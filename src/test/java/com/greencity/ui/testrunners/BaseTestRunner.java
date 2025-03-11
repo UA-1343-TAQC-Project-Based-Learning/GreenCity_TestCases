@@ -1,5 +1,6 @@
 package com.greencity.ui.testrunners;
 
+import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.utils.TestValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
@@ -14,6 +15,7 @@ import java.time.Duration;
 public class BaseTestRunner {
     protected WebDriver driver;
     protected static TestValueProvider testValueProvider;
+    protected HomePage homePage;
 
     @BeforeSuite
     public void beforeSuite() {
@@ -42,6 +44,7 @@ public class BaseTestRunner {
             initDriver();
         }
         driver.get(testValueProvider.getBaseUIUrl());
+        homePage = new HomePage(driver);
     }
 
     @AfterClass()
