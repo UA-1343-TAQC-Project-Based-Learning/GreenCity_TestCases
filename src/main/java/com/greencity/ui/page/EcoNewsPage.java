@@ -23,10 +23,12 @@ public class EcoNewsPage extends BasePage {
     }
 
     public String getHeaderText() {
+        waitUntilElementVisible(headerText);
         return headerText.getText();
     }
 
     public void clickCreateNewsButton() {
+        waitUntilElementClickable(createNewsButton);
         createNewsButton.click();
     }
 
