@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage extends BasePage {
     private WebDriver driver;
@@ -122,7 +126,8 @@ public class HomePage extends BasePage {
         return headerButton.getText();
     }
 
-    public void clickStartHeaderButton() {
+    public void clickHeaderButton() {
+        waitUntilElementClickable(headerButton);
         headerButton.click();
     }
 
@@ -151,7 +156,7 @@ public class HomePage extends BasePage {
     }
 
     public String getStatRightSpanBagsText() {
-        return statRightSpanBags.getText();                   //// ??
+        return statRightSpanBags.getText();
     }
 
     public String getStatRightButtonText() {
@@ -159,6 +164,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickStatRightButton() {
+        waitUntilElementClickable(statRightButton);
         statRightButton.click();
     }
 
@@ -171,6 +177,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickStatRightLink() {
+        waitUntilElementClickable(statRightLink);
         statRightLink.click();
     }
 
@@ -189,7 +196,7 @@ public class HomePage extends BasePage {
     }
 
     public String getStatLeftSpanCupsText() {
-        return statLeftSpanCups.getText();                        // ???
+        return statLeftSpanCups.getText();
     }
 
 
@@ -198,6 +205,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickStatLeftButton() {
+        waitUntilElementClickable(statLeftButton);
         statLeftButton.click();
     }
 
@@ -210,6 +218,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickStatLeftLink() {
+        waitUntilElementClickable(statLeftLink);
         statLeftLink.click();
     }
 
@@ -226,10 +235,12 @@ public class HomePage extends BasePage {
     }
 
     public void clickEventsLink() {
+        waitUntilElementClickable(eventsLink);
         eventsLink.click();
     }
 
     public void clickEventsArrowLink() {
+        waitUntilElementClickable(eventsArrowLink);
         eventsArrowLink.click();
     }
 
@@ -248,23 +259,32 @@ public class HomePage extends BasePage {
         return subscriptionImgQrCode.isDisplayed();
     }
 
+
+
     public void enterSubscriptionEmail(String email) {
+        waitUntilElementClickable(subscriptionInputEmail);
         subscriptionInputEmail.clear();
-        subscriptionInputEmail.sendKeys(email);                  //// ?????
-    }
-
-    public String getSubscriptionErrorText() {
-        return subscriptionError.getText();                      //// ?????
+            subscriptionInputEmail.sendKeys(email);
+           // Optionally add verification that text was entered correctly
     }
 
 
-    public String getSubscriptionButtonText() {
-        return subscriptionButton.getText();
-    }
+        public String getSubscriptionErrorText () {
+            return subscriptionError.getText();
+        }
 
-    public void clickSubscriptionButton() {
-        subscriptionButton.click();
-    }
+
+        public String getSubscriptionButtonText () {
+            return subscriptionButton.getText();
+        }
+
+        public void clickSubscriptionButton () {
+            waitUntilElementClickable(subscriptionButton);
+            subscriptionButton.click();
+        }
+
+
+
 
 
 }
