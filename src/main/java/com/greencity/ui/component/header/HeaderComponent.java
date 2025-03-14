@@ -37,7 +37,7 @@ public abstract class HeaderComponent extends BaseComponent {
     @FindBy(xpath = ".//li[@class='lang-option']")
     private WebElement languageSwitcherIcon;
 
-    @FindBy(xpath = ".//li[@class='lang-option']")
+    @FindBy(xpath = ".//img[@src='../assets/img/events/user.svg']")
     private WebElement signInButton;
 
     @FindBy(xpath = ".//span[contains(text(),'Зареєструватися')]")
