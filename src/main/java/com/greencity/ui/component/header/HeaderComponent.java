@@ -1,5 +1,4 @@
 package com.greencity.ui.component.header;
-
 import com.greencity.ui.component.BaseComponent;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 
 @Getter
-public abstract class HeaderComponent extends BaseComponent {
+public  class HeaderComponent extends BaseComponent {
 
     @FindBy(xpath = ".//img[@src='assets/img/logo.svg']")
     private WebElement logo;
@@ -52,7 +51,6 @@ public abstract class HeaderComponent extends BaseComponent {
     public String getEcoNewsLinkText() {
         return ecoNewsLink.getText();
     }
-
     public String getEventLinkText() {
         return getEventLink().getText();
     }
@@ -80,7 +78,7 @@ public abstract class HeaderComponent extends BaseComponent {
     public String getRegistrationButtonText() {
         return getRegistrationButton().getText();
     }
-    public void clickEcoNews(){
+    public void clickEcoNewsLink(){
         ecoNewsLink.click();
     }
     public void clickEventLink(){
@@ -95,7 +93,6 @@ public abstract class HeaderComponent extends BaseComponent {
     public void clickMyProfileLink(){
         myProfileLink.click();
     }
-
     public void clickUbsCourierLink(){
         ubsCourierLink.click();
     }
