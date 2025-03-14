@@ -17,7 +17,7 @@ public class HomePage extends BasePage {
     private WebElement headerParagraph;
 
     @FindBy(xpath = "//header //button[@class='primary-global-button btn']")
-    public WebElement headerButton;
+    private WebElement headerButton;
 
     @FindBy(xpath = "//img[@id='guy-image']")
     private WebElement guyImage;
@@ -26,7 +26,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//section[@id='stats'] //h2[@class='section-caption']")
     private WebElement statHeader;
 
-    @FindBy(xpath = "//img[contains(@src, 'habit-pic-bag.png')]")
+    @FindBy(xpath = "//div[contains(@style, 'margin-left')]//img[@alt='stat-icon']")
     private WebElement bagImage;
 
     @FindBy(xpath = "//div[contains(@style, 'margin-right')]/h3")
@@ -51,7 +51,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//section[@id='stats'] //h2[@class='section-caption']")
     private WebElement statLeftHeader;
 
-    @FindBy(xpath = "//img[contains(@src, 'habit-pic-bag.png')]")
+    @FindBy(xpath = "//div[contains(@style, 'margin-right')]//img[@alt='stat-icon']")
     private WebElement cupImage;
 
     @FindBy(xpath = "//div[contains(@style, 'margin-left')]/h3")
