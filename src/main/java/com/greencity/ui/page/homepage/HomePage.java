@@ -35,7 +35,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[contains(@style, 'margin-right')]/p")
     private WebElement statRightParagraphBags;
 
-    @FindBy(xpath = "//div[contains(@style, 'margin-right')]//span)")
+    @FindBy(xpath = "//div[contains(@style, 'margin-right')]//span")
     private WebElement statRightSpanBags;
 
     @FindBy(xpath = "//div[contains(@style, 'margin-right')]/button[@class='primary-global-button btn']")
@@ -60,7 +60,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[contains(@style, 'margin-left')]/p")
     private WebElement statLeftParagraphCups;
 
-    @FindBy(xpath = "//div[contains(@style, 'margin-left')]//span)")
+    @FindBy(xpath = "//div[contains(@style, 'margin-left')]//span")
     private WebElement statLeftSpanCups;
 
     @FindBy(xpath = "//div[contains(@style, 'margin-left')]/button[@class='primary-global-button btn']")
@@ -86,7 +86,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//section[@id='subscription']//h2")
     private WebElement subscriptionHeader;
 
-    @FindBy(xpath = "//section[@id='subscription']//p[not(@id='validation-error')])")
+    @FindBy(xpath = "//section[@id='subscription']//p[not(@id='validation-error')]")
     private WebElement subscriptionParagraph;
 
     @FindBy(xpath = "//section[@id='subscription']//img[contains(@alt, 'Scan this QR-code')]")
