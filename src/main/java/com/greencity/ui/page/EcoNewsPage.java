@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class EcoNewsPage extends BasePage {
-//    protected ToolbarComponent toolbarComponent;
-//    protected EcoNewsCardContainer ecoNewsCardContainer;
 
     @Getter
     @FindBy(xpath = ".//h1[@class='main-header']")
@@ -18,8 +16,6 @@ public class EcoNewsPage extends BasePage {
 
     public EcoNewsPage(WebDriver driver) {
         super(driver);
-//        toolbarComponent = new ToolbarComponent(driver);
-//        ecoNewsCardContainer = new EcoNewsCardContainer();
     }
 
     public String getHeaderText() {
@@ -31,6 +27,5 @@ public class EcoNewsPage extends BasePage {
         waitUntilElementClickable(createNewsButton);
         createNewsButton.click();
     }
-
 
 }
