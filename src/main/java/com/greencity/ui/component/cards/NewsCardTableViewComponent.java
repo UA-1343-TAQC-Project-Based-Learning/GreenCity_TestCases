@@ -104,7 +104,7 @@ public class NewsCardTableViewComponent extends BaseComponent {
 
     public NewsCardPage openNewsCardPage() {
         titleLabelClick();
-        return new NewsCardPage();
+        return new NewsCardPage(driver);
     }
 }
 
