@@ -19,13 +19,13 @@ public class NewsCardTableViewComponent extends BaseComponent {
     @FindBy(xpath = ".//div[@class='news-flags favourite-button']")
     private WebElement favouriteButton;
 
-    @FindBy(xpath = ".//div[contains(@class,'ul-eco-buttons')]")
+    @FindBy(xpath = ".//div[contains(@class,'ul-eco-buttons')]/span")
     private List<WebElement> filtersTag;
 
-    @FindBy(xpath = ".//div[@class='title-list word-wrap']")
+    @FindBy(xpath = ".//div[@class='title-list word-wrap']/h3")
     private WebElement titleLabel;
 
-    @FindBy(xpath = ".//div[contains(@class, 'list-text')]")
+    @FindBy(xpath = ".//div[contains(@class, 'list-text')]//span")
     private WebElement contentLabel;
 
     @FindBy(xpath = ".//p[@class='user-data-text-date']//span")
@@ -46,9 +46,9 @@ public class NewsCardTableViewComponent extends BaseComponent {
     }
 
     private void check() {
-        if (image == null && favouriteButton == null && filtersTag == null && titleLabel == null
-                && contentLabel == null && dateOfCreationLabel == null && usernameLabel == null
-                && commentsLabel == null && likesLabel == null) {
+        if (image == null || favouriteButton == null || filtersTag == null || titleLabel == null
+                || contentLabel == null || dateOfCreationLabel == null || usernameLabel == null
+                || commentsLabel == null || likesLabel == null) {
             throw new IllegalStateException("Some elements were not initialized properly");
         }
     }
