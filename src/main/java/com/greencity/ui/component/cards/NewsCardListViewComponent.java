@@ -42,9 +42,9 @@ public class NewsCardListViewComponent extends BaseComponent {
     }
 
     private void check() {
-        if (image == null && favouriteButton == null && filtersTag == null && titleLabel == null
-                && contentLabel == null && dateOfCreationLabel == null && usernameLabel == null
-                && moreButton == null) {
+        if (image == null || favouriteButton == null || filtersTag == null || titleLabel == null
+                || contentLabel == null || dateOfCreationLabel == null || usernameLabel == null
+                || moreButton == null) {
             throw new IllegalStateException("Some elements were not initialized properly");
         }
     }
