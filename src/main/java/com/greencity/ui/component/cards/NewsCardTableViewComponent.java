@@ -2,6 +2,7 @@ package com.greencity.ui.component.cards;
 
 import com.greencity.ui.component.BaseComponent;
 
+import com.greencity.ui.page.newscardpage.NewsCardPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
