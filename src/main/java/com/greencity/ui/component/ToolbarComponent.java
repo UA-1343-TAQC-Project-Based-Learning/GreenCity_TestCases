@@ -5,8 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ToolbarComponent {
-    private WebDriver driver;
+public class ToolbarComponent extends BaseComponent{
 
     @Getter
     @FindBy(xpath = "//span[@class='search-img']")
@@ -20,9 +19,10 @@ public class ToolbarComponent {
     @FindBy(xpath = "//img[@alt='my-event']")
     private WebElement calendarButton;
 
-    public ToolbarComponent(WebDriver driver) {
-        this.driver = driver;
+    public ToolbarComponent(WebDriver driver, WebElement rootElement) {
+        super(driver, rootElement);
     }
+
 
     public void clickSearchButton() {
         searchButton.click();
