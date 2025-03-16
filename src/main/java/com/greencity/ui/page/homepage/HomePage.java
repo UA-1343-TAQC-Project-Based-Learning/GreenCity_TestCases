@@ -11,9 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HomePage extends BasePage {
-    private WebDriver driver;
 
-
+    //Main-header
     @FindBy(xpath = "//header //h1")
     private WebElement headerTitle;
 
@@ -26,13 +25,14 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//img[@id='guy-image']")
     private WebElement guyImage;
 
-
+    // Stat-section
     @FindBy(xpath = "//section[@id='stats'] //h2[@class='section-caption']")
     private WebElement statHeader;
 
     @FindBy(xpath = "//div[contains(@style, 'margin-left')]//img[@alt='stat-icon']")
     private WebElement bagImage;
 
+    // margin-right
     @FindBy(xpath = "//div[contains(@style, 'margin-right')]/h3")
     private WebElement statRightHeaderBags;
 
@@ -51,7 +51,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[contains(@style, 'margin-right')]//a[@class='tertiary-global-button btn-link']")
     private WebElement statRightLink;
 
-
+    // margin-left
     @FindBy(xpath = "//section[@id='stats'] //h2[@class='section-caption']")
     private WebElement statLeftHeader;
 
@@ -76,7 +76,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[contains(@style, 'margin-left')]//a[@class='tertiary-global-button btn-link']")
     private WebElement statLeftLink;
 
-
+    // Event-section
     @FindBy(xpath = "//section[@id='events'] //h2[@class='section-caption']")
     private WebElement eventsHeader;
 
@@ -86,7 +86,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//section[@id='events'] //img[@alt='arrow']")
     private WebElement eventsArrowLink;
 
-
+    // Subscription-section
     @FindBy(xpath = "//section[@id='subscription']//h2")
     private WebElement subscriptionHeader;
 
@@ -108,8 +108,6 @@ public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
     //Main-header
@@ -223,8 +221,6 @@ public class HomePage extends BasePage {
     }
 
     // Event-section
-
-
     public String getEventsHeaderText() {
         return eventsHeader.getText();
     }
@@ -258,7 +254,6 @@ public class HomePage extends BasePage {
     public boolean isSubscriptionImgQrCodeDisplayed() {
         return subscriptionImgQrCode.isDisplayed();
     }
-
 
 
     public void enterSubscriptionEmail(String email) {
