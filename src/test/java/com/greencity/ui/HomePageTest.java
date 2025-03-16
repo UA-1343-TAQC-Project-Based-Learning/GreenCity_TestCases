@@ -25,13 +25,35 @@ public class HomePageTest extends BaseTestRunner {
         assertEquals("Еко новини", ecoNewsPage.getHeaderText());
     }
 
+
+
+
+    // Main-header
+    @Test
+    public void testHeaderTitle() {
+        assertEquals("Новий спосіб виховати в собі корисні звички", homePage.getHeaderTitle());
+    }
+
+    @Test
+    public void testHeaderParagraph() {
+        assertEquals("В Україні кожна людина щорічно використовує більше 500 одноразових пакетів і біля 70 паперових стаканчиків. Достатньо брати з собою еко-сумку і своє горнятко і це допоможе зберегти життя 3-х дельфінів, однієї черепашки і зберегти чистими води океанів для наступного покоління.",
+                homePage.getHeaderParagraph());
+    }
+
+    @Test
+    public void testHeaderButton() {
+        assertEquals("Почати формувати звичку!", homePage.getHeaderButtonText());
+//        homePage.clickHeaderButton();
+        // TODO
+    }
     @Test
     public void testGuyImageDisplayed() {
         assertTrue(homePage.isGuyImageDisplayed());
     }
 
 
-    // Тести для Stat-section
+
+    // Stat-section
     @Test
     public void testStatHeaderText() {
         assertEquals("Нас 5 і сьогодні ми", homePage.getStatHeaderText());
@@ -47,7 +69,7 @@ public class HomePageTest extends BaseTestRunner {
         assertTrue(homePage.isCupImageDisplayed());
     }
 
-    // Тести для margin-right
+    // margin-right
     @Test
     public void testStatRightHeaderBagsText() {
         assertEquals("Не взяли 0 пакетів", homePage.getStatRightHeaderBagsText());
@@ -117,7 +139,7 @@ public class HomePageTest extends BaseTestRunner {
         // TODO
     }
 
-    // Тести для Event-section
+    // Event-section
     @Test
     public void testEventsHeaderText() {
         assertEquals("Еко новини", homePage.getEventsHeaderText());
