@@ -11,10 +11,10 @@
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <selenium-java.version>4.28.1</selenium-java.version>
+        <selenium-java.version>4.29.0</selenium-java.version>
         <lombok.version>1.18.36</lombok.version>
         <testng.version>7.10.2</testng.version>
-        <webdrivermanager.version>5.9.2</webdrivermanager.version>
+        <webdrivermanager.version>5.9.3</webdrivermanager.version>
         <allure.version>2.24.0</allure.version>
         <aspectj.version>1.9.22.1</aspectj.version>
     </properties>
