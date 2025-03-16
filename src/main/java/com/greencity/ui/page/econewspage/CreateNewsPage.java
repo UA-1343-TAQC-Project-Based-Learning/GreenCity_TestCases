@@ -10,43 +10,43 @@ import org.openqa.selenium.support.PageFactory;
 public class CreateNewsPage extends BasePage {
     private ImageUploadComponent imageUploadComponent;
 
-    @FindBy(xpath = "//div[@class='image-block']")
+    @FindBy(xpath = ".//div[@class='image-block']")
     private WebElement imageBlockRoot;
 
-    @FindBy(xpath = "//h2[@class='title-header']")
+    @FindBy(xpath = ".//h2[@class='title-header']")
     private WebElement titleHeaderText;
 
-    @FindBy(xpath = "//p[@class='title-description']")
+    @FindBy(xpath = ".//p[@class='title-description']")
     private WebElement titleHeaderDescriptionText;
 
-    @FindBy(xpath = "//h3[normalize-space()='Title']")
+    @FindBy(xpath = ".//h3[normalize-space()='Title']")
     private WebElement titleText;
 
-    @FindBy(xpath = "//span[@class='field-info']")
+    @FindBy(xpath = ".//span[@class='field-info']")
     private WebElement titleFieldInfoText;
 
-    @FindBy(xpath = "//textarea[@placeholder='e.g. Coffee takeaway with 20% discount']")
+    @FindBy(xpath = ".//textarea[@placeholder='e.g. Coffee takeaway with 20% discount']")
     private WebElement titleInputTextField;
 
-    @FindBy(xpath = "//h3[normalize-space()='Pick tags for news']")
+    @FindBy(xpath = ".//h3[normalize-space()='Pick tags for news']")
     private WebElement pickTagsForNewsText;
 
-    @FindBy(xpath = "//p[normalize-space()='Only 3 tags can be added']")
+    @FindBy(xpath = ".//p[normalize-space()='Only 3 tags can be added']")
     private WebElement onlyThreeTagsCanBeAddedText;
 
-    @FindBy(xpath = "//input[@placeholder='Link to external source']")
+    @FindBy(xpath = ".//input[@placeholder='Link to external source']")
     private WebElement externalSourceLinkInputField;
 
-    @FindBy(xpath = "//h3[normalize-space()='Source (optional)']")
+    @FindBy(xpath = ".//h3[normalize-space()='Source (optional)']")
     private WebElement externalSourceInputFieldTitle;
 
-    @FindBy(xpath = "//span[@class='span field-info']")
+    @FindBy(xpath = ".//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
 
     public CreateNewsPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(getHeaderRoot(), this);
         imageUploadComponent = new ImageUploadComponent(driver, getHeaderRoot());
     }
 
