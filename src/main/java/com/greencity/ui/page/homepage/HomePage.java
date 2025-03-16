@@ -32,6 +32,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[contains(@style, 'margin-left')]//img[@alt='stat-icon']")
     private WebElement bagImage;
 
+    @FindBy(xpath = "//div[contains(@style, 'margin-right')]//img[@alt='stat-icon']")
+    private WebElement cupImage;
+
     // margin-right
     @FindBy(xpath = "//div[contains(@style, 'margin-right')]/h3")
     private WebElement statRightHeaderBags;
@@ -55,8 +58,6 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//section[@id='stats'] //h2[@class='section-caption']")
     private WebElement statLeftHeader;
 
-    @FindBy(xpath = "//div[contains(@style, 'margin-right')]//img[@alt='stat-icon']")
-    private WebElement cupImage;
 
     @FindBy(xpath = "//div[contains(@style, 'margin-left')]/h3")
     private WebElement statLeftHeaderCups;
@@ -139,12 +140,15 @@ public class HomePage extends BasePage {
         return statHeader.getText();
     }
 
-    // margin-right
-
     public boolean isBagImageDisplayed() {
         return bagImage.isDisplayed();
     }
 
+    public boolean isCupImageDisplayed() {
+        return cupImage.isDisplayed();
+    }
+
+    // margin-right
     public String getStatRightHeaderBagsText() {
         return statRightHeaderBags.getText();
     }
@@ -181,10 +185,6 @@ public class HomePage extends BasePage {
 
 
     // margin-left
-    public boolean isCupImageDisplayed() {
-        return cupImage.isDisplayed();
-    }
-
     public String getStatLeftHeaderCupsText() {
         return statLeftHeaderCups.getText();
     }
@@ -225,7 +225,6 @@ public class HomePage extends BasePage {
         return eventsHeader.getText();
     }
 
-
     public String getEventsLinkText() {
         return eventsLink.getText();
     }
@@ -242,7 +241,6 @@ public class HomePage extends BasePage {
 
 
     // Subscription-section
-
     public String getSubscriptionHeaderText() {
         return subscriptionHeader.getText();
     }
@@ -255,31 +253,25 @@ public class HomePage extends BasePage {
         return subscriptionImgQrCode.isDisplayed();
     }
 
-
     public void enterSubscriptionEmail(String email) {
         waitUntilElementClickable(subscriptionInputEmail);
         subscriptionInputEmail.clear();
-            subscriptionInputEmail.sendKeys(email);
-           // Optionally add verification that text was entered correctly
+        subscriptionInputEmail.sendKeys(email);
+        // Optionally add verification that text was entered correctly
+    }
+
+    public String getSubscriptionErrorText() {
+        return subscriptionError.getText();
     }
 
 
-        public String getSubscriptionErrorText () {
-            return subscriptionError.getText();
-        }
+    public String getSubscriptionButtonText() {
+        return subscriptionButton.getText();
+    }
 
-
-        public String getSubscriptionButtonText () {
-            return subscriptionButton.getText();
-        }
-
-        public void clickSubscriptionButton () {
-            waitUntilElementClickable(subscriptionButton);
-            subscriptionButton.click();
-        }
-
-
-
-
+    public void clickSubscriptionButton() {
+        waitUntilElementClickable(subscriptionButton);
+        subscriptionButton.click();
+    }
 
 }
