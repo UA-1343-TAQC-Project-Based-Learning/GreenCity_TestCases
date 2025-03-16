@@ -123,4 +123,7 @@ public abstract class Base {
     public void waitUntilPageLouder() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
     }
+
+
+
 }
