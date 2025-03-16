@@ -1,6 +1,7 @@
-package com.greencity.ui.testrunners;
+package com.greencity.ui;
 
 import com.greencity.ui.page.EcoNewsPage;
+import com.greencity.ui.testrunners.BaseTestRunner;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
