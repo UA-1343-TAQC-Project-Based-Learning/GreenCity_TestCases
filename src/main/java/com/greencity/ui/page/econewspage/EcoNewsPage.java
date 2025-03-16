@@ -1,4 +1,5 @@
-package com.greencity.ui.page;
+package com.greencity.ui.page.econewspage;
+import com.greencity.ui.page.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
