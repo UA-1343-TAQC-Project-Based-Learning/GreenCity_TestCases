@@ -1,38 +1,42 @@
-package com.greencity.ui.component;
+package com.greencity.ui.elements;
 
+import com.greencity.ui.component.BaseComponent;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ToolbarComponent extends BaseComponent{
+public class ToolbarElement extends BaseElement {
 
     @Getter
-    @FindBy(xpath = "//span[@class='search-img']")
+    @FindBy(xpath = ".//span[@class='search-img']")
     private WebElement searchButton;
 
     @Getter
-    @FindBy(xpath = "//span[@class='bookmark-img']")
+    @FindBy(xpath = ".//span[@class='bookmark-img']")
     private WebElement bookmarkButton;
 
     @Getter
-    @FindBy(xpath = "//img[@alt='my-event']")
+    @FindBy(xpath = ".//img[@alt='my-event']")
     private WebElement calendarButton;
 
-    public ToolbarComponent(WebDriver driver, WebElement rootElement) {
+    public ToolbarElement(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
 
     public void clickSearchButton() {
+        waitUntilElementClickable(searchButton);
         searchButton.click();
     }
 
     public void clickBookmarkButton() {
+        waitUntilElementClickable(bookmarkButton);
         bookmarkButton.click();
     }
 
     public void clickCalendarButton() {
+        waitUntilElementClickable(calendarButton);
         calendarButton.click();
     }
 
