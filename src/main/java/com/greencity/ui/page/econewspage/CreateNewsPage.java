@@ -38,7 +38,6 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
-
     public CreateNewsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
