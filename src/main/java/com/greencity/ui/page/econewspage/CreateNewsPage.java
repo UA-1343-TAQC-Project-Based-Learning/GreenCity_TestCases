@@ -46,7 +46,6 @@ public class CreateNewsPage extends BasePage {
 
     public CreateNewsPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(getHeaderRoot(), this);
         imageUploadComponent = new ImageUploadComponent(driver, getHeaderRoot());
     }
 
