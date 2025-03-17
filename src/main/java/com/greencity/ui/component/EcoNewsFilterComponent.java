@@ -13,23 +13,23 @@ public class EcoNewsFilterComponent extends BaseComponent {
     private WebElement filterSpan;
 
     @Getter
-    @FindBy(xpath = "//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[1]")   // "//button//span[contains(text(),'Новини')]"
+    @FindBy(xpath = "(//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[1]")   // "//button//span[contains(text(),'Новини')]"
     private WebElement newsFilterButton;
 
     @Getter
-    @FindBy(xpath = "//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[2]")
+    @FindBy(xpath = "(//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[2]")
     private WebElement eventsFilterButton;
 
     @Getter
-    @FindBy(xpath = "//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[3]")
+    @FindBy(xpath = "(//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[3]")
     private WebElement educationFilterButton;
 
     @Getter
-    @FindBy(xpath = "//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[4]")
+    @FindBy(xpath = "(//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[4]")
     private WebElement initiativesFilterButton;
 
     @Getter
-    @FindBy(xpath = "//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[5]")
+    @FindBy(xpath = "(//button[contains(@class, 'tag-button')]//span[contains(@class, 'text')])[5]")
     private WebElement adsFilterButton;
 
     @FindBy(xpath = "//app-remaining-count//h2")
