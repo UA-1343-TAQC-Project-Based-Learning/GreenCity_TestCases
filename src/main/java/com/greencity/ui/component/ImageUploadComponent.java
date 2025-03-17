@@ -69,11 +69,11 @@ public class ImageUploadComponent extends BaseComponent{
             waitUntilElementClickable(imageUploadLink);
             imageUploadLink.sendKeys(imagePath);
 
-            System.out.println("Image uploaded successfully: " + imagePath);
+
         }  catch (NoSuchElementException e) {
-            System.err.println("Error: File input element not found! " + e.getMessage());
+
         } catch (Exception e) {
-            System.err.println("Unexpected error during file upload: " + e.getMessage());
+
         }
     }
 
