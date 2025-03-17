@@ -8,32 +8,33 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ImageUploadComponent extends BaseComponent{
 
-    @FindBy(xpath = "//h3[normalize-space()='Picture (optional)']")
+    @FindBy(xpath = ".//h3[normalize-space()='Picture (optional)']")
     private WebElement titleText;
 
-    @FindBy(xpath = "//div[@class='text-wrapper']")
+    @FindBy(xpath = ".//div[@class='text-wrapper']")
     private WebElement imageUploadField;
 
-    @FindBy(xpath = "//span[normalize-space()='browse']")
+    @FindBy(xpath = ".//span[normalize-space()='browse']")
     private WebElement imageBrowseLink;
 
-    @FindBy(xpath = "//input[@type='file']")
+    @FindBy(xpath = ".//input[@type='file']")
     private WebElement imageUploadLink;
 
-    @FindBy(xpath = "//button[@class='secondary-global-button s-btn']")
+    @FindBy(xpath = ".//button[@class='secondary-global-button s-btn']")
     private WebElement cancelButton;
 
-    @FindBy(xpath = "//button[normalize-space()='Submit']")
+    @FindBy(xpath = ".//button[normalize-space()='Submit']")
     private WebElement submitButton;
 
-    @FindBy(xpath = "//div[@class='dropzone warning-background']//p[1]")
+    @FindBy(xpath = ".//div[@class='dropzone warning-background']//p[1]")
     private WebElement uploadFieldWarningText;
 
-    @FindBy(xpath = "//p[@class='warning warning-color']")
+    @FindBy(xpath = ".//p[@class='warning warning-color']")
     private WebElement imageFormatWarningMessageText;
 
     public ImageUploadComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
+
     }
 
 

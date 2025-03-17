@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class ToolbarComponent extends BaseComponent{
 
@@ -22,7 +23,6 @@ public class ToolbarComponent extends BaseComponent{
 
     public ToolbarComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-        PageFactory.initElements(getRootElement(), this);
     }
 
 
