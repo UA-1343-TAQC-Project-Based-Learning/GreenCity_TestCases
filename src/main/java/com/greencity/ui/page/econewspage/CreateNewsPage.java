@@ -38,6 +38,21 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
+    /**
+     * author Khrystyna Martynova
+     */
+    @FindBy(xpath = "//h3[normalize-space()='Content']")
+    private WebElement content;
+
+
+    @FindBy(xpath = "//p[@class = 'textarea-description warning']")
+    private WebElement textAreaDescriptionWarnings;
+
+
+    @FindBy(xpath = "//div[@data-placeholder = 'e.g. Short description of news, agenda for event']")
+    private WebElement descriptionOfNews;
+
+
 
     public CreateNewsPage(WebDriver driver) {
         super(driver);
