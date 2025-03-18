@@ -11,12 +11,13 @@
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <selenium-java.version>4.28.1</selenium-java.version>
+        <selenium-java.version>4.29.0</selenium-java.version>
         <lombok.version>1.18.36</lombok.version>
         <testng.version>7.10.2</testng.version>
-        <webdrivermanager.version>5.9.2</webdrivermanager.version>
+        <webdrivermanager.version>5.9.3</webdrivermanager.version>
         <allure.version>2.24.0</allure.version>
         <aspectj.version>1.9.22.1</aspectj.version>
+        <org.slf4j.version>2.0.13</org.slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -73,6 +74,19 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
