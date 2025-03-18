@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
 
+    @FindBy(xpath = "//div[@class='main-content app-container']")
+    private WebElement ecoNewsRoot;
+
     //main-content
     @Getter
     @FindBy(xpath = "//div[@id='main-content']/h1")
@@ -256,13 +259,13 @@ public class HomePage extends BasePage {
     public EcoNewsPage clickEventsLink() {
         waitUntilElementClickable(eventsLink);
         eventsLink.click();
-        return new EcoNewsPage(driver);
+        return new EcoNewsPage(driver, ecoNewsRoot);
     }
 
     public EcoNewsPage clickEventsArrowLink() {
         waitUntilElementClickable(eventsArrowLink);
         eventsArrowLink.click();
-        return new EcoNewsPage(driver);
+        return new EcoNewsPage(driver, ecoNewsRoot);
     }
 
 
