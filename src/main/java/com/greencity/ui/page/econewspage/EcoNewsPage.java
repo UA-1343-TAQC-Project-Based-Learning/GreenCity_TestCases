@@ -24,26 +24,26 @@ public class EcoNewsPage extends BasePage {
     private WebElement newsContainerRoot;
 
     @Getter
-    @FindBy(xpath = ".//h1[@class='main-header']")
+    @FindBy(xpath = "//h1[@class='main-header']")
     private WebElement headerText;
 
-    @FindBy(xpath = ".//span[@class='filter']")
+    @FindBy(xpath = "//span[@class='filter']")
     private WebElement filterByTitleText;
 
     @Getter
-    @FindBy(xpath = ".//span[@id='create-button-text']")
+    @FindBy(xpath = "//span[@id='create-button-text']")
     private WebElement createNewsButton;
 
-    @FindBy(xpath = ".//h2[contains(text(),'items found') or contains(text(),'новин знайдено')]")
+    @FindBy(xpath = "//h2[contains(text(),'items found') or contains(text(),'новин знайдено')]")
     private WebElement newsCounterText;
 
-    @FindBy(xpath = ".//em[@class='fa fa-th-large']")
+    @FindBy(xpath = "//em[@class='fa fa-th-large']")
     private WebElement tableViewButton;
 
-    @FindBy(xpath = ".//em[@class='fa fa-bars']")
+    @FindBy(xpath = "//em[@class='fa fa-bars']")
     private WebElement listViewButton;
 
-    public EcoNewsPage(WebDriver driver, WebElement rootElement) {
+    public EcoNewsPage(WebDriver driver) {
         super(driver);
         toolbarElement = new ToolbarElement(driver, toolbarRoot);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, newsFilterRoot);

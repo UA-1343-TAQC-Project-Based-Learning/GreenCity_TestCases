@@ -259,13 +259,13 @@ public class HomePage extends BasePage {
     public EcoNewsPage clickEventsLink() {
         waitUntilElementClickable(eventsLink);
         eventsLink.click();
-        return new EcoNewsPage(driver, ecoNewsRoot);
+        return new EcoNewsPage(driver);
     }
 
     public EcoNewsPage clickEventsArrowLink() {
         waitUntilElementClickable(eventsArrowLink);
         eventsArrowLink.click();
-        return new EcoNewsPage(driver, ecoNewsRoot);
+        return new EcoNewsPage(driver);
     }
 
 
