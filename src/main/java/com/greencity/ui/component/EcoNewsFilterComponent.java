@@ -24,7 +24,7 @@ public class EcoNewsFilterComponent extends BaseComponent {
     private WebElement educationTagButton;
 
     @Getter
-    @FindBy(xpath = "(.//button//span[contains(text(),'Ініціативи')or contains(text(),'Initiatives')]")
+    @FindBy(xpath = ".//button//span[contains(text(),'Ініціативи') or contains(text(),'Initiatives')]")
     private WebElement initiativesTagButton;
 
     @Getter
