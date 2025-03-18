@@ -21,7 +21,6 @@ public class EcoNewsPage extends BasePage {
 
     public EcoNewsPage(WebDriver driver) {
         super(driver);
-        toolbarComponent = new ToolbarComponent(driver, getHeaderRoot());
     }
 
 
