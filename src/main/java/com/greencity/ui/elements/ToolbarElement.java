@@ -1,4 +1,4 @@
-package com.greencity.ui.component;
+package com.greencity.ui.elements;
 
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
-public class ToolbarComponent extends BaseComponent{
+public class ToolbarElement extends BaseElement {
 
     @Getter
     @FindBy(xpath = ".//span[@class='search-img']")
@@ -21,20 +21,23 @@ public class ToolbarComponent extends BaseComponent{
     @FindBy(xpath = ".//img[@alt='my-event']")
     private WebElement calendarButton;
 
-    public ToolbarComponent(WebDriver driver, WebElement rootElement) {
+    public ToolbarElement(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
 
     public void clickSearchButton() {
+        waitUntilElementClickable(searchButton);
         searchButton.click();
     }
 
     public void clickBookmarkButton() {
+        waitUntilElementClickable(bookmarkButton);
         bookmarkButton.click();
     }
 
     public void clickCalendarButton() {
+        waitUntilElementClickable(calendarButton);
         calendarButton.click();
     }
 
