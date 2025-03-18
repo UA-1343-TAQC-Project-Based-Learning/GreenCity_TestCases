@@ -30,13 +30,7 @@ public class EcoNewsPage extends BasePage {
         return headerText.getText();
     }
 
-    public void clickCreateNewsButton() {
-        waitUntilElementClickable(createNewsButton);
-        createNewsButton.click();
-    }
-
-
-    public CreateNewsPage goToCreateNewsPage() {
+    public CreateNewsPage clickCreateNewsButton() {
         waitUntilElementClickable(createNewsButton);
         createNewsButton.click();
         return new CreateNewsPage(driver);

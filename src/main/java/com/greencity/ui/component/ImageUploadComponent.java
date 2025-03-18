@@ -65,17 +65,8 @@ public class ImageUploadComponent extends BaseComponent{
 
 
     public void uploadImage(String imagePath) {
-        try {
             waitUntilElementClickable(imageUploadLink);
             imageUploadLink.sendKeys(imagePath);
-
-
-        }  catch (NoSuchElementException e) {
-
-        } catch (Exception e) {
-
-        }
     }
-
 
 }
