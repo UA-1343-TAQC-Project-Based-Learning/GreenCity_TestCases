@@ -12,7 +12,7 @@ public abstract class BaseElement extends Base {
 
     public BaseElement(WebDriver driver, WebElement rootElement) {
         super(driver);
-        PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
         this.rootElement = rootElement;
+        PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
     }
 }

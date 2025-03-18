@@ -1,5 +1,6 @@
 package com.greencity.ui.page.econewspage;
 import com.greencity.ui.component.EcoNewsTagFilterComponent;
+import com.greencity.ui.container.NewsCardsContainer;
 import com.greencity.ui.elements.ToolbarElement;
 import com.greencity.ui.page.BasePage;
 import lombok.Getter;
