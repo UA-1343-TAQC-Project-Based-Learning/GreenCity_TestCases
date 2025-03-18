@@ -49,45 +49,50 @@ public class EcoNewsFilterComponent extends BaseComponent {
         return newsTagButton.getText();
     }
 
-    public void clickNewsTag() {
+    public EcoNewsFilterComponent clickNewsTag() {
         waitUntilElementClickable(newsTagButton);
         newsTagButton.click();
+        return this;
     }
 
     public String getEventsTagText() {
         return eventsTagButton.getText();
     }
 
-    public void clickEventsTag() {
+    public EcoNewsFilterComponent clickEventsTag() {
         waitUntilElementClickable(eventsTagButton);
         eventsTagButton.click();
+        return this;
     }
 
     public String getEducationTagText() {
         return educationTagButton.getText();
     }
 
-    public void clickEducationTag() {
+    public EcoNewsFilterComponent clickEducationTag() {
         waitUntilElementClickable(educationTagButton);
         educationTagButton.click();
+        return this;
     }
 
     public String getInitiativesTagText() {
         return initiativesTagButton.getText();
     }
 
-    public void clickInitiativesTag() {
+    public EcoNewsFilterComponent clickInitiativesTag() {
         waitUntilElementClickable(initiativesTagButton);
         initiativesTagButton.click();
+        return this;
     }
 
     public String getAdsTagText() {
         return adsTagButton.getText();
     }
 
-    public void clickAdsTag() {
+    public EcoNewsFilterComponent clickAdsTag() {
         waitUntilElementClickable(adsTagButton);
         adsTagButton.click();
+        return this;
     }
 
     public String getNewsCountText() {
