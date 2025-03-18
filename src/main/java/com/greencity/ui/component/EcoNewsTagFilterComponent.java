@@ -5,11 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class EcoNewsFilterComponent extends BaseComponent {
+public class EcoNewsTagFilterComponent extends BaseComponent {
 
-    @Getter
-    @FindBy(xpath = ".//span[contains(@class,'filter')]")
-    private WebElement filterSpan;
 
     @Getter
     @FindBy(xpath = ".//button//span[contains(text(),'Новини') or contains(text(),'News')]")
@@ -24,32 +21,23 @@ public class EcoNewsFilterComponent extends BaseComponent {
     private WebElement educationTagButton;
 
     @Getter
-    @FindBy(xpath = ".//button//span[contains(text(),'Ініціативи') or contains(text(),'Initiatives')]")
+    @FindBy(xpath = ".//button//span[contains(text(),'Ініціативи')or contains(text(),'Initiatives')]")
     private WebElement initiativesTagButton;
 
     @Getter
     @FindBy(xpath = ".//button//span[contains(text(),'Реклама') or contains(text(),'Ads')]")
     private WebElement adsTagButton;
 
-    @FindBy(xpath = ".//app-remaining-count//h2")
-    private WebElement newsCount;
-
-
-
-    public EcoNewsFilterComponent(WebDriver driver, WebElement rootElement) {
+    public EcoNewsTagFilterComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
-
-    public String getFilterSpanText() {
-        return filterSpan.getText();
-    }
 
     public String getNewsTagText() {
         return newsTagButton.getText();
     }
 
-    public EcoNewsFilterComponent clickNewsTag() {
+    public EcoNewsTagFilterComponent clickNewsTag() {
         waitUntilElementClickable(newsTagButton);
         newsTagButton.click();
         return this;
@@ -59,7 +47,7 @@ public class EcoNewsFilterComponent extends BaseComponent {
         return eventsTagButton.getText();
     }
 
-    public EcoNewsFilterComponent clickEventsTag() {
+    public EcoNewsTagFilterComponent clickEventsTag() {
         waitUntilElementClickable(eventsTagButton);
         eventsTagButton.click();
         return this;
@@ -69,7 +57,7 @@ public class EcoNewsFilterComponent extends BaseComponent {
         return educationTagButton.getText();
     }
 
-    public EcoNewsFilterComponent clickEducationTag() {
+    public EcoNewsTagFilterComponent clickEducationTag() {
         waitUntilElementClickable(educationTagButton);
         educationTagButton.click();
         return this;
@@ -79,7 +67,7 @@ public class EcoNewsFilterComponent extends BaseComponent {
         return initiativesTagButton.getText();
     }
 
-    public EcoNewsFilterComponent clickInitiativesTag() {
+    public EcoNewsTagFilterComponent clickInitiativesTag() {
         waitUntilElementClickable(initiativesTagButton);
         initiativesTagButton.click();
         return this;
@@ -89,17 +77,11 @@ public class EcoNewsFilterComponent extends BaseComponent {
         return adsTagButton.getText();
     }
 
-    public EcoNewsFilterComponent clickAdsTag() {
+    public EcoNewsTagFilterComponent clickAdsTag() {
         waitUntilElementClickable(adsTagButton);
         adsTagButton.click();
         return this;
     }
-
-    public String getNewsCountText() {
-        waitUntilElementVisible(newsCount);
-        return newsCount.getText();
-    }
-
 
 
 }
