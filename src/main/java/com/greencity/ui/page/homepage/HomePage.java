@@ -14,17 +14,17 @@ import java.time.Duration;
 
 public class HomePage extends BasePage {
 
-    //Main-header
+    //main-content
     @Getter
-    @FindBy(xpath = "//header //h1")
+    @FindBy(xpath = "//div[@id='main-content']/h1")
     private WebElement headerTitle;
 
     @Getter
-    @FindBy(xpath = "//header //p")
+    @FindBy(xpath = "//div[@id='main-content']/p")
     private WebElement headerParagraph;
 
     @Getter
-    @FindBy(xpath = "//header //button[@class='primary-global-button btn']")
+    @FindBy(xpath = "//div[@id='main-content']/button[@class='primary-global-button btn']")
     private WebElement headerButton;
 
     @Getter
@@ -143,17 +143,14 @@ public class HomePage extends BasePage {
 
     //Main-header
     public String getHeaderTitle() {
-        waitUntilElementVisible(headerTitle);
         return headerTitle.getText();
     }
 
     public String getHeaderParagraph() {
-        waitUntilElementVisible(headerParagraph);
-        return headerParagraph.getText();
+              return headerParagraph.getText();
     }
 
     public String getHeaderButtonText() {
-        waitUntilElementVisible(headerButton);
         return headerButton.getText();
     }
 
@@ -163,45 +160,37 @@ public class HomePage extends BasePage {
     }
 
     public boolean isGuyImageDisplayed() {
-        waitUntilElementVisible(guyImage);
         return guyImage.isDisplayed();
     }
 
 
     // Stat-section
     public String getStatHeaderText() {
-        waitUntilElementVisible(statHeader);
         return statHeader.getText();
     }
 
     public boolean isBagImageDisplayed() {
-        waitUntilElementVisible(bagImage);
         return bagImage.isDisplayed();
     }
 
     public boolean isCupImageDisplayed() {
-        waitUntilElementVisible(cupImage);
         return cupImage.isDisplayed();
     }
 
     // margin-right
     public String getStatRightHeaderBagsText() {
-        waitUntilElementVisible(statRightHeaderBags);
         return statRightHeaderBags.getText();
     }
 
     public String getStatRightParagraphBagsText() {
-        waitUntilElementVisible(statRightParagraphBags);
         return statRightParagraphBags.getText();
     }
 
     public String getStatRightSpanBagsText() {
-        waitUntilElementVisible(statRightSpanBags);
         return statRightSpanBags.getText();
     }
 
     public String getStatRightButtonText() {
-        waitUntilElementVisible(statRightButton);
         return statRightButton.getText();
     }
 
@@ -211,12 +200,10 @@ public class HomePage extends BasePage {
     }
 
     public boolean isStatRightIconDisplayed() {
-        waitUntilElementVisible(statRightIcon);
         return statRightIcon.isDisplayed();
     }
 
     public String getStatRightLinkText() {
-        waitUntilElementVisible(statRightLink);
         return statRightLink.getText();
     }
 
@@ -228,23 +215,19 @@ public class HomePage extends BasePage {
 
     // margin-left
     public String getStatLeftHeaderCupsText() {
-        waitUntilElementVisible(statLeftHeaderCups);
         return statLeftHeaderCups.getText();
     }
 
     public String getStatLeftParagraphCupsText() {
-        waitUntilElementVisible(statLeftParagraphCups);
         return statLeftParagraphCups.getText();
     }
 
     public String getStatLeftSpanCupsText() {
-        waitUntilElementVisible(statLeftSpanCups);
         return statLeftSpanCups.getText();
     }
 
 
     public String getStatLeftButtonText() {
-        waitUntilElementVisible(statLeftButton);
         return statLeftButton.getText();
     }
 
@@ -254,12 +237,10 @@ public class HomePage extends BasePage {
     }
 
     public boolean isStatLeftIconDisplayed() {
-        waitUntilElementVisible(statLeftIcon);
         return statLeftIcon.isDisplayed();
     }
 
     public String getStatLeftLinkText() {
-        waitUntilElementVisible(statLeftLink);
         return statLeftLink.getText();
     }
 
@@ -270,39 +251,36 @@ public class HomePage extends BasePage {
 
     // Event-section
     public String getEventsHeaderText() {
-        waitUntilElementVisible(eventsHeader);
         return eventsHeader.getText();
     }
 
     public String getEventsLinkText() {
-        waitUntilElementVisible(eventsLink);
         return eventsLink.getText();
     }
 
-    public void clickEventsLink() {
+    public EcoNewsPage clickEventsLink() {
         waitUntilElementClickable(eventsLink);
         eventsLink.click();
+        return new EcoNewsPage(driver);
     }
 
-    public void clickEventsArrowLink() {
+    public EcoNewsPage clickEventsArrowLink() {
         waitUntilElementClickable(eventsArrowLink);
         eventsArrowLink.click();
+        return new EcoNewsPage(driver);
     }
 
 
     // Subscription-section
     public String getSubscriptionHeaderText() {
-        waitUntilElementVisible(subscriptionHeader);
         return subscriptionHeader.getText();
     }
 
     public String getSubscriptionParagraphText() {
-        waitUntilElementVisible(subscriptionParagraph);
         return subscriptionParagraph.getText();
     }
 
     public boolean isSubscriptionImgQrCodeDisplayed() {
-        waitUntilElementVisible(subscriptionImgQrCode);
         return subscriptionImgQrCode.isDisplayed();
     }
 
@@ -314,13 +292,11 @@ public class HomePage extends BasePage {
     }
 
     public String getSubscriptionErrorText() {
-        waitUntilElementVisible(subscriptionError);
         return subscriptionError.getText();
     }
 
 
     public String getSubscriptionButtonText() {
-        waitUntilElementVisible(subscriptionButton);
         return subscriptionButton.getText();
     }
 
@@ -330,19 +306,5 @@ public class HomePage extends BasePage {
     }
 
 
-    // Business Logic
-
-   //  clickEventsArrowLink navigate to EcoNewsPage
-    public EcoNewsPage openEcoNewsPageByEventsArrowLink() {
-        clickEventsArrowLink();
-        return new EcoNewsPage(driver);
-    }
-
-
-   //  clickEventsLink navigate to EcoNewsPage
-    public EcoNewsPage openEcoNewsPageByEventsLink () {
-        clickEventsLink();
-        return new EcoNewsPage(driver);
-    }
 
 }
