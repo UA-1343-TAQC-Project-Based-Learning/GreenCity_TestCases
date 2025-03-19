@@ -9,9 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
 
-    @FindBy(xpath = "//div[@class='main-content app-container']")
-    private WebElement ecoNewsRoot;
-
     //main-content
     @Getter
     @FindBy(xpath = "//div[@id='main-content']/h1")
