@@ -13,7 +13,7 @@ public class HomePageTest extends BaseTestRunner {
     // go to EcoNewsPage via arrow
     @Test
     public void testOpenEcoNewsPageByEventsArrowLink() {
-        EcoNewsPage ecoNewsPage = homePage.openEcoNewsPageByEventsArrowLink();
+        EcoNewsPage ecoNewsPage = homePage.clickEventsArrowLink();
         assertEquals("Еко новини", ecoNewsPage.getHeaderText());
     }
 
@@ -21,7 +21,7 @@ public class HomePageTest extends BaseTestRunner {
     @Test
     public void testOpenEcoNewsPageByEventsLink() {
         assertEquals("Читати всі новини", homePage.getEventsLinkText());
-        EcoNewsPage ecoNewsPage = homePage.openEcoNewsPageByEventsLink();
+        EcoNewsPage ecoNewsPage = homePage.clickEventsLink();
         assertEquals("Еко новини", ecoNewsPage.getHeaderText());
     }
 
