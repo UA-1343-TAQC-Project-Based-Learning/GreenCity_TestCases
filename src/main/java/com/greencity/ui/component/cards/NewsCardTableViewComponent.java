@@ -2,6 +2,7 @@ package com.greencity.ui.component.cards;
 
 
 
+import com.greencity.ui.component.BaseComponent;
 import com.greencity.ui.page.newscardpage.NewsCardPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 
-public class NewsCardTableViewComponent extends NewsCardComponent {
+public class NewsCardTableViewComponent extends BaseComponent {
     @Getter
     @FindBy(xpath = ".//img[@class='list-image-content']")
     private WebElement image;
