@@ -6,39 +6,49 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-@Getter
-public  class HeaderComponent extends BaseComponent {
 
+public  class HeaderComponent extends BaseComponent {
+    @Getter
     @FindBy(xpath = ".//img[@src='assets/img/logo.svg']")
     private WebElement logo;
 
+    @Getter
     @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Еко новини')]")
     private WebElement ecoNewsLink;
 
+    @Getter
     @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Події')]")
     private WebElement eventLink;
 
+    @Getter
     @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Карта')]")
     private WebElement placeLink;
 
+    @Getter
     @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Про нас')]")
     private WebElement aboutUsLink;
 
+    @Getter
     @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Мій кабінет')]")
     private WebElement myProfileLink;
 
+    @Getter
     @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'UBS')]")
     private WebElement ubsCourierLink;
 
+    @Getter
     @FindBy(xpath = ".//img[@src='assets/img/search.svg']")
     private WebElement searchIcon;
 
+    @Getter
     @FindBy(xpath = ".//li[@class='lang-option']")
     private WebElement languageSwitcherIcon;
 
+    @Getter
     @FindBy(xpath = ".//img[@src='../assets/img/events/user.svg']")
     private WebElement signInButton;
 
+    @Getter
     @FindBy(xpath = ".//span[contains(text(),'Зареєструватися')]")
     private WebElement registrationButton;
 
