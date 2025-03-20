@@ -106,40 +106,6 @@ public class ContentOfNews extends BaseComponent {
     private WebElement styleButton;
 
 
-    public String getTitleContentText() {
-        return content.getText();
-    }
-    public String getTitleAreaDescriptionWarningsText() {
-        return textAreaDescriptionWarnings.getText();
-    }
-    public String getTitleDateText() {
-        return dateOfNew.getText();
-    }
-    public String getTitleAuthorText() {
-        return authorOfNew.getText();
-    }
-    public String getTitleCancelButtonText() {
-        return cancelButton.getText();
-    }
-    public String getTitlePreviewButtonText() {
-        return previewButton.getText();
-    }
-    public String getTitlePublishButtonText() {
-        return publishButton.getText();
-    }
-    public String getTitleDescriptionOfNewsText() {
-        return descriptionOfNews.getText();
-    }
-    public void clickContentNewsForm() {
-        contentNewsForm.click();
-    }
-    public void clearContentNewsForm() {
-        contentNewsForm.clear();
-    }
-    public void fillContentNewsForm(String textContent) {
-        contentNewsForm.sendKeys(textContent);
-    }
-
     // dropdownText
     protected DropdownTextSize getDropdownTextSize() {
         if (dropdownTextSize == null) {
