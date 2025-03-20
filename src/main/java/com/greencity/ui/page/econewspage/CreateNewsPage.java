@@ -1,5 +1,7 @@
 package com.greencity.ui.page.econewspage;
 
+import com.greencity.ui.component.ImageUploadComponent;
+import com.greencity.ui.component.ContentOfNews;
 import com.greencity.ui.page.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,8 +9,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class CreateNewsPage extends BasePage {
+    private ImageUploadComponent imageUploadComponent;
+    private ContentOfNews contentOfNews;
 
-    @FindBy(xpath = "//h2[@class='title-header']")
+    @FindBy(xpath = ".//div[@class='image-block']")
+    private WebElement imageBlockRoot;
+
+    @FindBy(xpath = ".//h2[@class='title-header']")
     private WebElement titleHeaderText;
 
     @FindBy(xpath = "//p[@class='title-description']")
@@ -38,10 +45,9 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
-
     public CreateNewsPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
+        imageUploadComponent = new ImageUploadComponent(driver, getHeaderRoot());
     }
 
 
