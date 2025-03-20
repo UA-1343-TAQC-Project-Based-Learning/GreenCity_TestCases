@@ -15,7 +15,6 @@ public class BaseTest  extends BaseTestRunner {
 
 
 
-
     @Test
     public void testHomePageElements() {
 //        Assert.assertEquals(homePage.getHeaderTitle(), "A new way to cultivate useful habits",
