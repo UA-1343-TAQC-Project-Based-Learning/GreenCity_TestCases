@@ -21,11 +21,11 @@ public class DropdownTextSize extends BaseComponent {
 
     @Getter
     @FindBy(xpath = ".//span[@class = 'ql-size ql-picker ql-expanded']//span[@data-value = 'large']")
-    private WebElement hugeStyleButton;
+    private WebElement largeStyleButton;
 
     @Getter
     @FindBy(xpath = ".//span[@class = 'ql-size ql-picker ql-expanded']//span[@data-value = 'huge']")
-    private WebElement largeStyleButton;
+    private WebElement hugeStyleButton;
 
     public String getSmallStyleButtonText() {
         return getSmallStyleButton().getText();

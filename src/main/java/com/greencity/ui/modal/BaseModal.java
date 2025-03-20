@@ -1,4 +1,4 @@
-package com.greencity.ui.component;
+package com.greencity.ui.modal;
 
 import com.greencity.ui.Base;
 import lombok.Getter;
@@ -7,15 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
-public abstract class BaseComponent extends Base {
-
+public class BaseModal extends Base {
     @Getter
     protected WebElement rootElement;
 
-    public BaseComponent(WebDriver driver, WebElement rootElement) {
+    public BaseModal(WebDriver driver, WebElement rootElement){
         super(driver);
-        this.rootElement = rootElement;
         PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
-
+        this.rootElement = rootElement;
     }
 }

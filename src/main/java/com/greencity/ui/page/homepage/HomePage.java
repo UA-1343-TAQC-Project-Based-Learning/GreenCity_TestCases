@@ -1,16 +1,15 @@
 package com.greencity.ui.page.homepage;
 
+import com.greencity.ui.modal.LoginModal;
 import com.greencity.ui.page.BasePage;
-import com.greencity.ui.page.EcoNewsPage;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
+import com.greencity.ui.page.UbsPage;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
 public class HomePage extends BasePage {
 
@@ -136,27 +135,32 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[@id='form-wrapper']//button[@class='primary-global-button btn']")
     private WebElement subscriptionButton;
 
+    @Getter
+    @FindBy(xpath = "//mat-dialog-container")
+    private WebElement loginModalRoot;
+
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     //Main-header
-    public String getHeaderTitle() {
+    public String getHeaderTitleText() {
         return headerTitle.getText();
     }
 
-    public String getHeaderParagraph() {
-              return headerParagraph.getText();
+    public String getHeaderParagraphText() {
+        return headerParagraph.getText();
     }
 
     public String getHeaderButtonText() {
         return headerButton.getText();
     }
 
-    public void clickHeaderButton() {
+    public LoginModal clickHeaderButton() {
         waitUntilElementClickable(headerButton);
         headerButton.click();
+        return new LoginModal(driver, loginModalRoot);
     }
 
     public boolean isGuyImageDisplayed() {
@@ -194,9 +198,11 @@ public class HomePage extends BasePage {
         return statRightButton.getText();
     }
 
-    public void clickStatRightButton() {
+    public UbsPage clickStatRightButton() {
         waitUntilElementClickable(statRightButton);
         statRightButton.click();
+        return new UbsPage(driver);
+
     }
 
     public boolean isStatRightIconDisplayed() {
@@ -207,9 +213,10 @@ public class HomePage extends BasePage {
         return statRightLink.getText();
     }
 
-    public void clickStatRightLink() {
+    public UbsPage clickStatRightLink() {
         waitUntilElementClickable(statRightLink);
         statRightLink.click();
+        return new UbsPage(driver);
     }
 
 
@@ -231,9 +238,10 @@ public class HomePage extends BasePage {
         return statLeftButton.getText();
     }
 
-    public void clickStatLeftButton() {
+    public UbsPage clickStatLeftButton() {
         waitUntilElementClickable(statLeftButton);
         statLeftButton.click();
+        return new UbsPage(driver);
     }
 
     public boolean isStatLeftIconDisplayed() {
@@ -244,9 +252,10 @@ public class HomePage extends BasePage {
         return statLeftLink.getText();
     }
 
-    public void clickStatLeftLink() {
+    public UbsPage clickStatLeftLink() {
         waitUntilElementClickable(statLeftLink);
         statLeftLink.click();
+        return new UbsPage(driver);
     }
 
     // Event-section
@@ -300,11 +309,10 @@ public class HomePage extends BasePage {
         return subscriptionButton.getText();
     }
 
-    public void clickSubscriptionButton() {
+    public HomePage clickSubscriptionButton() {
         waitUntilElementClickable(subscriptionButton);
         subscriptionButton.click();
+        return this;
     }
-
-
 
 }
