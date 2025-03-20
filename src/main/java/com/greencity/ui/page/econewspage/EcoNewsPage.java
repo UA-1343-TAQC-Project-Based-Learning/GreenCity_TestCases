@@ -1,10 +1,15 @@
-package com.greencity.ui.page;
+package com.greencity.ui.page.econewspage;
+import com.greencity.ui.component.ToolbarComponent;
+import com.greencity.ui.page.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class EcoNewsPage extends BasePage {
+    private ToolbarComponent toolbarComponent;
 
     @Getter
     @FindBy(xpath = ".//h1[@class='main-header']")
@@ -18,14 +23,16 @@ public class EcoNewsPage extends BasePage {
         super(driver);
     }
 
+
     public String getHeaderText() {
         waitUntilElementVisible(headerText);
         return headerText.getText();
     }
 
-    public void clickCreateNewsButton() {
+    public CreateNewsPage clickCreateNewsButton() {
         waitUntilElementClickable(createNewsButton);
         createNewsButton.click();
+        return new CreateNewsPage(driver);
     }
 
 }
