@@ -1,8 +1,11 @@
-package com.greencity.ui.page;
+package com.greencity.ui.page.econewspage;
+
+import com.greencity.ui.page.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 
 public class EcoNewsPage extends BasePage {
 
@@ -18,14 +21,16 @@ public class EcoNewsPage extends BasePage {
         super(driver);
     }
 
+
     public String getHeaderText() {
         waitUntilElementVisible(headerText);
         return headerText.getText();
     }
 
-    public void clickCreateNewsButton() {
+    public CreateNewsPage clickCreateNewsButton() {
         waitUntilElementClickable(createNewsButton);
         createNewsButton.click();
+        return new CreateNewsPage(driver);
     }
 
 }

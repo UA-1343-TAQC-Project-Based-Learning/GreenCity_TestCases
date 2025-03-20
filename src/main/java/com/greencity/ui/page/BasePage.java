@@ -22,6 +22,7 @@ public abstract class BasePage extends Base {
     @Getter
     protected FooterComponent footer;
 
+    @Getter
     @FindBy(xpath = "//app-header")
     private WebElement headerRoot;
     @FindBy(xpath = "//footer")

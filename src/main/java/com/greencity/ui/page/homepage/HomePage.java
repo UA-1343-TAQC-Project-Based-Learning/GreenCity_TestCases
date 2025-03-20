@@ -4,6 +4,7 @@ import com.greencity.ui.modal.LoginModal;
 import com.greencity.ui.page.BasePage;
 import com.greencity.ui.page.EcoNewsPage;
 import com.greencity.ui.page.UbsPage;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -313,7 +314,5 @@ public class HomePage extends BasePage {
         subscriptionButton.click();
         return this;
     }
-
-
 
 }
