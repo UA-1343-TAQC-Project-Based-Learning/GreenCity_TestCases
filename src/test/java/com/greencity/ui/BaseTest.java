@@ -19,7 +19,7 @@ public class BaseTest extends BaseTestRunner {
 //        Assert.assertEquals(homePage.getHeaderTitle(), "A new way to cultivate useful habits",
 //                "Header title is incorrect!");
 
-        Assert.assertFalse(homePage.getHeaderParagraph().isEmpty(), "Header paragraph is missing!");
+        Assert.assertFalse(homePage.getHeaderParagraphText().isEmpty(), "Header paragraph is missing!");
 
 //        Assert.assertTrue(homePage.headerButton.isDisplayed(),
 //                "Start habit button is not displayed!");

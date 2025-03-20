@@ -2,7 +2,6 @@ package com.greencity.ui.page.homepage;
 
 import com.greencity.ui.modal.LoginModal;
 import com.greencity.ui.page.BasePage;
-import com.greencity.ui.page.EcoNewsPage;
 import com.greencity.ui.page.UbsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import lombok.Getter;
