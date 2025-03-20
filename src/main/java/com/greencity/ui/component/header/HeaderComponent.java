@@ -15,7 +15,7 @@ import java.util.List;
 
 public class HeaderComponent extends BaseComponent {
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
-    protected  final String LIST_LANGUAGE_XPATH_SELECTOR = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]";
+    protected final String LIST_LANGUAGE_XPATH_SELECTOR = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]";
 
     private DropdownComponent dropdownComponent;
     private UsersHeaderComponent usersHeaderComponent;
@@ -58,9 +58,7 @@ public class HeaderComponent extends BaseComponent {
 
 
     @Getter
-    @FindAll({
-            @FindBy(xpath = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='Ua']"),
-            @FindBy(xpath = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='En']")
+    @FindAll({@FindBy(xpath = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='Ua']"), @FindBy(xpath = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='En']")
 
     })
     private List<WebElement> languagesList;
@@ -73,114 +71,101 @@ public class HeaderComponent extends BaseComponent {
     @FindBy(xpath = ".//span[contains(text(),'Зареєструватися')]")
     private WebElement registrationButton;
 
+    @Getter
+    @FindBy(xpath = ".//img[@src='../assets/img/events/user.svg']")
+    private WebElement signInButton;
+
 
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
-    @Getter
-    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Еко новини')]")
-    private WebElement ecoNewsLink;
-
-    @Getter
-    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Події')]")
-    private WebElement eventLink;
-
-    @Getter
-    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Карта')]")
-    private WebElement placeLink;
-
-    @Getter
-    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Про нас')]")
-    private WebElement aboutUsLink;
-
-    @Getter
-    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Мій кабінет')]")
-    private WebElement myProfileLink;
-
-    @Getter
-    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'UBS')]")
-    private WebElement ubsCourierLink;
-
-    @Getter
-    @FindBy(xpath = ".//img[@src='assets/img/search.svg']")
-    private WebElement searchIcon;
-
-    @Getter
-    @FindBy(xpath = ".//li[@class='lang-option']")
-    private WebElement languageSwitcherIcon;
-
-    @Getter
-    @FindBy(xpath = ".//img[@src='../assets/img/events/user.svg']")
-    private WebElement signInButton;
-
-    @Getter
-    @FindBy(xpath = ".//span[contains(text(),'Зареєструватися')]")
-    private WebElement registrationButton;
-
-
     public String getLogoText() {
         return getLogo().getText();
     }
+
     public String getEcoNewsLinkText() {
         return ecoNewsLink.getText();
     }
+
     public String getEventLinkText() {
         return getEventLink().getText();
     }
+
     public String getPlaceLinkText() {
         return getPlaceLink().getText();
     }
+
     public String getMyProfileLinkText() {
         return getMyProfileLink().getText();
     }
+
     public String getAboutUsLinkText() {
         return getAboutUsLink().getText();
     }
+
     public String getUbsCourierLinkText() {
         return getUbsCourierLink().getText();
     }
+
     public String getSearchIconText() {
         return getSearchIcon().getText();
     }
+
     public String getLanguageSwitcherIconText() {
         return getLanguageSwitcherIcon().getText();
     }
+
     public String getSignInButtonText() {
         return getSignInButton().getText();
     }
+
     public String getRegistrationButtonText() {
         return getRegistrationButton().getText();
     }
-    public void clickEcoNewsLink(){
+
+    public void clickEcoNewsLink() {
         ecoNewsLink.click();
     }
-    public void clickEventLink(){
+
+    public void clickEventLink() {
         eventLink.click();
     }
-    public void clickPlaceLink(){
+
+    public void clickPlaceLink() {
         placeLink.click();
     }
-    public void clickAboutUsLink(){
+
+    public void clickAboutUsLink() {
         aboutUsLink.click();
     }
-    public void clickMyProfileLink(){
+
+    public void clickMyProfileLink() {
         myProfileLink.click();
     }
-    public void clickUbsCourierLink(){
+
+    public void clickUbsCourierLink() {
         ubsCourierLink.click();
     }
-    public void clickSearchIcon(){
+
+    public void clickSearchIcon() {
         searchIcon.click();
     }
-    public void clickLanguageSwitcherIcon(){
+
+    public void clickLanguageSwitcherIcon() {
         languageSwitcherIcon.click();
     }
-    public void clickSignIn(){
+
+    public void clickSignIn() {
         signInButton.click();
     }
-    public void clickRegistrationButton(){
+
+    public void clickRegistrationButton() {
         registrationButton.click();
+    }
+
+    public WebElement getLanguageDropdown() {
+        return languageSwitcherIcon;
     }
 
     public void clickLanguageDropdown() {
@@ -194,6 +179,7 @@ public class HeaderComponent extends BaseComponent {
         }
         return dropdownComponent;
     }
+
     private DropdownComponent createDropdownComponent(By searchLocator) {
         try {
             Thread.sleep(2000);
@@ -204,10 +190,13 @@ public class HeaderComponent extends BaseComponent {
 
         return getDropdownComponent();
     }
+
     private void openLanguageDropdownComponent() {
         clickLanguageDropdown();
         createDropdownComponent(By.cssSelector(LIST_LANGUAGE_XPATH_SELECTOR));
-    } protected LoggedDropdown getDropdownLogged() {
+    }
+
+    protected LoggedDropdown getDropdownLogged() {
         if (dropdownLogged == null) {
 
             throw new RuntimeException(OPTION_NULL_MESSAGE);
@@ -216,17 +205,20 @@ public class HeaderComponent extends BaseComponent {
     }
 
     private LoggedDropdown createDropdownLogged() {
-        dropdownLogged = new LoggedDropdown(driver,rootElement);
+        dropdownLogged = new LoggedDropdown(driver, rootElement);
         return getDropdownLogged();
     }
+
     private void clickDropdownLoggedNotifications() {
         getDropdownLogged().clickNotifications();
         dropdownLogged = null;
     }
+
     private void clickDropdownLoggedSignOut() {
         getDropdownLogged().clickSignOut();
         dropdownLogged = null;
     }
+
     private void clickDropdownLoggedUbsUser() {
         getDropdownLogged().clickUbsUser();
         dropdownLogged = null;
@@ -238,7 +230,7 @@ public class HeaderComponent extends BaseComponent {
     }
 
     public HomePage signOutUser() {
-       usersHeaderComponent.clickUserName();
+        usersHeaderComponent.clickUserName();
         createDropdownLogged();
         clickDropdownLoggedSignOut();
         return new HomePage(driver);
