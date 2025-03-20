@@ -1,16 +1,12 @@
 package com.greencity.ui.page.homepage;
 
 import com.greencity.ui.page.BasePage;
-import com.greencity.ui.page.EcoNewsPage;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
 public class HomePage extends BasePage {
 
@@ -147,7 +143,7 @@ public class HomePage extends BasePage {
     }
 
     public String getHeaderParagraph() {
-              return headerParagraph.getText();
+        return headerParagraph.getText();
     }
 
     public String getHeaderButtonText() {
@@ -304,7 +300,6 @@ public class HomePage extends BasePage {
         waitUntilElementClickable(subscriptionButton);
         subscriptionButton.click();
     }
-
 
 
 }

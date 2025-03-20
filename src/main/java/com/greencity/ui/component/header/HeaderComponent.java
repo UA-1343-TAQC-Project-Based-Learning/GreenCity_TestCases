@@ -1,4 +1,5 @@
 package com.greencity.ui.component.header;
+
 import com.greencity.ui.component.BaseComponent;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.user.LoggedDropdown;
@@ -12,7 +13,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public  class HeaderComponent extends BaseComponent {
+public class HeaderComponent extends BaseComponent {
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
     protected  final String LIST_LANGUAGE_XPATH_SELECTOR = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]";
 
@@ -76,6 +77,48 @@ public  class HeaderComponent extends BaseComponent {
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
+
+    @Getter
+    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Еко новини')]")
+    private WebElement ecoNewsLink;
+
+    @Getter
+    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Події')]")
+    private WebElement eventLink;
+
+    @Getter
+    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Карта')]")
+    private WebElement placeLink;
+
+    @Getter
+    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Про нас')]")
+    private WebElement aboutUsLink;
+
+    @Getter
+    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Мій кабінет')]")
+    private WebElement myProfileLink;
+
+    @Getter
+    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'UBS')]")
+    private WebElement ubsCourierLink;
+
+    @Getter
+    @FindBy(xpath = ".//img[@src='assets/img/search.svg']")
+    private WebElement searchIcon;
+
+    @Getter
+    @FindBy(xpath = ".//li[@class='lang-option']")
+    private WebElement languageSwitcherIcon;
+
+    @Getter
+    @FindBy(xpath = ".//img[@src='../assets/img/events/user.svg']")
+    private WebElement signInButton;
+
+    @Getter
+    @FindBy(xpath = ".//span[contains(text(),'Зареєструватися')]")
+    private WebElement registrationButton;
+
+
     public String getLogoText() {
         return getLogo().getText();
     }
@@ -97,12 +140,17 @@ public  class HeaderComponent extends BaseComponent {
     public String getUbsCourierLinkText() {
         return getUbsCourierLink().getText();
     }
-
+    public String getSearchIconText() {
+        return getSearchIcon().getText();
+    }
+    public String getLanguageSwitcherIconText() {
+        return getLanguageSwitcherIcon().getText();
+    }
+    public String getSignInButtonText() {
+        return getSignInButton().getText();
+    }
     public String getRegistrationButtonText() {
         return getRegistrationButton().getText();
-    }
-    public WebElement getLanguageDropdown() {
-        return languageSwitcherIcon;
     }
     public void clickEcoNewsLink(){
         ecoNewsLink.click();
@@ -129,11 +177,12 @@ public  class HeaderComponent extends BaseComponent {
         languageSwitcherIcon.click();
     }
     public void clickSignIn(){
-        userIcon.click();
+        signInButton.click();
     }
     public void clickRegistrationButton(){
         registrationButton.click();
     }
+
     public void clickLanguageDropdown() {
         getLanguageDropdown().click();
     }
@@ -151,7 +200,7 @@ public  class HeaderComponent extends BaseComponent {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-         dropdownComponent = new DropdownComponent(driver, searchLocator);
+        dropdownComponent = new DropdownComponent(driver, searchLocator);
 
         return getDropdownComponent();
     }
@@ -182,7 +231,6 @@ public  class HeaderComponent extends BaseComponent {
         getDropdownLogged().clickUbsUser();
         dropdownLogged = null;
     }
-
 
     private void closeDropdownLogged() {
         usersHeaderComponent.clickUserName();
