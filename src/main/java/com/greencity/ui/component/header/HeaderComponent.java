@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public  abstract class HeaderComponent extends BaseComponent {
+public class HeaderComponent extends BaseComponent {
 
     @Getter
     @FindBy(xpath = ".//img[@src='assets/img/logo.svg']")
