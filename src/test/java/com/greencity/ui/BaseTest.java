@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class BaseTest  extends BaseTestRunner {
+public class BaseTest extends BaseTestRunner {
     @Test
     public void firstTest() {
         WebElement image = homePage.getHeader().getLogo();
@@ -14,21 +14,16 @@ public class BaseTest  extends BaseTestRunner {
     }
 
 
-
     @Test
     public void testHomePageElements() {
 //        Assert.assertEquals(homePage.getHeaderTitle(), "A new way to cultivate useful habits",
 //                "Header title is incorrect!");
 
-        Assert.assertFalse(homePage.getHeaderParagraph().isEmpty(),
-                "Header paragraph is missing!");
+        Assert.assertFalse(homePage.getHeaderParagraph().isEmpty(), "Header paragraph is missing!");
 
 //        Assert.assertTrue(homePage.headerButton.isDisplayed(),
 //                "Start habit button is not displayed!");
 
-        Assert.assertTrue(homePage.isGuyImageDisplayed(),
-                "Guy image is not displayed!");
+        Assert.assertTrue(homePage.isGuyImageDisplayed(), "Guy image is not displayed!");
     }
-
-
 }

@@ -58,9 +58,7 @@ public class HeaderComponent extends BaseComponent {
 
 
     @Getter
-    @FindAll({@FindBy(xpath = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='Ua']"), @FindBy(xpath = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='En']")
-
-    })
+    @FindBy(xpath=".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='Ua' or text()='En']")
     private List<WebElement> languagesList;
 
     @Getter

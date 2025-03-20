@@ -8,35 +8,29 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoggedDropdown extends BaseComponent {
 
+    @Getter
+    @FindBy(xpath = ".//ul[contains(@class, 'dropdown-list drop-down-item')]//li[@aria-label='notifications']")
+    private WebElement notifications;
+    @Getter
+    @FindBy(xpath = ".//ul[contains(@class, 'dropdown-list drop-down-item')]//li[@aria-label='sign-out']")
+    private WebElement signOut;
+    @Getter
+    @FindBy(xpath = ".//ul[contains(@class, 'dropdown-list drop-down-item')]//a[@href='#/ubs/user/orders']")
+    private WebElement ubsUser;
+
     public LoggedDropdown(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
-    @Getter
-    @FindBy(xpath =".//ul[contains(@class, 'dropdown-list drop-down-item')]//li[@aria-label='notifications']")
-    private WebElement notifications;
-
-    @Getter
-    @FindBy(xpath =".//ul[contains(@class, 'dropdown-list drop-down-item')]//li[@aria-label='sign-out']")
-    private WebElement signOut;
-
-    @Getter
-    @FindBy(xpath =".//ul[contains(@class, 'dropdown-list drop-down-item')]//a[@href='#/ubs/user/orders']")
-    private WebElement ubsUser;
-
     public void clickNotifications() {
         notifications.click();
     }
+
     public void clickSignOut() {
         signOut.click();
     }
+
     public void clickUbsUser() {
         ubsUser.click();
     }
-
-
-
-
-
-
 }

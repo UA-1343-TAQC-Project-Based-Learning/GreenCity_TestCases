@@ -10,10 +10,8 @@ import java.util.List;
 public class DropdownComponent {
 
     protected final String OPTION_NAME_NOT_FOUND = "OptionName not Found.";
-
-    private List<WebElement> listOptions;
-
     protected WebDriver driver;
+    private List<WebElement> listOptions;
     //
 
 
@@ -42,10 +40,6 @@ public class DropdownComponent {
                 result = current;
                 break;
             }
-        }
-        if (result == null) {
-
-            throw new RuntimeException(String.format( optionName, getListOptionsText()));
         }
         return result;
     }
