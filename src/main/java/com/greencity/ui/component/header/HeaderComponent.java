@@ -1,13 +1,16 @@
 package com.greencity.ui.component.header;
 import com.greencity.ui.component.BaseComponent;
+import com.greencity.ui.page.homepage.HomePage;
+import com.greencity.ui.user.LoggedDropdown;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
-
 public  class HeaderComponent extends BaseComponent {
+    protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
+
+    private LoggedDropdown dropdownLogged;
     @Getter
     @FindBy(xpath = ".//img[@src='assets/img/logo.svg']")
     private WebElement logo;
@@ -51,6 +54,10 @@ public  class HeaderComponent extends BaseComponent {
     @Getter
     @FindBy(xpath = ".//span[contains(text(),'Зареєструватися')]")
     private WebElement registrationButton;
+
+    @Getter
+    @FindBy(xpath =".//ul[@id='header_user-wrp']")
+    private WebElement userName;
 
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
@@ -117,5 +124,48 @@ public  class HeaderComponent extends BaseComponent {
     }
     public void clickRegistrationButton(){
         registrationButton.click();
+    }
+    public void clickUserName(){
+       userName.click();
+    }
+    protected LoggedDropdown getDropdownLogged() {
+        if (dropdownLogged == null) {
+
+            throw new RuntimeException(OPTION_NULL_MESSAGE);
+        }
+        return dropdownLogged;
+    }
+
+    private LoggedDropdown createDropdownLogged() {
+        dropdownLogged = new LoggedDropdown(driver,rootElement);
+        return getDropdownLogged();
+    }
+    private void openLoggedDropdownComponent() {
+        clickUserName();
+        createDropdownLogged();
+    }
+    private void clickDropdownLoggedNotifications() {
+        getDropdownLogged().clickNotifications();
+        dropdownLogged = null;
+    }
+    private void clickDropdownLoggedSignOut() {
+        getDropdownLogged().clickSignOut();
+        dropdownLogged = null;
+    }
+    private void clickDropdownLoggedUbsUser() {
+        getDropdownLogged().clickUbsUser();
+        dropdownLogged = null;
+    }
+
+    private void closeDropdownLogged() {
+        clickUserName();
+        dropdownLogged = null;
+    }
+
+    public HomePage signOutUser() {
+        clickUserName();
+        createDropdownLogged();
+        clickDropdownLoggedSignOut();
+        return new HomePage(driver);
     }
 }

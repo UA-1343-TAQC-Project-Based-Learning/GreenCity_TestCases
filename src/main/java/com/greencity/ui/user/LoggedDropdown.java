@@ -1,14 +1,16 @@
 package com.greencity.ui.user;
 
+import com.greencity.ui.component.BaseComponent;
 import lombok.Getter;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoggedDropdown {
+public class LoggedDropdown extends BaseComponent {
 
-    @Getter
-    @FindBy(xpath =".//ul[@id='header_user-wrp']")
-    private WebElement userName;
+    public LoggedDropdown(WebDriver driver, WebElement rootElement) {
+        super(driver, rootElement);
+    }
 
     @Getter
     @FindBy(xpath =".//ul[contains(@class, 'dropdown-list drop-down-item')]//li[@aria-label='notifications']")
@@ -22,9 +24,6 @@ public class LoggedDropdown {
     @FindBy(xpath =".//ul[contains(@class, 'dropdown-list drop-down-item')]//a[@href='#/ubs/user/orders']")
     private WebElement ubsUser;
 
-    public void clickAddUserName() {
-
-    }
     public void clickNotifications() {
         notifications.click();
     }
@@ -34,7 +33,6 @@ public class LoggedDropdown {
     public void clickUbsUser() {
         ubsUser.click();
     }
-
 
 
 
