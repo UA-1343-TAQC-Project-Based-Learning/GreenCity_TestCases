@@ -2,14 +2,22 @@ package com.greencity.ui.component.header;
 import com.greencity.ui.component.BaseComponent;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.user.LoggedDropdown;
+import com.greencity.ui.user.UsersHeaderComponent;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public  class HeaderComponent extends BaseComponent {
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
+    protected  final String LIST_LANGUAGE_XPATH_SELECTOR = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]";
 
+    private DropdownComponent dropdownComponent;
+    private UsersHeaderComponent usersHeaderComponent;
     private LoggedDropdown dropdownLogged;
     @Getter
     @FindBy(xpath = ".//img[@src='assets/img/logo.svg']")
@@ -44,20 +52,26 @@ public  class HeaderComponent extends BaseComponent {
     private WebElement searchIcon;
 
     @Getter
-    @FindBy(xpath = ".//li[@class='lang-option']")
+    @FindBy(xpath = ".//img[@class='header_arrow reverse']")
     private WebElement languageSwitcherIcon;
+
+
+    @Getter
+    @FindAll({
+            @FindBy(xpath = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='Ua']"),
+            @FindBy(xpath = ".//ul[contains(@class, 'header_lang-switcher-wrp header_navigation-menu-right-lang add-shadow')]//span[text()='En']")
+
+    })
+    private List<WebElement> languagesList;
 
     @Getter
     @FindBy(xpath = ".//img[@src='../assets/img/events/user.svg']")
-    private WebElement signInButton;
+    private WebElement userIcon;
 
     @Getter
     @FindBy(xpath = ".//span[contains(text(),'Зареєструватися')]")
     private WebElement registrationButton;
 
-    @Getter
-    @FindBy(xpath =".//ul[@id='header_user-wrp']")
-    private WebElement userName;
 
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
@@ -83,17 +97,12 @@ public  class HeaderComponent extends BaseComponent {
     public String getUbsCourierLinkText() {
         return getUbsCourierLink().getText();
     }
-    public String getSearchIconText() {
-        return getSearchIcon().getText();
-    }
-    public String getLanguageSwitcherIconText() {
-        return getLanguageSwitcherIcon().getText();
-    }
-    public String getSignInButtonText() {
-        return getSignInButton().getText();
-    }
+
     public String getRegistrationButtonText() {
         return getRegistrationButton().getText();
+    }
+    public WebElement getLanguageDropdown() {
+        return languageSwitcherIcon;
     }
     public void clickEcoNewsLink(){
         ecoNewsLink.click();
@@ -120,15 +129,36 @@ public  class HeaderComponent extends BaseComponent {
         languageSwitcherIcon.click();
     }
     public void clickSignIn(){
-        signInButton.click();
+        userIcon.click();
     }
     public void clickRegistrationButton(){
         registrationButton.click();
     }
-    public void clickUserName(){
-       userName.click();
+    public void clickLanguageDropdown() {
+        getLanguageDropdown().click();
     }
-    protected LoggedDropdown getDropdownLogged() {
+
+    protected DropdownComponent getDropdownComponent() {
+        if (dropdownComponent == null) {
+
+            throw new RuntimeException(OPTION_NULL_MESSAGE);
+        }
+        return dropdownComponent;
+    }
+    private DropdownComponent createDropdownComponent(By searchLocator) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+         dropdownComponent = new DropdownComponent(driver, searchLocator);
+
+        return getDropdownComponent();
+    }
+    private void openLanguageDropdownComponent() {
+        clickLanguageDropdown();
+        createDropdownComponent(By.cssSelector(LIST_LANGUAGE_XPATH_SELECTOR));
+    } protected LoggedDropdown getDropdownLogged() {
         if (dropdownLogged == null) {
 
             throw new RuntimeException(OPTION_NULL_MESSAGE);
@@ -139,10 +169,6 @@ public  class HeaderComponent extends BaseComponent {
     private LoggedDropdown createDropdownLogged() {
         dropdownLogged = new LoggedDropdown(driver,rootElement);
         return getDropdownLogged();
-    }
-    private void openLoggedDropdownComponent() {
-        clickUserName();
-        createDropdownLogged();
     }
     private void clickDropdownLoggedNotifications() {
         getDropdownLogged().clickNotifications();
@@ -157,13 +183,14 @@ public  class HeaderComponent extends BaseComponent {
         dropdownLogged = null;
     }
 
+
     private void closeDropdownLogged() {
-        clickUserName();
+        usersHeaderComponent.clickUserName();
         dropdownLogged = null;
     }
 
     public HomePage signOutUser() {
-        clickUserName();
+       usersHeaderComponent.clickUserName();
         createDropdownLogged();
         clickDropdownLoggedSignOut();
         return new HomePage(driver);
