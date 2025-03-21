@@ -143,5 +143,18 @@ public class CreateNewsPage extends BasePage {
         return externalSourceLinkInputField.getDomAttribute("placeholder");
     }
 
+    public void clickExitButton() {
+        exitButton.click();
+    }
+
+    public void clickPreviewButton() {
+        previewButton.click();
+    }
+
+    public EcoNewsPage clickPublishButton() {
+        publishButton.click();
+        return new EcoNewsPage(driver);
+    }
+
 
 }
