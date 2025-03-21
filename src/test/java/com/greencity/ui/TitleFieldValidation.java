@@ -1,5 +1,6 @@
 package com.greencity.ui;
 
+import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.CreateNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import org.testng.Assert;
@@ -47,6 +48,21 @@ public class TitleFieldValidation extends BaseTestRunner {
                 "The counter text color should be grey");
     }
 
+
+    @Test(description = "Test that Publish button is enabled only after valid input is provided")
+    public void checkPublishButtonIsEnable() {
+        CreateNewsPage createNewsPage = loadAppliacation()
+                .goToCreateEcoNewsPage(testValueProvider.getUserEmail(), testValueProvider.getUserPassword())
+                .fillTitleInputTextField("Test News")
+                .clickTagFilterButton(TagButton.NEWS)
+                .enterTextIntoTextContentField("Main Text");
+
+        Assert.assertTrue(createNewsPage.getPublishButton().isEnabled(),
+                "The Publish button should be enabled when all required fields are filled out");
+
+
+
+    }
 
 
 

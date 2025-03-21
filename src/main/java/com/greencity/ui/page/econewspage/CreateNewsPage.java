@@ -1,8 +1,9 @@
 package com.greencity.ui.page.econewspage;
 
 import com.greencity.ui.component.ImageUploadComponent;
-import com.greencity.ui.component.ContentOfNews;
+import com.greencity.ui.component.TextContentComponent;
 import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
+import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -12,16 +13,21 @@ import org.openqa.selenium.support.FindBy;
 public class CreateNewsPage extends BasePage {
     private EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
     private ImageUploadComponent imageUploadComponent;
-    private ContentOfNews contentOfNews;
+    private TextContentComponent textContentComponent;
 
-    @FindBy(xpath = ".//div[@class='image-block']")
+    private TextContentComponent contentOfNews;
+
+    @FindBy(xpath = "//div[@class='image-block']")
     private WebElement imageBlockRoot;
 
     @FindBy(xpath = "//div[@class='tags-box']")
     private WebElement filterTagsRoot;
 
+    @FindBy(xpath = "//div[@class='textarea-wrapper']")
+    private WebElement textAreaRoot;
 
-    @FindBy(xpath = ".//h2[@class='title-header']")
+
+    @FindBy(xpath = "//h2[@class='title-header']")
     private WebElement titleHeaderText;
 
     @FindBy(xpath = "//p[@class='title-description']")
@@ -57,10 +63,21 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
+    @FindBy(xpath = "//button[@class='tertiary-global-button']")
+    private WebElement exitButton;
+
+    @FindBy(xpath = "//button[@class='secondary-global-button']")
+    private WebElement previewButton;
+
+    @Getter
+    @FindBy(xpath = "//button[@class='primary-global-button']")
+    private WebElement publishButton;
+
     public CreateNewsPage(WebDriver driver) {
         super(driver);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, filterTagsRoot);
         imageUploadComponent = new ImageUploadComponent(driver, imageBlockRoot);
+        textContentComponent new TextContentComponent(driver, textAreaRoot);
     }
 
 
@@ -151,6 +168,31 @@ public class CreateNewsPage extends BasePage {
 
         clickTitleInputTextField();
         fillTitleInputTextField(stringBuilder.toString());
+        return this;
+    }
+
+    public CreateNewsPage clickTagFilterButton(TagButton tagButton) {
+        ecoNewsTagFilterComponent.clickTagButton(tagButton);
+        return this;
+    }
+
+    public CreateNewsPage clickTagFilterButton(TagButton tagButton1, TagButton tagButton2) {
+        ecoNewsTagFilterComponent
+                .clickTagButton(tagButton1)
+                .clickTagButton(tagButton2);
+        return this;
+    }
+
+    public CreateNewsPage clickTagFilterButton(TagButton tagButton1, TagButton tagButton2, TagButton tagButton3) {
+        ecoNewsTagFilterComponent
+                .clickTagButton(tagButton1)
+                .clickTagButton(tagButton2)
+                .clickTagButton(tagButton3);
+        return this;
+    }
+
+    public CreateNewsPage enterTextIntoTextContentField(String text) {
+        textContentComponent.fillTextAreaField(text);
         return this;
     }
 
