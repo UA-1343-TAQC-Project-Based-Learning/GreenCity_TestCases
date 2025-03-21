@@ -59,4 +59,9 @@ public class BaseTestRunner {
             driver.quit();
         }
     }
+
+    public HomePage loadAppliacation() {
+        return new HomePage(driver);
+    }
+
 }

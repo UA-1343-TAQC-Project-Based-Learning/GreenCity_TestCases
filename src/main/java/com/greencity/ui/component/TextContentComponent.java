@@ -1,39 +1,36 @@
 package com.greencity.ui.component;
 
 import com.greencity.ui.component.header.DropdownTextSize;
+import com.greencity.ui.page.econewspage.CreateNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class ContentOfNews extends BaseComponent {
+public class TextContentComponent extends BaseComponent {
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
     private DropdownTextSize dropdownTextSize;
     @Getter
     @FindBy(xpath = ".//h3[normalize-space()='Content']")
-    private WebElement content;
+    private WebElement contentTitleText;
     @Getter
     @FindBy(xpath = ".//p[@class = 'textarea-description warning']")
     private WebElement textAreaDescriptionWarnings;
     @Getter
     @FindBy(xpath = ".//div[@data-placeholder = 'e.g. Short description of news, agenda for event']")
-    private WebElement descriptionOfNews;
+    private WebElement inputTextAreaPlaceholder;
+
+    @FindBy(xpath = ".//div[@class='ql-editor ql-blank']")
+    private WebElement textAreaField;
+
     @Getter
     @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Date:']")
     private WebElement dateOfNew;
     @Getter
     @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Author:']")
     private WebElement authorOfNew;
-    @Getter
-    @FindBy(xpath = ".//div[@class = 'submit-buttons']/button[normalize-space() = 'Cancel']")
-    private WebElement cancelButton;
-    @Getter
-    @FindBy(xpath = ".//div[@class = 'submit-buttons']/button[normalize-space() = 'Preview']")
-    private WebElement previewButton;
-    @Getter
-    @FindBy(xpath = ".//div[@class = 'submit-buttons']/button[normalize-space() = 'Publish']")
-    private WebElement publishButton;
+
     @Getter
     @FindBy(xpath = ".//div[@class = 'ql-container ql-snow']")
     private WebElement contentNewsForm;
@@ -80,7 +77,7 @@ public class ContentOfNews extends BaseComponent {
     @FindBy(xpath = ".//span[@class = 'ql-formats']//span[@class = 'ql-size ql-picker ql-expanded']")
     private WebElement styleButton;
 
-    public ContentOfNews(WebDriver driver, WebElement rootElement) {
+    public TextContentComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
@@ -97,38 +94,29 @@ public class ContentOfNews extends BaseComponent {
         return getDropdownTextSize();
     }
 
-    public ContentOfNews clickDropdownSmallTextSize() {
+    public TextContentComponent clickDropdownSmallTextSize() {
         getDropdownTextSize().clickSmallStyleButton();
         return this;
     }
 
-    public ContentOfNews clickDropdownNormalTextSize() {
+    public TextContentComponent clickDropdownNormalTextSize() {
         getDropdownTextSize().clickNormalStyleButton();
         return this;
     }
 
-    public ContentOfNews clickDropdownHugeTextSize() {
+    public TextContentComponent clickDropdownHugeTextSize() {
         getDropdownTextSize().clickHugeStyleButton();
         return this;
     }
 
-    public ContentOfNews clickDropdownLargeTextSize() {
+    public TextContentComponent clickDropdownLargeTextSize() {
         getDropdownTextSize().clickLargeStyleButton();
         return this;
     }
 
-    public void clickCancelButton() {
-        cancelButton.click();
+    public TextContentComponent fillTextAreaField(String text) {
+        textAreaField.sendKeys(text);
+        return this;
     }
-
-    public void clickPreviewButton() {
-        previewButton.click();
-    }
-
-    public void clickPublishButton() {
-        waitUntilElementClickable(publishButton);
-        publishButton.click();
-    }
-
 
 }
