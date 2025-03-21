@@ -27,10 +27,13 @@ public class BaseTestRunner {
     @Step("init ChromeDriver")
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
-
+        String userProfile = System.getenv("HOMEPATH") + "\\AppData\\Local\\Google\\Chrome\\User Data";
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
+
+        options.addArguments("--user-data-dir=" + userProfile);
+
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -50,7 +53,7 @@ public class BaseTestRunner {
     @AfterClass()
     public void afterClass() {
         if (driver != null) {
-            driver.close();
+            driver.quit();
         }
     }
     @AfterSuite
