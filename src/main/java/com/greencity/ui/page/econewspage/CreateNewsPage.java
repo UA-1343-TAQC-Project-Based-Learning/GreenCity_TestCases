@@ -2,7 +2,9 @@ package com.greencity.ui.page.econewspage;
 
 import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.component.ContentOfNews;
+import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
 import com.greencity.ui.page.BasePage;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,11 +47,17 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
+    @FindBy(xpath = "//div[@class='wrapper']//div[@class='tags-box']")
+    private WebElement newsFilterRoot;
+
+    @Getter
+    private EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
+
     public CreateNewsPage(WebDriver driver) {
         super(driver);
         imageUploadComponent = new ImageUploadComponent(driver, getHeaderRoot());
+        ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, newsFilterRoot);
     }
-
 
     public String getTitleHeaderText() {
         return titleHeaderText.getText();
