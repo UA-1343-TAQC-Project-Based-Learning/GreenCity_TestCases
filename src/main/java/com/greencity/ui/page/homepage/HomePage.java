@@ -269,6 +269,7 @@ public class HomePage extends BasePage {
 
     public EcoNewsPage clickEventsLink() {
         waitUntilElementClickable(eventsLink);
+        scrollToElement(eventsLink);
         eventsLink.click();
         return new EcoNewsPage(driver);
     }

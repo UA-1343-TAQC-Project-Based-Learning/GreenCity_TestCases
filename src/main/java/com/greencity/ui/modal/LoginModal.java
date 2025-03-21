@@ -48,6 +48,7 @@ public class LoginModal extends BaseModal{
     }
 
     public void clickSignInButton() {
+        waitUntilElementClickable(signInButton);
         signInButton.click();
     }
 
