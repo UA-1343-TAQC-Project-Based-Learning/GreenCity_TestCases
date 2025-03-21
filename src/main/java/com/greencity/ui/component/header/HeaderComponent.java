@@ -1,6 +1,7 @@
 package com.greencity.ui.component.header;
 
 import com.greencity.ui.component.BaseComponent;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.user.LoggedDropdown;
 import com.greencity.ui.user.UsersHeaderComponent;
@@ -80,6 +81,17 @@ public class HeaderComponent extends BaseComponent {
 
     public String getLogoText() {
         return getLogo().getText();
+    }
+
+    public HomePage clickLogo() {
+        waitUntilElementClickable(logo);
+        logo.click();
+        return new  HomePage(driver);
+    }
+
+    public EcoNewsPage gotoEcoNewsPage(){
+        clickEcoNewsLink();
+        return new EcoNewsPage(driver);
     }
 
     public String getEcoNewsLinkText() {
