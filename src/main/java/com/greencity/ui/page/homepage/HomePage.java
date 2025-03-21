@@ -2,6 +2,7 @@ package com.greencity.ui.page.homepage;
 
 import com.greencity.ui.modal.LoginModal;
 import com.greencity.ui.page.BasePage;
+import com.greencity.ui.page.econewspage.CreateNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.UbsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
@@ -313,6 +314,14 @@ public class HomePage extends BasePage {
         waitUntilElementClickable(subscriptionButton);
         subscriptionButton.click();
         return this;
+    }
+
+    public CreateNewsPage goToCreateEcoNewsPage(String email, String password) {
+        return new HomePage(driver)
+                .clickHeaderButton()
+                .successfulLogin(email, password)
+                .openEcoNewsPage()
+                .clickCreateNewsButton();
     }
 
 }

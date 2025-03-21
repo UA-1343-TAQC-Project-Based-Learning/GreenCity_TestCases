@@ -25,7 +25,7 @@ public class HeaderComponent extends BaseComponent {
     private WebElement logo;
 
     @Getter
-    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Еко новини')]")
+    @FindBy(xpath = ".//a[contains(text(),'Еко новини') or contains(text(),'Eco news')]")
     private WebElement ecoNewsLink;
 
     @Getter
@@ -123,6 +123,7 @@ public class HeaderComponent extends BaseComponent {
     }
 
     public void clickEcoNewsLink() {
+        waitUntilElementClickable(ecoNewsLink);
         ecoNewsLink.click();
     }
 

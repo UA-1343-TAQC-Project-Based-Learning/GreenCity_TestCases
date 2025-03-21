@@ -1,6 +1,7 @@
 package com.greencity.ui.modal;
 
 import com.greencity.ui.page.MySpacePage;
+import com.greencity.ui.page.econewspage.CreateNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,24 +24,28 @@ public class LoginModal extends BaseModal{
         super(driver, rootElement);
     }
 
-    public void clearEmailInput() {
+    public LoginModal clearEmailInput() {
         emailInput.clear();
+        return this;
     }
 
-    public void clickEmailInput() {
+    public LoginModal clickEmailInput() {
         emailInput.click();
+        return this;
     }
 
-    public void setEmailInput(String email) {
+    public LoginModal setEmailInput(String email) {
         emailInput.sendKeys(email);
+        return this;
     }
 
     public void clearPasswordInput() {
         passwordInput.clear();
     }
 
-    public void clickPasswordInput() {
+    public LoginModal clickPasswordInput() {
         passwordInput.click();
+        return this;
     }
 
     public void setPasswordInput(String password) {
@@ -51,26 +56,45 @@ public class LoginModal extends BaseModal{
         signInButton.click();
     }
 
-    private void enterEmailInput(String email) {
-        clickEmailInput();
-        clearEmailInput();
-        setEmailInput(email);
+    private LoginModal enterEmailInput(String email) {
+        clickEmailInput()
+                .clearEmailInput()
+                .setEmailInput(email);
+        return this;
     }
 
-    private void enterPasswordInput(String password) {
+    private LoginModal enterPasswordInput(String password) {
         clickPasswordInput();
         clearPasswordInput();
         setPasswordInput(password);
+        return this;
     }
 
     public void fillLogin(String email, String password) {
-        enterEmailInput(email);
-        enterPasswordInput(password);
-        clickSignInButton();
+        enterEmailInput(email)
+                .enterPasswordInput(password)
+                .clickSignInButton();
     }
 
     public MySpacePage successfulLogin(String email, String password) {
         fillLogin(email, password);
         return new MySpacePage(driver);
+    }
+
+    // temp test methods
+    public String getEmailFieldBorderColor() {
+        return emailInput.getCssValue("border-color");
+    }
+
+    public LoginModal fillTitleInputField(int charactersNumber) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < 171; i++) {
+            stringBuilder.append("A");
+        }
+
+        clickEmailInput();
+        emailInput.sendKeys(stringBuilder.toString());
+        return this;
     }
 }
