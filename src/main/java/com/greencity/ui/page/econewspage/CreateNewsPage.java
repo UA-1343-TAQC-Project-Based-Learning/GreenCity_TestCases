@@ -77,7 +77,7 @@ public class CreateNewsPage extends BasePage {
         super(driver);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, filterTagsRoot);
         imageUploadComponent = new ImageUploadComponent(driver, imageBlockRoot);
-        textContentComponent new TextContentComponent(driver, textAreaRoot);
+        textContentComponent = new TextContentComponent(driver, textAreaRoot);
     }
 
 
