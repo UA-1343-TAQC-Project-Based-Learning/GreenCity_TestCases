@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.io.File;
@@ -87,9 +88,10 @@ public class BaseTestRunner {
 
     @Step("init ChromeDriver")
     public void initDriver() {
-        ChromeOptions options = new ChromeOptions();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+         ChromeOptions options = new ChromeOptions();
 
-        options.setBrowserVersion("134.0.6998.89");
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
@@ -129,7 +131,14 @@ public class BaseTestRunner {
         }
     }
     @AfterTest
-    public void tearThis() {
+    public void tearThis(ITestContext testContext) {
+        if (!isTestSuccessful) {
+            logger.error("Test_Name = {} fail",  testContext.getName());
+            // delete session
+            takeScreenShot();
+            takePageSource(); // Default sources
+            // TODO JS sources
+        }
 
         // Sign out
         // delete All Cookies;
@@ -142,7 +151,7 @@ public class BaseTestRunner {
         //
         driver.navigate().refresh();
         presentationSleep(4); // For Presentation
-        System.out.println("\t@AfterEach executed");
+        logger.info("\t@AfterTest executed");
     }
     protected void loadApplication() {
         driver.get(BASE_URL);
