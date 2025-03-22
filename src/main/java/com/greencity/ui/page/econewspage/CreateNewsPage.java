@@ -15,7 +15,6 @@ public class CreateNewsPage extends BasePage {
     private ImageUploadComponent imageUploadComponent;
     private TextContentComponent textContentComponent;
 
-    private TextContentComponent contentOfNews;
 
     @FindBy(xpath = "//div[@class='image-block']")
     private WebElement imageBlockRoot;
@@ -85,6 +84,11 @@ public class CreateNewsPage extends BasePage {
         return titleHeaderText.getText();
     }
 
+    public CreateNewsPage clickTitleHeaderText() {
+        titleHeaderText.click();
+        return this;
+    }
+
     public String getTitleHeaderDescriptionText() {
         return titleHeaderDescriptionText.getText();
     }
@@ -105,16 +109,28 @@ public class CreateNewsPage extends BasePage {
         return titleFieldCharacterCounterWarning.getText();
     }
 
-    public void clickTitleInputTextField() {
-        titleInputTextField.click();
+    public String getTitleFieldCharacterCounterWarningTextColor() {
+        return titleFieldCharacterCounterWarning.getCssValue("color");
     }
 
-    public void clearTitleInputTextField() {
+    public CreateNewsPage clickTitleInputTextField() {
+        titleInputTextField.click();
+        return this;
+    }
+
+    public CreateNewsPage clearTitleInputTextField() {
         titleInputTextField.clear();
+        return this;
+    }
+
+    public String getTitleInputTextFieldValue() {
+        return titleInputTextField.getAttribute("value");
     }
 
     public CreateNewsPage fillTitleInputTextField(String titleText) {
-        titleInputTextField.sendKeys(titleText);
+        clickTitleInputTextField()
+                .clearTitleInputTextField()
+                .titleInputTextField.sendKeys(titleText);
         return this;
     }
 
@@ -158,36 +174,22 @@ public class CreateNewsPage extends BasePage {
         return externalSourceLinkInputField.getDomAttribute("placeholder");
     }
 
-
-    public CreateNewsPage fillTitleInputFieldWithCustomNumberOfCharacters(int charactersNumber) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < 171; i++) {
-            stringBuilder.append("A");
-        }
-
-        clickTitleInputTextField();
-        fillTitleInputTextField(stringBuilder.toString());
-        return this;
+    public void clickExitButton() {
+        exitButton.click();
     }
+
+    public void clickPreviewButton() {
+        previewButton.click();
+    }
+
+    public EcoNewsPage clickPublishButton() {
+        publishButton.click();
+        return new EcoNewsPage(driver);
+    }
+
 
     public CreateNewsPage clickTagFilterButton(TagButton tagButton) {
         ecoNewsTagFilterComponent.clickTagButton(tagButton);
-        return this;
-    }
-
-    public CreateNewsPage clickTagFilterButton(TagButton tagButton1, TagButton tagButton2) {
-        ecoNewsTagFilterComponent
-                .clickTagButton(tagButton1)
-                .clickTagButton(tagButton2);
-        return this;
-    }
-
-    public CreateNewsPage clickTagFilterButton(TagButton tagButton1, TagButton tagButton2, TagButton tagButton3) {
-        ecoNewsTagFilterComponent
-                .clickTagButton(tagButton1)
-                .clickTagButton(tagButton2)
-                .clickTagButton(tagButton3);
         return this;
     }
 

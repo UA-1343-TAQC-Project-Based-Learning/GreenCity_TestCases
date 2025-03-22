@@ -316,10 +316,8 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public CreateNewsPage goToCreateEcoNewsPage(String email, String password) {
+    public CreateNewsPage goToCreateEcoNewsPage() {
         return new HomePage(driver)
-                .clickHeaderButton()
-                .successfulLogin(email, password)
                 .openEcoNewsPage()
                 .clickCreateNewsButton();
     }

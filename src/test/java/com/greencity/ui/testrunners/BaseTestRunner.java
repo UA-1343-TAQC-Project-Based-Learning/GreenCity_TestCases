@@ -7,6 +7,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -16,6 +18,8 @@ public class BaseTestRunner {
     protected WebDriver driver;
     protected static TestValueProvider testValueProvider;
     protected HomePage homePage;
+
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @BeforeSuite
     public void beforeSuite() {
@@ -28,6 +32,8 @@ public class BaseTestRunner {
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
 
+        options.addArguments("user-data-dir=/home/hembei/.config/google-chrome-selenium/");
+        options.addArguments("profile-directory=Default");
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
