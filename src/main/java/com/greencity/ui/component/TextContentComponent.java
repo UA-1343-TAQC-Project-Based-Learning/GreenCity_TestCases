@@ -14,7 +14,7 @@ public class TextContentComponent extends BaseComponent {
     @FindBy(xpath = ".//h3[normalize-space()='Content']")
     private WebElement content;
     @Getter
-    @FindBy(xpath = ".//p[@class = 'textarea-description warning']")
+    @FindBy(xpath = ".//p[@class = 'field-info']")
     private WebElement textAreaDescriptionWarnings;
     @Getter
     @FindBy(xpath = ".//div[@data-placeholder = 'e.g. Short description of news, agenda for event']")
@@ -130,5 +130,12 @@ public class TextContentComponent extends BaseComponent {
         publishButton.click();
     }
 
+    public String getContentText() {
+        return content.getText();
+    }
+
+    public String getAreaDescriptionWarningsText(){
+        return textAreaDescriptionWarnings.getText();
+    }
 
 }

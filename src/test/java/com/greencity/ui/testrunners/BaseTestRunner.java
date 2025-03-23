@@ -27,12 +27,12 @@ public class BaseTestRunner {
     @Step("init ChromeDriver")
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
-        String userProfile = System.getenv("HOMEPATH") + "\\AppData\\Local\\Google\\Chrome\\User Data";
+
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
 
-        options.addArguments("--user-data-dir=" + userProfile);
+        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
 
 
         driver = new ChromeDriver(options);

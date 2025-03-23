@@ -3,24 +3,34 @@ package com.greencity.ui.page.econewspage;
 import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.component.TextContentComponent;
 import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
+import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class CreateNewsPage extends BasePage {
     private EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
     private ImageUploadComponent imageUploadComponent;
     private TextContentComponent textContentComponent;
+    public List<String> tagFilters = new ArrayList<>(List.of("News","Events","Education","Initiatives","Ads"));
 
-
+    @Getter
     @FindBy(xpath = "//div[@class='image-block']")
     private WebElement imageBlockRoot;
 
+    @Getter
     @FindBy(xpath = "//div[@class='tags-box']")
     private WebElement filterTagsRoot;
 
+    @Getter
     @FindBy(xpath = "//div[@class='textarea-wrapper']")
     private WebElement textAreaRoot;
 
@@ -52,6 +62,7 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//p[normalize-space()='Only 3 tags can be added' or normalize-space()='Оберіть не більше 3-х тегів']")
     private WebElement onlyThreeTagsCanBeAddedText;
 
+    @Getter
     @FindBy(xpath = "//input[@placeholder='Link to external source' or @placeholder='Посилання на зовнішнє джерело']")
     private WebElement externalSourceLinkInputField;
 
@@ -61,15 +72,25 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
+    @Getter
     @FindBy(xpath = "//button[@class='tertiary-global-button']")
     private WebElement exitButton;
 
+    @Getter
     @FindBy(xpath = "//button[@class='secondary-global-button']")
     private WebElement previewButton;
 
     @Getter
     @FindBy(xpath = "//button[@class='primary-global-button']")
     private WebElement publishButton;
+
+    @Getter
+    @FindBy(xpath="//span[contains(text(), 'Author') or contains(text(), 'Автор')]/following-sibling::span")
+    private WebElement authorLabel;
+
+    @Getter
+    @FindBy(xpath = "//span[contains(text(), 'Date') or contains(text(), 'Дата')]/following-sibling::span")
+    private WebElement dataLabel;
 
     public CreateNewsPage(WebDriver driver) {
         super(driver);
@@ -157,4 +178,87 @@ public class CreateNewsPage extends BasePage {
     }
 
 
+    public List<String> getListOfAllTagButtonsText() {
+        List<String> tagButtonsText = new ArrayList<>();
+        TagButton[] tagButtons = TagButton.values();
+        for(TagButton tagButton : tagButtons){
+            tagButtonsText.add(ecoNewsTagFilterComponent.getTagButtonText(tagButton));
+        }
+        return tagButtonsText;
+    }
+
+    public boolean isAllSelectedTagsChangeAppearance() {
+        TagButton[] tagButtons = TagButton.values();
+        boolean result = true;
+        for (TagButton tagButton : tagButtons) {
+            ecoNewsTagFilterComponent.clickTagButton(tagButton);
+            result = ecoNewsTagFilterComponent.isTagButtonSelected(tagButton);
+            ecoNewsTagFilterComponent.clickTagButton(tagButton);
+            if (!result) break;
+        }
+        return result;
+    }
+
+    public String getImageBrowseLinkText(){
+        return imageUploadComponent.getImageBrowseLinkText();
+    }
+
+    public boolean isPresentTitleInputTextField(){
+        return titleInputTextField.isDisplayed();
+    }
+
+    public String getContentText(){
+        return textContentComponent.getContentText();
+    }
+
+    public boolean isPresentContentInputTextField(){
+        return textAreaRoot.isDisplayed();
+    }
+
+    public String getContentCharacterCountText(){
+        return textContentComponent.getAreaDescriptionWarningsText();
+    }
+
+    public String getAuthorLabelText(){
+        return authorLabel.getText();
+    }
+
+    public boolean isAuthorLabelNotEditable(){
+        String isContentEditable = authorLabel.getAttribute("contenteditable");
+        return (isContentEditable == null || isContentEditable.equals("false"));
+    }
+
+    public String getDataLabelText(){
+        return dataLabel.getText();
+    }
+
+    public LocalDate getDataLabelFormating(Locale locale){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", locale);
+        return LocalDate.parse(getDataLabelText(), formatter);
+    }
+
+    public boolean isDataLabelNotEditable(){
+        String isContentEditable = dataLabel.getAttribute("contenteditable");
+        return (isContentEditable == null || isContentEditable.equals("false"));
+    }
+
+    public  boolean isCancelButtonPresent(){
+       return exitButton.isDisplayed();
+    }
+
+    public  boolean isPreviewButtonPresent(){
+        return previewButton.isDisplayed();
+    }
+
+    public  boolean isPublishButtonPresent(){
+        return publishButton.isDisplayed();
+    }
+
+    public boolean isElementsOrderCorrect(WebElement first, WebElement second){
+        return first.getLocation().getY() < second.getLocation().getY();
+    }
+
+    public boolean areElementsOnSameLine(WebElement first, WebElement second){
+        return first.getLocation().getY() == second.getLocation().getY();
+    }
 }
