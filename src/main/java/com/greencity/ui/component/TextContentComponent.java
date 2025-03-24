@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class ContentOfNews extends BaseComponent {
+public class TextContentComponent extends BaseComponent {
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
     private DropdownTextSize dropdownTextSize;
     @Getter
@@ -80,7 +80,7 @@ public class ContentOfNews extends BaseComponent {
     @FindBy(xpath = ".//span[@class = 'ql-formats']//span[@class = 'ql-size ql-picker ql-expanded']")
     private WebElement styleButton;
 
-    public ContentOfNews(WebDriver driver, WebElement rootElement) {
+    public TextContentComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
@@ -97,22 +97,22 @@ public class ContentOfNews extends BaseComponent {
         return getDropdownTextSize();
     }
 
-    public ContentOfNews clickDropdownSmallTextSize() {
+    public TextContentComponent clickDropdownSmallTextSize() {
         getDropdownTextSize().clickSmallStyleButton();
         return this;
     }
 
-    public ContentOfNews clickDropdownNormalTextSize() {
+    public TextContentComponent clickDropdownNormalTextSize() {
         getDropdownTextSize().clickNormalStyleButton();
         return this;
     }
 
-    public ContentOfNews clickDropdownHugeTextSize() {
+    public TextContentComponent clickDropdownHugeTextSize() {
         getDropdownTextSize().clickHugeStyleButton();
         return this;
     }
 
-    public ContentOfNews clickDropdownLargeTextSize() {
+    public TextContentComponent clickDropdownLargeTextSize() {
         getDropdownTextSize().clickLargeStyleButton();
         return this;
     }
