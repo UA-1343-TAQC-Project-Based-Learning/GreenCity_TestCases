@@ -1,6 +1,7 @@
 package com.greencity.ui.createNewsPage;
 
 import com.greencity.ui.component.ecoNewsTag.TagButton;
+import com.greencity.ui.data.Colors;
 import com.greencity.ui.page.econewspage.CreateNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import org.openqa.selenium.WebDriver;
@@ -66,19 +67,16 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
 
     @Test
     public void checkPublishButton2() {
-        String greyColor = "rgb(156, 167, 176)";
-        String redColor = "rgb(255, 0, 0)";
-
         goToCreateEcoNewsPage()
-                .checkTitleInputFieldBorderColor(redColor)
+                .checkTitleInputFieldBorderColor(Colors.getRED_COLOR_BORDER())
                 .checkPublishButtonIsDisabled()
                 .checkTitleFieldCharacterCounterText("0/170")
                 .fillTitleInputTextField(titleCharacterProvider(171))
-                .checkTitleFieldCharacterCounterWarningTextColor("rgba(235, 24, 13, 1)")
+                .checkTitleFieldCharacterCounterWarningTextColor(Colors.getRED_COLOR_COUNTER())
                 .checkTitleInputTextFieldCharactersNumberValue(170)
                 .fillTitleInputTextField("Test News")
                 .checkTitleFieldCharacterCounterText("9/170")
-                .checkTitleInputFieldBorderColor(greyColor)
+                .checkTitleInputFieldBorderColor(Colors.getGREY_COLOR_BORDER())
                 .clickTagFilterButton(TagButton.NEWS)
                 .checkPublishButtonIsDisabled()
                 .enterTextIntoTextContentField("Test Text Field Content")
