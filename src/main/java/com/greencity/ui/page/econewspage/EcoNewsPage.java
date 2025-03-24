@@ -48,7 +48,7 @@ public class EcoNewsPage extends BasePage {
         super(driver);
         toolbarElement = new ToolbarElement(driver, toolbarRoot);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, newsFilterRoot);
-        newsCardsContainer = new NewsCardsContainer(driver, newsContainerRoot);
+        newsCardsContainer = new NewsCardsContainer(driver, newsContainerRoot, isTableViewButtonActive());
     }
 
 
