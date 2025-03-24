@@ -1,17 +1,16 @@
-package com.greencity.ui;
+package com.greencity.ui.createNewsPage;
 
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.CreateNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import org.testng.Assert;
-import org.testng.annotations.DataProvider;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import static org.testng.AssertJUnit.assertEquals;
 
-public class TitleFieldValidation extends BaseTestRunner {
-    SoftAssert softAssert = new SoftAssert();
+public class TitleFieldValidation extends CreateNewsPageSteps {
 
     private String titleCharacterProvider(int numberOfCharacters) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -26,7 +25,7 @@ public class TitleFieldValidation extends BaseTestRunner {
         String greyColor = "rgb(156, 167, 176)";
         String redColor = "rgb(255, 0, 0)";
 
-        CreateNewsPage createNewsPage = loadAppliacation()
+        CreateNewsPage createNewsPage = loadApplication()
                 .goToCreateEcoNewsPage()
                 .clickTitleInputTextField()
                 .clickTitleHeaderText();
@@ -62,6 +61,29 @@ public class TitleFieldValidation extends BaseTestRunner {
         softAssert.assertTrue(createNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be enabled when all required fields are filled out");
         softAssert.assertAll();
+    }
+
+
+    @Test
+    public void checkPublishButton2() {
+        String greyColor = "rgb(156, 167, 176)";
+        String redColor = "rgb(255, 0, 0)";
+
+        goToCreateEcoNewsPage()
+                .checkTitleInputFieldBorderColor(redColor)
+                .checkPublishButtonIsDisabled()
+                .checkTitleFieldCharacterCounterText("0/170")
+                .fillTitleInputTextField(titleCharacterProvider(171))
+                .checkTitleFieldCharacterCounterWarningTextColor("rgba(235, 24, 13, 1)")
+                .checkTitleInputTextFieldCharactersNumberValue(170)
+                .fillTitleInputTextField("Test News")
+                .checkTitleFieldCharacterCounterText("9/170")
+                .checkTitleInputFieldBorderColor(greyColor)
+                .clickTagFilterButton(TagButton.NEWS)
+                .checkPublishButtonIsDisabled()
+                .enterTextIntoTextContentField("Test Text Field Content")
+                .checkPublishButtonIsEnabled()
+                .assertAll();
     }
 
 }
