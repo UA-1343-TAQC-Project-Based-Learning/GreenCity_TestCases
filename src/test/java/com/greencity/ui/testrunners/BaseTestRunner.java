@@ -154,8 +154,6 @@ public class BaseTestRunner {
         logger.info("\t@AfterTest executed");
     }
     protected void loadApplication() {
-        driver.get(BASE_URL);
-        presentationSleep(); // For Presentation
-        //return null;
+       driver.get(BASE_URL);
     }
 }

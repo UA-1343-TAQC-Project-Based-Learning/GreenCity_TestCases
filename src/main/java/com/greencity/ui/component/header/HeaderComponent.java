@@ -1,6 +1,8 @@
 package com.greencity.ui.component.header;
 
 import com.greencity.ui.component.BaseComponent;
+import com.greencity.ui.modal.LoginModal;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.user.LoggedDropdown;
 import com.greencity.ui.user.UsersHeaderComponent;
@@ -106,10 +108,6 @@ public class HeaderComponent extends BaseComponent {
         return getUbsCourierLink().getText();
     }
 
-    public String getSearchIconText() {
-        return getSearchIcon().getText();
-    }
-
     public String getLanguageSwitcherIconText() {
         return getLanguageSwitcherIcon().getText();
     }
@@ -152,6 +150,9 @@ public class HeaderComponent extends BaseComponent {
 
     public void clickLanguageSwitcherIcon() {
         languageSwitcherIcon.click();
+    }
+    public void clickUserIcon() {
+        userIcon.click();
     }
 
     public void clickSignIn() {
@@ -226,11 +227,20 @@ public class HeaderComponent extends BaseComponent {
         usersHeaderComponent.clickUserName();
         dropdownLogged = null;
     }
+    public LoginModal openLoginModal() {
+        clickUserIcon();
+        return new LoginModal(driver,rootElement);
+    }
 
     public HomePage signOutUser() {
         usersHeaderComponent.clickUserName();
         createDropdownLogged();
         clickDropdownLoggedSignOut();
         return new HomePage(driver);
+    }
+
+    public EcoNewsPage gotoEcoNewsPage() {
+        clickEcoNewsLink();
+        return new EcoNewsPage(driver);
     }
 }

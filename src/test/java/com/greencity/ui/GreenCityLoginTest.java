@@ -2,6 +2,9 @@ package com.greencity.ui;
 
 
 
+import com.greencity.ui.component.header.HeaderComponent;
+import com.greencity.ui.modal.LoginModal;
+import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import com.greencity.data.TesterUser;
 import com.greencity.data.TesterUserRepository;
@@ -22,7 +25,6 @@ public class GreenCityLoginTest extends BaseTestRunner {
     @Test(dataProvider = "provideTesterUsers")
     public void checkLogin(TesterUser testerUser) {
         logger.info("Start checkLogin() with testerUser = " + testerUser);
-        //
         loadApplication();
         presentationSleep(); // For Presentation
         //
@@ -40,4 +42,5 @@ public class GreenCityLoginTest extends BaseTestRunner {
         //
         System.out.println("\t\tTest testUi() executed");
     }
+    
 }

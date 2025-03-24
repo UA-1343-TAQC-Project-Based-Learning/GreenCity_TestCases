@@ -4,6 +4,7 @@ package com.greencity.modules;
 import com.greencity.data.LoginDto;
 
 import com.greencity.data.TesterUser;
+import com.greencity.ui.component.header.HeaderComponent;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import com.greencity.utils.LocalStorageJS;
 import org.openqa.selenium.By;
@@ -35,7 +36,7 @@ public class GreenCityGuest {
         //logger.debug("Start signIn with user = " + user);
         //
         // Click Login Button
-        driver.findElement(By.cssSelector("app-ubs .ubs-header-sing-in-img")).click();
+       driver.findElement(By.cssSelector("app-ubs .ubs-header-sing-in-img")).click();
         BaseTestRunner.presentationSleep(); // For Presentation ONLY
         //
         // Fill email input
