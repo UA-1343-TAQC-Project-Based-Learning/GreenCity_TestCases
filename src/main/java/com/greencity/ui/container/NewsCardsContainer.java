@@ -9,4 +9,5 @@ public class NewsCardsContainer extends BaseContainer{
         super(driver, rootElement);
     }
 
+
 }

@@ -23,28 +23,33 @@ public class LoginModal extends BaseModal{
         super(driver, rootElement);
     }
 
-    public void clearEmailInput() {
+    public LoginModal clearEmailInput() {
         emailInput.clear();
+        return this;
     }
+        public LoginModal clickEmailInput() {
+            emailInput.click();
+            return this;
+        }
 
-    public void clickEmailInput() {
-        emailInput.click();
-    }
-
-    public void setEmailInput(String email) {
+    public LoginModal setEmailInput(String email) {
         emailInput.sendKeys(email);
+        return this;
     }
 
-    public void clearPasswordInput() {
+    public LoginModal  clearPasswordInput() {
         passwordInput.clear();
+        return this;
     }
 
-    public void clickPasswordInput() {
+    public LoginModal clickPasswordInput() {
         passwordInput.click();
+        return this;
     }
 
-    public void setPasswordInput(String password) {
+    public LoginModal setPasswordInput(String password) {
         passwordInput.sendKeys(password);
+        return this;
     }
 
     public void clickSignInButton() {
@@ -52,22 +57,26 @@ public class LoginModal extends BaseModal{
         signInButton.click();
     }
 
-    private void enterEmailInput(String email) {
-        clickEmailInput();
-        clearEmailInput();
-        setEmailInput(email);
+    private LoginModal enterEmailInput(String email) {
+        clickEmailInput()
+                .clearEmailInput()
+                .setEmailInput(email);
+        return this;
     }
 
-    private void enterPasswordInput(String password) {
+    private LoginModal enterPasswordInput(String password) {
         clickPasswordInput();
         clearPasswordInput();
         setPasswordInput(password);
+        return this;
     }
 
+
+
     public void fillLogin(String email, String password) {
-        enterEmailInput(email);
-        enterPasswordInput(password);
-        clickSignInButton();
+        enterEmailInput(email)
+                .enterPasswordInput(password)
+                .clickSignInButton();
     }
 
     public MySpacePage successfulLogin(String email, String password) {

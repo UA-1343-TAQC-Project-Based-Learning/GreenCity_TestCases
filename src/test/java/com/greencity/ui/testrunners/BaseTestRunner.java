@@ -28,9 +28,18 @@ public class BaseTestRunner {
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
 
-//        options.addArguments("--disable-notifications");
-//        options.addArguments("--disable-popup-blocking");
-//        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--remote-debugging-port=9222");
+
+        // Use a custom profile directory (optional)
+         String userProfile = "C:/Users/Nataliia/AppData/Local/Google/Chrome/User Data";
+         options.addArguments("--user-data-dir=" + userProfile);
+
+
+        // Fix for "DevToolsActivePort file doesn't exist" error
+        options.addArguments("--disable-gpu");
+        options.addArguments("--disable-software-rasterizer");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
