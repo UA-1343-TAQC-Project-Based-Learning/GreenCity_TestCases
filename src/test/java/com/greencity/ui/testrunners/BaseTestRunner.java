@@ -32,8 +32,7 @@ public class BaseTestRunner {
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("user-data-dir=/home/hembei/.config/google-chrome-selenium/");
-        options.addArguments("profile-directory=Default");
+
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");

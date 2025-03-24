@@ -35,14 +35,16 @@ public class TitleFieldValidation extends BaseTestRunner {
                 "The border color should be red when the Title field is empty");
         softAssert.assertFalse(createNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
-        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterText().equals("0/170"));
+        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterText().equals("0/170"),
+                "The number of characters should equal 0 when field is empty");
 
         createNewsPage.fillTitleInputTextField(titleCharacterProvider(171));
         logger.info("The actual counter text color is: " + createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
         softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals("rgba(235, 24, 13, 1)"),
                 "The counter text color should be red when the Title field exceeding the limit");
         logger.info("The actual text value of Title text field is: " + createNewsPage.getTitleInputTextFieldValue().length());
-        softAssert.assertTrue(createNewsPage.getTitleInputTextFieldValue().length() == 170, "The text should equal 170 characters.");
+        softAssert.assertTrue(createNewsPage.getTitleInputTextFieldValue().length() == 170,
+                "The text should equal 170 characters.");
 
         createNewsPage.fillTitleInputTextField("Test News");
         logger.info("The actual character counter value is: " + createNewsPage.getTitleFieldCharacterCounterText());
