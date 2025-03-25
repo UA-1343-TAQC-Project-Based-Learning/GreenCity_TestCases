@@ -13,7 +13,7 @@ public class CreateNewsPageSteps extends BaseTestRunner {
         createNewsPage = new CreateNewsPage(driver);
 
         loadApplication()
-                .openEcoNewsPage()
+                .gotoEcoNewsPage()
                 .clickCreateNewsButton();
         return this;
     }

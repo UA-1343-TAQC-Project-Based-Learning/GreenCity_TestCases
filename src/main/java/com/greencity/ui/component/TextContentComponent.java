@@ -1,7 +1,6 @@
 package com.greencity.ui.component;
 
 import com.greencity.ui.component.header.DropdownTextSize;
-import com.greencity.ui.page.econewspage.CreateNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,11 +15,12 @@ public class TextContentComponent extends BaseComponent {
     private WebElement contentTitleText;
     @Getter
     @FindBy(xpath = ".//p[@class = 'textarea-description warning']")
-    private WebElement textAreaDescriptionWarnings;
+    private WebElement areaDescriptionWarningsText;
     @Getter
     @FindBy(xpath = ".//div[@data-placeholder = 'e.g. Short description of news, agenda for event']")
     private WebElement inputTextAreaPlaceholder;
 
+    @Getter
     @FindBy(xpath = ".//div[@class='ql-editor ql-blank']")
     private WebElement textAreaField;
 
@@ -114,9 +114,8 @@ public class TextContentComponent extends BaseComponent {
         return this;
     }
 
-    public TextContentComponent fillTextAreaField(String text) {
-        textAreaField.sendKeys(text);
-        return this;
+    public String getContentText() {
+        return textAreaField.getText();
     }
 
 }

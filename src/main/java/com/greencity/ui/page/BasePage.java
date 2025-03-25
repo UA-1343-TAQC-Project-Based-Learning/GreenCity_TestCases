@@ -5,6 +5,7 @@ import com.greencity.ui.component.footer.FooterComponent;
 import com.greencity.ui.component.header.HeaderComponent;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.homepage.HomePage;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -51,9 +52,8 @@ public abstract class BasePage extends Base {
         return wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
-    public EcoNewsPage openEcoNewsPage() {
+    public EcoNewsPage gotoEcoNewsPage(){
         header.clickEcoNewsLink();
         return new EcoNewsPage(driver);
     }
-
 }

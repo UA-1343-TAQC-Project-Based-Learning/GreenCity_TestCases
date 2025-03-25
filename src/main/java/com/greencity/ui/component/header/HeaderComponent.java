@@ -123,7 +123,6 @@ public class HeaderComponent extends BaseComponent {
     }
 
     public void clickEcoNewsLink() {
-        waitUntilElementClickable(ecoNewsLink);
         ecoNewsLink.click();
     }
 

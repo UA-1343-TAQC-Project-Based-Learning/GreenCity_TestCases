@@ -318,7 +318,7 @@ public class HomePage extends BasePage {
 
     public CreateNewsPage goToCreateEcoNewsPage() {
         return new HomePage(driver)
-                .openEcoNewsPage()
+                .gotoEcoNewsPage()
                 .clickCreateNewsButton();
     }
 
