@@ -38,9 +38,8 @@ public class BaseTestRunner {
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
 
-        options.addArguments("--user-data-dir=/home/hembei/.config/google-chrome-selenium/");
-        options.addArguments("--profile-directory=Default");
-//        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
+
+        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
 
 
         driver = new ChromeDriver(options);
