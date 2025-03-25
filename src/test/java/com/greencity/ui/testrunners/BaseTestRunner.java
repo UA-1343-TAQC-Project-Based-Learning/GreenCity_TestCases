@@ -72,7 +72,7 @@ public class BaseTestRunner {
 
     public HomePage loadApplication() {
         HomePage homePage = new HomePage(driver).goToHomePage();
-        return new HomePage(driver);
+        return homePage;
     }
 
 }
