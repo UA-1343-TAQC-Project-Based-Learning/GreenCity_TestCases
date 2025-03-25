@@ -39,6 +39,10 @@ public class TestValueProvider {
         return properties != null ? properties.getProperty("user.name") : System.getenv("USER_NAME");
     }
 
+    public String getUserProfile() {
+        return properties != null ? properties.getProperty("user.profile") : System.getenv("USER_PROFILE");
+    }
+
     public String getUserPassword() {
         return properties != null ? properties.getProperty("user.password") : System.getenv("USER_PASSWORD");
     }
