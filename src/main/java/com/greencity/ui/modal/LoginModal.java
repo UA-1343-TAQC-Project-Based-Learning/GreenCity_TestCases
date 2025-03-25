@@ -81,20 +81,4 @@ public class LoginModal extends BaseModal{
         return new MySpacePage(driver);
     }
 
-    // temp test methods
-    public String getEmailFieldBorderColor() {
-        return emailInput.getCssValue("border-color");
-    }
-
-    public LoginModal fillTitleInputField(int charactersNumber) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < 171; i++) {
-            stringBuilder.append("A");
-        }
-
-        clickEmailInput();
-        emailInput.sendKeys(stringBuilder.toString());
-        return this;
-    }
 }
