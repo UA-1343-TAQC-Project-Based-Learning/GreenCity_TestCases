@@ -1,15 +1,24 @@
 package com.greencity.ui.data;
 
-import lombok.Getter;
+public enum Colors {
+    DEFAULT_VALUE("rgb(255, 255, 255)", "rgb(255, 0, 0)"),
+    CREATE_NEWS_TITLE_FIELD_BORDER_COLOR("rgb(156, 167, 176)", "rgb(255, 0, 0)"),
+    CREATE_NEWS_TITLE_FIELD_COUNTER_TEXT_COLOR("rgba(135, 135, 135, 1)","rgba(235, 24, 13, 1)");
 
-public class Colors {
+    private final String normalColor;
+    private final String warningColor;
 
-    @Getter
-    private static final String RED_COLOR_BORDER = "rgb(255, 0, 0)";
+    private Colors(String normalColor, String warningColor) {
+        this.normalColor = normalColor;
+        this.warningColor = warningColor;
+    }
 
-    @Getter
-    private static final String GREY_COLOR_BORDER = "rgb(156, 167, 176)";
+    public String normalColor() {
+        return normalColor;
+    }
 
-    @Getter
-    private static final String RED_COLOR_COUNTER = "rgba(235, 24, 13, 1)";
+    public String warningColor() {
+        return warningColor;
+    }
+
 }

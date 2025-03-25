@@ -256,7 +256,7 @@ public class CreateNewsPage extends BasePage {
     }
 
     public String getContentCharacterCountText(){
-        return textContentComponent.getAreaDescriptionWarningsText().getText();
+        return textContentComponent.getContentCharacterCountText().getText();
     }
 
     public String getAuthorLabelText(){

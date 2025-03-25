@@ -16,17 +16,19 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
         return stringBuilder.toString();
     }
 
+    @Description("Verify the validation of the 'Title' field (mandatory, maximum 170 characters) and that the " +
+            "'Publish' button remains disabled until both Title and Main Text (Content) fields are filled.")
+    @Severity(SeverityLevel.MINOR)
+    @Issue("14")
+    @Link(name = "Link goto site", url = "http://localhost:4205/#/greenCity")
     @Test
     public void checkPublishButton() {
-        String greyColor = "rgb(156, 167, 176)";
-        String redColor = "rgb(255, 0, 0)";
-
         CreateNewsPage createNewsPage = loadApplication()
                 .goToCreateEcoNewsPage()
                 .clickTitleInputTextField()
                 .clickTitleHeaderText();
         logger.info("The actual border color is: {}", createNewsPage.getTitleInputFieldBorderColor());
-        softAssert.assertTrue(createNewsPage.getTitleInputFieldBorderColor().equals(redColor),
+        softAssert.assertTrue(createNewsPage.getTitleInputFieldBorderColor().equals(Colors.CREATE_NEWS_TITLE_FIELD_BORDER_COLOR.warningColor()),
                 "The border color should be red when the Title field is empty");
         softAssert.assertFalse(createNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
@@ -35,7 +37,7 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
 
         createNewsPage.fillTitleInputTextField(titleCharacterProvider(171));
         logger.info("The actual counter text color is: {}", createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
-        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals("rgba(235, 24, 13, 1)"),
+        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.CREATE_NEWS_TITLE_FIELD_COUNTER_TEXT_COLOR.warningColor()),
                 "The counter text color should be red when the Title field exceeding the limit");
         logger.info("The actual text value of Title text field is: {}", createNewsPage.getTitleInputTextFieldValue().length());
         softAssert.assertTrue(createNewsPage.getTitleInputTextFieldValue().length() == 170,
@@ -46,8 +48,8 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
         softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterText().equals("9/170"),
                 "The counter should displays '9/170'");
         logger.info("The actual border color is: {}", createNewsPage.getTitleInputFieldBorderColor());
-        softAssert.assertTrue(createNewsPage.getTitleInputFieldBorderColor().equals(greyColor),
-                "The border color should be grey and " + greyColor);
+        softAssert.assertTrue(createNewsPage.getTitleInputFieldBorderColor().equals(Colors.CREATE_NEWS_TITLE_FIELD_BORDER_COLOR.normalColor()),
+                "The border color should be grey and " + Colors.CREATE_NEWS_TITLE_FIELD_BORDER_COLOR.normalColor());
 
         createNewsPage.clickTagFilterButton(TagButton.NEWS);
         softAssert.assertFalse(createNewsPage.getPublishButton().isEnabled(),
@@ -68,15 +70,15 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
     @Test
     public void checkPublishButton2() {
         goToCreateEcoNewsPage()
-                .checkTitleInputFieldBorderColor(Colors.getRED_COLOR_BORDER())
+                .checkTitleInputFieldBorderColor(Colors.CREATE_NEWS_TITLE_FIELD_BORDER_COLOR.warningColor())
                 .checkPublishButtonIsDisabled()
                 .checkTitleFieldCharacterCounterText("0/170")
                 .fillTitleInputTextField(titleCharacterProvider(171))
-                .checkTitleFieldCharacterCounterWarningTextColor(Colors.getRED_COLOR_COUNTER())
+                .checkTitleFieldCharacterCounterWarningTextColor(Colors.CREATE_NEWS_TITLE_FIELD_COUNTER_TEXT_COLOR.warningColor())
                 .checkTitleInputTextFieldCharactersNumberValue(170)
                 .fillTitleInputTextField("Test News")
                 .checkTitleFieldCharacterCounterText("9/170")
-                .checkTitleInputFieldBorderColor(Colors.getGREY_COLOR_BORDER())
+                .checkTitleInputFieldBorderColor(Colors.CREATE_NEWS_TITLE_FIELD_BORDER_COLOR.normalColor())
                 .clickTagFilterButton(TagButton.NEWS)
                 .checkPublishButtonIsDisabled()
                 .enterTextIntoTextContentField("Test Text Field Content")

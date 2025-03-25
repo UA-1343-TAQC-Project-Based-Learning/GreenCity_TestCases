@@ -21,6 +21,10 @@ public class TextContentComponent extends BaseComponent {
     private WebElement inputTextAreaPlaceholder;
 
     @Getter
+    @FindBy(xpath = ".//p[@class='field-info']")
+    private WebElement contentCharacterCountText;
+
+    @Getter
     @FindBy(xpath = ".//div[@class='ql-editor ql-blank']")
     private WebElement textAreaField;
 

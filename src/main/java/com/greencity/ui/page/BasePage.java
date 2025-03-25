@@ -52,6 +52,11 @@ public abstract class BasePage extends Base {
         return wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
+    public HomePage goToHomePage() {
+        header.getLogo().click();
+        return new HomePage(driver);
+    }
+
     public EcoNewsPage gotoEcoNewsPage(){
         header.clickEcoNewsLink();
         return new EcoNewsPage(driver);

@@ -1,5 +1,6 @@
 package com.greencity.ui.testrunners;
 
+import com.greencity.ui.page.BasePage;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.utils.TestValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -37,7 +38,9 @@ public class BaseTestRunner {
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
 
-        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
+        options.addArguments("--user-data-dir=/home/hembei/.config/google-chrome-selenium/");
+        options.addArguments("--profile-directory=Default");
+//        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
 
 
         driver = new ChromeDriver(options);
@@ -69,6 +72,7 @@ public class BaseTestRunner {
     }
 
     public HomePage loadApplication() {
+        HomePage homePage = new HomePage(driver).goToHomePage();
         return new HomePage(driver);
     }
 

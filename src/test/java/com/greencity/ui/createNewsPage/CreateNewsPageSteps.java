@@ -36,10 +36,17 @@ public class CreateNewsPageSteps extends BaseTestRunner {
         return this;
     }
 
-    public CreateNewsPageSteps checkTitleFieldCharacterCounterWarningTextColor(String color) {
-        logger.info("The actual counter text color is: {}", createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
-        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(color),
+    public CreateNewsPageSteps checkTitleFieldCharacterCounterTextColor(String color) {
+        logger.info("The actual counter text color is: {}", createNewsPage.getTitleFieldCharacterCounterTextColor());
+        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterTextColor().equals(color),
                 "The counter text color should be: " + color);
+        return this;
+    }
+
+    public CreateNewsPageSteps checkTitleFieldCharacterCounterWarningTextColor(String warningColor) {
+        logger.info("The actual counter text color is: {}", createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
+        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(warningColor),
+                "The counter text warning color should be: " + warningColor);
         return this;
     }
 

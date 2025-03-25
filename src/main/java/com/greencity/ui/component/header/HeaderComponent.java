@@ -20,6 +20,7 @@ public class HeaderComponent extends BaseComponent {
     private DropdownComponent dropdownComponent;
     private UsersHeaderComponent usersHeaderComponent;
     private LoggedDropdown dropdownLogged;
+
     @Getter
     @FindBy(xpath = ".//img[@src='assets/img/logo.svg']")
     private WebElement logo;
