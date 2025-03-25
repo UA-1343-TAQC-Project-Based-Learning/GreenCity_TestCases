@@ -1,4 +1,4 @@
-package com.greencity.ui.createNewsPage;
+package com.greencity.ui.createnewspage;
 
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.CreateNewsPage;
