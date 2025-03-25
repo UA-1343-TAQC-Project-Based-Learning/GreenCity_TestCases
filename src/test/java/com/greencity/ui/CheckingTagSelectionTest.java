@@ -8,6 +8,8 @@ import com.greencity.ui.testrunners.BaseTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 
 public class CheckingTagSelectionTest extends BaseTestRunner {
 
@@ -56,8 +58,9 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
                 "Published news title doesn't match the created one");
 
         // Verify that the news is published with the "News" tag
-        Assert.assertTrue(firstNewsCard.getFiltersTagText().contains("Новини"),
-                "Published news should contain the 'News' tag");
+        List<String> publishedTags = firstNewsCard.getFiltersTagText();
+        Assert.assertTrue(publishedTags.contains("НОВИНИ") || publishedTags.contains("NEWS"),
+                "Published news should contain News tag. Actual tags: " + publishedTags);
     }
 
 
