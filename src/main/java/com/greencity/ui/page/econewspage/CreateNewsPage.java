@@ -3,6 +3,7 @@ package com.greencity.ui.page.econewspage;
 import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.component.TextContentComponent;
 import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
+import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -95,16 +96,18 @@ public class CreateNewsPage extends BasePage {
         return titleFieldCharacterCounter.getText();
     }
 
-    public void clickTitleInputTextField() {
+    public CreateNewsPage clickTitleInputTextField() {
         titleInputTextField.click();
+        return this;
     }
 
     public void clearTitleInputTextField() {
         titleInputTextField.clear();
     }
 
-    public void fillTitleInputTextField(String titleText) {
+    public CreateNewsPage fillTitleInputTextField(String titleText) {
         titleInputTextField.sendKeys(titleText);
+        return this;
     }
 
     public String getTitleInputTextFieldPlaceholderText() {
@@ -113,6 +116,11 @@ public class CreateNewsPage extends BasePage {
 
     public String getPickTagsForNewsText() {
         return pickTagsForNewsText.getText();
+    }
+
+    public CreateNewsPage clickTagFilterButton(TagButton tagButton) {
+        ecoNewsTagFilterComponent.clickTagButton(tagButton);
+        return this;
     }
 
     public String getOnlyThreeTagsCanBeAddedText() {
@@ -135,8 +143,9 @@ public class CreateNewsPage extends BasePage {
         externalSourceLinkInputField.clear();
     }
 
-    public void fillExternalSourceLinkInputField(String text) {
+    public CreateNewsPage fillExternalSourceLinkInputField(String text) {
         externalSourceLinkInputField.sendKeys(text);
+        return this;
     }
 
     public String getExternalSourceLinkInputFieldPlaceholderText() {
@@ -156,5 +165,12 @@ public class CreateNewsPage extends BasePage {
         return new EcoNewsPage(driver);
     }
 
+    public CreateNewsPage enterTextIntoTextContentField(String text) {
+        textContentComponent.fillTextAreaField(text);
+        return this;
+    }
 
+    public boolean isTagSelected(TagButton button) {
+        return ecoNewsTagFilterComponent.isTagButtonSelected(button);
+    }
 }

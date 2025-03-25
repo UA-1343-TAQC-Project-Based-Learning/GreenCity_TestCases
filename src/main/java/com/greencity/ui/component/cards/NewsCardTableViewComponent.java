@@ -74,6 +74,7 @@ public class NewsCardTableViewComponent extends BaseComponent {
         return filtersTagNames;
     }
 
+
     public String getContentLabelText() {
         return contentLabel.getText();
     }

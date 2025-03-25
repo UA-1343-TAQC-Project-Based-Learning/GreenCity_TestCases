@@ -13,6 +13,7 @@ public class EcoNewsPage extends BasePage {
 
     protected ToolbarElement toolbarElement;
     protected EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
+    @Getter
     protected NewsCardsContainer newsCardsContainer;
 
     @FindBy(xpath = "//div[@class='create-container']")
@@ -48,8 +49,9 @@ public class EcoNewsPage extends BasePage {
         super(driver);
         toolbarElement = new ToolbarElement(driver, toolbarRoot);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, newsFilterRoot);
-        newsCardsContainer = new NewsCardsContainer(driver, newsContainerRoot);
+        newsCardsContainer = new NewsCardsContainer(driver, newsContainerRoot, isTableViewButtonActive());
     }
+
 
 
     public String getHeaderText() {
@@ -88,6 +90,5 @@ public class EcoNewsPage extends BasePage {
     public boolean isListViewButtonActive() {
         return listViewButton.isEnabled();
     }
-
 
 }
