@@ -3,12 +3,11 @@ package com.greencity.ui.createNewsPage;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.CreateNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import org.openqa.selenium.WebDriver;
 import org.testng.asserts.SoftAssert;
 
 public class CreateNewsPageSteps extends BaseTestRunner {
     protected SoftAssert softAssert = new SoftAssert();
-    CreateNewsPage createNewsPage;
+    private CreateNewsPage createNewsPage;
 
     public CreateNewsPageSteps goToCreateEcoNewsPage() {
         createNewsPage = new CreateNewsPage(driver);
@@ -24,9 +23,9 @@ public class CreateNewsPageSteps extends BaseTestRunner {
                 .clickTitleInputTextField()
                 .clickTitleHeaderText();
 
-        logger.info("The actual border color is: " + createNewsPage.getTitleInputFieldBorderColor());
+        logger.info("The actual border color is: {}", createNewsPage.getTitleInputFieldBorderColor());
         softAssert.assertTrue(createNewsPage.getTitleInputFieldBorderColor().equals(color),
-                "The border color should be red: " + color);
+                "The border color should be: " + color);
 
         return this;
     }
@@ -38,14 +37,14 @@ public class CreateNewsPageSteps extends BaseTestRunner {
     }
 
     public CreateNewsPageSteps checkTitleFieldCharacterCounterWarningTextColor(String color) {
-        logger.info("The actual counter text color is: " + createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
+        logger.info("The actual counter text color is: {}", createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
         softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(color),
                 "The counter text color should be: " + color);
         return this;
     }
 
     public CreateNewsPageSteps checkTitleInputTextFieldCharactersNumberValue(int charactersNumber) {
-        logger.info("The actual text value of Title text field is: " + createNewsPage.getTitleInputTextFieldValue().length());
+        logger.info("The actual text value of Title text field is: {}", createNewsPage.getTitleInputTextFieldValue().length());
         softAssert.assertTrue(createNewsPage.getTitleInputTextFieldValue().length() == charactersNumber,
                 "The text should equal " + charactersNumber + " characters.");
         return this;
@@ -78,7 +77,7 @@ public class CreateNewsPageSteps extends BaseTestRunner {
 
     public CreateNewsPageSteps clickTagFilterButton(TagButton tagButton) {
         createNewsPage.clickTagFilterButton(tagButton);
-        logger.info("The " + tagButton + " tag button has been clicked");
+        logger.info("The {} tag button has been clicked", tagButton);
         return this;
     }
 

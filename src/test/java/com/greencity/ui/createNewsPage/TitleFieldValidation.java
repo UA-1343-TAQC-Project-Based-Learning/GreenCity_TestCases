@@ -3,13 +3,8 @@ package com.greencity.ui.createNewsPage;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.data.Colors;
 import com.greencity.ui.page.econewspage.CreateNewsPage;
-import com.greencity.ui.testrunners.BaseTestRunner;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-
-import static org.testng.AssertJUnit.assertEquals;
 
 public class TitleFieldValidation extends CreateNewsPageSteps {
 
@@ -30,7 +25,7 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
                 .goToCreateEcoNewsPage()
                 .clickTitleInputTextField()
                 .clickTitleHeaderText();
-        logger.info("The actual border color is: " + createNewsPage.getTitleInputFieldBorderColor());
+        logger.info("The actual border color is: {}", createNewsPage.getTitleInputFieldBorderColor());
         softAssert.assertTrue(createNewsPage.getTitleInputFieldBorderColor().equals(redColor),
                 "The border color should be red when the Title field is empty");
         softAssert.assertFalse(createNewsPage.getPublishButton().isEnabled(),
@@ -39,18 +34,18 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
                 "The number of characters should equal 0 when field is empty");
 
         createNewsPage.fillTitleInputTextField(titleCharacterProvider(171));
-        logger.info("The actual counter text color is: " + createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
+        logger.info("The actual counter text color is: {}", createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
         softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals("rgba(235, 24, 13, 1)"),
                 "The counter text color should be red when the Title field exceeding the limit");
-        logger.info("The actual text value of Title text field is: " + createNewsPage.getTitleInputTextFieldValue().length());
+        logger.info("The actual text value of Title text field is: {}", createNewsPage.getTitleInputTextFieldValue().length());
         softAssert.assertTrue(createNewsPage.getTitleInputTextFieldValue().length() == 170,
                 "The text should equal 170 characters.");
 
         createNewsPage.fillTitleInputTextField("Test News");
-        logger.info("The actual character counter value is: " + createNewsPage.getTitleFieldCharacterCounterText());
+        logger.info("The actual character counter value is: {}", createNewsPage.getTitleFieldCharacterCounterText());
         softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterText().equals("9/170"),
                 "The counter should displays '9/170'");
-        logger.info("The actual border color is: " + createNewsPage.getTitleInputFieldBorderColor());
+        logger.info("The actual border color is: {}", createNewsPage.getTitleInputFieldBorderColor());
         softAssert.assertTrue(createNewsPage.getTitleInputFieldBorderColor().equals(greyColor),
                 "The border color should be grey and " + greyColor);
 
@@ -65,6 +60,11 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
     }
 
 
+    @Description("Verify the validation of the 'Title' field (mandatory, maximum 170 characters) and that the " +
+            "'Publish' button remains disabled until both Title and Main Text (Content) fields are filled.")
+    @Severity(SeverityLevel.MINOR)
+    @Issue("14")
+    @Link(name = "Link goto site", url = "http://localhost:4205/#/greenCity")
     @Test
     public void checkPublishButton2() {
         goToCreateEcoNewsPage()
