@@ -1,11 +1,13 @@
 package com.greencity.ui;
 
+import com.greencity.ui.component.cards.NewsCardTableViewComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.CreateNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 
 public class CheckingTagSelectionTest extends BaseTestRunner {
 
@@ -17,19 +19,23 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
 //                .successfulLogin(testValueProvider.getUserEmail(), testValueProvider.getUserPassword())
 
 
-        //  The "Create News" form is open. Fill in the required fields
+        String newsTitle = "TestNews_" + System.currentTimeMillis();
+        String newsContent = "Content_" + System.currentTimeMillis();
+
+// The "Create News" form is open. Fill in the required fields
         CreateNewsPage createNewsPage = homePage
                 .gotoEcoNewsPage()
                 .clickCreateNewsButton()
                 .clickTitleInputTextField()
-                .fillTitleInputTextField("test verifyTagSelection")
-                .enterTextIntoTextContentField("123456789012345678901")
+                .fillTitleInputTextField(newsTitle)
+                .enterTextIntoTextContentField(newsContent)
                 // Select one tag
                 .clickTagFilterButton(TagButton.NEWS);
 
         // Verify the tag is successfully selected
         Assert.assertTrue(createNewsPage.isTagSelected(TagButton.NEWS),
                 "News tag should be selected after clicking");
+
         // Verify that the "Publish" button is clickable
         Assert.assertTrue(createNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be enabled when all required fields are filled out");
@@ -37,14 +43,21 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
         // Click "Publish" and get the EcoNewsPage
         EcoNewsPage ecoNewsPage = createNewsPage.clickPublishButton();
 
-
         // Verify that at least one news card exists
-        // Get the first news card
+        Assert.assertFalse(ecoNewsPage.getNewsCardsContainer().getNewsCardTableViewComponents().isEmpty(),
+                "No news cards found after publishing");
 
+        // Get the first news card
+        NewsCardTableViewComponent firstNewsCard = ecoNewsPage.getNewsCardsContainer()
+                .getNewsCardTableViewComponents().getFirst();
+
+        // Verify the news title matches
+        Assert.assertEquals(firstNewsCard.getTitleLabelText(), newsTitle,
+                "Published news title doesn't match the created one");
 
         // Verify that the news is published with the "News" tag
-
-
+        Assert.assertTrue(firstNewsCard.getFiltersTagText().contains("Новини"),
+                "Published news should contain the 'News' tag");
     }
 
 
