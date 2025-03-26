@@ -124,8 +124,9 @@ public class CreateNewsPage extends BasePage {
         titleInputTextField.clear();
     }
 
-    public void fillTitleInputTextField(String titleText) {
+    public CreateNewsPage fillTitleInputTextField(String titleText) {
         titleInputTextField.sendKeys(titleText);
+        return this;
     }
 
     public String getTitleInputTextFieldPlaceholderText() {
@@ -199,6 +200,11 @@ public class CreateNewsPage extends BasePage {
         return result;
     }
 
+    public CreateNewsPage clickNewsTagButton(){
+        ecoNewsTagFilterComponent.clickTagButton(TagButton.NEWS);
+        return this;
+    }
+
     public String getImageBrowseLinkText(){
         return imageUploadComponent.getImageBrowseLinkText();
     }
@@ -260,5 +266,17 @@ public class CreateNewsPage extends BasePage {
 
     public boolean areElementsOnSameLine(WebElement first, WebElement second){
         return first.getLocation().getY() == second.getLocation().getY();
+    }
+
+    public CreateNewsPage fillContentInput(String content){
+        textContentComponent.fillContent(content);
+        return this;
+    }
+
+    public CreateNewsPage fillSourceInput(String url) {
+        clearExternalSourceLinkInputField();
+        clickExternalSourceLinkInputField();
+        fillExternalSourceLinkInputField(url);
+        return this;
     }
 }

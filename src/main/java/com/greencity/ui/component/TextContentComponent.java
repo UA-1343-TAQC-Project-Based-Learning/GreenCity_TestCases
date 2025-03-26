@@ -138,4 +138,21 @@ public class TextContentComponent extends BaseComponent {
         return textAreaDescriptionWarnings.getText();
     }
 
+    public void clearContentInput() {
+        descriptionOfNews.clear();
+    }
+
+    public void clickContentInput() {
+        descriptionOfNews.click();
+    }
+    public void setContentInput(String mainText) {
+        descriptionOfNews.sendKeys(mainText);
+    }
+
+    public void fillContent(String mainText) {
+        clearContentInput();
+        clickContentInput();
+        setContentInput(mainText);
+    }
+
 }
