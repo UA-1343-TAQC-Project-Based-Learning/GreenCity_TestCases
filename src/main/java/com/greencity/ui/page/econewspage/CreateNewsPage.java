@@ -17,11 +17,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class CreateNewsPage extends BasePage {
-    private EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
-    private ImageUploadComponent imageUploadComponent;
-    private TextContentComponent textContentComponent;
-    public List<String> tagFilters = new ArrayList<>(List.of("News","Events","Education","Initiatives","Ads"));
-
+    private final EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
+    private final ImageUploadComponent imageUploadComponent;
+    private final TextContentComponent textContentComponent;
+    public List<String> tagFilters = new ArrayList<>(List.of("News", "Events", "Education", "Initiatives", "Ads"));
     @Getter
     @FindBy(xpath = "//div[@class='image-block']")
     private WebElement imageBlockRoot;
@@ -33,7 +32,6 @@ public class CreateNewsPage extends BasePage {
     @Getter
     @FindBy(xpath = "//div[@class='textarea-wrapper']")
     private WebElement textAreaRoot;
-
 
     @FindBy(xpath = "//h2[@class='title-header']")
     private WebElement titleHeaderText;
@@ -72,6 +70,11 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
+
+    @Getter
+    @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Author:']")
+    private WebElement authorOfNew;
+
     @Getter
     @FindBy(xpath = "//button[@class='tertiary-global-button']")
     private WebElement exitButton;
@@ -85,7 +88,7 @@ public class CreateNewsPage extends BasePage {
     private WebElement publishButton;
 
     @Getter
-    @FindBy(xpath="//span[contains(text(), 'Author') or contains(text(), 'Автор')]/following-sibling::span")
+    @FindBy(xpath = "//span[contains(text(), 'Author') or contains(text(), 'Автор')]/following-sibling::span")
     private WebElement authorLabel;
 
     @Getter
@@ -99,6 +102,22 @@ public class CreateNewsPage extends BasePage {
         textContentComponent = new TextContentComponent(driver, textAreaRoot);
     }
 
+    public String getTitleFieldCharacterCounterTextColor() {
+        return titleFieldCharacterCounter.getCssValue("color");
+    }
+
+    public String getTitleFieldCharacterCounterWarningText() {
+        return titleFieldCharacterCounterWarning.getText();
+    }
+
+    public String getTitleFieldCharacterCounterWarningTextColor() {
+        return titleFieldCharacterCounterWarning.getCssValue("color");
+    }
+
+    public CreateNewsPage clickTitleHeaderText() {
+        titleHeaderText.click();
+        return this;
+    }
 
     public String getTitleHeaderText() {
         return titleHeaderText.getText();
@@ -116,16 +135,9 @@ public class CreateNewsPage extends BasePage {
         return titleFieldCharacterCounter.getText();
     }
 
-    public void clickTitleInputTextField() {
+    public CreateNewsPage clickTitleInputTextField() {
         titleInputTextField.click();
-    }
-
-    public void clearTitleInputTextField() {
-        titleInputTextField.clear();
-    }
-
-    public void fillTitleInputTextField(String titleText) {
-        titleInputTextField.sendKeys(titleText);
+        return this;
     }
 
     public String getTitleInputTextFieldPlaceholderText() {
@@ -172,16 +184,77 @@ public class CreateNewsPage extends BasePage {
         previewButton.click();
     }
 
+    public String getTitleInputTextFieldValue() {
+        return titleInputTextField.getAttribute("value");
+    }
+
+    public CreateNewsPage clearTitleInputTextField() {
+        titleInputTextField.clear();
+        return this;
+    }
+
+    public CreateNewsPage fillTitleInputTextField(String titleText) {
+        clickTitleInputTextField().clearTitleInputTextField().titleInputTextField.sendKeys(titleText);
+        return this;
+    }
+
     public EcoNewsPage clickPublishButton() {
         publishButton.click();
         return new EcoNewsPage(driver);
     }
 
+    public CreateNewsPage clickTextIntoTextContentField() {
+        textContentComponent.clickContentInputTextField();
+        return this;
+    }
+
+    public CreateNewsPage enterTextIntoTextContentField(String text) {
+        textContentComponent.fillContentTextAreaField(text);
+        return this;
+    }
+
+    public String getTitleInputFieldBorderColor() {
+        return titleInputTextField.getCssValue("border-color");
+    }
+
+
+    public boolean isPresentContentInputTextField() {
+        return textAreaRoot.isDisplayed();
+    }
+
+    public String getContentCharacterCountText() {
+        return textContentComponent.getContentCounterText();
+    }
+
+    public long getContentInputTextFieldText() {
+        return textContentComponent.getContentInputTextFieldText().length();
+    }
+
+    public String getAuthorLabelText() {
+        return authorOfNew.getText();
+    }
+
+    public boolean isCancelButtonPresent() {
+        return exitButton.isDisplayed();
+    }
+
+    public boolean isPreviewButtonPresent() {
+        return previewButton.isDisplayed();
+    }
+
+    public boolean isPublishButtonPresent() {
+        return publishButton.isDisplayed();
+    }
+
+    public CreateNewsPage clickTagFilterButton(TagButton tagButton) {
+        ecoNewsTagFilterComponent.clickTagButton(tagButton);
+        return this;
+    }
 
     public List<String> getListOfAllTagButtonsText() {
         List<String> tagButtonsText = new ArrayList<>();
         TagButton[] tagButtons = TagButton.values();
-        for(TagButton tagButton : tagButtons){
+        for (TagButton tagButton : tagButtons) {
             tagButtonsText.add(ecoNewsTagFilterComponent.getTagButtonText(tagButton));
         }
         return tagButtonsText;
@@ -199,66 +272,43 @@ public class CreateNewsPage extends BasePage {
         return result;
     }
 
-    public String getImageBrowseLinkText(){
+    public String getImageBrowseLinkText() {
         return imageUploadComponent.getImageBrowseLinkText();
     }
 
-    public boolean isPresentTitleInputTextField(){
+    public boolean isPresentTitleInputTextField() {
         return titleInputTextField.isDisplayed();
     }
 
-    public String getContentText(){
+    public String getContentText() {
         return textContentComponent.getContentText();
     }
 
-    public boolean isPresentContentInputTextField(){
-        return textAreaRoot.isDisplayed();
-    }
 
-    public String getContentCharacterCountText(){
-        return textContentComponent.getAreaDescriptionWarningsText();
-    }
-
-    public String getAuthorLabelText(){
-        return authorLabel.getText();
-    }
-
-    public boolean isAuthorLabelNotEditable(){
+    public boolean isAuthorLabelNotEditable() {
         String isContentEditable = authorLabel.getAttribute("contenteditable");
         return (isContentEditable == null || isContentEditable.equals("false"));
     }
 
-    public String getDataLabelText(){
+    public String getDataLabelText() {
         return dataLabel.getText();
     }
 
-    public LocalDate getDataLabelFormating(Locale locale){
+    public LocalDate getDataLabelFormating(Locale locale) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", locale);
         return LocalDate.parse(getDataLabelText(), formatter);
     }
 
-    public boolean isDataLabelNotEditable(){
+    public boolean isDataLabelNotEditable() {
         String isContentEditable = dataLabel.getAttribute("contenteditable");
         return (isContentEditable == null || isContentEditable.equals("false"));
     }
 
-    public  boolean isCancelButtonPresent(){
-       return exitButton.isDisplayed();
-    }
-
-    public  boolean isPreviewButtonPresent(){
-        return previewButton.isDisplayed();
-    }
-
-    public  boolean isPublishButtonPresent(){
-        return publishButton.isDisplayed();
-    }
-
-    public boolean isElementsOrderCorrect(WebElement first, WebElement second){
+    public boolean isElementsOrderCorrect(WebElement first, WebElement second) {
         return first.getLocation().getY() < second.getLocation().getY();
     }
 
-    public boolean areElementsOnSameLine(WebElement first, WebElement second){
+    public boolean areElementsOnSameLine(WebElement first, WebElement second) {
         return first.getLocation().getY() == second.getLocation().getY();
     }
 }

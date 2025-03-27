@@ -13,18 +13,24 @@ public class TextContentComponent extends BaseComponent {
     @Getter
     @FindBy(xpath = ".//h3[normalize-space()='Content']")
     private WebElement content;
+    @FindBy(xpath = ".//div[@class='ql-editor']")
+    private WebElement textAreaField;
     @Getter
     @FindBy(xpath = ".//p[@class = 'field-info']")
     private WebElement textAreaDescriptionWarnings;
     @Getter
     @FindBy(xpath = ".//div[@data-placeholder = 'e.g. Short description of news, agenda for event']")
-    private WebElement descriptionOfNews;
+    private WebElement contentInputTextField;
+    @Getter
+    @FindBy(xpath = ".//p[@class='quill-counter quill-valid']")
+    private WebElement textContentCounter;
+
+    @FindBy(xpath = ".//p[@class='quill-counter warning']")
+    private WebElement textContentWarningCounter;
     @Getter
     @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Date:']")
     private WebElement dateOfNew;
-    @Getter
-    @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Author:']")
-    private WebElement authorOfNew;
+
     @Getter
     @FindBy(xpath = ".//div[@class = 'submit-buttons']/button[normalize-space() = 'Cancel']")
     private WebElement cancelButton;
@@ -107,6 +113,48 @@ public class TextContentComponent extends BaseComponent {
         return this;
     }
 
+    public String getAreaDescriptionWarningsText() {
+        return textAreaDescriptionWarnings.getText();
+    }
+
+    public String getDescriptionOfNewsText() {
+        return contentInputTextField.getText();
+
+    }
+
+    public void clickContentInputTextField() {
+        contentInputTextField.click();
+    }
+
+    public void clearContentInputTextField() {
+        contentInputTextField.clear();
+    }
+
+    public String getContentInputTextFieldValue() {
+        return contentInputTextField.getAttribute("value");
+    }
+
+    public String getContentInputFieldBorderColor() {
+        return contentInputTextField.getCssValue("border-color");
+    }
+
+    public String getTitleInputTextFieldPlaceholderText() {
+        return contentInputTextField.getDomAttribute("placeholder");
+    }
+
+    public String getContentInputTextFieldText() {
+        return contentInputTextField.getText();
+    }
+
+    public String getContentCounterText() {
+        return textContentCounter.getText();
+    }
+
+    public String getContentWarningCounterText() {
+        return textContentWarningCounter.getText();
+    }
+
+
     public TextContentComponent clickDropdownHugeTextSize() {
         getDropdownTextSize().clickHugeStyleButton();
         return this;
@@ -115,6 +163,22 @@ public class TextContentComponent extends BaseComponent {
     public TextContentComponent clickDropdownLargeTextSize() {
         getDropdownTextSize().clickLargeStyleButton();
         return this;
+    }
+
+    public String getContentText() {
+        return textAreaField.getText();
+    }
+
+    public void clickTextAreaField() {
+        textAreaField.click();
+    }
+
+    public void clearTextAreaField() {
+        textAreaField.clear();
+    }
+
+    public void fillTextAreaField(String text) {
+        textAreaField.sendKeys(text);
     }
 
     public void clickCancelButton() {
@@ -130,12 +194,10 @@ public class TextContentComponent extends BaseComponent {
         publishButton.click();
     }
 
-    public String getContentText() {
-        return content.getText();
+    public TextContentComponent fillContentTextAreaField(String text) {
+        clickTextAreaField();
+        clearTextAreaField();
+        fillTextAreaField(text);
+        return this;
     }
-
-    public String getAreaDescriptionWarningsText(){
-        return textAreaDescriptionWarnings.getText();
-    }
-
 }

@@ -1,6 +1,8 @@
 package com.greencity.ui.component.header;
 
 import com.greencity.ui.component.BaseComponent;
+import com.greencity.ui.modal.LoginModal;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.user.LoggedDropdown;
 import com.greencity.ui.user.UsersHeaderComponent;
@@ -70,8 +72,11 @@ public class HeaderComponent extends BaseComponent {
     private WebElement registrationButton;
 
     @Getter
-    @FindBy(xpath = ".//img[@src='../assets/img/events/user.svg']")
+    @FindBy(xpath = ".//a[@class='header_sign-in-link tertiary-global-button']")
     private WebElement signInButton;
+
+    @FindBy(xpath = "//mat-dialog-container")
+    private WebElement LoginModalRoot;
 
 
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
@@ -104,10 +109,6 @@ public class HeaderComponent extends BaseComponent {
 
     public String getUbsCourierLinkText() {
         return getUbsCourierLink().getText();
-    }
-
-    public String getSearchIconText() {
-        return getSearchIcon().getText();
     }
 
     public String getLanguageSwitcherIconText() {
@@ -153,9 +154,14 @@ public class HeaderComponent extends BaseComponent {
     public void clickLanguageSwitcherIcon() {
         languageSwitcherIcon.click();
     }
+    public void clickUserIcon() {
+        userIcon.click();
+    }
 
-    public void clickSignIn() {
+    public LoginModal clickSignIn() {
         signInButton.click();
+        sleep(3000);
+        return new LoginModal(driver,LoginModalRoot);
     }
 
     public void clickRegistrationButton() {
@@ -226,6 +232,10 @@ public class HeaderComponent extends BaseComponent {
         usersHeaderComponent.clickUserName();
         dropdownLogged = null;
     }
+    public LoginModal openLoginModal() {
+        clickUserIcon();
+        return new LoginModal(driver,LoginModalRoot);
+    }
 
     public HomePage signOutUser() {
         usersHeaderComponent.clickUserName();
@@ -233,4 +243,11 @@ public class HeaderComponent extends BaseComponent {
         clickDropdownLoggedSignOut();
         return new HomePage(driver);
     }
+
+    public EcoNewsPage gotoEcoNewsPage() {
+        clickEcoNewsLink();
+        return new EcoNewsPage(driver);
+    }
+
+
 }

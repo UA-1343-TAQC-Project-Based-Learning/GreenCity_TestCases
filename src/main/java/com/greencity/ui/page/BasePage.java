@@ -4,6 +4,7 @@ import com.greencity.ui.Base;
 import com.greencity.ui.component.footer.FooterComponent;
 import com.greencity.ui.component.header.HeaderComponent;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
+import com.greencity.ui.user.UsersHeaderComponent;
 import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +22,8 @@ public abstract class BasePage extends Base {
     @Getter
     protected HeaderComponent header;
     @Getter
+    protected UsersHeaderComponent loggedHeader;
+    @Getter
     protected FooterComponent footer;
 
     @Getter
@@ -33,6 +36,7 @@ public abstract class BasePage extends Base {
         super(driver);
         header = new HeaderComponent(driver, headerRoot);
         footer = new FooterComponent(driver, FooterRoot);
+        loggedHeader = new UsersHeaderComponent(driver, headerRoot);
     }
 
 
