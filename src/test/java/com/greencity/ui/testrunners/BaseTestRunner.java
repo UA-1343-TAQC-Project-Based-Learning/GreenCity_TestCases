@@ -32,12 +32,8 @@ public class BaseTestRunner {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--remote-debugging-port=9222");
 
-        // Use a custom profile directory (optional)
-         String userProfile = "C:/Users/Nataliia/AppData/Local/Google/Chrome/User Data";
-         options.addArguments("--user-data-dir=" + userProfile);
+        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfilePath());
 
-
-        // Fix for "DevToolsActivePort file doesn't exist" error
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-software-rasterizer");
 

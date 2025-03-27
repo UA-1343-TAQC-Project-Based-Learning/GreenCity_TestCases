@@ -1,13 +1,9 @@
 package com.greencity.ui.component;
-
 import com.greencity.ui.component.header.DropdownTextSize;
-import com.greencity.ui.page.econewspage.CreateNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-
 public class TextContentComponent extends BaseComponent {
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
     private DropdownTextSize dropdownTextSize;
@@ -16,11 +12,16 @@ public class TextContentComponent extends BaseComponent {
     private WebElement contentTitleText;
     @Getter
     @FindBy(xpath = ".//p[@class = 'textarea-description warning']")
-    private WebElement textAreaDescriptionWarnings;
+    private WebElement areaDescriptionWarningsText;
     @Getter
     @FindBy(xpath = ".//div[@data-placeholder = 'e.g. Short description of news, agenda for event']")
     private WebElement inputTextAreaPlaceholder;
 
+    @Getter
+    @FindBy(xpath = ".//p[@class='field-info']")
+    private WebElement contentCharacterCountText;
+
+    @Getter
     @FindBy(xpath = ".//div[@class='ql-editor ql-blank']")
     private WebElement textAreaField;
 
@@ -30,7 +31,6 @@ public class TextContentComponent extends BaseComponent {
     @Getter
     @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Author:']")
     private WebElement authorOfNew;
-
     @Getter
     @FindBy(xpath = ".//div[@class = 'ql-container ql-snow']")
     private WebElement contentNewsForm;
@@ -76,12 +76,9 @@ public class TextContentComponent extends BaseComponent {
     @Getter
     @FindBy(xpath = ".//span[@class = 'ql-formats']//span[@class = 'ql-size ql-picker ql-expanded']")
     private WebElement styleButton;
-
-
     public TextContentComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
-
     // dropdownText
     protected DropdownTextSize getDropdownTextSize() {
         if (dropdownTextSize == null) {
@@ -93,32 +90,30 @@ public class TextContentComponent extends BaseComponent {
         dropdownTextSize = new DropdownTextSize(driver, rootElement);
         return getDropdownTextSize();
     }
-
     public TextContentComponent clickDropdownSmallTextSize() {
         getDropdownTextSize().clickSmallStyleButton();
         return this;
     }
-
     public TextContentComponent clickDropdownNormalTextSize() {
         getDropdownTextSize().clickNormalStyleButton();
         return this;
     }
-
     public TextContentComponent clickDropdownHugeTextSize() {
         getDropdownTextSize().clickHugeStyleButton();
         return this;
     }
-
     public TextContentComponent clickDropdownLargeTextSize() {
         getDropdownTextSize().clickLargeStyleButton();
         return this;
     }
 
+    public String getContentText() {
+        return textAreaField.getText();
+    }
 
     public TextContentComponent fillTextAreaField(String text) {
         textAreaField.sendKeys(text);
         return this;
     }
-
 
 }

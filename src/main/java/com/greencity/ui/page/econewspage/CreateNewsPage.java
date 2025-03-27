@@ -173,4 +173,8 @@ public class CreateNewsPage extends BasePage {
     public boolean isTagSelected(TagButton button) {
         return ecoNewsTagFilterComponent.isTagButtonSelected(button);
     }
+
+    public String getTagButtonColor(TagButton tag) {
+        return ecoNewsTagFilterComponent.getTagButtonColor(tag);
+    }
 }
