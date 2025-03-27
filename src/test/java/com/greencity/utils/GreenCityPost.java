@@ -1,4 +1,4 @@
-package com.greencity.modules;
+package com.greencity.utils;
 
 
 
@@ -12,7 +12,7 @@ import okhttp3.*;
 import java.io.IOException;
 
 public class GreenCityPost {
-    public LoginDto login(TesterUser testerUser) {
+    public static LoginDto login(TesterUser testerUser) {
         Gson gson = new Gson();
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody;

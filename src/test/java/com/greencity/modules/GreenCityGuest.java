@@ -4,8 +4,8 @@ package com.greencity.modules;
 import com.greencity.data.LoginDto;
 
 import com.greencity.data.TesterUser;
-import com.greencity.ui.component.header.HeaderComponent;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import com.greencity.utils.GreenCityPost;
 import com.greencity.utils.LocalStorageJS;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

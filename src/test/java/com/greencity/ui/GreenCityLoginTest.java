@@ -1,46 +1,52 @@
 package com.greencity.ui;
 
 
-
-import com.greencity.ui.page.econewspage.CreateNewsPage;
-import com.greencity.ui.testrunners.BaseTestRunner;
 import com.greencity.data.TesterUser;
 import com.greencity.data.TesterUserRepository;
+import com.greencity.ui.modal.LoginModal;
+import com.greencity.ui.page.homepage.HomePage;
+import com.greencity.ui.testrunners.BaseTestRunner;
 import org.testng.Assert;
-import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 
 public class GreenCityLoginTest extends BaseTestRunner {
+    LoginModal loginModal;
+
     @DataProvider(name = "provideTesterUsers")
     public Object[][] getData() {
-        return new Object[][]{
-                {TesterUserRepository.getValidUserSecret()},
-        };
+        return new Object[][]{{TesterUserRepository.getValidUserSecret()},};
+    }
+
+    @BeforeMethod
+    public void goToLogin() {
+        loginModal = homePage.getHeader().clickSignIn();
+
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        clearBrowserMemory();
     }
 
     @Test(dataProvider = "provideTesterUsers")
-    @BeforeMethod
     public void checkLogin(TesterUser testerUser) {
-        logger.info("Start checkLogin() with testerUser = " + testerUser);
-        loadApplication();
-        presentationSleep(); // For Presentation
-        //
-        greencityGuest.signIn(testerUser);
-        presentationSleep(); // For Presentation
-        //
-        // get Username
-        String actualUserName = greencityLogged.getUsername();
+
+        loginModal.setEmailInput(testerUser.getEmail());
+        loginModal.setPasswordInput(testerUser.getPassword());
+        loginModal.clickSignInButton();
+
+        HomePage homePage = new HomePage(driver);
+
+
+        String actualUserName = homePage.getLoggedHeader().getUserName().getText();
         String expectedUserName = testerUser.getUsername();
-        presentationSleep(); // For Presentation ONLY
-        //
-        // Check
+
         Assert.assertEquals(expectedUserName, actualUserName);
         presentationSleep(); // For Presentation ONLY
-        //
-        System.out.println("\t\tTest testUi() executed");
     }
 
-
-    
 }

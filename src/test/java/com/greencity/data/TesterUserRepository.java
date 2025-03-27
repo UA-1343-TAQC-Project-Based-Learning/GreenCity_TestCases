@@ -1,7 +1,7 @@
 package com.greencity.data;
 
 
-import com.greencity.utils.DotenvUtil;
+
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ public final class TesterUserRepository {
 
 
     public static TesterUser getValidUserSecret() {
-        DotenvUtil dotenvUtil = new DotenvUtil();
+
         return new TesterUser("tyv09754@zslsz.com", "Qwerty_1",
-                dotenvUtil.getSecretKey(),
+                "dotenvUtil.getSecretKey()",
                 "QwertyY", "https://greencity-user.greencity.cx.ua/api/testers/sign-in");
     }
     /*

@@ -27,7 +27,7 @@ public class ContentFieldValidationTest  extends GreenCityLoginTest {
 
     @Test
     public void checkContentFormNegative(){
-        CreateNewsPage createNewsPage = loadApplication()
+        CreateNewsPage createNewsPage = homePage
                 .goToCreateEcoNewsPage()
                 .clickTextIntoTextContentField()
                 .clickTitleHeaderText();
@@ -70,7 +70,7 @@ public class ContentFieldValidationTest  extends GreenCityLoginTest {
 
     @Test
     public void checkContentFormPositive(){
-        CreateNewsPage createNewsPage = loadApplication()
+        CreateNewsPage createNewsPage = homePage
                 .goToCreateEcoNewsPage()
                 .clickTextIntoTextContentField()
                 .clickTitleHeaderText();

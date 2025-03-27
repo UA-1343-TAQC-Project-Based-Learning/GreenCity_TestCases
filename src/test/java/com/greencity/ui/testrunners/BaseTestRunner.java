@@ -1,6 +1,6 @@
 package com.greencity.ui.testrunners;
 
-import com.greencity.data.TesterUser;
+import com.greencity.data.LoginDto;
 import com.greencity.modules.GreenCityGuest;
 import com.greencity.modules.GreenCityLogged;
 import com.greencity.ui.GreenCityLoginTest;
@@ -17,15 +17,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.ITestContext;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -34,19 +32,15 @@ import java.util.Date;
 public class BaseTestRunner {
     private static final String BASE_URL = "https://www.greencity.cx.ua/#/ubs";
     private static final Long ONE_SECOND_DELAY = 1000L;
-    private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss-S";
     protected static Boolean isTestSuccessful = false;
-    //
     protected static LocalStorageJS localStorageJS;
     protected static GreenCityGuest greencityGuest;
     protected static GreenCityLogged greencityLogged;
     protected static GreenCityLoginTest greenCityLoginTest;
-
-    protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     protected static WebDriver driver;
-
     protected static TestValueProvider testValueProvider;
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss-S";
     protected HomePage homePage;
 
     public static void presentationSleep() {
@@ -62,7 +56,8 @@ public class BaseTestRunner {
             e.printStackTrace();
         }
     }
-    private void takeScreenShot() {
+
+    protected void takeScreenShot() {
         String currentTime = new SimpleDateFormat(TIME_TEMPLATE).format(new Date());
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
@@ -81,30 +76,37 @@ public class BaseTestRunner {
         initDriver();
     }
 
+    public void setLocalStorage(LoginDto loginDto) {
+        localStorageJS.setItemInLocalStorage("accessToken", loginDto.getAccessToken());
+        localStorageJS.setItemInLocalStorage("language", "en");
+        localStorageJS.setItemInLocalStorage("name", loginDto.getName());
+        localStorageJS.setItemInLocalStorage("refreshToken", loginDto.getRefreshToken());
+        localStorageJS.setItemInLocalStorage("userId", String.valueOf(loginDto.getUserId()));
+    }
+
     @Step("init ChromeDriver")
     public void initDriver() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        // ChromeOptions options = new ChromeOptions();
+        ChromeOptions options = new ChromeOptions();
 
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
-        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
+//        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
 
 
-        //driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
 
         localStorageJS = new LocalStorageJS(driver);
         greencityGuest = new GreenCityGuest(driver);
         greencityLogged = new GreenCityLogged(driver);
-        System.out.println("@BeforeAll executed");
     }
+
     @BeforeClass
     public void beforeClass() {
-        if (driver == null){
+        if (driver == null) {
             initDriver();
         }
         driver.get(testValueProvider.getBaseUIUrl());
@@ -117,37 +119,19 @@ public class BaseTestRunner {
             driver.quit();
         }
     }
+
     @AfterSuite
     public void afterSuite() {
         if (driver != null) {
             driver.close();
         }
     }
-    @AfterTest
-    public void tearThis(ITestContext testContext) {
-        if (!isTestSuccessful) {
-            logger.error("Test_Name = {} fail",  testContext.getName());
-            // delete session
-            takeScreenShot();
 
-        }
-
-        // Sign out
-        // delete All Cookies;
+    @Step("Clear Browser Memory Cookies and LocalStorage.")
+    public void clearBrowserMemory() {
         driver.manage().deleteAllCookies();
-        // Clear session
-        // delete All Tokens;
-        //localStorageJS.clearLocalStorage();
-        localStorageJS.removeItemFromLocalStorage("accessToken");
-        localStorageJS.removeItemFromLocalStorage("refreshToken");
-        //
+        localStorageJS.clearLocalStorage();
         driver.navigate().refresh();
-        presentationSleep(4); // For Presentation
-        logger.info("\t@AfterTest executed");
-    }
-    protected HomePage loadApplication() {
-       //driver.get(BASE_URL);
-        return new HomePage(driver);
     }
 
 }

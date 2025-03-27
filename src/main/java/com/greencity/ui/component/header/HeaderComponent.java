@@ -72,8 +72,11 @@ public class HeaderComponent extends BaseComponent {
     private WebElement registrationButton;
 
     @Getter
-    @FindBy(xpath = ".//img[@src='../assets/img/events/user.svg']")
+    @FindBy(xpath = ".//a[@class='header_sign-in-link tertiary-global-button']")
     private WebElement signInButton;
+
+    @FindBy(xpath = "//mat-dialog-container")
+    private WebElement LoginModalRoot;
 
 
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
@@ -155,8 +158,10 @@ public class HeaderComponent extends BaseComponent {
         userIcon.click();
     }
 
-    public void clickSignIn() {
+    public LoginModal clickSignIn() {
         signInButton.click();
+        sleep(3000);
+        return new LoginModal(driver,LoginModalRoot);
     }
 
     public void clickRegistrationButton() {
@@ -229,7 +234,7 @@ public class HeaderComponent extends BaseComponent {
     }
     public LoginModal openLoginModal() {
         clickUserIcon();
-        return new LoginModal(driver,rootElement);
+        return new LoginModal(driver,LoginModalRoot);
     }
 
     public HomePage signOutUser() {

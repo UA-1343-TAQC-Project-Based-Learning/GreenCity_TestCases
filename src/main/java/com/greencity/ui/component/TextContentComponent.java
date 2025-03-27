@@ -1,7 +1,6 @@
 package com.greencity.ui.component;
 
 import com.greencity.ui.component.header.DropdownTextSize;
-import com.greencity.ui.page.econewspage.CreateNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -113,18 +112,22 @@ public class TextContentComponent extends BaseComponent {
         getDropdownTextSize().clickNormalStyleButton();
         return this;
     }
-    public String getAreaDescriptionWarningsText(){
+
+    public String getAreaDescriptionWarningsText() {
         return textAreaDescriptionWarnings.getText();
     }
-    public String getDescriptionOfNewsText(){
+
+    public String getDescriptionOfNewsText() {
         return contentInputTextField.getText();
 
     }
+
     public void clickContentInputTextField() {
         contentInputTextField.click();
     }
+
     public void clearContentInputTextField() {
-       contentInputTextField.clear();
+        contentInputTextField.clear();
     }
 
     public String getContentInputTextFieldValue() {
@@ -132,20 +135,22 @@ public class TextContentComponent extends BaseComponent {
     }
 
     public String getContentInputFieldBorderColor() {
-        return contentInputTextField.getCssValue("border-color").toString();
+        return contentInputTextField.getCssValue("border-color");
     }
 
     public String getTitleInputTextFieldPlaceholderText() {
         return contentInputTextField.getDomAttribute("placeholder");
     }
 
-    public String getContentInputTextFieldText(){
+    public String getContentInputTextFieldText() {
         return contentInputTextField.getText();
     }
-    public String getContentCounterText(){
+
+    public String getContentCounterText() {
         return textContentCounter.getText();
     }
-    public String getContentWarningCounterText(){
+
+    public String getContentWarningCounterText() {
         return textContentWarningCounter.getText();
     }
 
@@ -159,13 +164,22 @@ public class TextContentComponent extends BaseComponent {
         getDropdownTextSize().clickLargeStyleButton();
         return this;
     }
+
     public String getContentText() {
         return textAreaField.getText();
     }
-    public void clickTextAreaField() {textAreaField.click();
+
+    public void clickTextAreaField() {
+        textAreaField.click();
     }
-    public void clearTextAreaField(){textAreaField.clear();}
-    public void fillTextAreaField(String text){textAreaField.sendKeys(text);}
+
+    public void clearTextAreaField() {
+        textAreaField.clear();
+    }
+
+    public void fillTextAreaField(String text) {
+        textAreaField.sendKeys(text);
+    }
 
     public void clickCancelButton() {
         cancelButton.click();
@@ -179,21 +193,11 @@ public class TextContentComponent extends BaseComponent {
         waitUntilElementClickable(publishButton);
         publishButton.click();
     }
+
     public TextContentComponent fillContentTextAreaField(String text) {
         clickTextAreaField();
         clearTextAreaField();
         fillTextAreaField(text);
         return this;
     }
-
-
-
-    public String getContentText() {
-        return content.getText();
-    }
-
-    public String getAreaDescriptionWarningsText(){
-        return textAreaDescriptionWarnings.getText();
-    }
-
 }
