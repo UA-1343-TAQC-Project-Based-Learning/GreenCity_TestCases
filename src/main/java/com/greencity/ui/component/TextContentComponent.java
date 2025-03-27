@@ -17,7 +17,7 @@ public class TextContentComponent extends BaseComponent {
     @FindBy(xpath = ".//div[@class='ql-editor']")
     private WebElement textAreaField;
     @Getter
-    @FindBy(xpath = ".//p[@class = 'textarea-description warning']")
+    @FindBy(xpath = ".//p[@class = 'field-info']")
     private WebElement textAreaDescriptionWarnings;
     @Getter
     @FindBy(xpath = ".//div[@data-placeholder = 'e.g. Short description of news, agenda for event']")
@@ -188,5 +188,12 @@ public class TextContentComponent extends BaseComponent {
 
 
 
+    public String getContentText() {
+        return content.getText();
+    }
+
+    public String getAreaDescriptionWarningsText(){
+        return textAreaDescriptionWarnings.getText();
+    }
 
 }

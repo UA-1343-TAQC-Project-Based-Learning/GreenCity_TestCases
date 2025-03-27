@@ -69,4 +69,8 @@ public class ImageUploadComponent extends BaseComponent{
             imageUploadLink.sendKeys(imagePath);
     }
 
+    public String getImageBrowseLinkText(){
+        return imageBrowseLink.getText();
+    }
+
 }

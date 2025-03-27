@@ -90,6 +90,8 @@ public class BaseTestRunner {
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
+        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
+
 
         //driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -108,10 +110,11 @@ public class BaseTestRunner {
         driver.get(testValueProvider.getBaseUIUrl());
         homePage = new HomePage(driver);
     }
+
     @AfterClass()
     public void afterClass() {
         if (driver != null) {
-            driver.close();
+            driver.quit();
         }
     }
     @AfterSuite
