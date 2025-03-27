@@ -3,16 +3,20 @@ package com.greencity.ui.page.econewspage;
 import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.component.TextContentComponent;
 import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
+import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateNewsPage extends BasePage {
     private EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
     private ImageUploadComponent imageUploadComponent;
     private TextContentComponent textContentComponent;
+
 
 
     @FindBy(xpath = "//div[@class='image-block']")
@@ -23,7 +27,6 @@ public class CreateNewsPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='textarea-wrapper']")
     private WebElement textAreaRoot;
-
 
     @FindBy(xpath = "//h2[@class='title-header']")
     private WebElement titleHeaderText;
@@ -61,6 +64,10 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[@class='span field-info']")
     private WebElement externalSourceInputFieldInfoText;
 
+    @Getter
+    @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Author:']")
+    private WebElement authorOfNew;
+
     @FindBy(xpath = "//button[@class='tertiary-global-button']")
     private WebElement exitButton;
 
@@ -78,6 +85,22 @@ public class CreateNewsPage extends BasePage {
         textContentComponent = new TextContentComponent(driver, textAreaRoot);
     }
 
+    public String getTitleFieldCharacterCounterTextColor() {
+        return titleFieldCharacterCounter.getCssValue("color");
+    }
+
+    public String getTitleFieldCharacterCounterWarningText() {
+        return titleFieldCharacterCounterWarning.getText();
+    }
+
+    public String getTitleFieldCharacterCounterWarningTextColor() {
+        return titleFieldCharacterCounterWarning.getCssValue("color");
+    }
+    
+    public CreateNewsPage clickTitleHeaderText() {
+        titleHeaderText.click();
+        return this;
+    }
 
     public String getTitleHeaderText() {
         return titleHeaderText.getText();
@@ -95,16 +118,9 @@ public class CreateNewsPage extends BasePage {
         return titleFieldCharacterCounter.getText();
     }
 
-    public void clickTitleInputTextField() {
+    public CreateNewsPage clickTitleInputTextField() {
         titleInputTextField.click();
-    }
-
-    public void clearTitleInputTextField() {
-        titleInputTextField.clear();
-    }
-
-    public void fillTitleInputTextField(String titleText) {
-        titleInputTextField.sendKeys(titleText);
+        return this;
     }
 
     public String getTitleInputTextFieldPlaceholderText() {
@@ -150,11 +166,91 @@ public class CreateNewsPage extends BasePage {
     public void clickPreviewButton() {
         previewButton.click();
     }
+    public String getTitleInputTextFieldValue() {
+        return titleInputTextField.getAttribute("value");
+    }
+    public CreateNewsPage clearTitleInputTextField() {
+        titleInputTextField.clear();
+        return this;
+    }
 
+    public CreateNewsPage fillTitleInputTextField(String titleText) {
+        clickTitleInputTextField()
+                .clearTitleInputTextField()
+                .titleInputTextField.sendKeys(titleText);
+        return this;
+    }
     public EcoNewsPage clickPublishButton() {
         publishButton.click();
         return new EcoNewsPage(driver);
     }
 
+    public CreateNewsPage clickTextIntoTextContentField() {
+        textContentComponent.clickContentInputTextField();
+        return this;
+    }
+
+    public CreateNewsPage enterTextIntoTextContentField(String text) {
+        textContentComponent.fillContentTextAreaField(text);
+        return this;
+    }
+    public String getTitleInputFieldBorderColor() {
+        return titleInputTextField.getCssValue("border-color").toString();
+    }
+
+    public String getContentText(){
+        return textContentComponent.getContentText();
+    }
+
+    public boolean isPresentContentInputTextField(){
+        return textAreaRoot.isDisplayed();
+    }
+
+    public String getContentCharacterCountText(){
+        return textContentComponent.getContentCounterText();
+    }
+    public long getContentInputTextFieldText(){
+        return  textContentComponent.getContentInputTextFieldText().length();
+    }
+
+    public String getAuthorLabelText(){
+        return authorOfNew.getText();
+    }
+    public  boolean isCancelButtonPresent(){
+        return exitButton.isDisplayed();
+    }
+
+    public  boolean isPreviewButtonPresent(){
+        return previewButton.isDisplayed();
+    }
+
+    public  boolean isPublishButtonPresent(){
+        return publishButton.isDisplayed();
+    }
+
+    public CreateNewsPage clickTagFilterButton(TagButton tagButton) {
+        ecoNewsTagFilterComponent.clickTagButton(tagButton);
+        return this;
+    }
+    public List<String> getListOfAllTagButtonsText() {
+        List<String> tagButtonsText = new ArrayList<>();
+        TagButton[] tagButtons = TagButton.values();
+        for(TagButton tagButton : tagButtons){
+            tagButtonsText.add(ecoNewsTagFilterComponent.getTagButtonText(tagButton));
+        }
+        return tagButtonsText;
+    }
+
+    public boolean isAllSelectedTagsChangeAppearance() {
+        TagButton[] tagButtons = TagButton.values();
+        boolean result = true;
+        for (TagButton tagButton : tagButtons) {
+            ecoNewsTagFilterComponent.clickTagButton(tagButton);
+            result = ecoNewsTagFilterComponent.isTagButtonSelected(tagButton);
+            ecoNewsTagFilterComponent.clickTagButton(tagButton);
+            if (!result) break;
+        }
+        return result;
+    }
 
 }

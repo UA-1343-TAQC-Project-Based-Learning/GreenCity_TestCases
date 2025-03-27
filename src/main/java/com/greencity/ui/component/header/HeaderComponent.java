@@ -243,4 +243,6 @@ public class HeaderComponent extends BaseComponent {
         clickEcoNewsLink();
         return new EcoNewsPage(driver);
     }
+
+
 }

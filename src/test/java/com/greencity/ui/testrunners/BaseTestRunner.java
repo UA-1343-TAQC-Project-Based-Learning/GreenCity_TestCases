@@ -1,6 +1,11 @@
 package com.greencity.ui.testrunners;
 
+import com.greencity.data.TesterUser;
+import com.greencity.modules.GreenCityGuest;
+import com.greencity.modules.GreenCityLogged;
+import com.greencity.ui.GreenCityLoginTest;
 import com.greencity.ui.page.homepage.HomePage;
+import com.greencity.utils.LocalStorageJS;
 import com.greencity.utils.TestValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
@@ -32,9 +37,11 @@ public class BaseTestRunner {
     private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss-S";
     protected static Boolean isTestSuccessful = false;
     //
-    protected static com.greencity.utils.LocalStorageJS localStorageJS;
-    protected static com.greencity.modules.GreenCityGuest greencityGuest;
-    protected static com.greencity.modules.GreenCityLogged greencityLogged;
+    protected static LocalStorageJS localStorageJS;
+    protected static GreenCityGuest greencityGuest;
+    protected static GreenCityLogged greencityLogged;
+    protected static GreenCityLoginTest greenCityLoginTest;
+
     protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected static WebDriver driver;
@@ -67,18 +74,6 @@ public class BaseTestRunner {
         }
     }
 
-    private void takePageSource() {
-        String currentTime = new SimpleDateFormat(TIME_TEMPLATE).format(new Date());
-        String pageSource = driver.getPageSource();
-        byte[] strToBytes = pageSource.getBytes();
-        Path path = Paths.get("./" + currentTime + "_source.html");
-        try {
-            Files.write(path, strToBytes, StandardOpenOption.CREATE);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
     @BeforeSuite
     public void beforeSuite() {
         WebDriverManager.chromedriver().setup();
@@ -90,25 +85,21 @@ public class BaseTestRunner {
     public void initDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-         ChromeOptions options = new ChromeOptions();
+        // ChromeOptions options = new ChromeOptions();
 
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
 
-        driver = new ChromeDriver(options);
+        //driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
 
-        localStorageJS = new com.greencity.utils.LocalStorageJS(driver);
-        greencityGuest = new com.greencity.modules.GreenCityGuest(driver);
-        greencityLogged = new com.greencity.modules.GreenCityLogged(driver);
+        localStorageJS = new LocalStorageJS(driver);
+        greencityGuest = new GreenCityGuest(driver);
+        greencityLogged = new GreenCityLogged(driver);
         System.out.println("@BeforeAll executed");
     }
-
-
-
-
     @BeforeClass
     public void beforeClass() {
         if (driver == null){
@@ -117,7 +108,6 @@ public class BaseTestRunner {
         driver.get(testValueProvider.getBaseUIUrl());
         homePage = new HomePage(driver);
     }
-
     @AfterClass()
     public void afterClass() {
         if (driver != null) {
@@ -136,8 +126,7 @@ public class BaseTestRunner {
             logger.error("Test_Name = {} fail",  testContext.getName());
             // delete session
             takeScreenShot();
-            takePageSource(); // Default sources
-            // TODO JS sources
+
         }
 
         // Sign out
@@ -153,7 +142,9 @@ public class BaseTestRunner {
         presentationSleep(4); // For Presentation
         logger.info("\t@AfterTest executed");
     }
-    protected void loadApplication() {
-       driver.get(BASE_URL);
+    protected HomePage loadApplication() {
+       //driver.get(BASE_URL);
+        return new HomePage(driver);
     }
+
 }

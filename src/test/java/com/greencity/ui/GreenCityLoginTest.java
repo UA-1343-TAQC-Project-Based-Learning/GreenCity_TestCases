@@ -2,16 +2,13 @@ package com.greencity.ui;
 
 
 
-import com.greencity.ui.component.header.HeaderComponent;
-import com.greencity.ui.modal.LoginModal;
-import com.greencity.ui.page.homepage.HomePage;
+import com.greencity.ui.page.econewspage.CreateNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import com.greencity.data.TesterUser;
 import com.greencity.data.TesterUserRepository;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
+import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 
 public class GreenCityLoginTest extends BaseTestRunner {
@@ -23,6 +20,7 @@ public class GreenCityLoginTest extends BaseTestRunner {
     }
 
     @Test(dataProvider = "provideTesterUsers")
+    @BeforeMethod
     public void checkLogin(TesterUser testerUser) {
         logger.info("Start checkLogin() with testerUser = " + testerUser);
         loadApplication();
@@ -42,5 +40,7 @@ public class GreenCityLoginTest extends BaseTestRunner {
         //
         System.out.println("\t\tTest testUi() executed");
     }
+
+
     
 }
