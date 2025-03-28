@@ -311,7 +311,7 @@ public class CreateNewsPage extends BasePage {
         return first.getLocation().getY() < second.getLocation().getY();
     }
 
-    public boolean areElementsOnSameLine(WebElement first, WebElement second) {
+    public boolean areElementsOnSameLine(WebElement first, WebElement second){
         return first.getLocation().getY() == second.getLocation().getY();
     }
 

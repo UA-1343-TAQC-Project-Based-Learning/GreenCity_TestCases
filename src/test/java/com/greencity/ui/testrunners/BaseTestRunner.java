@@ -4,6 +4,7 @@ import com.greencity.data.LoginDto;
 import com.greencity.modules.GreenCityGuest;
 import com.greencity.modules.GreenCityLogged;
 import com.greencity.ui.GreenCityLoginTest;
+import com.greencity.ui.page.BasePage;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.utils.LocalStorageJS;
 import com.greencity.utils.TestValueProvider;
@@ -21,6 +22,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,7 +98,6 @@ public class BaseTestRunner {
 //        options.addArguments("--headless");
 //        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
 
-
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
@@ -132,6 +135,12 @@ public class BaseTestRunner {
         driver.manage().deleteAllCookies();
         localStorageJS.clearLocalStorage();
         driver.navigate().refresh();
+    }
+
+
+    public HomePage loadApplication() {
+        HomePage homePage = new HomePage(driver).goToHomePage();
+        return homePage;
     }
 
 }

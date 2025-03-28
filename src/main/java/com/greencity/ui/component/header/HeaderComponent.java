@@ -22,12 +22,13 @@ public class HeaderComponent extends BaseComponent {
     private DropdownComponent dropdownComponent;
     private UsersHeaderComponent usersHeaderComponent;
     private LoggedDropdown dropdownLogged;
+
     @Getter
     @FindBy(xpath = ".//img[@src='assets/img/logo.svg']")
     private WebElement logo;
 
     @Getter
-    @FindBy(xpath = ".//div[@class='header_navigation-menu']//a[contains(text(),'Еко новини') or contains(text(),'Eco news')]")
+    @FindBy(xpath = ".//a[contains(text(),'Еко новини') or contains(text(),'Eco news')]")
     private WebElement ecoNewsLink;
 
     @Getter

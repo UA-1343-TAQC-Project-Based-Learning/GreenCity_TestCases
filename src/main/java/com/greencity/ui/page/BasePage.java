@@ -5,6 +5,8 @@ import com.greencity.ui.component.footer.FooterComponent;
 import com.greencity.ui.component.header.HeaderComponent;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.user.UsersHeaderComponent;
+import com.greencity.ui.page.homepage.HomePage;
+import com.greencity.ui.page.econewspage.EcoNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -52,6 +54,11 @@ public abstract class BasePage extends Base {
     public Boolean isElementInvisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         return wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    public HomePage goToHomePage() {
+        header.getLogo().click();
+        return new HomePage(driver);
     }
 
     public EcoNewsPage gotoEcoNewsPage(){

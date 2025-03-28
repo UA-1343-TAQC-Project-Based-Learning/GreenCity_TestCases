@@ -34,7 +34,7 @@ public class ContentFieldValidationTest  extends GreenCityLoginTest {
 
         createNewsPage.fillTitleInputTextField("Eco News");
         logger.info("The actual counter text color is: {}", createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
-        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.CREATE_NEWS_TITLE_FIELD_COUNTER_TEXT_COLOR.warningColor()),
+        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.ERROR_RED),
                 "The counter text color should be red when the Title field exceeding the limit");
         logger.info("The actual text value of Title text field is: {}", createNewsPage.getTitleInputTextFieldValue().length());
         softAssert.assertTrue(createNewsPage.getTitleInputTextFieldValue().length() == 150,
@@ -77,7 +77,7 @@ public class ContentFieldValidationTest  extends GreenCityLoginTest {
 
         createNewsPage.fillTitleInputTextField("Eco News");
         logger.info("The actual counter text color is: {}", createNewsPage.getTitleFieldCharacterCounterWarningTextColor());
-        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.CREATE_NEWS_TITLE_FIELD_COUNTER_TEXT_COLOR.warningColor()),
+        softAssert.assertTrue(createNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.ERROR_RED),
                 "The counter text color should be red when the Title field exceeding the limit");
         logger.info("The actual text value of Title text field is: {}", createNewsPage.getTitleInputTextFieldValue().length());
         softAssert.assertTrue(createNewsPage.getTitleInputTextFieldValue().length() == 150,
