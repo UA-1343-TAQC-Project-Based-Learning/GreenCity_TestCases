@@ -1,5 +1,6 @@
 package com.greencity.ui.page.homepage;
 
+import com.greencity.ui.component.header.HeaderComponent;
 import com.greencity.ui.modal.LoginModal;
 import com.greencity.ui.page.BasePage;
 import com.greencity.ui.page.econewspage.CreateNewsPage;
@@ -12,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class HomePage extends BasePage {
+public class HomePage extends BasePage  {
 
     //main-content
     @Getter
@@ -141,9 +142,10 @@ public class HomePage extends BasePage {
     private WebElement loginModalRoot;
 
 
-    public HomePage(WebDriver driver) {
+    public HomePage (WebDriver driver) {
         super(driver);
     }
+
 
     //Main-header
     public String getHeaderTitleText() {
@@ -315,11 +317,15 @@ public class HomePage extends BasePage {
         subscriptionButton.click();
         return this;
     }
-
     public CreateNewsPage goToCreateEcoNewsPage() {
         return new HomePage(driver)
-                .gotoEcoNewsPage()
+                .openEcoNewsPage()
                 .clickCreateNewsButton();
+    }
+
+    private EcoNewsPage openEcoNewsPage() {
+        header.clickEcoNewsLink();
+        return new EcoNewsPage(driver);
     }
 
 }

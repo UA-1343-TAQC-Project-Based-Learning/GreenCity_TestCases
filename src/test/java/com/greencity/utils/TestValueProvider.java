@@ -70,4 +70,10 @@ public class TestValueProvider {
     public String getJDBCGreenCityURL() {
         return properties != null ? properties.getProperty("JDBCGreenCityURL") : System.getenv("JDBC_GREENCITY_URL");
     }
+    public String getAPIUrlLoginSecretKey() {
+        return properties != null ? properties.getProperty("getAPIUrlLoginSecretKey") : System.getenv("getAPIUrlLoginSecretKey");
+    }
+    public String getAPIUrlLogin() {
+        return properties != null ? properties.getProperty("getAPIUrlLogin") : System.getenv("getAPIUrlLogin");
+    }
 }

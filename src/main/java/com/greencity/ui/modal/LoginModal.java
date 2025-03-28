@@ -1,7 +1,7 @@
 package com.greencity.ui.modal;
 
 import com.greencity.ui.page.MySpacePage;
-import com.greencity.ui.page.econewspage.CreateNewsPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,30 +24,28 @@ public class LoginModal extends BaseModal{
         super(driver, rootElement);
     }
 
-    public LoginModal clearEmailInput() {
+    public void clearEmailInput() {
         emailInput.clear();
-        return this;
     }
 
-    public LoginModal clickEmailInput() {
+    public void clickEmailInput() {
         emailInput.click();
-        return this;
     }
 
-    public LoginModal setEmailInput(String email) {
+    @Step("set Email Input {email}")
+    public void setEmailInput(String email) {
         emailInput.sendKeys(email);
-        return this;
     }
 
     public void clearPasswordInput() {
         passwordInput.clear();
     }
 
-    public LoginModal clickPasswordInput() {
+    public void clickPasswordInput() {
         passwordInput.click();
-        return this;
     }
 
+    @Step("set Email Input {password}")
     public void setPasswordInput(String password) {
         passwordInput.sendKeys(password);
     }
@@ -56,29 +54,26 @@ public class LoginModal extends BaseModal{
         signInButton.click();
     }
 
-    private LoginModal enterEmailInput(String email) {
-        clickEmailInput()
-                .clearEmailInput()
-                .setEmailInput(email);
-        return this;
+    private void enterEmailInput(String email) {
+        clickEmailInput();
+        clearEmailInput();
+        setEmailInput(email);
     }
 
-    private LoginModal enterPasswordInput(String password) {
+    private void enterPasswordInput(String password) {
         clickPasswordInput();
         clearPasswordInput();
         setPasswordInput(password);
-        return this;
     }
 
     public void fillLogin(String email, String password) {
-        enterEmailInput(email)
-                .enterPasswordInput(password)
-                .clickSignInButton();
+        enterEmailInput(email);
+        enterPasswordInput(password);
+        clickSignInButton();
     }
 
     public MySpacePage successfulLogin(String email, String password) {
         fillLogin(email, password);
         return new MySpacePage(driver);
     }
-
 }
