@@ -8,8 +8,10 @@ import org.openqa.selenium.support.FindBy;
 
 
 public class TextContentComponent extends BaseComponent {
+
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
     private DropdownTextSize dropdownTextSize;
+
     @Getter
     @FindBy(xpath = ".//h3[normalize-space()='Content']")
     private WebElement content;
@@ -27,19 +29,7 @@ public class TextContentComponent extends BaseComponent {
 
     @FindBy(xpath = ".//p[@class='quill-counter warning']")
     private WebElement textContentWarningCounter;
-    @Getter
-    @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Date:']")
-    private WebElement dateOfNew;
 
-    @Getter
-    @FindBy(xpath = ".//div[@class = 'submit-buttons']/button[normalize-space() = 'Cancel']")
-    private WebElement cancelButton;
-    @Getter
-    @FindBy(xpath = ".//div[@class = 'submit-buttons']/button[normalize-space() = 'Preview']")
-    private WebElement previewButton;
-    @Getter
-    @FindBy(xpath = ".//div[@class = 'submit-buttons']/button[normalize-space() = 'Publish']")
-    private WebElement publishButton;
     @Getter
     @FindBy(xpath = ".//div[@class = 'ql-container ql-snow']")
     private WebElement contentNewsForm;
@@ -181,18 +171,6 @@ public class TextContentComponent extends BaseComponent {
         textAreaField.sendKeys(text);
     }
 
-    public void clickCancelButton() {
-        cancelButton.click();
-    }
-
-    public void clickPreviewButton() {
-        previewButton.click();
-    }
-
-    public void clickPublishButton() {
-        waitUntilElementClickable(publishButton);
-        publishButton.click();
-    }
 
     public TextContentComponent fillContentTextAreaField(String text) {
         clickTextAreaField();

@@ -17,10 +17,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class CreateNewsPage extends BasePage {
+
     private final EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
     private final ImageUploadComponent imageUploadComponent;
     private final TextContentComponent textContentComponent;
+
     public List<String> tagFilters = new ArrayList<>(List.of("News", "Events", "Education", "Initiatives", "Ads"));
+
     @Getter
     @FindBy(xpath = "//div[@class='image-block']")
     private WebElement imageBlockRoot;
@@ -311,4 +314,13 @@ public class CreateNewsPage extends BasePage {
     public boolean areElementsOnSameLine(WebElement first, WebElement second) {
         return first.getLocation().getY() == second.getLocation().getY();
     }
+
+    public boolean isTagSelected(TagButton button) {
+        return ecoNewsTagFilterComponent.isTagButtonSelected(button);
+    }
+
+    public String getTagButtonColor(TagButton tag) {
+        return ecoNewsTagFilterComponent.getTagButtonColor(tag);
+    }
+
 }
