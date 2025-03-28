@@ -99,6 +99,9 @@ public class BaseTestRunner {
 //        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
 
 
+        options.addArguments("--user-data-dir=/home/hembei/.config/google-chrome-selenium/");
+        options.addArguments("--profile-directory=Default");
+
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
@@ -127,7 +130,7 @@ public class BaseTestRunner {
     @AfterSuite
     public void afterSuite() {
         if (driver != null) {
-            driver.close();
+            driver.quit();
         }
     }
 
