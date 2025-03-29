@@ -65,6 +65,12 @@ public class EcoNewsTagFilterComponent extends BaseComponent {
         return aClass.contains("global-tag-clicked");
     }
 
+    public String getTagButtonColor(TagButton button) {
+        WebElement buttonElement = tagButtons.get(button);
+        WebElement aElement = buttonElement.findElement(By.xpath("./.."));
+        return aElement.getCssValue("background-color");
+    }
+
 }
 
 

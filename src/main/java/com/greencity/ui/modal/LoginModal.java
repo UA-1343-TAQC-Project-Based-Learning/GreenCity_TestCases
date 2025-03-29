@@ -1,6 +1,7 @@
 package com.greencity.ui.modal;
 
 import com.greencity.ui.page.MySpacePage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,6 +32,7 @@ public class LoginModal extends BaseModal{
         emailInput.click();
     }
 
+    @Step("set Email Input {email}")
     public void setEmailInput(String email) {
         emailInput.sendKeys(email);
     }
@@ -43,6 +45,7 @@ public class LoginModal extends BaseModal{
         passwordInput.click();
     }
 
+    @Step("set Email Input {password}")
     public void setPasswordInput(String password) {
         passwordInput.sendKeys(password);
     }
