@@ -12,12 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class NewsCardsContainer extends BaseContainer {
     @Getter
     private List<NewsCardListViewComponent> newsCardListViewComponents;
     @Getter
     private List<NewsCardTableViewComponent> newsCardTableViewComponents;
-    boolean isTableViewButtonActive;
+
+    @FindBy(xpath = "//em[@class='fa fa-th-large']")
+    private WebElement tableViewButton;
+
+    @FindBy(xpath = "//em[@class='fa fa-bars']")
+    private WebElement listViewButton;
 
     @FindBy(xpath = ".//div[@class='list-gallery']")
     private List<WebElement> newsCardTableViewComponentRoots;
@@ -26,14 +32,13 @@ public class NewsCardsContainer extends BaseContainer {
     private List<WebElement> newsCardListViewComponentRoots;
 
 
-    public NewsCardsContainer(WebDriver driver, WebElement rootElement, boolean isTableViewButtonActive) {
+    public NewsCardsContainer(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-        this.isTableViewButtonActive = isTableViewButtonActive;
         initElements();
     }
 
     private void initElements() {
-        if (isTableViewButtonActive) {
+        if (isTableViewButtonActive()) {
             newsCardTableViewComponents = new ArrayList<>();
             for (WebElement current : newsCardTableViewComponentRoots) {
                 newsCardTableViewComponents.add(new NewsCardTableViewComponent(driver, current));
@@ -48,7 +53,7 @@ public class NewsCardsContainer extends BaseContainer {
 
     public List<String> getCardComponentTitles() {
         List<String> cardComponentNames = new ArrayList<>();
-        if (isTableViewButtonActive) {
+        if (isTableViewButtonActive()) {
             for (NewsCardTableViewComponent current : getNewsCardTableViewComponents()) {
                 cardComponentNames.add(current.getTitleLabelText());
             }
@@ -71,6 +76,23 @@ public class NewsCardsContainer extends BaseContainer {
         return isFound;
     }
 
+    public NewsCardsContainer clickTableViewButton() {
+        waitUntilElementClickable(tableViewButton);
+        tableViewButton.click();
+        return new NewsCardsContainer(driver, rootElement);
+    }
 
+    public boolean isTableViewButtonActive() {
+        return tableViewButton.isEnabled();
+    }
+
+    public boolean isListViewButtonActive() {
+        return listViewButton.isEnabled();
+    }
+
+    public NewsCardsContainer clickListViewButton() {
+        waitUntilElementClickable(listViewButton);
+        listViewButton.click();
+        return new NewsCardsContainer(driver, rootElement);
+    }
 }
-

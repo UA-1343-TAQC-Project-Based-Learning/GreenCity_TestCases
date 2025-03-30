@@ -1,27 +1,21 @@
 package com.greencity.ui.data;
 
 public enum Colors {
-    DEFAULT_VALUE("rgb(255, 255, 255)", "rgb(255, 0, 0)"),
-    CREATE_NEWS_TITLE_FIELD_BORDER_COLOR("rgb(156, 167, 176)", "rgb(255, 0, 0)"),
-    CREATE_NEWS_TITLE_FIELD_COUNTER_TEXT_COLOR("rgba(135, 135, 135, 1)","rgba(235, 24, 13, 1)"),
-    TAG_COLOR("rgba(255, 255, 255, 1)", "rgba(19, 170, 87, 1)");
+    QUINTYNARY_LIGHT_GREY("rgb(156, 167, 176)"),
+    RED("rgb(255, 0, 0)"),
+    SECONDARY_GREY("rgba(135, 135, 135, 1)"),
+    ERROR_RED("rgba(235, 24, 13, 1)"),
+    PRIMARY_GREEN("rgba(19, 170, 87, 1)"),
+    PRIMARY_WHITE("rgba(255, 255, 255, 1)");
 
-    private final String normalColor;
-    private final String warningColor;
+    private  String color;
 
-    private Colors(String normalColor, String warningColor) {
-        this.normalColor = normalColor;
-        this.warningColor = warningColor;
+    private Colors(String color) {
+        this.color=color;
     }
 
-    public String normalColor() {
-        return normalColor;
+    public String getColor() {
+        return color;
     }
-
-    public String warningColor() {
-        return warningColor;
-    }
-
 
 }
-

@@ -41,6 +41,10 @@ public class TestValueProvider {
         return properties != null ? properties.getProperty("user.name") : System.getenv("USER_NAME");
     }
 
+    public String getUserProfile() {
+        return properties != null ? properties.getProperty("user.profile") : System.getenv("USER_PROFILE");
+    }
+
     public String getUserPassword() {
         return properties != null ? properties.getProperty("user.password") : System.getenv("USER_PASSWORD");
     }
@@ -67,5 +71,11 @@ public class TestValueProvider {
 
     public String getJDBCGreenCityURL() {
         return properties != null ? properties.getProperty("JDBCGreenCityURL") : System.getenv("JDBC_GREENCITY_URL");
+    }
+    public String getAPIUrlLoginSecretKey() {
+        return properties != null ? properties.getProperty("getAPIUrlLoginSecretKey") : System.getenv("getAPIUrlLoginSecretKey");
+    }
+    public String getAPIUrlLogin() {
+        return properties != null ? properties.getProperty("getAPIUrlLogin") : System.getenv("getAPIUrlLogin");
     }
 }

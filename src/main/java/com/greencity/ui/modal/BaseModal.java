@@ -13,7 +13,7 @@ public class BaseModal extends Base {
 
     public BaseModal(WebDriver driver, WebElement rootElement){
         super(driver);
-        PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
         this.rootElement = rootElement;
+        PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
     }
 }

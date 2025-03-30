@@ -13,7 +13,6 @@ public class EcoNewsPage extends BasePage {
 
     protected ToolbarElement toolbarElement;
     protected EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
-    @Getter
     protected NewsCardsContainer newsCardsContainer;
 
     @FindBy(xpath = "//div[@class='create-container']")
@@ -39,19 +38,12 @@ public class EcoNewsPage extends BasePage {
     @FindBy(xpath = "//h2[contains(text(),'items found') or contains(text(),'новин знайдено')]")
     private WebElement newsCounterText;
 
-    @FindBy(xpath = "//em[@class='fa fa-th-large']")
-    private WebElement tableViewButton;
-
-    @FindBy(xpath = "//em[@class='fa fa-bars']")
-    private WebElement listViewButton;
-
     public EcoNewsPage(WebDriver driver) {
         super(driver);
         toolbarElement = new ToolbarElement(driver, toolbarRoot);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, newsFilterRoot);
-        newsCardsContainer = new NewsCardsContainer(driver, newsContainerRoot, isTableViewButtonActive());
+        newsCardsContainer = new NewsCardsContainer(driver, newsContainerRoot);
     }
-
 
 
     public String getHeaderText() {
@@ -72,23 +64,4 @@ public class EcoNewsPage extends BasePage {
     public String getNewsCounterText() {
         return newsCounterText.getText();
     }
-
-    public void clickTableViewButton() {
-        waitUntilElementClickable(tableViewButton);
-        tableViewButton.click();
-    }
-
-    public boolean isTableViewButtonActive() {
-        return tableViewButton.isEnabled();
-    }
-
-    public void clickListViewButton() {
-        waitUntilElementClickable(listViewButton);
-        listViewButton.click();
-    }
-
-    public boolean isListViewButtonActive() {
-        return listViewButton.isEnabled();
-    }
-
 }
