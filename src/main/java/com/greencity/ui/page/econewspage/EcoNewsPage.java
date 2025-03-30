@@ -15,6 +15,8 @@ public class EcoNewsPage extends BasePage {
     protected EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
     protected NewsCardsContainer newsCardsContainer;
 
+    public static final String SUCCESSFUL_CREATE_CARD_MESSAGE = "Your news has been successfully published";
+
     @FindBy(xpath = "//div[@class='create-container']")
     private WebElement toolbarRoot;
 
@@ -37,6 +39,10 @@ public class EcoNewsPage extends BasePage {
 
     @FindBy(xpath = "//h2[contains(text(),'items found') or contains(text(),'новин знайдено')]")
     private WebElement newsCounterText;
+
+    @Getter
+    @FindBy(xpath="//div[contains(@class,'mdc-snackbar__label')]")
+    private WebElement createCardMessage;
 
     public EcoNewsPage(WebDriver driver) {
         super(driver);
@@ -63,5 +69,13 @@ public class EcoNewsPage extends BasePage {
 
     public String getNewsCounterText() {
         return newsCounterText.getText();
+    }
+
+    public String getCreateCardMessageText(){
+        return createCardMessage.getText();
+    }
+
+    public boolean isExistCardComponentByPartialTitle(String partialTitle){
+       return newsCardsContainer.isExistCardComponentByPartialTitle(partialTitle);
     }
 }

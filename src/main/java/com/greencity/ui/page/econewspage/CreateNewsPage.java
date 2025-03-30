@@ -22,6 +22,8 @@ public class CreateNewsPage extends BasePage {
     private final ImageUploadComponent imageUploadComponent;
     private final TextContentComponent textContentComponent;
 
+    public static final String SOURCE_Field_INFO_MESSAGE = "Please add the link of original article/news/post. Link must start with http(s)://";
+
     public List<String> tagFilters = new ArrayList<>(List.of("News", "Events", "Education", "Initiatives", "Ads"));
 
     @Getter
@@ -70,7 +72,7 @@ public class CreateNewsPage extends BasePage {
     @FindBy(css = "div[class='source-block'] h3")
     private WebElement externalSourceInputFieldTitle;
 
-    @FindBy(xpath = "//span[@class='span field-info']")
+    @FindBy(xpath = "//span[contains(@class,'span field-info')]")
     private WebElement externalSourceInputFieldInfoText;
 
 
@@ -321,6 +323,35 @@ public class CreateNewsPage extends BasePage {
 
     public String getTagButtonColor(TagButton tag) {
         return ecoNewsTagFilterComponent.getTagButtonColor(tag);
+    }
+
+    public CreateNewsPage fillContentInput(String content){
+        textContentComponent.fillContentTextAreaField(content);
+        return this;
+    }
+
+    public CreateNewsPage fillSourceInput(String url) {
+        clearExternalSourceLinkInputField();
+        clickExternalSourceLinkInputField();
+        fillExternalSourceLinkInputField(url);
+        return this;
+    }
+
+    public CreateNewsPage clickNewsTagButton(){
+        ecoNewsTagFilterComponent.clickTagButton(TagButton.NEWS);
+        return this;
+    }
+
+    public String getExternalSourceInputFieldInfoTextColor(){
+       return externalSourceInputFieldInfoText.getCssValue("color");
+    }
+
+    public String getExternalSourceInputFieldBorderColor(){
+        return externalSourceLinkInputField.getCssValue("border");
+    }
+
+    public boolean isPublishButtonEnabled() {
+        return publishButton.isEnabled();
     }
 
 }
