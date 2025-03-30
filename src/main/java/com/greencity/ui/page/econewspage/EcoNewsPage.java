@@ -13,6 +13,7 @@ public class EcoNewsPage extends BasePage {
 
     protected ToolbarElement toolbarElement;
     protected EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
+    @Getter
     protected NewsCardsContainer newsCardsContainer;
 
     @FindBy(xpath = "//div[@class='create-container']")

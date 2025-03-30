@@ -48,7 +48,7 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
         for (TagButton tag : tagsToSelect) {
             softAssert.assertTrue(createNewsPage.isTagSelected(tag),
                     tag + " tag should be selected after clicking");
-            softAssert.assertEquals(createNewsPage.getTagButtonColor(tag), Colors.TAG_COLOR.warningColor(),
+            softAssert.assertEquals(createNewsPage.getTagButtonColor(tag), Colors.PRIMARY_GREEN,
                     tag + " tag should have green color when selected");
         }
 
@@ -95,17 +95,17 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
 
         softAssert.assertTrue(createNewsPage.isTagSelected(TagButton.NEWS),
                 "News tag should be selected after clicking");
-        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.NEWS), Colors.TAG_COLOR.warningColor(),
+        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.NEWS), Colors.PRIMARY_GREEN,
                 "News tag should have green color when selected");
 
         softAssert.assertTrue(createNewsPage.isTagSelected(TagButton.EVENTS),
                 "Events tag should be selected after clicking");
-        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.EVENTS), Colors.TAG_COLOR.warningColor(),
+        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.EVENTS), Colors.PRIMARY_GREEN,
                 "Events tag should have green color when selected");
 
         softAssert.assertTrue(createNewsPage.isTagSelected(TagButton.EDUCATION),
                 "Education tag should be selected after clicking");
-        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.EDUCATION), Colors.TAG_COLOR.warningColor(),
+        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.EDUCATION), Colors.PRIMARY_GREEN,
                 "Education tag should have green color when selected");
 
         createNewsPage.clickTagFilterButton(TagButton.INITIATIVES);
@@ -113,7 +113,7 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
         softAssert.assertFalse(createNewsPage.isTagSelected(TagButton.INITIATIVES),
                 "Initiatives tag should NOT be selected when trying to select fourth tag");
 
-        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.INITIATIVES), Colors.TAG_COLOR.normalColor(),
+        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.INITIATIVES), Colors.PRIMARY_WHITE,
                 "Education tag should have green color when selected");
 
         softAssert.assertAll();
