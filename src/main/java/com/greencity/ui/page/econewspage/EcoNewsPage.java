@@ -15,8 +15,6 @@ public class EcoNewsPage extends BasePage {
     protected EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
     protected NewsCardsContainer newsCardsContainer;
 
-    public static final String SUCCESSFUL_CREATE_CARD_MESSAGE = "Your news has been successfully published";
-
     @FindBy(xpath = "//div[@class='create-container']")
     private WebElement toolbarRoot;
 

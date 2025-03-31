@@ -27,7 +27,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
                 .clickNewsTagButton()
                 .clickPublishButton();
 
-        assertion.assertEquals(ecoNewsPageWithoutSourceField.getCreateCardMessageText(),ecoNewsPageWithoutSourceField.SUCCESSFUL_CREATE_CARD_MESSAGE,"'Your news has been successfully published' message should be present");
+        assertion.assertEquals(ecoNewsPageWithoutSourceField.getCreateCardMessageText(),"Your news has been successfully published","'Your news has been successfully published' message should be present");
         assertion.assertTrue(ecoNewsPageWithoutSourceField.isExistCardComponentByPartialTitle(titleForFirstTest),"A card should be created without any error");
         assertion.assertAll();
 
@@ -39,7 +39,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
                 .fillContentInput("Creating Card with invalid URL in the source field")
                 .fillSourceInput("example.com");
 
-        assertion.assertTrue(createNewsPage.getExternalSourceInputFieldInfoText().contains(createNewsPage.SOURCE_Field_INFO_MESSAGE), "Info message should be present");
+        assertion.assertTrue(createNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"), "Info message should be present");
         assertion.assertEquals(createNewsPage.getExternalSourceInputFieldInfoTextColor(), Colors.ERROR_RED.getColor(), "A color of info message should be red");
         assertion.assertTrue(createNewsPage.getExternalSourceInputFieldBorderColor().contains(Colors.RED.getColor()), "A border of the 'Source' text field should be red");
         assertion.assertFalse(createNewsPage.isPublishButtonEnabled(), "Publish button should be disabled");
@@ -47,7 +47,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
 
         createNewsPage.fillSourceInput("https://example.com");
 
-        assertion.assertTrue(createNewsPage.getExternalSourceInputFieldInfoText().contains(createNewsPage.SOURCE_Field_INFO_MESSAGE),"Info message should be present");
+        assertion.assertTrue(createNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"),"Info message should be present");
         assertion.assertEquals(createNewsPage.getExternalSourceInputFieldInfoTextColor(), Colors.SECONDARY_GREY.getColor(),"A color of info message should be grey");
         assertion.assertTrue(createNewsPage.getExternalSourceInputFieldBorderColor().contains(Colors.QUINTYNARY_LIGHT_GREY.getColor()),"A border of the 'Source' text field should be grey");
         assertion.assertTrue(createNewsPage.isPublishButtonEnabled(),"Publish button should be enabled");
@@ -55,7 +55,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
 
         EcoNewsPage ecoNewsPageWithSourceField = createNewsPage.clickPublishButton();
 
-        assertion.assertEquals(ecoNewsPageWithSourceField.getCreateCardMessageText(),ecoNewsPageWithSourceField.SUCCESSFUL_CREATE_CARD_MESSAGE,"'Your news has been successfully published' message should be present");
+        assertion.assertEquals(ecoNewsPageWithSourceField.getCreateCardMessageText(),"Your news has been successfully published","'Your news has been successfully published' message should be present");
         assertion.assertTrue(ecoNewsPageWithSourceField.isExistCardComponentByPartialTitle(titleForSecondTest), "A card should be created without any error");
         assertion.assertAll();
     }

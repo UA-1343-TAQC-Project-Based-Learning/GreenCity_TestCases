@@ -22,8 +22,6 @@ public class CreateNewsPage extends BasePage {
     private final ImageUploadComponent imageUploadComponent;
     private final TextContentComponent textContentComponent;
 
-    public static final String SOURCE_Field_INFO_MESSAGE = "Please add the link of original article/news/post. Link must start with http(s)://";
-
     public List<String> tagFilters = new ArrayList<>(List.of("News", "Events", "Education", "Initiatives", "Ads"));
 
     @Getter
