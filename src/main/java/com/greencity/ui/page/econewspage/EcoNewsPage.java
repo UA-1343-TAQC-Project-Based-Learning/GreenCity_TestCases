@@ -60,10 +60,10 @@ public class EcoNewsPage extends BasePage {
         return filterByTitleText.getText();
     }
 
-    public CreateNewsPage clickCreateNewsButton() {
+    public CreateEditNewsPage clickCreateNewsButton() {
         waitUntilElementClickable(createNewsButton);
         createNewsButton.click();
-        return new CreateNewsPage(driver);
+        return new CreateEditNewsPage(driver);
     }
 
     public String getNewsCounterText() {
@@ -77,4 +77,11 @@ public class EcoNewsPage extends BasePage {
     public boolean isExistCardComponentByPartialTitle(String partialTitle){
        return newsCardsContainer.isExistCardComponentByPartialTitle(partialTitle);
     }
+
+    public NewsCardPage goToNewsCardPage(String title){
+        newsCardsContainer.clickComponentByTitle(title);
+        return new  NewsCardPage(driver);
+    }
+
+
 }

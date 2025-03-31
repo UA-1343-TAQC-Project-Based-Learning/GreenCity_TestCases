@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CreateNewsPage extends BasePage {
+public class CreateEditNewsPage extends BasePage {
 
     private final EcoNewsTagFilterComponent ecoNewsTagFilterComponent;
     private final ImageUploadComponent imageUploadComponent;
@@ -98,7 +98,7 @@ public class CreateNewsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(), 'Date') or contains(text(), 'Дата')]/following-sibling::span")
     private WebElement dataLabel;
 
-    public CreateNewsPage(WebDriver driver) {
+    public CreateEditNewsPage(WebDriver driver) {
         super(driver);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, filterTagsRoot);
         imageUploadComponent = new ImageUploadComponent(driver, imageBlockRoot);
@@ -117,7 +117,7 @@ public class CreateNewsPage extends BasePage {
         return titleFieldCharacterCounterWarning.getCssValue("color");
     }
 
-    public CreateNewsPage clickTitleHeaderText() {
+    public CreateEditNewsPage clickTitleHeaderText() {
         titleHeaderText.click();
         return this;
     }
@@ -138,7 +138,7 @@ public class CreateNewsPage extends BasePage {
         return titleFieldCharacterCounter.getText();
     }
 
-    public CreateNewsPage clickTitleInputTextField() {
+    public CreateEditNewsPage clickTitleInputTextField() {
         titleInputTextField.click();
         return this;
     }
@@ -191,12 +191,12 @@ public class CreateNewsPage extends BasePage {
         return titleInputTextField.getAttribute("value");
     }
 
-    public CreateNewsPage clearTitleInputTextField() {
+    public CreateEditNewsPage clearTitleInputTextField() {
         titleInputTextField.clear();
         return this;
     }
 
-    public CreateNewsPage fillTitleInputTextField(String titleText) {
+    public CreateEditNewsPage fillTitleInputTextField(String titleText) {
         clickTitleInputTextField().clearTitleInputTextField().titleInputTextField.sendKeys(titleText);
         return this;
     }
@@ -206,12 +206,12 @@ public class CreateNewsPage extends BasePage {
         return new EcoNewsPage(driver);
     }
 
-    public CreateNewsPage clickTextIntoTextContentField() {
+    public CreateEditNewsPage clickTextIntoTextContentField() {
         textContentComponent.clickContentInputTextField();
         return this;
     }
 
-    public CreateNewsPage enterTextIntoTextContentField(String text) {
+    public CreateEditNewsPage enterTextIntoTextContentField(String text) {
         textContentComponent.fillContentTextAreaField(text);
         return this;
     }
@@ -249,7 +249,7 @@ public class CreateNewsPage extends BasePage {
         return publishButton.isDisplayed();
     }
 
-    public CreateNewsPage clickTagFilterButton(TagButton tagButton) {
+    public CreateEditNewsPage clickTagFilterButton(TagButton tagButton) {
         ecoNewsTagFilterComponent.clickTagButton(tagButton);
         return this;
     }
@@ -323,19 +323,19 @@ public class CreateNewsPage extends BasePage {
         return ecoNewsTagFilterComponent.getTagButtonColor(tag);
     }
 
-    public CreateNewsPage fillContentInput(String content){
+    public CreateEditNewsPage fillContentInput(String content){
         textContentComponent.fillContentTextAreaField(content);
         return this;
     }
 
-    public CreateNewsPage fillSourceInput(String url) {
+    public CreateEditNewsPage fillSourceInput(String url) {
         clearExternalSourceLinkInputField();
         clickExternalSourceLinkInputField();
         fillExternalSourceLinkInputField(url);
         return this;
     }
 
-    public CreateNewsPage clickNewsTagButton(){
+    public CreateEditNewsPage clickNewsTagButton(){
         ecoNewsTagFilterComponent.clickTagButton(TagButton.NEWS);
         return this;
     }

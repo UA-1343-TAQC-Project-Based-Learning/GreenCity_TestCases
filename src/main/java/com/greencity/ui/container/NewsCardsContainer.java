@@ -2,6 +2,7 @@ package com.greencity.ui.container;
 
 import com.greencity.ui.component.cards.NewsCardListViewComponent;
 import com.greencity.ui.component.cards.NewsCardTableViewComponent;
+import com.greencity.ui.page.econewspage.NewsCardPage;
 import lombok.Getter;
 
 import org.openqa.selenium.WebDriver;
@@ -24,10 +25,10 @@ public class NewsCardsContainer extends BaseContainer {
 
     @FindBy(xpath = "//em[@class='fa fa-bars']")
     private WebElement listViewButton;
-
+    @Getter
     @FindBy(xpath = ".//div[@class='list-gallery']")
     private List<WebElement> newsCardTableViewComponentRoots;
-
+    @Getter
     @FindBy(xpath = ".//div[@class='eco-news_list-view-wrp']")
     private List<WebElement> newsCardListViewComponentRoots;
 
@@ -75,6 +76,23 @@ public class NewsCardsContainer extends BaseContainer {
         }
         return isFound;
     }
+
+    public void clickComponentByTitle(String partialTitle) {
+        if (isTableViewButtonActive()) {
+            for (NewsCardTableViewComponent currentCard : newsCardTableViewComponents) {
+                if (currentCard.getTitleLabelText().contains(partialTitle)) {
+                    currentCard.titleLabelClick();
+                }
+            }
+        } else {
+        for (NewsCardListViewComponent currentCard : newsCardListViewComponents) {
+            if (currentCard.getTitleLabelText().contains(partialTitle)) {
+                currentCard.titleLabelClick();
+            }
+        }
+    }
+}
+
 
     public NewsCardsContainer clickTableViewButton() {
         waitUntilElementClickable(tableViewButton);

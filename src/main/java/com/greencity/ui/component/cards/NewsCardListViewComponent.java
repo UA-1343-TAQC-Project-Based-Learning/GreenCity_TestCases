@@ -2,12 +2,11 @@ package com.greencity.ui.component.cards;
 
 
 import com.greencity.ui.component.BaseComponent;
+import com.greencity.ui.page.econewspage.NewsCardPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import com.greencity.ui.page.newscardpage.NewsCardPage;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,13 +102,15 @@ public class NewsCardListViewComponent extends BaseComponent {
         return moreButton.getText();
     }
 
-    public void moreButtonClick() {
+    public NewsCardPage moreButtonClick() {
         waitUntilElementClickable(moreButton);
         moreButton.click();
+        return new NewsCardPage(driver);
     }
 
-    public NewsCardPage openNewsCardPage() {
-        moreButtonClick();
+    public NewsCardPage titleLabelClick() {
+        waitUntilElementClickable(titleLabel);
+        titleLabel.click();
         return new NewsCardPage(driver);
     }
 }
