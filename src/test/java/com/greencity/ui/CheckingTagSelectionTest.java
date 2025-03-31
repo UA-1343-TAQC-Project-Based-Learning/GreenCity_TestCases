@@ -21,14 +21,14 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
     @DataProvider(name = "tagSelectionProvider")
     public Iterator<Object[]> tagSelectionProvider() {
         return Stream.of(
-                new Object[]{1, new TagButton[]{TagButton.NEWS}},
-                new Object[]{2, new TagButton[]{TagButton.NEWS, TagButton.EVENTS}},
-                new Object[]{3, new TagButton[]{TagButton.NEWS, TagButton.EVENTS, TagButton.EDUCATION}}
+                new Object[]{new TagButton[]{TagButton.NEWS}},
+                new Object[]{new TagButton[]{TagButton.NEWS, TagButton.EVENTS}},
+                new Object[]{ new TagButton[]{TagButton.NEWS, TagButton.EVENTS, TagButton.EDUCATION}}
         ).iterator();
     }
 
     @Test(dataProvider = "tagSelectionProvider")
-    public void verifyTagSelection(int testNumber, TagButton[] tagsToSelect) {
+    public void verifyTagSelection(TagButton[] tagsToSelect) {
         String newsTitle = "TestNews_" + UUID.randomUUID();
         String newsContent = "Content_" + UUID.randomUUID();
 
