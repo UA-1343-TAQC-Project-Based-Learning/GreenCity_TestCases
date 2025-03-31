@@ -2,7 +2,7 @@ package com.greencity.ui.component.cards;
 
 
 import com.greencity.ui.component.BaseComponent;
-import com.greencity.ui.page.newscardpage.NewsCardPage;
+import com.greencity.ui.page.econewspage.NewsCardPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -74,7 +74,6 @@ public class NewsCardTableViewComponent extends BaseComponent {
         return filtersTagNames;
     }
 
-
     public String getContentLabelText() {
         return contentLabel.getText();
     }
@@ -105,9 +104,10 @@ public class NewsCardTableViewComponent extends BaseComponent {
         return !image.getCssValue(CSS_PROPERTY_DISPLAY).equals("none");
     }
 
-    private void titleLabelClick() {
+    public NewsCardPage titleLabelClick() {
         waitUntilElementClickable(titleLabel);
         titleLabel.click();
+        return new NewsCardPage(driver);
     }
 
     public String getCommentsLabelText() {
@@ -118,9 +118,5 @@ public class NewsCardTableViewComponent extends BaseComponent {
         return likesLabel.getText();
     }
 
-    public NewsCardPage openNewsCardPage() {
-        titleLabelClick();
-        return new NewsCardPage(driver);
-    }
 }
 

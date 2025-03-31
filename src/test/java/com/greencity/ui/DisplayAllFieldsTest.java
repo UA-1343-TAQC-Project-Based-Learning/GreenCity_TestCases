@@ -1,14 +1,11 @@
 package com.greencity.ui;
 
-import com.greencity.ui.page.econewspage.CreateNewsPage;
+import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class DisplayAllFieldsTest extends BaseTestRunner {
@@ -22,7 +19,7 @@ public class DisplayAllFieldsTest extends BaseTestRunner {
 //                .clickCreateNewsButton();
 
 
-        CreateNewsPage newsPage = homePage.gotoEcoNewsPage().clickCreateNewsButton();
+        CreateEditNewsPage newsPage = homePage.gotoEcoNewsPage().clickCreateNewsButton();
 
         SoftAssert assertion = new SoftAssert();
 
@@ -59,7 +56,7 @@ public class DisplayAllFieldsTest extends BaseTestRunner {
 //                .clickCreateNewsButton();
 
 
-        CreateNewsPage newsPage = homePage.gotoEcoNewsPage().clickCreateNewsButton();
+        CreateEditNewsPage newsPage = homePage.gotoEcoNewsPage().clickCreateNewsButton();
 
         SoftAssert assertion = new SoftAssert();
         assertion.assertTrue(newsPage.isElementsOrderCorrect(newsPage.getTitleInputTextField(),newsPage.getFilterTagsRoot()),"Incorrect order between titleInputTextField and filterTagsRoot");

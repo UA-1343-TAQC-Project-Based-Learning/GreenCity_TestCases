@@ -3,10 +3,9 @@ package com.greencity.ui;
 import com.greencity.ui.component.cards.NewsCardTableViewComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.data.Colors;
-import com.greencity.ui.page.econewspage.CreateNewsPage;
+import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -32,7 +31,7 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
         String newsTitle = "TestNews_" + UUID.randomUUID();
         String newsContent = "Content_" + UUID.randomUUID();
 
-        CreateNewsPage createNewsPage = homePage
+        CreateEditNewsPage createEditNewsPage = homePage
                 .gotoEcoNewsPage()
                 .clickCreateNewsButton()
                 .clickTitleInputTextField()
@@ -40,22 +39,22 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
                 .enterTextIntoTextContentField(newsContent);
 
         for (TagButton tag : tagsToSelect) {
-            createNewsPage.clickTagFilterButton(tag);
+            createEditNewsPage.clickTagFilterButton(tag);
         }
 
         SoftAssert softAssert = new SoftAssert();
 
         for (TagButton tag : tagsToSelect) {
-            softAssert.assertTrue(createNewsPage.isTagSelected(tag),
+            softAssert.assertTrue(createEditNewsPage.isTagSelected(tag),
                     tag + " tag should be selected after clicking");
-            softAssert.assertEquals(createNewsPage.getTagButtonColor(tag), Colors.PRIMARY_GREEN,
+            softAssert.assertEquals(createEditNewsPage.getTagButtonColor(tag), Colors.PRIMARY_GREEN,
                     tag + " tag should have green color when selected");
         }
 
-        softAssert.assertTrue(createNewsPage.getPublishButton().isEnabled(),
+        softAssert.assertTrue(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be enabled when all required fields are filled out");
 
-        EcoNewsPage ecoNewsPage = createNewsPage.clickPublishButton();
+        EcoNewsPage ecoNewsPage = createEditNewsPage.clickPublishButton();
 
         softAssert.assertFalse(ecoNewsPage.getNewsCardsContainer().getNewsCardTableViewComponents().isEmpty(),
                 "No news cards found after publishing");
@@ -81,7 +80,7 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
         String newsTitle = "TestNews_" + UUID.randomUUID();
         String newsContent = "Content_" + UUID.randomUUID();
 
-        CreateNewsPage createNewsPage = homePage
+        CreateEditNewsPage createEditNewsPage = homePage
                 .gotoEcoNewsPage()
                 .clickCreateNewsButton()
                 .clickTitleInputTextField()
@@ -93,27 +92,27 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
 
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertTrue(createNewsPage.isTagSelected(TagButton.NEWS),
+        softAssert.assertTrue(createEditNewsPage.isTagSelected(TagButton.NEWS),
                 "The tag should be selected after clicking");
-        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.NEWS), Colors.PRIMARY_GREEN,
+        softAssert.assertEquals(createEditNewsPage.getTagButtonColor(TagButton.NEWS), Colors.PRIMARY_GREEN,
                 "The tag should have green color when selected");
 
-        softAssert.assertTrue(createNewsPage.isTagSelected(TagButton.EVENTS),
+        softAssert.assertTrue(createEditNewsPage.isTagSelected(TagButton.EVENTS),
                 "The tag should be selected after clicking");
-        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.EVENTS), Colors.PRIMARY_GREEN,
+        softAssert.assertEquals(createEditNewsPage.getTagButtonColor(TagButton.EVENTS), Colors.PRIMARY_GREEN,
                 "The tag should have green color when selected");
 
-        softAssert.assertTrue(createNewsPage.isTagSelected(TagButton.EDUCATION),
+        softAssert.assertTrue(createEditNewsPage.isTagSelected(TagButton.EDUCATION),
                 "The tag should be selected after clicking");
-        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.EDUCATION), Colors.PRIMARY_GREEN,
+        softAssert.assertEquals(createEditNewsPage.getTagButtonColor(TagButton.EDUCATION), Colors.PRIMARY_GREEN,
                 "The tag should have green color when selected");
 
-        createNewsPage.clickTagFilterButton(TagButton.INITIATIVES);
+        createEditNewsPage.clickTagFilterButton(TagButton.INITIATIVES);
 
-        softAssert.assertFalse(createNewsPage.isTagSelected(TagButton.INITIATIVES),
+        softAssert.assertFalse(createEditNewsPage.isTagSelected(TagButton.INITIATIVES),
                 "The tag should NOT be selected when trying to select fourth tag");
 
-        softAssert.assertEquals(createNewsPage.getTagButtonColor(TagButton.INITIATIVES), Colors.PRIMARY_WHITE,
+        softAssert.assertEquals(createEditNewsPage.getTagButtonColor(TagButton.INITIATIVES), Colors.PRIMARY_WHITE,
                 "The tag should have white color when not selected");
 
         softAssert.assertAll();
