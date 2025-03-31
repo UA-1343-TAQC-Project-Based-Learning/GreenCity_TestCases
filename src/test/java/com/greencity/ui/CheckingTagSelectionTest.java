@@ -23,7 +23,7 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
         return Stream.of(
                 new Object[]{new TagButton[]{TagButton.NEWS}},
                 new Object[]{new TagButton[]{TagButton.NEWS, TagButton.EVENTS}},
-                new Object[]{ new TagButton[]{TagButton.NEWS, TagButton.EVENTS, TagButton.EDUCATION}}
+                new Object[]{new TagButton[]{TagButton.NEWS, TagButton.EVENTS, TagButton.EDUCATION}}
         ).iterator();
     }
 
