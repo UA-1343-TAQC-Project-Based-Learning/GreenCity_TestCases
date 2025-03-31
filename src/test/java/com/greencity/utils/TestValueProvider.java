@@ -30,7 +30,9 @@ public class TestValueProvider {
         return properties != null ? Integer.parseInt(properties.getProperty("implicitlyWait")) : Integer.parseInt(System.getenv("IMPLICITLY_WAIT"));
     }
 
-
+    public String getUserProfilePath() {
+        return properties != null ? properties.getProperty("user.profile.path") : System.getenv("USER_PROFILE_PATH");
+    }
     public String getUserEmail() {
         return properties != null ? properties.getProperty("user.email") : System.getenv("USER_EMAIL");
     }
