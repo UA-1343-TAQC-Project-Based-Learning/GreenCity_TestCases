@@ -5,7 +5,6 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +70,7 @@ public class NewsCardPage extends BasePage {
     public CreateEditNewsPage clickEditButton() {
         waitUntilElementClickable(editButton);
         editButton.click();
-        return new CreateEditNewsPage(driver) ;
+        return new CreateEditNewsPage(driver);
     }
 
 }

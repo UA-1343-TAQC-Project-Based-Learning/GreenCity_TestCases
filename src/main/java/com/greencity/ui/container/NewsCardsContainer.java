@@ -82,12 +82,14 @@ public class NewsCardsContainer extends BaseContainer {
             for (NewsCardTableViewComponent currentCard : newsCardTableViewComponents) {
                 if (currentCard.getTitleLabelText().contains(partialTitle)) {
                     currentCard.titleLabelClick();
+                    break;
                 }
             }
         } else {
         for (NewsCardListViewComponent currentCard : newsCardListViewComponents) {
             if (currentCard.getTitleLabelText().contains(partialTitle)) {
                 currentCard.titleLabelClick();
+                break;
             }
         }
     }
