@@ -1,12 +1,9 @@
 package com.greencity.ui;
 
-import com.greencity.ui.page.econewspage.CreateNewsPage;
-import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 
 public class BaseTest extends BaseTestRunner {

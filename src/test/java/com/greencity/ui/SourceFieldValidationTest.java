@@ -1,12 +1,10 @@
 package com.greencity.ui;
 
 import com.greencity.ui.data.Colors;
-import com.greencity.ui.page.econewspage.CreateNewsPage;
+import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
+import com.greencity.ui.page.econewspage.NewsCardPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import io.restassured.internal.common.assertion.Assertion;
-import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -31,29 +29,33 @@ public class SourceFieldValidationTest extends BaseTestRunner {
         assertion.assertTrue(ecoNewsPageWithoutSourceField.isExistCardComponentByPartialTitle(titleForFirstTest),"A card should be created without any error");
         assertion.assertAll();
 
+                NewsCardPage newsCardPage = ecoNewsPageWithoutSourceField.goToNewsCardPage(titleForFirstTest);
+        newsCardPage.getTitleLabelText();
+
+
         String titleForSecondTest = "TestTitle-" + UUID.randomUUID();
 
-        CreateNewsPage createNewsPage = homePage.gotoEcoNewsPage().
+        CreateEditNewsPage createEditNewsPage = homePage.gotoEcoNewsPage().
                 clickCreateNewsButton()
                 .fillTitleInputTextField(titleForSecondTest)
                 .fillContentInput("Creating Card with invalid URL in the source field")
                 .fillSourceInput("example.com");
 
-        assertion.assertTrue(createNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"), "Info message should be present");
-        assertion.assertEquals(createNewsPage.getExternalSourceInputFieldInfoTextColor(), Colors.ERROR_RED.getColor(), "A color of info message should be red");
-        assertion.assertTrue(createNewsPage.getExternalSourceInputFieldBorderColor().contains(Colors.RED.getColor()), "A border of the 'Source' text field should be red");
-        assertion.assertFalse(createNewsPage.isPublishButtonEnabled(), "Publish button should be disabled");
+        assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"), "Info message should be present");
+        assertion.assertEquals(createEditNewsPage.getExternalSourceInputFieldInfoTextColor(), Colors.ERROR_RED.getColor(), "A color of info message should be red");
+        assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldBorderColor().contains(Colors.RED.getColor()), "A border of the 'Source' text field should be red");
+        assertion.assertFalse(createEditNewsPage.isPublishButtonEnabled(), "Publish button should be disabled");
         assertion.assertAll();
 
-        createNewsPage.fillSourceInput("https://example.com");
+        createEditNewsPage.fillSourceInput("https://example.com");
 
-        assertion.assertTrue(createNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"),"Info message should be present");
-        assertion.assertEquals(createNewsPage.getExternalSourceInputFieldInfoTextColor(), Colors.SECONDARY_GREY.getColor(),"A color of info message should be grey");
-        assertion.assertTrue(createNewsPage.getExternalSourceInputFieldBorderColor().contains(Colors.QUINTYNARY_LIGHT_GREY.getColor()),"A border of the 'Source' text field should be grey");
-        assertion.assertTrue(createNewsPage.isPublishButtonEnabled(),"Publish button should be enabled");
+        assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"),"Info message should be present");
+        assertion.assertEquals(createEditNewsPage.getExternalSourceInputFieldInfoTextColor(), Colors.SECONDARY_GREY.getColor(),"A color of info message should be grey");
+        assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldBorderColor().contains(Colors.QUINTYNARY_LIGHT_GREY.getColor()),"A border of the 'Source' text field should be grey");
+        assertion.assertTrue(createEditNewsPage.isPublishButtonEnabled(),"Publish button should be enabled");
         assertion.assertAll();
 
-        EcoNewsPage ecoNewsPageWithSourceField = createNewsPage.clickPublishButton();
+        EcoNewsPage ecoNewsPageWithSourceField = createEditNewsPage.clickPublishButton();
 
         assertion.assertEquals(ecoNewsPageWithSourceField.getCreateCardMessageText(),"Your news has been successfully published","'Your news has been successfully published' message should be present");
         assertion.assertTrue(ecoNewsPageWithSourceField.isExistCardComponentByPartialTitle(titleForSecondTest), "A card should be created without any error");
