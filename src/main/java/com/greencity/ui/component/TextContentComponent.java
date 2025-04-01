@@ -17,7 +17,7 @@ public class TextContentComponent extends BaseComponent {
     private WebElement content;
 
     @Getter
-    @FindBy(xpath = ".//div[@class='ql-editor ql-blank']")
+    @FindBy(xpath = ".//div[contains(@class,'ql-editor')]")
     private WebElement textAreaField;
     @Getter
     @FindBy(xpath = ".//p[@class = 'field-info']")
