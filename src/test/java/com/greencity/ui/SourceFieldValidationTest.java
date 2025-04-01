@@ -29,10 +29,6 @@ public class SourceFieldValidationTest extends BaseTestRunner {
         assertion.assertTrue(ecoNewsPageWithoutSourceField.isExistCardComponentByPartialTitle(titleForFirstTest),"A card should be created without any error");
         assertion.assertAll();
 
-                NewsCardPage newsCardPage = ecoNewsPageWithoutSourceField.goToNewsCardPage(titleForFirstTest);
-        newsCardPage.getTitleLabelText();
-
-
         String titleForSecondTest = "TestTitle-" + UUID.randomUUID();
 
         CreateEditNewsPage createEditNewsPage = homePage.gotoEcoNewsPage().
