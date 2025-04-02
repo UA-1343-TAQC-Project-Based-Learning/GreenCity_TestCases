@@ -3,6 +3,7 @@ package com.greencity.ui.component.cards;
 
 import com.greencity.ui.component.BaseComponent;
 import com.greencity.ui.page.econewspage.NewsCardPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -86,6 +87,7 @@ public class NewsCardTableViewComponent extends BaseComponent {
         return usernameLabel.getText();
     }
 
+    @Step("Click the 'Favourite' button")
     public NewsCardTableViewComponent favouriteButtonClick() {
         waitUntilElementClickable(favouriteButton);
         favouriteButton.click();
@@ -104,6 +106,7 @@ public class NewsCardTableViewComponent extends BaseComponent {
         return !image.getCssValue(CSS_PROPERTY_DISPLAY).equals("none");
     }
 
+    @Step("Click the Title")
     public NewsCardPage titleLabelClick() {
         waitUntilElementClickable(titleLabel);
         titleLabel.click();
