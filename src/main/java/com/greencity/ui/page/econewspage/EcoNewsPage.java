@@ -9,6 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class EcoNewsPage extends BasePage {
 
     protected ToolbarElement toolbarElement;
@@ -83,5 +87,13 @@ public class EcoNewsPage extends BasePage {
         return new  NewsCardPage(driver);
     }
 
+    public String getFirstCardTitle(){
+        return newsCardsContainer.getCardComponentTitles().getFirst();
+    }
+
+    public LocalDate getDataLabelFormating(Locale locale) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", locale);
+        return LocalDate.parse(newsCardsContainer.getCardComponentDatesOfCreation().getFirst(), formatter);
+    }
 
 }
