@@ -27,7 +27,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
 
         assertion.assertEquals(ecoNewsPageWithoutSourceField.getCreateCardMessageText(),"Your news has been successfully published","'Your news has been successfully published' message should be present");
         assertion.assertTrue(ecoNewsPageWithoutSourceField.isExistCardComponentByPartialTitle(titleForFirstTest),"A card should be created without any error");
-        assertion.assertAll();
+
 
         String titleForSecondTest = "TestTitle-" + UUID.randomUUID();
 
@@ -41,7 +41,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
         assertion.assertEquals(createEditNewsPage.getExternalSourceInputFieldInfoTextColor(), Colors.ERROR_RED.getColor(), "A color of info message should be red");
         assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldBorderColor().contains(Colors.RED.getColor()), "A border of the 'Source' text field should be red");
         assertion.assertFalse(createEditNewsPage.isPublishButtonEnabled(), "Publish button should be disabled");
-        assertion.assertAll();
+
 
         createEditNewsPage.fillSourceInput("https://example.com");
 
@@ -49,7 +49,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
         assertion.assertEquals(createEditNewsPage.getExternalSourceInputFieldInfoTextColor(), Colors.SECONDARY_GREY.getColor(),"A color of info message should be grey");
         assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldBorderColor().contains(Colors.QUINTYNARY_LIGHT_GREY.getColor()),"A border of the 'Source' text field should be grey");
         assertion.assertTrue(createEditNewsPage.isPublishButtonEnabled(),"Publish button should be enabled");
-        assertion.assertAll();
+
 
         EcoNewsPage ecoNewsPageWithSourceField = createEditNewsPage.clickPublishButton();
 

@@ -66,6 +66,20 @@ public class NewsCardsContainer extends BaseContainer {
         return cardComponentNames;
     }
 
+    public List<String> getCardComponentDatesOfCreation() {
+        List<String> cardComponentDates = new ArrayList<>();
+        if (isTableViewButtonActive()) {
+            for (NewsCardTableViewComponent current : getNewsCardTableViewComponents()) {
+                cardComponentDates.add(current.getDateOfCreationLabelText());
+            }
+        } else {
+            for (NewsCardListViewComponent current : getNewsCardListViewComponents()) {
+                cardComponentDates.add(current.getDateOfCreationLabelText());
+            }
+        }
+        return cardComponentDates;
+    }
+
     public boolean isExistCardComponentByPartialTitle(String partialTitle) {
         boolean isFound = false;
         for (String current : getCardComponentTitles()) {
