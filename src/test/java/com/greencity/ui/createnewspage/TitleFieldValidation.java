@@ -28,7 +28,7 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
                 .clickTitleInputTextField()
                 .clickTitleHeaderText();
         logger.info("The actual border color is: {}", createEditNewsPage.getTitleInputFieldBorderColor());
-        softAssert.assertTrue(createEditNewsPage.getTitleInputFieldBorderColor().equals(Colors.RED),
+        softAssert.assertTrue(createEditNewsPage.getTitleInputFieldBorderColor().equals(Colors.RED.getColor()),
                 "The border color should be red when the Title field is empty");
         softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
@@ -37,7 +37,7 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
 
         createEditNewsPage.fillTitleInputTextField(titleCharacterProvider(171));
         logger.info("The actual counter text color is: {}", createEditNewsPage.getTitleFieldCharacterCounterWarningTextColor());
-        softAssert.assertTrue(createEditNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.ERROR_RED),
+        softAssert.assertTrue(createEditNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.ERROR_RED.getColor()),
                 "The counter text color should be red when the Title field exceeding the limit");
         logger.info("The actual text value of Title text field is: {}", createEditNewsPage.getTitleInputTextFieldValue().length());
         softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 170,
@@ -48,7 +48,7 @@ public class TitleFieldValidation extends CreateNewsPageSteps {
         softAssert.assertTrue(createEditNewsPage.getTitleFieldCharacterCounterText().equals("9/170"),
                 "The counter should displays '9/170'");
         logger.info("The actual border color is: {}", createEditNewsPage.getTitleInputFieldBorderColor());
-        softAssert.assertTrue(createEditNewsPage.getTitleInputFieldBorderColor().equals(Colors.QUINTYNARY_LIGHT_GREY),
+        softAssert.assertTrue(createEditNewsPage.getTitleInputFieldBorderColor().equals(Colors.QUINTYNARY_LIGHT_GREY.getColor()),
                 "The border color should be grey and " + Colors.QUINTYNARY_LIGHT_GREY);
 
         createEditNewsPage.clickTagFilterButton(TagButton.NEWS);
