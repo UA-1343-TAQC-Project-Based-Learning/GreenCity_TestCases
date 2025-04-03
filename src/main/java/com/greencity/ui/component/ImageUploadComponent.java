@@ -1,5 +1,6 @@
 package com.greencity.ui.component;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,11 +44,13 @@ public class ImageUploadComponent extends BaseComponent{
         return titleText.getText();
     }
 
+    @Step("Click Cancel Button")
     public void clickCancelButton() {
         waitUntilElementClickable(cancelButton);
         cancelButton.click();
     }
 
+    @Step("Click Submit Button")
     public void clickSubmitButton() {
         waitUntilElementClickable(submitButton);
         submitButton.click();
@@ -64,6 +67,7 @@ public class ImageUploadComponent extends BaseComponent{
     }
 
 
+    @Step("Upload Image with path: {imagePath}")
     public void uploadImage(String imagePath) {
             waitUntilElementClickable(imageUploadLink);
             imageUploadLink.sendKeys(imagePath);

@@ -3,6 +3,7 @@ package com.greencity.ui.container;
 import com.greencity.ui.component.cards.NewsCardListViewComponent;
 import com.greencity.ui.component.cards.NewsCardTableViewComponent;
 import com.greencity.ui.page.econewspage.NewsCardPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 
 import org.openqa.selenium.WebDriver;
@@ -38,6 +39,7 @@ public class NewsCardsContainer extends BaseContainer {
         initElements();
     }
 
+    @Step("Init elements of NewsCardsContainer")
     private void initElements() {
         if (isTableViewButtonActive()) {
             newsCardTableViewComponents = new ArrayList<>();
@@ -80,6 +82,7 @@ public class NewsCardsContainer extends BaseContainer {
         return cardComponentDates;
     }
 
+    @Step("Check if CardComponent by partial title [{partialTitle}] exists")
     public boolean isExistCardComponentByPartialTitle(String partialTitle) {
         boolean isFound = false;
         for (String current : getCardComponentTitles()) {
@@ -91,6 +94,7 @@ public class NewsCardsContainer extends BaseContainer {
         return isFound;
     }
 
+    @Step("Click component by title: {partialTitle}")
     public void clickComponentByTitle(String partialTitle) {
         if (isTableViewButtonActive()) {
             for (NewsCardTableViewComponent currentCard : newsCardTableViewComponents) {
@@ -100,30 +104,34 @@ public class NewsCardsContainer extends BaseContainer {
                 }
             }
         } else {
-        for (NewsCardListViewComponent currentCard : newsCardListViewComponents) {
-            if (currentCard.getTitleLabelText().contains(partialTitle)) {
-                currentCard.titleLabelClick();
-                break;
+            for (NewsCardListViewComponent currentCard : newsCardListViewComponents) {
+                if (currentCard.getTitleLabelText().contains(partialTitle)) {
+                        currentCard.titleLabelClick();
+                        break;
+                }
             }
         }
     }
-}
 
 
+    @Step("Click table view button")
     public NewsCardsContainer clickTableViewButton() {
         waitUntilElementClickable(tableViewButton);
         tableViewButton.click();
         return new NewsCardsContainer(driver, rootElement);
     }
 
+    @Step("Check if table view button is active")
     public boolean isTableViewButtonActive() {
         return tableViewButton.isEnabled();
     }
 
+    @Step("Check if list view button is active")
     public boolean isListViewButtonActive() {
         return listViewButton.isEnabled();
     }
 
+    @Step("Click list view button")
     public NewsCardsContainer clickListViewButton() {
         waitUntilElementClickable(listViewButton);
         listViewButton.click();
