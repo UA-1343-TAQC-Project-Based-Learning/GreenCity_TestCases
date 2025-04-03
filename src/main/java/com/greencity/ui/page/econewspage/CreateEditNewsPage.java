@@ -352,4 +352,8 @@ public class CreateEditNewsPage extends BasePage {
         return publishButton.isEnabled();
     }
 
+    public ImageUploadComponent switchToImageUploadComponent() {
+        return imageUploadComponent;
+    }
+
 }
