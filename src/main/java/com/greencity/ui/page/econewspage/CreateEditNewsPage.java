@@ -4,10 +4,13 @@ import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.component.TextContentComponent;
 import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
+import com.greencity.ui.modal.CancelModal;
 import com.greencity.ui.page.BasePage;
 import lombok.Getter;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.time.LocalDate;
@@ -102,6 +105,10 @@ public class CreateEditNewsPage extends BasePage {
     @FindBy(xpath = "//button[@class='primary-global-button']")
     private WebElement editButton;
 
+    @Getter
+    @FindBy(xpath = "//mat-dialog-container")
+    private WebElement cancelModalRoot;
+
     public CreateEditNewsPage(WebDriver driver) {
         super(driver);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, filterTagsRoot);
@@ -147,6 +154,21 @@ public class CreateEditNewsPage extends BasePage {
         return this;
     }
 
+    public void actionClearTitleInputTextField() {
+        Actions actions = new Actions(driver);
+        actions.click(titleInputTextField)
+                .keyDown(Keys.CONTROL)
+                .sendKeys("a")
+                .keyUp(Keys.CONTROL)
+                .sendKeys(Keys.BACK_SPACE)
+                .perform();
+    }
+
+    public CreateEditNewsPage clearTitleInputTextField() {
+        actionClearTitleInputTextField();
+        return this;
+    }
+
     public String getTitleInputTextFieldPlaceholderText() {
         return titleInputTextField.getDomAttribute("placeholder");
     }
@@ -183,8 +205,9 @@ public class CreateEditNewsPage extends BasePage {
         return externalSourceLinkInputField.getDomAttribute("placeholder");
     }
 
-    public void clickExitButton() {
+    public CancelModal clickExitButton() {
         exitButton.click();
+        return  new CancelModal(driver, cancelModalRoot);
     }
 
     public void clickPreviewButton() {
@@ -195,10 +218,7 @@ public class CreateEditNewsPage extends BasePage {
         return titleInputTextField.getAttribute("value");
     }
 
-    public CreateEditNewsPage clearTitleInputTextField() {
-        titleInputTextField.clear();
-        return this;
-    }
+
 
     public CreateEditNewsPage fillTitleInputTextField(String titleText) {
         clickTitleInputTextField().clearTitleInputTextField().titleInputTextField.sendKeys(titleText);
@@ -223,11 +243,6 @@ public class CreateEditNewsPage extends BasePage {
     public String getTitleInputFieldBorderColor() {
         return titleInputTextField.getCssValue("border-color");
     }
-
-    public String getTitleFieldBorderColor() {
-        return titleInputTextField.getCssValue("border");
-    }
-
 
     public boolean isPresentContentInputTextField() {
         return textAreaRoot.isDisplayed();

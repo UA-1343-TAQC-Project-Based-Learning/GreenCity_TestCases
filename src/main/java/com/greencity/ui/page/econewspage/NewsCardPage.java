@@ -1,6 +1,8 @@
 package com.greencity.ui.page.econewspage;
 
+import com.greencity.ui.modal.DeleteModal;
 import com.greencity.ui.page.BasePage;
+import io.cucumber.java.an.E;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsCardPage extends BasePage {
+
+    @Getter
+    @FindBy(xpath = "//a[@class= 'button-link']")
+    private WebElement backButton;
+
+    @Getter
+    @FindBy(xpath = "//button[@class= 'secondary-global-button delete-news-button']")
+    private WebElement deleteButton;
 
     @Getter
     @FindBy(xpath = "//div[@class='edit-news']/..")
@@ -33,6 +43,10 @@ public class NewsCardPage extends BasePage {
     @Getter
     @FindBy(xpath = "//div[@class='news-info-author']")
     private WebElement usernameLabel;
+
+    @Getter
+    @FindBy(xpath = "//mat-dialog-container")
+    private WebElement deleteModalRoot;
 
     public NewsCardPage(WebDriver driver) {
         super(driver);
@@ -71,6 +85,27 @@ public class NewsCardPage extends BasePage {
         waitUntilElementClickable(editButton);
         editButton.click();
         return new CreateEditNewsPage(driver);
+    }
+
+    public String getBackButtonText() {
+        return backButton.getText();
+    }
+
+    public EcoNewsPage clickBackButton() {
+        waitUntilElementClickable(backButton);
+        backButton.click();
+        return new EcoNewsPage(driver);
+    }
+
+
+    public String getDeleteButtonText() {
+        return deleteButton.getText();
+    }
+
+    public DeleteModal clickDeleteButton() {
+        waitUntilElementClickable(deleteButton);
+        deleteButton.click();
+        return new DeleteModal(driver, deleteModalRoot);
     }
 
 }
