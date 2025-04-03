@@ -98,6 +98,10 @@ public class CreateEditNewsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(), 'Date') or contains(text(), 'Дата')]/following-sibling::span")
     private WebElement dataLabel;
 
+    @Getter
+    @FindBy(xpath = "//button[@class='primary-global-button']")
+    private WebElement editButton;
+
     public CreateEditNewsPage(WebDriver driver) {
         super(driver);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, filterTagsRoot);
@@ -218,6 +222,10 @@ public class CreateEditNewsPage extends BasePage {
 
     public String getTitleInputFieldBorderColor() {
         return titleInputTextField.getCssValue("border-color");
+    }
+
+    public String getTitleFieldBorderColor() {
+        return titleInputTextField.getCssValue("border");
     }
 
 
@@ -350,6 +358,18 @@ public class CreateEditNewsPage extends BasePage {
 
     public boolean isPublishButtonEnabled() {
         return publishButton.isEnabled();
+    }
+
+    public String getEditButtonText() {
+        return editButton.getText();
+    }
+    public EcoNewsPage clickEditButton() {
+        publishButton.click();
+        return new EcoNewsPage(driver);
+    }
+
+    public boolean isEditButtonEnabled() {
+        return editButton.isEnabled();
     }
 
 }
