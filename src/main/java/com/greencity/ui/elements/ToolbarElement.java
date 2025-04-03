@@ -1,5 +1,6 @@
 package com.greencity.ui.elements;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,16 +27,19 @@ public class ToolbarElement extends BaseElement {
     }
 
 
+    @Step("Click search button")
     public void clickSearchButton() {
         waitUntilElementClickable(searchButton);
         searchButton.click();
     }
 
+    @Step("Click bookmark button")
     public void clickBookmarkButton() {
         waitUntilElementClickable(bookmarkButton);
         bookmarkButton.click();
     }
 
+    @Step("Click calendar button")
     public void clickCalendarButton() {
         waitUntilElementClickable(calendarButton);
         calendarButton.click();
