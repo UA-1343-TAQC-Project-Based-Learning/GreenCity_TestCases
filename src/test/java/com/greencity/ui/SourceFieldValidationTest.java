@@ -1,12 +1,9 @@
 package com.greencity.ui;
 
 import com.greencity.ui.data.Colors;
-import com.greencity.ui.page.econewspage.CreateNewsPage;
+import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import io.restassured.internal.common.assertion.Assertion;
-import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -33,7 +30,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
 
         String titleForSecondTest = "TestTitle-" + UUID.randomUUID();
 
-        CreateNewsPage createNewsPage = homePage.gotoEcoNewsPage().
+        CreateEditNewsPage createNewsPage = homePage.gotoEcoNewsPage().
                 clickCreateNewsButton()
                 .fillTitleInputTextField(titleForSecondTest)
                 .fillContentInput("Creating Card with invalid URL in the source field")

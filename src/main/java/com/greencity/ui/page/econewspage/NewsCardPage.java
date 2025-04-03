@@ -68,7 +68,7 @@ public class NewsCardPage extends BasePage {
     }
 
 
-    public CreateEditNewsPage clickEditButton() {
+    public CreateEditNewsPage clickEditButton()  {
         waitUntilElementClickable(editButton);
         editButton.click();
         return new CreateEditNewsPage(driver) ;

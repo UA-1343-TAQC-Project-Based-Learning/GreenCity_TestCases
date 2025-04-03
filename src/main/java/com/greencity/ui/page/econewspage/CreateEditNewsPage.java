@@ -190,7 +190,9 @@ public class CreateEditNewsPage extends BasePage {
     public String getTitleInputTextFieldValue() {
         return titleInputTextField.getAttribute("value");
     }
-
+    public String getContentInputFieldText() {
+        return textContentComponent.getContentInputTextFieldText();
+    }
     public CreateEditNewsPage clearTitleInputTextField() {
         titleInputTextField.clear();
         return this;
@@ -240,13 +242,23 @@ public class CreateEditNewsPage extends BasePage {
     public boolean isCancelButtonPresent() {
         return exitButton.isDisplayed();
     }
+    public boolean isCancelButtonEnabled() {
+        return exitButton.isEnabled();
+    }
 
     public boolean isPreviewButtonPresent() {
         return previewButton.isDisplayed();
     }
 
+    public boolean isPreviewButtonEnabled() {
+        return previewButton.isEnabled();
+    }
+
     public boolean isPublishButtonPresent() {
         return publishButton.isDisplayed();
+    }
+    public boolean isPublishButtonEnabled() {
+        return publishButton.isEnabled();
     }
 
     public CreateEditNewsPage clickTagFilterButton(TagButton tagButton) {
@@ -348,8 +360,6 @@ public class CreateEditNewsPage extends BasePage {
         return externalSourceLinkInputField.getCssValue("border");
     }
 
-    public boolean isPublishButtonEnabled() {
-        return publishButton.isEnabled();
-    }
+
 
 }

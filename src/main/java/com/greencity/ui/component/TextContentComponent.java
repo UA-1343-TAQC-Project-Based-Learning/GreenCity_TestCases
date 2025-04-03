@@ -12,6 +12,7 @@ public class TextContentComponent extends BaseComponent {
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
     private DropdownTextSize dropdownTextSize;
 
+
     @Getter
     @FindBy(xpath = ".//h3[normalize-space()='Content']")
     private WebElement content;
@@ -135,7 +136,8 @@ public class TextContentComponent extends BaseComponent {
     }
 
     public String getContentInputTextFieldText() {
-        return contentInputTextField.getText();
+        return contentInputTextField.getAttribute("value");
+               // getText();
     }
 
     public String getContentCounterText() {
