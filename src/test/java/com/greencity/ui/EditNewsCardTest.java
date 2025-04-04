@@ -92,11 +92,13 @@ public class EditNewsCardTest extends BaseTestRunner {
         softAssert.assertAll();
     }
 
-//    @AfterMethod
-//    public void deleteTestNews() {
-//        newsCardPage = ecoNewsPage.goToNewsCardPage(newsTitle);
-//        newsCardPage.clickDeleteButton()
-//                .clickYesButton()
-//                .refreshPage();
-//    }
+    @AfterMethod
+    public void deleteTestNews() {
+        ecoNewsPage = homePage
+                .gotoEcoNewsPage()
+                .goToNewsCardPage(newsTitle)
+                .clickDeleteButton()
+                .clickYesButton();
+        ecoNewsPage.refreshPage();
+    }
 }
