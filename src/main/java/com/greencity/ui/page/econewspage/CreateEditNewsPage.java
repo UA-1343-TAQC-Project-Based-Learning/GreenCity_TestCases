@@ -104,7 +104,7 @@ public class CreateEditNewsPage extends BasePage {
         imageUploadComponent = new ImageUploadComponent(driver, imageBlockRoot);
         textContentComponent = new TextContentComponent(driver, textAreaRoot);
     }
-
+public String getAuthorName(){return authorLabel.getText();}
     public String getTitleFieldCharacterCounterTextColor() {
         return titleFieldCharacterCounter.getCssValue("color");
     }
@@ -193,6 +193,10 @@ public class CreateEditNewsPage extends BasePage {
     public String getContentInputFieldText() {
         return textContentComponent.getContentInputTextFieldText();
     }
+    public String getContentWarningCounterText(){
+        return textContentComponent.getContentWarningCounterText();
+    }
+
     public CreateEditNewsPage clearTitleInputTextField() {
         titleInputTextField.clear();
         return this;
@@ -220,6 +224,9 @@ public class CreateEditNewsPage extends BasePage {
 
     public String getTitleInputFieldBorderColor() {
         return titleInputTextField.getCssValue("border-color");
+    }
+    public String getContentInputFieldTextColor() {
+        return textContentComponent.getContentInputFieldBorderColor();
     }
 
 

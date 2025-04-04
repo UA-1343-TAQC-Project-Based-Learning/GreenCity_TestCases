@@ -31,7 +31,7 @@ public class TextContentComponent extends BaseComponent {
     private WebElement textContentCounter;
 
     @FindBy(xpath = ".//p[@class='quill-counter warning']")
-    private WebElement textContentWarningCounter;
+    private WebElement contentWarningCounter;
 
     @Getter
     @FindBy(xpath = ".//div[@class = 'ql-container ql-snow']")
@@ -105,6 +105,9 @@ public class TextContentComponent extends BaseComponent {
         getDropdownTextSize().clickNormalStyleButton();
         return this;
     }
+    public String getContentWarningCounterText(){
+       return contentWarningCounter.getText();
+    }
 
     public String getAreaDescriptionWarningsText() {
         return textAreaDescriptionWarnings.getText();
@@ -136,7 +139,7 @@ public class TextContentComponent extends BaseComponent {
     }
 
     public String getContentInputTextFieldText() {
-        return contentInputTextField.getAttribute("value");
+        return contentInputTextField.getText();
                // getText();
     }
 
@@ -144,9 +147,6 @@ public class TextContentComponent extends BaseComponent {
         return textContentCounter.getText();
     }
 
-    public String getContentWarningCounterText() {
-        return textContentWarningCounter.getText();
-    }
 
 
     public TextContentComponent clickDropdownHugeTextSize() {
