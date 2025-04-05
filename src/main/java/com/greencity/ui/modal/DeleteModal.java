@@ -2,6 +2,7 @@ package com.greencity.ui.modal;
 
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.econewspage.NewsCardPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,19 +30,23 @@ public class DeleteModal extends BaseModal {
     public String getModalTitleText() {
         return modalTitle.getText();
     }
+
     public String getNoButtonText() {
         return noButton.getText();
     }
+
     public String getYesButtonText() {
         return yesButton.getText();
     }
 
+    @Step("Click 'No' button")
     public NewsCardPage clickNoButton() {
-        waitUntilElementClickable( noButton);
+        waitUntilElementClickable(noButton);
         noButton.click();
         return new NewsCardPage(driver);
     }
 
+    @Step("Click 'Yes' button")
     public EcoNewsPage clickYesButton() {
         waitUntilElementClickable(yesButton);
         yesButton.click();

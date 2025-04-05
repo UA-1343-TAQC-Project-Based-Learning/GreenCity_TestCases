@@ -2,7 +2,7 @@ package com.greencity.ui.modal;
 
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
-import com.greencity.ui.page.econewspage.NewsCardPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,22 +29,26 @@ public class CancelModal extends BaseModal {
     public String getNoButtonText() {
         return continueEditingButton.getText();
     }
+
     public String getYesButtonText() {
         return yesCancelButton.getText();
     }
 
+    @Step("Click 'Continue Editing' button")
     public CreateEditNewsPage clickContinueEditingButton() {
         waitUntilElementClickable(continueEditingButton);
         continueEditingButton.click();
         return new CreateEditNewsPage(driver);
     }
 
+    @Step("Click 'Yes' button")
     public EcoNewsPage clickYesCancelButton() {
         waitUntilElementClickable(yesCancelButton);
         yesCancelButton.click();
         return new EcoNewsPage(driver);
     }
 
+    @Step("Click 'Close' icon")
     public CreateEditNewsPage clickCloseIcon() {
         waitUntilElementClickable(closeIcon);
         closeIcon.click();

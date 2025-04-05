@@ -2,7 +2,7 @@ package com.greencity.ui.page.econewspage;
 
 import com.greencity.ui.modal.DeleteModal;
 import com.greencity.ui.page.BasePage;
-import io.cucumber.java.an.E;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,6 +68,7 @@ public class NewsCardPage extends BasePage {
     public String getTitleLabelText() {
         return titleLabel.getText();
     }
+
     public String getContentLabelText() {
         return contentLabel.getText();
     }
@@ -80,7 +81,7 @@ public class NewsCardPage extends BasePage {
         return usernameLabel.getText();
     }
 
-
+    @Step("Click 'Edit' button")
     public CreateEditNewsPage clickEditButton() {
         waitUntilElementClickable(editButton);
         editButton.click();
@@ -91,17 +92,18 @@ public class NewsCardPage extends BasePage {
         return backButton.getText();
     }
 
+    @Step("Click 'Back to News' button")
     public EcoNewsPage clickBackButton() {
         waitUntilElementClickable(backButton);
         backButton.click();
         return new EcoNewsPage(driver);
     }
 
-
     public String getDeleteButtonText() {
         return deleteButton.getText();
     }
 
+    @Step("Click 'Delete' button")
     public DeleteModal clickDeleteButton() {
         waitUntilElementClickable(deleteButton);
         deleteButton.click();
