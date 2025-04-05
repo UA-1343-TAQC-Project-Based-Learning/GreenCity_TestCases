@@ -11,7 +11,8 @@ import org.openqa.selenium.support.FindBy;
 public class CancelModal extends BaseModal {
 
     @Getter
-    @FindBy(xpath = ".//button[@class= 'secondary-global-button ng-star-inserted']")
+    @FindBy(xpath = ".//button[contains(@class, 'secondary-global-button')]")
+
     private WebElement continueEditingButton;
     @Getter
     @FindBy(xpath = ".//button[@class='m-btn primary-global-button']")
