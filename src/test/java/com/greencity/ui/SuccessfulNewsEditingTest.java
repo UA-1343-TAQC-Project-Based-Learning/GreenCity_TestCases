@@ -14,7 +14,7 @@ import java.util.UUID;
 public class SuccessfulNewsEditingTest extends BaseTestRunner {
 
     @Test(description = "Successful news editing by the author")
-    public void SuccessfulNewsEditing() {
+    public void successfulNewsEditing() {
         SoftAssert assertion = new SoftAssert();
 
         EcoNewsPage ecoNewsPage = homePage.gotoEcoNewsPage();
@@ -28,7 +28,8 @@ public class SuccessfulNewsEditingTest extends BaseTestRunner {
                 .clickEditButton()
                 .fillTitleInputTextField(changedTitle)
                 .fillContentInput("updating a content input")
-                .clickTagFilterButton(TagButton.EVENTS)
+                .clickOnlyUnselectedTagFilterButton(TagButton.EVENTS)
+                .clickOnlyUnselectedTagFilterButton(TagButton.NEWS)
                 .clickPublishButton()
                 .goToNewsCardPage(changedTitle);
 
