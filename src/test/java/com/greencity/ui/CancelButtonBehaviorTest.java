@@ -20,11 +20,11 @@ public class CancelButtonBehaviorTest extends BaseTestRunner {
                 .clickExitButton();
 
 
-        assertion.assertTrue(cancelModal.getWarningText().contains("All created content will be lost."));
-        assertion.assertTrue(cancelModal.getWarningText().contains("Do you still want to cancel news creating?"));
+        assertion.assertTrue(cancelModal.getWarningText().contains("All created content will be lost."),"Warning text should be present");
+        assertion.assertTrue(cancelModal.getWarningText().contains("Do you still want to cancel news creating?"),"Warning text should be present");
 
         EcoNewsPage ecoNewsPage = cancelModal.clickYesCancelButton();
-        assertion.assertEquals(ecoNewsPage.getHeaderText(), "Eco news");
+        assertion.assertEquals(ecoNewsPage.getHeaderText(), "Eco news","EcoNews page should be opened");
 
         CreateEditNewsPage createEditNewsPage = ecoNewsPage
                 .clickCreateNewsButton()
@@ -33,8 +33,12 @@ public class CancelButtonBehaviorTest extends BaseTestRunner {
                 .clickExitButton()
                 .clickContinueEditingButton();
 
-        assertion.assertEquals(createEditNewsPage.getTitleHeaderText(),"Create news");
-        assertion.assertEquals(createEditNewsPage.getTitleInputTextFieldValue(),"Title");
-        assertion.assertEquals(createEditNewsPage.getContentInputTextFieldText(),"Test content with 20 chars");
+
+
+        assertion.assertEquals(createEditNewsPage.getTitleHeaderText(),"Create news","CreateNewsPage should be opened");
+        assertion.assertEquals(createEditNewsPage.getTitleInputTextFieldValue(),"Title", "Title must contain the 'Title' text");
+        assertion.assertEquals(createEditNewsPage.getContentText(),"Test content with 20 chars", "Content must contain the 'Test content with 20 chars' text");
+
+        assertion.assertAll();
     }
 }
