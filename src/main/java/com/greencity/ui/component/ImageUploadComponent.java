@@ -64,9 +64,10 @@ public class ImageUploadComponent extends BaseComponent{
     }
 
 
-    public void uploadImage(String imagePath) {
-            waitUntilElementClickable(imageUploadLink);
+    public ImageUploadComponent uploadImage(String imagePath) {
+        waitUntilElementClickable(imageUploadLink);
             imageUploadLink.sendKeys(imagePath);
+            return this;
     }
 
     public String getImageBrowseLinkText(){

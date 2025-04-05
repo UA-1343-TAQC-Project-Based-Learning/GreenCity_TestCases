@@ -2,6 +2,7 @@ package com.greencity.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class TestValueProvider {
@@ -77,5 +78,9 @@ public class TestValueProvider {
     }
     public String getAPIUrlLogin() {
         return properties != null ? properties.getProperty("getAPIUrlLogin") : System.getenv("getAPIUrlLogin");
+    }
+
+    public String getFilePath(String path){
+        return Paths.get("src/test/resources/" + path).toAbsolutePath().toString();
     }
 }
