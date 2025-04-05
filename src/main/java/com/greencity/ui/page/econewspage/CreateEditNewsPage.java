@@ -128,6 +128,7 @@ public class CreateEditNewsPage extends BasePage {
     }
 
     public String getTitleHeaderText() {
+        waitUntilElementVisible(titleHeaderText);
         return titleHeaderText.getText();
     }
 
