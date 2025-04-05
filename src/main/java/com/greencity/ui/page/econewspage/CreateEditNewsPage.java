@@ -4,6 +4,7 @@ import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.component.TextContentComponent;
 import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
+import com.greencity.ui.modal.CancelModal;
 import com.greencity.ui.page.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -98,6 +99,10 @@ public class CreateEditNewsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(), 'Date') or contains(text(), 'Дата')]/following-sibling::span")
     private WebElement dataLabel;
 
+    @Getter
+    @FindBy(xpath = "//mat-dialog-container")
+    private WebElement cancelModalRoot;
+
     public CreateEditNewsPage(WebDriver driver) {
         super(driver);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, filterTagsRoot);
@@ -179,8 +184,9 @@ public class CreateEditNewsPage extends BasePage {
         return externalSourceLinkInputField.getDomAttribute("placeholder");
     }
 
-    public void clickExitButton() {
+    public CancelModal clickExitButton() {
         exitButton.click();
+        return  new CancelModal(driver, cancelModalRoot);
     }
 
     public void clickPreviewButton() {
@@ -350,6 +356,11 @@ public class CreateEditNewsPage extends BasePage {
 
     public boolean isPublishButtonEnabled() {
         return publishButton.isEnabled();
+    }
+
+    public CreateEditNewsPage clickOnlyUnselectedTagFilterButton(TagButton tagButton){
+        if(!isTagSelected(tagButton)) ecoNewsTagFilterComponent.clickTagButton(tagButton);
+        return this;
     }
 
 }
