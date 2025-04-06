@@ -1,30 +1,21 @@
 package com.greencity.utils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.StringBuilder;
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+import java.nio.file.*;
 
 public class FileReaderData {
+    public String readTextFromFile(String filePath) throws IOException {
 
-    public String readTextFromFile(String filePath) {
-        // Створення StringBuilder для збереження всього вмісту файлу
-        StringBuilder fileContent = new StringBuilder();
+        StringBuilder content = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
-        // Використання FileReader для читання файлу
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-
-            // Читання кожного рядка з файлу
-            while ((line = br.readLine()) != null) {
-                fileContent.append(line).append(System.lineSeparator());  // Додаємо рядок до StringBuilder
-            }
-        } catch (IOException e) {
-            // Обробка помилки з більш детальним повідомленням
-            System.err.println("Error reading the file: " + e.getMessage());
+        String line;
+        while ((line = reader.readLine()) != null) {
+            content.append(line).append("\n");
         }
-
-
-        return fileContent.toString();
+        reader.close();
+        return content.toString();
     }
 }

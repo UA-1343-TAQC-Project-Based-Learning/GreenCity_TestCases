@@ -11,11 +11,9 @@ import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 import com.greencity.ui.data.Colors;
-
 import org.testng.asserts.SoftAssert;
 
-import java.util.Objects;
-
+import java.io.IOException;
 
 public class ContentFieldValidationTest  extends BaseTestRunner {
 
@@ -27,8 +25,6 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
         }
         return stringBuilder.toString();
     }
-
-
     @Test
     public void checkContentFormNegative(){
         CreateEditNewsPage createEditNewsPage = homePage
@@ -36,7 +32,6 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
                 .clickCreateNewsButton()
                 .clickTitleInputTextField()
                 .fillTitleInputTextField(contentCharacterProvider(10));
-
 
         softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 120,
                 "The text should equal 170 characters.");
@@ -48,24 +43,25 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
 
         softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
-        String filePath = "src/test/resources/data.txt";
+        createEditNewsPage.enterTextIntoTextContentField(contentCharacterProvider(1));
+        softAssert.assertTrue(createEditNewsPage.getContentWarningCounterText().equals(" Not enough characters. Left: 8 "),
+                "Content counter should contains 'Not enough characters.Left:8' ");
+        softAssert.assertTrue(createEditNewsPage.getContentInputFieldTextColor().equals(Colors.ERROR_RED));
 
-        // Створення об'єкта класу FileReaderData для отримання вмісту файлу
-        FileReaderData fileReader = new FileReaderData();
-        String fileContent = fileReader.readTextFromFile(filePath);
-        createEditNewsPage.enterTextIntoTextContentField(fileContent);
-                //contentCharacterProvider(63207));
+        FileReaderData example = new FileReaderData();
+        try {
+            String content = example.readTextFromFile("D:/Java_projects/file1.txt");
+            createEditNewsPage.enterTextIntoTextContentField(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         softAssert.assertTrue(createEditNewsPage.getContentCharacterCountText().length() == 63206,
                   "Поле повинно містити не менше 20 та не більше 63 206 символів");
         softAssert.assertTrue(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
 
-      //  createEditNewsPage.enterTextIntoTextContentField(contentCharacterProvider(1));
-     //   softAssert.assertTrue(createEditNewsPage.getContentWarningCounterText().equals(" Not enough characters. Left: 8 "),
-      //          "Content counter should contains 'Not enough characters.Left:8' ");
-      //  softAssert.assertTrue(createEditNewsPage.getContentInputFieldTextColor().equals(Colors.ERROR_RED));
-
-                softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
+        softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
 
         softAssert.assertAll();

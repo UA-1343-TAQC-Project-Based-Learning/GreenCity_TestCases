@@ -1,6 +1,7 @@
 package com.greencity.ui.user;
 
 import com.greencity.ui.component.BaseComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,15 +22,17 @@ public class LoggedDropdown extends BaseComponent {
     public LoggedDropdown(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
-
+    @Step("Click on the Notifications dropdown item")
     public void clickNotifications() {
         notifications.click();
     }
 
+    @Step("Click on the Sign Out dropdown item")
     public void clickSignOut() {
         signOut.click();
     }
 
+    @Step("Click on the UBS User dropdown item")
     public void clickUbsUser() {
         ubsUser.click();
     }

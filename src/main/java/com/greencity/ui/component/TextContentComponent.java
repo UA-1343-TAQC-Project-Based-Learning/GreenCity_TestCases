@@ -164,15 +164,15 @@ public class TextContentComponent extends BaseComponent {
     }
 
     public void clickTextAreaField() {
-        textAreaField.click();
+        contentInputTextField.click();
     }
 
     public void clearTextAreaField() {
-        textAreaField.clear();
+        contentInputTextField.clear();
     }
 
     public void fillTextAreaField(String text) {
-        textAreaField.sendKeys(text);
+        contentInputTextField.sendKeys(text);
     }
 
 

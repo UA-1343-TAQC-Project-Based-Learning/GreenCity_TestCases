@@ -7,6 +7,7 @@ import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.user.UsersHeaderComponent;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -41,26 +42,26 @@ public abstract class BasePage extends Base {
         loggedHeader = new UsersHeaderComponent(driver, headerRoot);
     }
 
-
+    @Step("Retrieve the full content height of the page")
     private int getContentHeight() {
         return ((Number) Objects.requireNonNull(threadJs.executeScript("return document.body.scrollHeight;"))).intValue();
     }
 
-
+    @Step("Wait for the page to load within {0} seconds")
     public void waitForPageToLoad(long timeoutInSeconds) {
         new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds)).until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
-
+    @Step("Check if element is invisible: {0}")
     public Boolean isElementInvisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         return wait.until(ExpectedConditions.invisibilityOf(element));
     }
-
+    @Step("Navigate to the Home Page")
     public HomePage goToHomePage() {
         header.getLogo().click();
         return new HomePage(driver);
     }
-
+    @Step("Navigate to the EcoNews Page")
     public EcoNewsPage gotoEcoNewsPage(){
         header.clickEcoNewsLink();
         return new EcoNewsPage(driver);
