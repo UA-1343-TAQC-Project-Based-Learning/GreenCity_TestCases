@@ -19,5 +19,10 @@ public class ValidationImageSize extends BaseTestRunner {
                 .clickCreateNewsButton()
                 .switchToImageUploadComponent()
                 .uploadImage(testValueProvider.getFilePath("images/GreenCity11mb.png"));
+
+        assertion.assertEquals(imageUploadComponent.getUploadFieldWarningText(),"The image isn't uploaded","'The image isn`t uploaded' warning should appears");
+        assertion.assertEquals(imageUploadComponent.getImageFormatWarningMessageText(),"Upload only PNG or JPG. File size must be less than 10MB","'Upload only PNG or JPG. File size must be less than 10MB' warning should appears");
+
+        assertion.assertAll();
     }
 }
