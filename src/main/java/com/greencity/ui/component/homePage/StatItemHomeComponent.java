@@ -74,7 +74,6 @@ public class StatItemHomeComponent extends BaseComponent {
         return icon.isDisplayed();
     }
 
-    @Step("Click on 'Start forming a habit!' button")
     public String getLinkText() {
         return link.getText();
     }
