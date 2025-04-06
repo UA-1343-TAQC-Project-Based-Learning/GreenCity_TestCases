@@ -14,11 +14,11 @@ public class StatsHomeComponent extends BaseComponent {
     private WebElement header;
 
     @Getter
-    @FindBy(xpath = ".//div[contains(@style, 'margin-left')]")
+    @FindBy(xpath = ".//div[contains(@style, 'margin-left')]//..//..")
     private WebElement leftItemRoot;
 
     @Getter
-    @FindBy(xpath = ".//div[contains(@style, 'margin-right')]")
+    @FindBy(xpath = ".//div[contains(@style, 'margin-right')]//..//..")
     private WebElement rightItemRoot;
 
     @Getter
