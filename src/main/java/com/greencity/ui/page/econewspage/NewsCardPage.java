@@ -7,8 +7,12 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class NewsCardPage extends BasePage {
 
@@ -25,7 +29,7 @@ public class NewsCardPage extends BasePage {
     private WebElement editButton;
 
     @Getter
-    @FindBy(xpath = "//div[@class='tags']")
+    @FindBy(xpath = "//div[contains(@class,'tags-item')]")
     private List<WebElement> filtersTag;
 
     @Getter
@@ -108,6 +112,10 @@ public class NewsCardPage extends BasePage {
         waitUntilElementClickable(deleteButton);
         deleteButton.click();
         return new DeleteModal(driver, deleteModalRoot);
+
+    public LocalDate getDataLabelFormating(Locale locale) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy", locale);
+        return LocalDate.parse(getDateOfCreationLabelText(), formatter);
     }
 
 }
