@@ -3,6 +3,7 @@ package com.greencity.ui.component.homePage;
 
 import com.greencity.ui.component.BaseComponent;
 import com.greencity.ui.page.UbsPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,6 +62,7 @@ public class StatItemHomeComponent extends BaseComponent {
         return button.getText();
     }
 
+    @Step("Click on 'Start forming a habit!' button")
     public UbsPage clickButton() {
         scrollToElement(button);
         waitUntilElementClickable(button);
@@ -72,10 +74,12 @@ public class StatItemHomeComponent extends BaseComponent {
         return icon.isDisplayed();
     }
 
+    @Step("Click on 'Start forming a habit!' button")
     public String getLinkText() {
         return link.getText();
     }
 
+    @Step("Click on link navigates to UbsPage")
     public UbsPage clickLink() {
         scrollToElement(link);
         waitUntilElementClickable(link);

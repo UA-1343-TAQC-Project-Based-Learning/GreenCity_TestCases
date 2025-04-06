@@ -2,6 +2,7 @@ package com.greencity.ui.component.homePage;
 
 import com.greencity.ui.component.BaseComponent;
 import com.greencity.ui.page.homepage.HomePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +36,7 @@ public class SubscriptionHomeComponent extends BaseComponent {
     private WebElement button;
 
     public SubscriptionHomeComponent(WebDriver driver, WebElement subscriptionHomeRoot) {
-        super(driver,subscriptionHomeRoot);
+        super(driver, subscriptionHomeRoot);
     }
 
     public String getHeaderText() {
@@ -50,6 +51,7 @@ public class SubscriptionHomeComponent extends BaseComponent {
         return imgQrCode.isDisplayed();
     }
 
+    @Step("Enter '{email}' to email input")
     public void enterEmail(String email) {
         scrollToElement(inputEmail);
         waitUntilElementClickable(inputEmail);
@@ -65,6 +67,7 @@ public class SubscriptionHomeComponent extends BaseComponent {
         return button.getText();
     }
 
+    @Step("Click 'Subscribe!' button")
     public HomePage clickButton() {
         scrollToElement(button);
         waitUntilElementClickable(button);

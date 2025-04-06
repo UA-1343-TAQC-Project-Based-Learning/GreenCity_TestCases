@@ -7,6 +7,7 @@ import com.greencity.ui.component.homePage.SubscriptionHomeComponent;
 import com.greencity.ui.page.BasePage;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,12 +67,14 @@ public class HomePage extends BasePage {
         return subscriptionHome;
     }
 
+    @Step("Go to CreateEditNews page [Header → EcoNews → Create]")
     public CreateEditNewsPage goToCreateEcoNewsPage() {
         return openEcoNewsPage().clickCreateNewsButton();
     }
 
+    @Step("Click EcoNews via Header")
     public EcoNewsPage openEcoNewsPage() {
-         header.clickEcoNewsLink();
+        header.clickEcoNewsLink();
         return new EcoNewsPage(driver);
     }
 }

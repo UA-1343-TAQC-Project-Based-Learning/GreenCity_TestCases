@@ -2,6 +2,7 @@ package com.greencity.ui.component.homePage;
 
 import com.greencity.ui.component.BaseComponent;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,7 @@ public class EventsHomeComponent extends BaseComponent {
         return eventsLink.getText();
     }
 
+    @Step("Click on 'Read all news' link")
     public EcoNewsPage clickEventsLink() {
         scrollToElement(eventsLink);
         waitUntilElementClickable(eventsLink);
@@ -39,6 +41,7 @@ public class EventsHomeComponent extends BaseComponent {
         return new EcoNewsPage(driver);
     }
 
+    @Step("Click on 'Arrow' link")
     public EcoNewsPage clickEventsArrowLink() {
         scrollToElement(eventsArrowLink);
         waitUntilElementClickable(eventsArrowLink);

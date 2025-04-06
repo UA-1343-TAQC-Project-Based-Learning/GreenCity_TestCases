@@ -3,6 +3,7 @@ package com.greencity.ui.component.homePage;
 
 import com.greencity.ui.component.BaseComponent;
 import com.greencity.ui.modal.LoginModal;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -46,6 +47,7 @@ public class MainHomeComponent extends BaseComponent {
         return headerButton.getText();
     }
 
+    @Step("Click on 'Start forming a habit!' button")
     public LoginModal clickHeaderButton() {
         waitUntilElementClickable(headerButton);
         headerButton.click();
