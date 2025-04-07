@@ -112,6 +112,7 @@ public class NewsCardPage extends BasePage {
         waitUntilElementClickable(deleteButton);
         deleteButton.click();
         return new DeleteModal(driver, deleteModalRoot);
+    }
 
     public LocalDate getDataLabelFormating(Locale locale) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy", locale);

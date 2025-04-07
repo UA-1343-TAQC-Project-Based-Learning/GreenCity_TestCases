@@ -1,13 +1,12 @@
 package com.greencity.ui.component;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.NoSuchElementException;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ImageUploadComponent extends BaseComponent{
+public class ImageUploadComponent extends BaseComponent {
 
     @FindBy(xpath = ".//h3[normalize-space()='Picture (optional)']")
     private WebElement titleText;
@@ -77,23 +76,18 @@ public class ImageUploadComponent extends BaseComponent{
         return imageFormatWarningMessage.getText();
     }
 
-    public String getImageBrowseLinkText(){
+    public String getImageBrowseLinkText() {
         return imageBrowseLink.getText();
     }
 
     @Step("Upload Image with path: {imagePath}")
-    public void uploadImage(String imagePath) {
-            waitUntilElementClickable(imageUploadLink);
-            imageUploadLink.sendKeys(imagePath);
-    }
-  
-    public String getImageDropzoneFieldColor() {
-        return imageDropzoneField.getCssValue("background-color");
-   }
-
     public ImageUploadComponent uploadImage(String imagePath) {
         imageUploadLink.sendKeys(imagePath);
         return this;
     }
 
+    public String getImageDropzoneFieldColor() {
+
+        return imageDropzoneField.getCssValue("background-color");
+    }
 }
