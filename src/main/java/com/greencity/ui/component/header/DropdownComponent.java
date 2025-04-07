@@ -64,7 +64,7 @@ public class DropdownComponent {
         return isFound;
     }
 
-    @Step("Click on the Dropdown item")
+    @Step("Click on the Dropdown item: {optionName}")
     public void clickDropdownOptionByPartialName(String optionName) {
         getDropdownOptionByPartialName(optionName).click();
     }

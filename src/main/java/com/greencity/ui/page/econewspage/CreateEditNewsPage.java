@@ -136,6 +136,7 @@ public class CreateEditNewsPage extends BasePage {
     }
 
     public String getTitleHeaderText() {
+        waitUntilElementVisible(titleHeaderText);
         return titleHeaderText.getText();
     }
 
@@ -160,12 +161,7 @@ public class CreateEditNewsPage extends BasePage {
     @Step("Clear 'Title Input' text field using keyboard shortcut")
     public void actionClearTitleInputTextField() {
         Actions actions = new Actions(driver);
-        actions.click(titleInputTextField)
-                .keyDown(Keys.CONTROL)
-                .sendKeys("a")
-                .keyUp(Keys.CONTROL)
-                .sendKeys(Keys.BACK_SPACE)
-                .perform();
+        actions.click(titleInputTextField).keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).sendKeys(Keys.BACK_SPACE).perform();
     }
 
     @Step("Clear 'Title Input' text field")
@@ -393,7 +389,7 @@ public class CreateEditNewsPage extends BasePage {
     public ImageUploadComponent switchToImageUploadComponent() {
         return imageUploadComponent;
     }
-  
+
     public String getEditButtonText() {
         return editButton.getText();
     }
@@ -406,6 +402,11 @@ public class CreateEditNewsPage extends BasePage {
 
     public boolean isEditButtonEnabled() {
         return editButton.isEnabled();
+    }
+
+    public CreateEditNewsPage clickOnlyUnselectedTagFilterButton(TagButton tagButton){
+        if(!isTagSelected(tagButton)) ecoNewsTagFilterComponent.clickTagButton(tagButton);
+        return this;
     }
 
 }

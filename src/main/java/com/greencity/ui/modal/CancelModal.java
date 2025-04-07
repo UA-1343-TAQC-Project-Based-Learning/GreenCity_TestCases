@@ -22,6 +22,10 @@ public class CancelModal extends BaseModal {
     @FindBy(xpath = ".//img[@alt='close']")
     private WebElement closeIcon;
 
+    @Getter
+    @FindBy(xpath = ".//div[@class='warning-text']")
+    private WebElement warningText;
+
 
     public CancelModal(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
@@ -54,5 +58,9 @@ public class CancelModal extends BaseModal {
         waitUntilElementClickable(closeIcon);
         closeIcon.click();
         return new CreateEditNewsPage(driver);
+    }
+
+    public String getWarningText(){
+        return warningText.getText();
     }
 }
