@@ -4,10 +4,14 @@ import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.component.TextContentComponent;
 import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
+import com.greencity.ui.modal.CancelModal;
 import com.greencity.ui.page.BasePage;
+import io.qameta.allure.Step;
 import lombok.Getter;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.time.LocalDate;
@@ -98,6 +102,14 @@ public class CreateEditNewsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(), 'Date') or contains(text(), 'Дата')]/following-sibling::span")
     private WebElement dataLabel;
 
+    @Getter
+    @FindBy(xpath = "//button[@class='primary-global-button']")
+    private WebElement editButton;
+
+    @Getter
+    @FindBy(xpath = "//mat-dialog-container")
+    private WebElement cancelModalRoot;
+
     public CreateEditNewsPage(WebDriver driver) {
         super(driver);
         ecoNewsTagFilterComponent = new EcoNewsTagFilterComponent(driver, filterTagsRoot);
@@ -117,12 +129,14 @@ public class CreateEditNewsPage extends BasePage {
         return titleFieldCharacterCounterWarning.getCssValue("color");
     }
 
+    @Step("Click 'Title' header")
     public CreateEditNewsPage clickTitleHeaderText() {
         titleHeaderText.click();
         return this;
     }
 
     public String getTitleHeaderText() {
+        waitUntilElementVisible(titleHeaderText);
         return titleHeaderText.getText();
     }
 
@@ -138,8 +152,21 @@ public class CreateEditNewsPage extends BasePage {
         return titleFieldCharacterCounter.getText();
     }
 
+    @Step("Click 'Title Input' text field")
     public CreateEditNewsPage clickTitleInputTextField() {
         titleInputTextField.click();
+        return this;
+    }
+
+    @Step("Clear 'Title Input' text field using keyboard shortcut")
+    public void actionClearTitleInputTextField() {
+        Actions actions = new Actions(driver);
+        actions.click(titleInputTextField).keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).sendKeys(Keys.BACK_SPACE).perform();
+    }
+
+    @Step("Clear 'Title Input' text field")
+    public CreateEditNewsPage clearTitleInputTextField() {
+        actionClearTitleInputTextField();
         return this;
     }
 
@@ -163,14 +190,17 @@ public class CreateEditNewsPage extends BasePage {
         return externalSourceInputFieldInfoText.getText();
     }
 
+    @Step("Click 'External Source Link' input field")
     public void clickExternalSourceLinkInputField() {
         externalSourceLinkInputField.click();
     }
 
+    @Step("Clear 'External Source Link' input field")
     public void clearExternalSourceLinkInputField() {
         externalSourceLinkInputField.clear();
     }
 
+    @Step("Fill '{text}' into 'External Source Link' input field")
     public void fillExternalSourceLinkInputField(String text) {
         externalSourceLinkInputField.sendKeys(text);
     }
@@ -179,10 +209,13 @@ public class CreateEditNewsPage extends BasePage {
         return externalSourceLinkInputField.getDomAttribute("placeholder");
     }
 
-    public void clickExitButton() {
+    @Step("Click 'Cancel' button")
+    public CancelModal clickExitButton() {
         exitButton.click();
+        return new CancelModal(driver, cancelModalRoot);
     }
 
+    @Step("Click 'Preview' button")
     public void clickPreviewButton() {
         previewButton.click();
     }
@@ -191,26 +224,25 @@ public class CreateEditNewsPage extends BasePage {
         return titleInputTextField.getAttribute("value");
     }
 
-    public CreateEditNewsPage clearTitleInputTextField() {
-        titleInputTextField.clear();
-        return this;
-    }
-
+    @Step("Fill '{titleText}' into 'Title Input' text field")
     public CreateEditNewsPage fillTitleInputTextField(String titleText) {
         clickTitleInputTextField().clearTitleInputTextField().titleInputTextField.sendKeys(titleText);
         return this;
     }
 
+    @Step("Click 'Publish' button")
     public EcoNewsPage clickPublishButton() {
         publishButton.click();
         return new EcoNewsPage(driver);
     }
 
+    @Step("Click 'TextContent' field")
     public CreateEditNewsPage clickTextIntoTextContentField() {
         textContentComponent.clickContentInputTextField();
         return this;
     }
 
+    @Step("Enter '{text}' into 'TextContent' field")
     public CreateEditNewsPage enterTextIntoTextContentField(String text) {
         textContentComponent.fillContentTextAreaField(text);
         return this;
@@ -219,7 +251,6 @@ public class CreateEditNewsPage extends BasePage {
     public String getTitleInputFieldBorderColor() {
         return titleInputTextField.getCssValue("border-color");
     }
-
 
     public boolean isPresentContentInputTextField() {
         return textAreaRoot.isDisplayed();
@@ -249,6 +280,7 @@ public class CreateEditNewsPage extends BasePage {
         return publishButton.isDisplayed();
     }
 
+    @Step("Click '{tagButton}' tag in filter")
     public CreateEditNewsPage clickTagFilterButton(TagButton tagButton) {
         ecoNewsTagFilterComponent.clickTagButton(tagButton);
         return this;
@@ -287,7 +319,6 @@ public class CreateEditNewsPage extends BasePage {
         return textContentComponent.getContentText();
     }
 
-
     public boolean isAuthorLabelNotEditable() {
         String isContentEditable = authorLabel.getAttribute("contenteditable");
         return (isContentEditable == null || isContentEditable.equals("false"));
@@ -311,7 +342,7 @@ public class CreateEditNewsPage extends BasePage {
         return first.getLocation().getY() < second.getLocation().getY();
     }
 
-    public boolean areElementsOnSameLine(WebElement first, WebElement second){
+    public boolean areElementsOnSameLine(WebElement first, WebElement second) {
         return first.getLocation().getY() == second.getLocation().getY();
     }
 
@@ -323,11 +354,13 @@ public class CreateEditNewsPage extends BasePage {
         return ecoNewsTagFilterComponent.getTagButtonColor(tag);
     }
 
-    public CreateEditNewsPage fillContentInput(String content){
+    @Step("Fill '{content}' into content input field")
+    public CreateEditNewsPage fillContentInput(String content) {
         textContentComponent.fillContentTextAreaField(content);
         return this;
     }
 
+    @Step("Fill '{url}' into source input field")
     public CreateEditNewsPage fillSourceInput(String url) {
         clearExternalSourceLinkInputField();
         clickExternalSourceLinkInputField();
@@ -335,16 +368,17 @@ public class CreateEditNewsPage extends BasePage {
         return this;
     }
 
-    public CreateEditNewsPage clickNewsTagButton(){
+    @Step("Click '{NEWS}' tag button")
+    public CreateEditNewsPage clickNewsTagButton() {
         ecoNewsTagFilterComponent.clickTagButton(TagButton.NEWS);
         return this;
     }
 
-    public String getExternalSourceInputFieldInfoTextColor(){
-       return externalSourceInputFieldInfoText.getCssValue("color");
+    public String getExternalSourceInputFieldInfoTextColor() {
+        return externalSourceInputFieldInfoText.getCssValue("color");
     }
 
-    public String getExternalSourceInputFieldBorderColor(){
+    public String getExternalSourceInputFieldBorderColor() {
         return externalSourceLinkInputField.getCssValue("border");
     }
 
@@ -354,6 +388,25 @@ public class CreateEditNewsPage extends BasePage {
 
     public ImageUploadComponent switchToImageUploadComponent() {
         return imageUploadComponent;
+    }
+
+    public String getEditButtonText() {
+        return editButton.getText();
+    }
+
+    @Step("Click 'Edit' button")
+    public EcoNewsPage clickEditButton() {
+        publishButton.click();
+        return new EcoNewsPage(driver);
+    }
+
+    public boolean isEditButtonEnabled() {
+        return editButton.isEnabled();
+    }
+
+    public CreateEditNewsPage clickOnlyUnselectedTagFilterButton(TagButton tagButton){
+        if(!isTagSelected(tagButton)) ecoNewsTagFilterComponent.clickTagButton(tagButton);
+        return this;
     }
 
 }
