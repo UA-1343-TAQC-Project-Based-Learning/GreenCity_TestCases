@@ -2,15 +2,11 @@ package com.greencity.ui.createnewspage;
 
 import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.data.Colors;
-import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import com.greencity.utils.TestValueProvider;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.nio.file.Paths;
 
 public class ImageUploadValidationTest extends BaseTestRunner {
     private SoftAssert softAssert = new SoftAssert();
@@ -23,14 +19,14 @@ public class ImageUploadValidationTest extends BaseTestRunner {
                 .gotoEcoNewsPage()
                 .clickCreateNewsButton()
                 .switchToImageUploadComponent()
-                .uploadImage(TestValueProvider.getFilePath("images/GreenCity5mb.png"));
+                .uploadImage(testValueProvider.getFilePath("images/GreenCity5mb.png"));
 
         softAssert.assertTrue(imageUploadComponent.getPresentationImageWindow().isDisplayed(),
                 "The presentation window should be displayed on the uploaded image");
 
         imageUploadComponent
                 .clickCancelButton()
-                .uploadImage(TestValueProvider.getFilePath("images/GreenCity1mb.gif"));
+                .uploadImage(testValueProvider.getFilePath("images/GreenCity1mb.gif"));
         softAssert.assertTrue(imageUploadComponent.getImageDropzoneFieldColor().equals(Colors.IMAGE_DROPZONE_WARNING_BACKGROUND.getColor()),
                 "The background color of the dropzone field should be: " + Colors.IMAGE_DROPZONE_WARNING_BACKGROUND.getColor());
         softAssert.assertTrue(imageUploadComponent.getImageFormatWarningMessage().isEnabled(),
@@ -39,7 +35,7 @@ public class ImageUploadValidationTest extends BaseTestRunner {
                 "'The image isn't uploaded' message should be displayed");
 
 
-        imageUploadComponent.uploadImage(TestValueProvider.getFilePath("images/GreenCity15mb.jpg"));
+        imageUploadComponent.uploadImage(testValueProvider.getFilePath("images/GreenCity15mb.jpg"));
         softAssert.assertTrue(imageUploadComponent.getImageDropzoneFieldColor().equals(Colors.IMAGE_DROPZONE_WARNING_BACKGROUND.getColor()),
                 "The background color of the dropzone field should be: " + Colors.IMAGE_DROPZONE_WARNING_BACKGROUND.getColor());
         softAssert.assertTrue(imageUploadComponent.getImageFormatWarningMessage().isEnabled(),

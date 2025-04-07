@@ -4,7 +4,6 @@ import com.greencity.data.LoginDto;
 import com.greencity.modules.GreenCityGuest;
 import com.greencity.modules.GreenCityLogged;
 import com.greencity.ui.GreenCityLoginTest;
-import com.greencity.ui.page.BasePage;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.utils.LocalStorageJS;
 import com.greencity.utils.TestValueProvider;
@@ -22,9 +21,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -93,14 +89,14 @@ public class BaseTestRunner {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
+        for (String option : testValueProvider.getChromeOptions()) {
+            options.addArguments(option);
+        }
+
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
 //        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
-
-        options.addArguments("--user-data-dir=/home/hembei/.config/google-chrome-selenium/");
-        options.addArguments("--profile-directory=Default");
-
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
