@@ -2,22 +2,23 @@ package com.greencity.ui.component;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.NoSuchElementException;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class ImageUploadComponent extends BaseComponent{
 
     @FindBy(xpath = ".//h3[normalize-space()='Picture (optional)']")
     private WebElement titleText;
 
-    @FindBy(xpath = ".//div[@class='text-wrapper']")
-    private WebElement imageUploadField;
+    @FindBy(xpath = ".//div[@class='dropzone warning-background']")
+    private WebElement imageDropzoneField;
 
     @FindBy(xpath = ".//span[normalize-space()='browse']")
     private WebElement imageBrowseLink;
 
+    @Getter
     @FindBy(xpath = ".//input[@type='file']")
     private WebElement imageUploadLink;
 
@@ -30,12 +31,20 @@ public class ImageUploadComponent extends BaseComponent{
     @FindBy(xpath = ".//div[@class='dropzone warning-background']//p[1]")
     private WebElement uploadFieldWarningText;
 
+    @Getter
+    @FindBy(xpath = ".//div[@class='ngx-ic-move']")
+    private WebElement presentationImageWindow;
+
+    @Getter
+    @FindBy(xpath = ".//p[@class='warning']")
+    private WebElement imageFormatMessage;
+
+    @Getter
     @FindBy(xpath = ".//p[@class='warning warning-color']")
-    private WebElement imageFormatWarningMessageText;
+    private WebElement imageFormatWarningMessage;
 
     public ImageUploadComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-
     }
 
 
@@ -45,15 +54,17 @@ public class ImageUploadComponent extends BaseComponent{
     }
 
     @Step("Click Cancel Button")
-    public void clickCancelButton() {
+    public ImageUploadComponent clickCancelButton() {
         waitUntilElementClickable(cancelButton);
         cancelButton.click();
+        return this;
     }
 
     @Step("Click Submit Button")
-    public void clickSubmitButton() {
+    public ImageUploadComponent clickSubmitButton() {
         waitUntilElementClickable(submitButton);
         submitButton.click();
+        return this;
     }
 
     public String getUploadFieldWarningText() {
@@ -62,19 +73,27 @@ public class ImageUploadComponent extends BaseComponent{
     }
 
     public String getImageFormatWarningMessageText() {
-        waitUntilElementVisible(imageFormatWarningMessageText);
-        return imageFormatWarningMessageText.getText();
+        waitUntilElementVisible(imageFormatWarningMessage);
+        return imageFormatWarningMessage.getText();
     }
 
+    public String getImageBrowseLinkText(){
+        return imageBrowseLink.getText();
+    }
 
     @Step("Upload Image with path: {imagePath}")
     public void uploadImage(String imagePath) {
             waitUntilElementClickable(imageUploadLink);
             imageUploadLink.sendKeys(imagePath);
     }
+  
+    public String getImageDropzoneFieldColor() {
+        return imageDropzoneField.getCssValue("background-color");
+   }
 
-    public String getImageBrowseLinkText(){
-        return imageBrowseLink.getText();
+    public ImageUploadComponent uploadImage(String imagePath) {
+        imageUploadLink.sendKeys(imagePath);
+        return this;
     }
 
 }
