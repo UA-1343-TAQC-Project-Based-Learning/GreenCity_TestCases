@@ -1,5 +1,6 @@
 package com.greencity.ui.component.header;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -63,6 +64,7 @@ public class DropdownComponent {
         return isFound;
     }
 
+    @Step("Click on the Dropdown item")
     public void clickDropdownOptionByPartialName(String optionName) {
         getDropdownOptionByPartialName(optionName).click();
     }
