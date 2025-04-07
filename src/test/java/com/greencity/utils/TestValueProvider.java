@@ -85,6 +85,10 @@ public class TestValueProvider {
         return properties != null ? properties.getProperty("getAPIUrlLogin") : System.getenv("getAPIUrlLogin");
     }
 
+    public String getFilePathByResources(String path){
+        return Paths.get("src/test/resources/" + path).toAbsolutePath().toString();
+    }
+
     public String getFilePath(String fileName) {
         return Paths.get(properties.getProperty("files.path") + fileName).toAbsolutePath().toString();
     }

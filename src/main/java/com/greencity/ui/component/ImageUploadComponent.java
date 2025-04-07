@@ -46,7 +46,6 @@ public class ImageUploadComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
-
     public String getTitleText() {
         waitUntilElementVisible(titleText);
         return titleText.getText();
