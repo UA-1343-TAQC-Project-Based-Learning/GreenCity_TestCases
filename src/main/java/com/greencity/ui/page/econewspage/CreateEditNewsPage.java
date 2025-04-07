@@ -390,6 +390,10 @@ public class CreateEditNewsPage extends BasePage {
         return publishButton.isEnabled();
     }
 
+    public ImageUploadComponent switchToImageUploadComponent() {
+        return imageUploadComponent;
+    }
+  
     public String getEditButtonText() {
         return editButton.getText();
     }

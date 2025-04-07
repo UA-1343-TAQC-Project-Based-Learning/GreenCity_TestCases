@@ -2,6 +2,9 @@ package com.greencity.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class TestValueProvider {
@@ -33,6 +36,7 @@ public class TestValueProvider {
     public String getUserProfilePath() {
         return properties != null ? properties.getProperty("user.profile.path") : System.getenv("USER_PROFILE_PATH");
     }
+
     public String getUserEmail() {
         return properties != null ? properties.getProperty("user.email") : System.getenv("USER_EMAIL");
     }
@@ -72,10 +76,36 @@ public class TestValueProvider {
     public String getJDBCGreenCityURL() {
         return properties != null ? properties.getProperty("JDBCGreenCityURL") : System.getenv("JDBC_GREENCITY_URL");
     }
+
     public String getAPIUrlLoginSecretKey() {
         return properties != null ? properties.getProperty("getAPIUrlLoginSecretKey") : System.getenv("getAPIUrlLoginSecretKey");
     }
+
     public String getAPIUrlLogin() {
         return properties != null ? properties.getProperty("getAPIUrlLogin") : System.getenv("getAPIUrlLogin");
     }
+
+    public String getFilePath(String fileName) {
+        return Paths.get(properties.getProperty("files.path") + fileName).toAbsolutePath().toString();
+    }
+
+    public List<String> getChromeOptions() {
+        String options = properties != null ? properties.getProperty("chrome.options") : System.getenv("ChromeOptions");
+        return stringToList(options);
+    }
+
+    private static List<String> stringToList(String input) {
+        List<String> result = new ArrayList<>();
+        if (input == null || input.isEmpty()) {
+            return result;
+        }
+
+        String[] parts = input.split(", ");
+        for (String part : parts) {
+            result.add(part.trim()); // Trim to remove leading/trailing spaces
+        }
+
+        return result;
+    }
+
 }
