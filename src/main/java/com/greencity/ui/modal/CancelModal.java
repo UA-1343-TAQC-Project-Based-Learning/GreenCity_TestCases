@@ -8,9 +8,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CancelModal extends BaseModal{
+public class CancelModal extends BaseModal {
+
     @Getter
     @FindBy(xpath = ".//button[contains(@class, 'secondary-global-button')]")
+
     private WebElement continueEditingButton;
     @Getter
     @FindBy(xpath = ".//button[@class='m-btn primary-global-button']")
@@ -32,6 +34,7 @@ public class CancelModal extends BaseModal{
     public String getNoButtonText() {
         return continueEditingButton.getText();
     }
+
     public String getYesButtonText() {
         return yesCancelButton.getText();
     }
