@@ -9,7 +9,7 @@ Feature: Create News Form Display
 
   Scenario: Verify Create News form displays all necessary fields in the correct order
     When the user navigates to the GreenCity News page
-    And the user clicks the "Create News" button on the main news page
+    And click the "Create News" button
     Then the Create News form should be displayed
     And the form should contain the following fields in order
     And the form should contain the following buttons:
