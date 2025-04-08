@@ -20,7 +20,7 @@ public class CreateNewsSteps  extends BaseStep{
     private CreateEditNewsPage createEditNewsPage;
     private HomePage homePage;
     private EcoNewsPage newsPage;
-    CreateEditNewsPage createEditNewsPage;
+
 
     @Given("the user is registered and logged into the GreenCity system")
     public void theUserIsRegisteredAndLoggedIntoTheGreenCitySystem() {
@@ -55,7 +55,7 @@ public class CreateNewsSteps  extends BaseStep{
         assertion.assertTrue(createEditNewsPage.isPresentTitleInputTextField(),"Title input text field should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.getTitleFieldCharacterCounterText().contains("0/170"), "Character count should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.getOnlyThreeTagsCanBeAddedText().contains("Only 3 tags can be added"));
-        assertion.assertEquals(createEditNewsPage.getListOfAllTagButtonsText(),newsPage.tagFilters,"All tags should be present in the 'Create News' page");
+        assertion.assertEquals(createEditNewsPage.getListOfAllTagButtonsText(),createEditNewsPage.tagFilters,"All tags should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.isAllSelectedTagsChangeAppearance(),"All tags should change an appearance after selecting");
         assertion.assertEquals(createEditNewsPage.getImageBrowseLinkText(),"browse","link for uploading an image should be present in the 'Create News' page");
         assertion.assertEquals(createEditNewsPage.getContentText(),"Content");
