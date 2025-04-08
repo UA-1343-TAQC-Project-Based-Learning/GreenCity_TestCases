@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
 
 public class CreateEditNewsPage extends BasePage {
 
@@ -221,6 +222,16 @@ public String getAuthorName(){return authorLabel.getText();}
         textContentComponent.fillContentTextAreaField(text);
         return this;
     }
+    public CreateEditNewsPage enterTextIntoTextContentField(Stream<String> text) {
+
+        text.forEach(line -> {
+            sleep(100);
+            textContentComponent.clickContentInputTextField();
+        });
+
+        return this;
+    }
+
 
     public String getTitleInputFieldBorderColor() {
         return titleInputTextField.getCssValue("border-color");
