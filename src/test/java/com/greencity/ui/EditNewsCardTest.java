@@ -96,7 +96,7 @@ public class EditNewsCardTest extends BaseTestRunner {
 
 
     @Test
-    public void verifyCanselEditing() {
+    public void verifyCancelEditing() {
         newsTitleAfterEditing = "TestNews after editing" + UUID.randomUUID();
 
         CreateEditNewsPage createEditNewsPage = newsCardPage
