@@ -34,7 +34,6 @@ import java.util.Date;
 
 
 public class BaseTestRunner {
-    private static final String BASE_URL = "https://www.greencity.cx.ua/#/ubs";
     private static final Long ONE_SECOND_DELAY = 1000L;
     protected static Boolean isTestSuccessful = false;
     protected static LocalStorageJS localStorageJS;
@@ -146,8 +145,7 @@ public class BaseTestRunner {
 
 
     public HomePage loadApplication() {
-        HomePage homePage = new HomePage(driver).goToHomePage();
-        return homePage;
+        return new HomePage(driver).goToHomePage();
     }
 
 }
