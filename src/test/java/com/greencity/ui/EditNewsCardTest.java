@@ -4,6 +4,7 @@ import com.greencity.ui.component.cards.NewsCardTableViewComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.container.NewsCardsContainer;
 import com.greencity.ui.data.Colors;
+import com.greencity.ui.modal.CancelModal;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.econewspage.NewsCardPage;
@@ -23,6 +24,7 @@ public class EditNewsCardTest extends BaseTestRunner {
 
     private String newsTitle;
     private String newsContent;
+    private String newsTitleAfterEditing;
     private NewsCardPage newsCardPage;
     private EcoNewsPage ecoNewsPage;
 
@@ -91,6 +93,36 @@ public class EditNewsCardTest extends BaseTestRunner {
 
         softAssert.assertAll();
     }
+
+
+    @Test
+    public void verifyCanselEditing() {
+        newsTitleAfterEditing = "TestNews after editing" + UUID.randomUUID();
+
+        CreateEditNewsPage createEditNewsPage = newsCardPage
+                .clickEditButton();
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(createEditNewsPage.getTitleInputTextFieldValue(), newsTitle, "Initial title in edit form should match original news title");
+
+        createEditNewsPage.clearTitleInputTextField()
+                .clickTitleHeaderText()
+                .fillTitleInputTextField(newsTitleAfterEditing);
+
+        softAssert.assertEquals(createEditNewsPage.getTitleInputTextFieldValue(), newsTitleAfterEditing, "Input field should display the new edited title");
+
+        EcoNewsPage ecoNewsPageAfterCancel = createEditNewsPage
+                .clickExitButton()
+                .clickYesCancelButton();
+
+        softAssert.assertEquals(ecoNewsPage.getHeaderText(), "Eco news", "After canceling edit, user should be redirected to EcoNews page");
+
+        softAssert.assertTrue(ecoNewsPageAfterCancel.isExistCardComponentByPartialTitle(newsTitle), "News card should display original title after canceling edit");
+
+        softAssert.assertAll();
+    }
+
 
     @AfterMethod
     public void deleteTestNews() {
