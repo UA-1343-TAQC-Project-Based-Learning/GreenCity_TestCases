@@ -1,13 +1,14 @@
 package com.greencity.cucumber.steps;
 
+import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.homepage.HomePage;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -15,15 +16,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
-public class CreateNewsSteps  extends BaseStep{
+public class CreateEditNewsPageStepsDefinition extends BaseStep {
 
-    private CreateEditNewsPage createEditNewsPage;
     private HomePage homePage;
     private EcoNewsPage newsPage;
     CreateEditNewsPage createEditNewsPage;
 
-    @Given("the user is registered and logged into the GreenCity system")
-    public void theUserIsRegisteredAndLoggedIntoTheGreenCitySystem() {
+    @Given("The user is on the Home page as a logged-in user")
+    public void theUserIsOnTheHomePageAsALoggedInUser() {
         initDriver();
         driver.get(testValueProvider.getBaseUIUrl());
         homePage = new HomePage(driver);
@@ -34,17 +34,71 @@ public class CreateNewsSteps  extends BaseStep{
         newsPage = new HomePage(driver).getHeader().gotoEcoNewsPage();
     }
 
-    @And("the user clicks the {string} button on the main news page")
-    public void theUserClicksTheButtonOnTheMainNewsPage(String arg0) {
+    @When("the user navigates to the Create News page")
+    public void theUserNavigatesToTheCreateNewsPage() {
         newsPage.clickCreateNewsButton();
-        sleep(1);
         createEditNewsPage = new CreateEditNewsPage(driver);
     }
+
+    @When("the user types {string} in the Title field")
+    public void theUserTypesInTheTitleField(String title) {
+        createEditNewsPage.fillTitleInputTextField(title);
+    }
+
+    @When("the user types {string} in the News Content field")
+    public void theUserTypesInTheNewsContentField(String content) {
+        createEditNewsPage.fillContentInput(content);
+    }
+
+    @When("the user types {string} in the Source link field")
+    public void theUserTypesInTheSourceLinkField(String url) {
+        createEditNewsPage.fillSourceInput(url);
+    }
+
+//    @When("the user selects the {tagButton} tag")
+//    public void theUserSelectsTheTag(TagButton tagButton) {
+//        createEditNewsPage.clickOnlyUnselectedTagFilterButton(tagButton);
+//    }
+//
+//    @When("the user unselects the {tagButton} tag")
+//    public void theUserUnselectsTheTag(TagButton tagButton) {
+//        if (createEditNewsPage.isTagSelected(tagButton)) {
+//            createEditNewsPage.clickTagFilterButton(tagButton);
+//        }
+//    }
+
+    @When("the user uploads the image from {string}")
+    public void theUserUploadsTheImageFrom(String imagePath) {
+        createEditNewsPage.switchToImageUploadComponent().uploadImage(imagePath);
+    }
+
+    @When("the user clicks the {string} button on the Create News page")
+    public void theUserClicksTheButtonOnTheCreateNewsPage(String buttonName) {
+        switch (buttonName) {
+            case "ImageSubmitButton":
+                driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+                break;
+            case "ImageCancelButton":
+                driver.findElement(By.xpath("//button[@class='secondary-global-button s-btn']")).click();
+                break;
+            case "Publish/EditButton":
+                driver.findElement(By.xpath("//button[@class='primary-global-button']")).click();
+                break;
+            case "CancelButton":
+                driver.findElement(By.xpath("//button[@class='tertiary-global-button']")).click();
+                break;
+            case "PreviewButton":
+                driver.findElement(By.xpath("//button[@class='secondary-global-button']")).click();
+                break;
+            default:
+                Assert.fail("Unknown button: " + buttonName);
+        }
+    }
+
 
     @Then("the Create News form should be displayed")
     public void theFormShouldBeDisplayed() {
         Assert.assertEquals(createEditNewsPage.getTitleText(), "Title","Title should be present in the 'Create News' page");
-
     }
 
     @Then("the form should contain the following fields in order")
@@ -55,7 +109,7 @@ public class CreateNewsSteps  extends BaseStep{
         assertion.assertTrue(createEditNewsPage.isPresentTitleInputTextField(),"Title input text field should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.getTitleFieldCharacterCounterText().contains("0/170"), "Character count should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.getOnlyThreeTagsCanBeAddedText().contains("Only 3 tags can be added"));
-        assertion.assertEquals(createEditNewsPage.getListOfAllTagButtonsText(),newsPage.tagFilters,"All tags should be present in the 'Create News' page");
+        assertion.assertEquals(createEditNewsPage.getListOfAllTagButtonsText(),createEditNewsPage.tagFilters,"All tags should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.isAllSelectedTagsChangeAppearance(),"All tags should change an appearance after selecting");
         assertion.assertEquals(createEditNewsPage.getImageBrowseLinkText(),"browse","link for uploading an image should be present in the 'Create News' page");
         assertion.assertEquals(createEditNewsPage.getContentText(),"Content");
@@ -101,6 +155,5 @@ public class CreateNewsSteps  extends BaseStep{
     @Then("the Date field should be pre-filled with the current date and non-editable")
     public void theFieldShouldBePreFilledWithTheCurrentDateAndNonEditable(String arg0) {
     }
-
 
 }
