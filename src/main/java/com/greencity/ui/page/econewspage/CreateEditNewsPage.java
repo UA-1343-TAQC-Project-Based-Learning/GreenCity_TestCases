@@ -226,7 +226,7 @@ public String getAuthorName(){return authorLabel.getText();}
 
         text.forEach(line -> {
             sleep(100);
-            textContentComponent.clickContentInputTextField();
+            textContentComponent.fillTextAreaField(line);
         });
 
         return this;

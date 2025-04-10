@@ -50,12 +50,6 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
         softAssert.assertTrue(createEditNewsPage.getContentInputFieldTextColor().equals(Colors.ERROR_RED));
 
         FileReaderData example = new FileReaderData();
-//        try {
-//            String content = example.readTextFromFile("D:/Java_projects/file1.txt");
-//            createEditNewsPage.enterTextIntoTextContentField(content);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         try (Stream<String> lines = example.readTextFromFileGenerator("D:/Java_projects/file1.txt")) {
 
             createEditNewsPage.enterTextIntoTextContentField(lines);
