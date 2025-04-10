@@ -10,8 +10,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
 import org.testng.asserts.SoftAssert;
 
 import java.time.LocalDate;
@@ -22,7 +20,7 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
 
     private HomePage homePage;
     private EcoNewsPage newsPage;
-
+    CreateEditNewsPage createEditNewsPage;
 
     @Given("The user is on the Home page as a logged-in user")
     public void theUserIsOnTheHomePageAsALoggedInUser() {
@@ -56,18 +54,6 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
     public void theUserTypesInTheSourceLinkField(String url) {
         createEditNewsPage.fillSourceInput(url);
     }
-
-//    @When("the user selects the {tagButton} tag")
-//    public void theUserSelectsTheTag(TagButton tagButton) {
-//        createEditNewsPage.clickOnlyUnselectedTagFilterButton(tagButton);
-//    }
-//
-//    @When("the user unselects the {tagButton} tag")
-//    public void theUserUnselectsTheTag(TagButton tagButton) {
-//        if (createEditNewsPage.isTagSelected(tagButton)) {
-//            createEditNewsPage.clickTagFilterButton(tagButton);
-//        }
-//    }
 
     @When("the user uploads the image from {string}")
     public void theUserUploadsTheImageFrom(String imagePath) {
@@ -116,10 +102,10 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
         assertion.assertEquals(createEditNewsPage.getImageBrowseLinkText(),"browse","link for uploading an image should be present in the 'Create News' page");
         assertion.assertEquals(createEditNewsPage.getContentText(),"Content");
         assertion.assertTrue(createEditNewsPage.isPresentContentInputTextField(),"Content input text field should be present in the 'Create News' page");
-       // assertion.assertTrue(createEditNewsPage.getContentCharacterCountText().contains("Must be minimum 20 and maximum 63 206 symbols"));
+        assertion.assertTrue(createEditNewsPage.getContentCharacterCountText().contains("Must be minimum 20 and maximum 63 206 symbols"));
         assertion.assertEquals(createEditNewsPage.getAuthorLabelText(),testValueProvider.getUserName().toLowerCase(), "userName should be present in the 'Create News' page" );
         assertion.assertTrue(createEditNewsPage.isAuthorLabelNotEditable(), "Username label should not be editable");
-       // assertion.assertEquals(createEditNewsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(), "current date should be present");
+        assertion.assertEquals(createEditNewsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(), "current date should be present");
         assertion.assertTrue(createEditNewsPage.isDataLabelNotEditable(),"Date label should not be editable");
         assertion.assertEquals(createEditNewsPage.getExternalSourceInputFieldTitle(),"Source (optional)", "Source (optional) should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"),

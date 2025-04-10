@@ -26,3 +26,12 @@ Feature: News Tag Selection
       | Education |
     And The user clicks "Publish" button
     Then The news should be published with the selected tags
+
+  Scenario: The user cannot select more than three tags
+    When The user selects the following tags:
+      | News       |
+      | Events     |
+      | Education  |
+    And The user tries to select the tag "Initiatives"
+    Then The tag "Initiatives" should not be selected
+    And The tag "Initiatives" should be white

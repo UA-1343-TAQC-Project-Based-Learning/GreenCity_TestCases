@@ -1,6 +1,8 @@
 package com.greencity.cucumber.steps;
 
+import com.greencity.ui.component.cards.NewsCardTableViewComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
+import com.greencity.ui.data.Colors;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.homepage.HomePage;
@@ -14,14 +16,17 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class NewsTagSelectionSteps extends BaseStep {
 
     private HomePage homePage;
-    private EcoNewsPage newsPage;
+    private EcoNewsPage ecoNewsPage;
     private CreateEditNewsPage createEditNewsPage;
     private List<TagButton> selectedTags;
+    private String newsTitle;
+    private String newsContent;
 
     private TagButton getTagButtonByName(String tagName) {
         try {
@@ -36,38 +41,37 @@ public class NewsTagSelectionSteps extends BaseStep {
         initDriver();
         driver.get(testValueProvider.getBaseUIUrl());
         homePage = new HomePage(driver);
-        newsPage = homePage.getHeader().gotoEcoNewsPage();
-        newsPage.clickCreateNewsButton();
-        createEditNewsPage = new CreateEditNewsPage(driver);
+        ecoNewsPage = homePage.gotoEcoNewsPage();
+        createEditNewsPage = ecoNewsPage.clickCreateNewsButton();
+
+        newsTitle = "TestNews_" + UUID.randomUUID();
+        newsContent = "Content_" + UUID.randomUUID();
     }
 
-    @And("The user fills required fields with valid data")
+    @When("The user fills required fields with valid data")
     public void fillRequiredFieldsWithValidData() {
-        createEditNewsPage.fillTitleInputTextField("Test Title");
-        createEditNewsPage.fillContentInput("Valid content with more than 20 characters");
+        createEditNewsPage.clickTitleInputTextField()
+                .fillTitleInputTextField(newsTitle)
+                .enterTextIntoTextContentField(newsContent);
     }
 
     @When("The user selects the following tags:")
     public void selectTags(DataTable tagsTable) {
         List<String> tags = tagsTable.asList();
-        tags.forEach(tag ->
-                createEditNewsPage.clickOnlyUnselectedTagFilterButton(getTagButtonByName(tag))
-        );
+        for (String tag : tags) {
+            TagButton tagButton = getTagButtonByName(tag);
+            createEditNewsPage.clickTagFilterButton(tagButton);
+        }
         this.selectedTags = tags.stream()
                 .map(this::getTagButtonByName)
                 .collect(Collectors.toList());
-    }
-
-    @When("The user attempts to select a fourth tag {string}")
-    public void attemptToSelectFourthTag(String tagName) {
-        createEditNewsPage.clickOnlyUnselectedTagFilterButton(getTagButtonByName(tagName));
     }
 
     @And("The user clicks {string} button")
     public void clickButton(String buttonName) {
         switch (buttonName) {
             case "Publish":
-                driver.findElement(By.xpath("//button[@class='primary-global-button']")).click();
+                ecoNewsPage = createEditNewsPage.clickPublishButton();
                 break;
             default:
                 Assert.fail("Unknown button: " + buttonName);
@@ -76,38 +80,54 @@ public class NewsTagSelectionSteps extends BaseStep {
 
     @Then("The news should be published with the selected tags")
     public void verifyPublishedNewsHasCorrectTags() {
-        EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
-        var newsCard = ecoNewsPage.getNewsCardsContainer()
-                .getNewsCardTableViewComponents()
-                .getFirst();
-
-        List<String> actualTags = newsCard.getFiltersTagText();
-
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualTags.size(), selectedTags.size(),
-                "Number of tags in published news doesn't match");
 
-        selectedTags.forEach(tag ->
-                softAssert.assertTrue(actualTags.contains(tag.getUkrainianName()),
-                        "Tag " + tag + " not found in published news")
-        );
+        softAssert.assertFalse(ecoNewsPage.getNewsCardsContainer().getNewsCardTableViewComponents().isEmpty(),
+                "No news cards found after publishing");
+
+        NewsCardTableViewComponent firstNewsCard = ecoNewsPage.getNewsCardsContainer()
+                .getNewsCardTableViewComponents().getFirst();
+
+        softAssert.assertEquals(firstNewsCard.getTitleLabelText(), newsTitle,
+                "Published news title doesn't match the created one");
+
+        List<String> publishedTags = firstNewsCard.getFiltersTagText();
+        for (TagButton tag : selectedTags) {
+            softAssert.assertTrue(publishedTags.contains(tag.getEnglishName()),
+                    "Published news should contain " + tag + " tag. Actual tags: " + publishedTags);
+        }
 
         softAssert.assertAll();
     }
 
-    @Then("The tag {string} should not be selected")
-    public void verifyTagNotSelected(String tagName) {
+    @Then("The tag {string} should be selected and green")
+    public void verifyTagIsSelectedAndGreen(String tagName) {
         TagButton tag = getTagButtonByName(tagName);
-        Assert.assertFalse(createEditNewsPage.isTagSelected(tag),
-                tagName + " tag should not be selectable");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(createEditNewsPage.isTagSelected(tag),
+                tagName + " tag should be selected");
+        softAssert.assertEquals(createEditNewsPage.getTagButtonColor(tag), "#2b6b34",
+                tagName + " tag should be green when selected");
+        softAssert.assertAll();
     }
 
-    @Then("Only {int} tags should be selected")
-    public void verifyNumberOfSelectedTags(int expectedCount) {
-        long selectedCount = selectedTags.stream()
-                .filter(tag -> createEditNewsPage.isTagSelected(tag))
-                .count();
-        Assert.assertEquals(selectedCount, expectedCount,
-                "Incorrect number of selected tags");
+    @When("The user tries to select the tag {string}")
+    public void tryToSelectFourthTag(String tagName) {
+        TagButton tagButton = getTagButtonByName(tagName);
+        createEditNewsPage.clickTagFilterButton(tagButton);
+    }
+
+    @Then("The tag {string} should not be selected")
+    public void verifyTagIsNotSelected(String tagName) {
+        TagButton tag = getTagButtonByName(tagName);
+        Assert.assertFalse(createEditNewsPage.isTagSelected(tag),
+                "Tag " + tagName + " should NOT be selected");
+    }
+
+    @Then("The tag {string} should be white")
+    public void verifyTagIsWhite(String tagName) {
+        TagButton tag = getTagButtonByName(tagName);
+        Assert.assertEquals(createEditNewsPage.getTagButtonColor(tag), Colors.PRIMARY_WHITE.getColor(),
+                "Tag " + tagName + " should be white when not selected");
     }
 }
