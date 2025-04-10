@@ -78,19 +78,19 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
     public void theUserClicksTheButtonOnTheCreateNewsPage(String buttonName) {
         switch (buttonName) {
             case "ImageSubmitButton":
-                driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+                createEditNewsPage.switchToImageUploadComponent().clickSubmitButton();
                 break;
             case "ImageCancelButton":
-                driver.findElement(By.xpath("//button[@class='secondary-global-button s-btn']")).click();
+                createEditNewsPage.switchToImageUploadComponent().clickCancelButton();
                 break;
             case "Publish/EditButton":
-                driver.findElement(By.xpath("//button[@class='primary-global-button']")).click();
+                createEditNewsPage.clickPublishButton();
                 break;
             case "CancelButton":
-                driver.findElement(By.xpath("//button[@class='tertiary-global-button']")).click();
+
                 break;
             case "PreviewButton":
-                driver.findElement(By.xpath("//button[@class='secondary-global-button']")).click();
+                createEditNewsPage.clickPreviewButton();
                 break;
             default:
                 Assert.fail("Unknown button: " + buttonName);
@@ -114,12 +114,12 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
         assertion.assertEquals(createEditNewsPage.getListOfAllTagButtonsText(),createEditNewsPage.tagFilters,"All tags should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.isAllSelectedTagsChangeAppearance(),"All tags should change an appearance after selecting");
         assertion.assertEquals(createEditNewsPage.getImageBrowseLinkText(),"browse","link for uploading an image should be present in the 'Create News' page");
-        assertion.assertEquals(createEditNewsPage.getContentText(),"Content");
+        assertion.assertEquals(createEditNewsPage.getContentHeaderText(),"Content","Content header should be present");
         assertion.assertTrue(createEditNewsPage.isPresentContentInputTextField(),"Content input text field should be present in the 'Create News' page");
-       // assertion.assertTrue(createEditNewsPage.getContentCharacterCountText().contains("Must be minimum 20 and maximum 63 206 symbols"));
+        assertion.assertTrue(createEditNewsPage.getContentDescriptionWarning().contains("Must be minimum 20 and maximum 63 206 symbols"),"Content warning should be present");
         assertion.assertEquals(createEditNewsPage.getAuthorLabelText(),testValueProvider.getUserName().toLowerCase(), "userName should be present in the 'Create News' page" );
         assertion.assertTrue(createEditNewsPage.isAuthorLabelNotEditable(), "Username label should not be editable");
-       // assertion.assertEquals(createEditNewsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(), "current date should be present");
+        assertion.assertEquals(createEditNewsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(), "current date should be present");
         assertion.assertTrue(createEditNewsPage.isDataLabelNotEditable(),"Date label should not be editable");
         assertion.assertEquals(createEditNewsPage.getExternalSourceInputFieldTitle(),"Source (optional)", "Source (optional) should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"),
@@ -156,6 +156,23 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
 
     @Then("the Date field should be pre-filled with the current date and non-editable")
     public void theFieldShouldBePreFilledWithTheCurrentDateAndNonEditable(String arg0) {
+    }
+
+    @Then("all elements should be in correct order")
+    public void elementsShouldBePresentInCorrectOrder(){
+        SoftAssert assertion = new SoftAssert();
+
+        assertion.assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getTitleInputTextField(),createEditNewsPage.getFilterTagsRoot()),"Incorrect order between titleInputTextField and filterTagsRoot");
+        assertion.assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getFilterTagsRoot(),createEditNewsPage.getExternalSourceLinkInputField()), "Incorrect order between filterTagsRoot and externalSourceLinkInputField");
+        assertion.assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getImageBlockRoot(),createEditNewsPage.getExternalSourceLinkInputField()),"Incorrect order between imageBlockRoot and externalSourceLinkInputField");
+        assertion.assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getExternalSourceLinkInputField(),createEditNewsPage.getTextAreaRoot()),"Incorrect order between externalSourceLinkInputField and textAreaRoot");
+        assertion.assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getTextAreaRoot(),createEditNewsPage.getDataLabel()),"Incorrect order between dtaLabel and textAreaRoot");
+        assertion.assertTrue(createEditNewsPage.areElementsOnSameLine(createEditNewsPage.getDataLabel(), createEditNewsPage.getAuthorLabel()),"Incorrect order between dtaLabel and authorLabel");
+        assertion.assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getAuthorLabel(),createEditNewsPage.getExitButton()),"Incorrect order between exitButton and authorLabel");
+        assertion.assertTrue(createEditNewsPage.areElementsOnSameLine(createEditNewsPage.getExitButton(), createEditNewsPage.getPreviewButton()),"Incorrect order between exitButton and previewButton");
+        assertion.assertTrue(createEditNewsPage.areElementsOnSameLine(createEditNewsPage.getPublishButton(), createEditNewsPage.getPreviewButton()),"Incorrect order between publishButton and previewButton");
+
+        assertion.assertAll();
     }
 
 }
