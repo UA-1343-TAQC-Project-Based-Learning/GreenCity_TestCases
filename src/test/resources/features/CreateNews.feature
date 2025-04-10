@@ -5,11 +5,11 @@ Feature: Create News Form Display
   So that I can ensure a proper user experience
 
   Background:
-    Given the user is registered and logged into the GreenCity system
+    Given The user is on the Home page as a logged-in user
 
   Scenario: Verify Create News form displays all necessary fields in the correct order
     When the user navigates to the GreenCity News page
-    And click the "Create News" button
+    When the user navigates to the Create News page
     Then the Create News form should be displayed
     And the form should contain the following fields in order
     And the form should contain the following buttons:
