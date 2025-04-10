@@ -1,6 +1,7 @@
 package com.greencity.ui.component.ecoNewsTag;
 
 import com.greencity.ui.component.BaseComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -52,6 +53,7 @@ public class EcoNewsTagFilterComponent extends BaseComponent {
         return  tagButtons.get(button).getText();
     }
 
+    @Step("Click the 'Tag' button")
     public EcoNewsTagFilterComponent clickTagButton(TagButton button) {
         WebElement buttonElement = tagButtons.get(button);
         buttonElement.click();

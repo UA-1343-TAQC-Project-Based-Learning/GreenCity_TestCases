@@ -1,6 +1,7 @@
 package com.greencity.ui.component;
 
 import com.greencity.ui.component.header.DropdownTextSize;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,7 @@ public class TextContentComponent extends BaseComponent {
     private WebElement content;
 
     @Getter
-    @FindBy(xpath = ".//div[@class='ql-editor ql-blank']")
+    @FindBy(xpath = ".//div[contains(@class,'ql-editor')]")
     private WebElement textAreaField;
     @Getter
     @FindBy(xpath = ".//p[@class = 'field-info']")
@@ -91,16 +92,19 @@ public class TextContentComponent extends BaseComponent {
         return dropdownTextSize;
     }
 
+    @Step("Create dropdown text size")
     public DropdownTextSize createDropdownTextSize() {
         dropdownTextSize = new DropdownTextSize(driver, rootElement);
         return getDropdownTextSize();
     }
 
+    @Step("Click on dropdown small text size")
     public TextContentComponent clickDropdownSmallTextSize() {
         getDropdownTextSize().clickSmallStyleButton();
         return this;
     }
 
+    @Step("Click on dropdown normal text size")
     public TextContentComponent clickDropdownNormalTextSize() {
         getDropdownTextSize().clickNormalStyleButton();
         return this;
@@ -118,10 +122,12 @@ public class TextContentComponent extends BaseComponent {
 
     }
 
+    @Step("Click on content input text field")
     public void clickContentInputTextField() {
         contentInputTextField.click();
     }
 
+    @Step("Clear content input text field")
     public void clearContentInputTextField() {
         contentInputTextField.clear();
     }
@@ -149,11 +155,13 @@ public class TextContentComponent extends BaseComponent {
 
 
 
+    @Step("Click on dropdown huge text size")
     public TextContentComponent clickDropdownHugeTextSize() {
         getDropdownTextSize().clickHugeStyleButton();
         return this;
     }
 
+    @Step("Click on dropdown large text size")
     public TextContentComponent clickDropdownLargeTextSize() {
         getDropdownTextSize().clickLargeStyleButton();
         return this;
@@ -163,20 +171,21 @@ public class TextContentComponent extends BaseComponent {
         return textAreaField.getText();
     }
 
+    @Step("Click on text area field")
     public void clickTextAreaField() {
         contentInputTextField.click();
     }
 
+    @Step("Click text area field")
     public void clearTextAreaField() {
         contentInputTextField.clear();
     }
 
+    @Step("Fill text area field with: {text}")
     public void fillTextAreaField(String text) {
         contentInputTextField.sendKeys(text);
     }
-
-
-
+    @Step("Fill content text area field with: {text}")
     public TextContentComponent fillContentTextAreaField(String text) {
         clickTextAreaField();
         clearTextAreaField();

@@ -4,10 +4,15 @@ import com.greencity.ui.component.ecoNewsTag.EcoNewsTagFilterComponent;
 import com.greencity.ui.container.NewsCardsContainer;
 import com.greencity.ui.elements.ToolbarElement;
 import com.greencity.ui.page.BasePage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class EcoNewsPage extends BasePage {
 
@@ -40,7 +45,7 @@ public class EcoNewsPage extends BasePage {
     private WebElement newsCounterText;
 
     @Getter
-    @FindBy(xpath="//div[contains(@class,'mdc-snackbar__label')]")
+    @FindBy(xpath = "//div[contains(@class,'mdc-snackbar__label')]")
     private WebElement createCardMessage;
 
     public EcoNewsPage(WebDriver driver) {
@@ -60,6 +65,7 @@ public class EcoNewsPage extends BasePage {
         return filterByTitleText.getText();
     }
 
+    @Step("Click 'Create news' button")
     public CreateEditNewsPage clickCreateNewsButton() {
         waitUntilElementClickable(createNewsButton);
         createNewsButton.click();
@@ -70,18 +76,27 @@ public class EcoNewsPage extends BasePage {
         return newsCounterText.getText();
     }
 
-    public String getCreateCardMessageText(){
+    public String getCreateCardMessageText() {
         return createCardMessage.getText();
     }
 
-    public boolean isExistCardComponentByPartialTitle(String partialTitle){
-       return newsCardsContainer.isExistCardComponentByPartialTitle(partialTitle);
+    public boolean isExistCardComponentByPartialTitle(String partialTitle) {
+        return newsCardsContainer.isExistCardComponentByPartialTitle(partialTitle);
     }
 
-    public NewsCardPage goToNewsCardPage(String title){
+    @Step("Open News Card page clicking by title '{title}'")
+    public NewsCardPage goToNewsCardPage(String title) {
         newsCardsContainer.clickComponentByTitle(title);
-        return new  NewsCardPage(driver);
+        return new NewsCardPage(driver);
     }
 
+    public String getFirstCardTitle() {
+        return newsCardsContainer.getCardComponentTitles().getFirst();
+    }
+
+    public LocalDate getDataLabelFormating(Locale locale) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", locale);
+        return LocalDate.parse(newsCardsContainer.getCardComponentDatesOfCreation().getFirst(), formatter);
+    }
 
 }

@@ -8,6 +8,8 @@ public enum Colors {
     PRIMARY_GREEN("rgba(19, 170, 87, 1)"),
     PRIMARY_WHITE("rgba(255, 255, 255, 1)"),
     PRIMARY_RED("rgb(255, 0, 0)");
+    IMAGE_DROPZONE_WARNING_BACKGROUND("rgba(254, 241, 242, 1)");
+
 
     private  String color;
 

@@ -1,5 +1,6 @@
 package com.greencity.ui.component.header;
 import com.greencity.ui.component.BaseComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,15 +41,22 @@ public class DropdownTextSize extends BaseComponent {
         return getLargeStyleButton().getText();
     }
 
+    @Step("Click the 'Small style' button")
     public void clickSmallStyleButton() {
         smallStyleButton.click();
     }
+
+    @Step("Click the 'Normal style' button")
     public void clickNormalStyleButton() {
         normalStyleButton.click();
     }
+
+    @Step("Click the 'Huge style' button")
     public void clickHugeStyleButton() {
         hugeStyleButton.click();
     }
+
+    @Step("Click the 'Large style' button")
     public void clickLargeStyleButton() {
         largeStyleButton.click();
     }
