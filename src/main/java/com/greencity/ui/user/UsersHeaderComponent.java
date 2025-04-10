@@ -29,8 +29,15 @@ public class UsersHeaderComponent extends HeaderComponent {
     @FindBy(xpath =".//ul[@id='header_user-wrp']")
     private WebElement userName;
 
+
     @Step("Click on the user name in the header")
     public void clickUserName() {
+
+    public String getUserNameText() {
+        return userName.getText();
+    }
+
+    public void clickUserName(){
         userName.click();
     }
 
