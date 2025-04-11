@@ -4,6 +4,7 @@ import com.greencity.ui.modal.DeleteModal;
 import com.greencity.ui.page.BasePage;
 import io.qameta.allure.Step;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class NewsCardPage extends BasePage {
-
     @Getter
     @FindBy(xpath = "//a[@class= 'button-link']")
     private WebElement backButton;
@@ -96,6 +96,15 @@ public class NewsCardPage extends BasePage {
         return backButton.getText();
     }
 
+
+
+
+
+
+
+
+
+
     @Step("Click 'Back to News' button")
     public EcoNewsPage clickBackButton() {
         waitUntilElementClickable(backButton);
@@ -113,10 +122,12 @@ public class NewsCardPage extends BasePage {
         deleteButton.click();
         return new DeleteModal(driver, deleteModalRoot);
     }
-
     public LocalDate getDataLabelFormating(Locale locale) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy", locale);
         return LocalDate.parse(getDateOfCreationLabelText(), formatter);
+    }
+    public boolean isEditButtonAbsent() {
+        return driver.findElements(By.id("edit-button")).isEmpty();
     }
 
 }
