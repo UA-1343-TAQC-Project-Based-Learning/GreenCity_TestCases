@@ -268,8 +268,8 @@ public String getAuthorName(){return authorLabel.getText();}
     public String getTitleInputFieldBorderColor() {
         return titleInputTextField.getCssValue("border-color");
     }
-    public String getContentInputFieldTextColor() {
-        return textContentComponent.getContentInputFieldBorderColor();
+    public String getTextAreaDescriptionWarningsColor() {
+        return textContentComponent.getTextAreaDescriptionWarningsColor();
     }
 
     public boolean isPresentContentInputTextField() {

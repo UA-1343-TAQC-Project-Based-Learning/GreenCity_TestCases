@@ -85,7 +85,6 @@ public class NewsCardPage extends BasePage {
         return usernameLabel.getText();
     }
 
-    public CreateEditNewsPage clickEditButton()  {
     @Step("Click 'Edit' button")
     public CreateEditNewsPage clickEditButton() {
         waitUntilElementClickable(editButton);

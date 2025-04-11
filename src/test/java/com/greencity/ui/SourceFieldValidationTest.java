@@ -31,9 +31,6 @@ public class SourceFieldValidationTest extends BaseTestRunner {
 
         String titleForSecondTest = "TestTitle-" + UUID.randomUUID();
 
-
-        CreateEditNewsPage createNewsPage = homePage.gotoEcoNewsPage().
-
         CreateEditNewsPage createEditNewsPage = homePage.gotoEcoNewsPage().
 
                 clickCreateNewsButton()

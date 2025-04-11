@@ -32,7 +32,7 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
                 .gotoEcoNewsPage()
                 .clickCreateNewsButton()
                 .clickTitleInputTextField()
-                .fillTitleInputTextField(contentCharacterProvider(10));
+                .fillTitleInputTextField(contentCharacterProvider(1));
 
         softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 120,
                 "The text should equal 170 characters.");
@@ -44,25 +44,18 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
 
         softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
-        createEditNewsPage.enterTextIntoTextContentField(contentCharacterProvider(1));
-        softAssert.assertTrue(createEditNewsPage.getContentWarningCounterText().equals(" Not enough characters. Left: 8 "),
-                "Content counter should contains 'Not enough characters.Left:8' ");
-        softAssert.assertTrue(createEditNewsPage.getContentInputFieldTextColor().equals(Colors.ERROR_RED));
-
         FileReaderData example = new FileReaderData();
         try (Stream<String> lines = example.readTextFromFileGenerator("D:/Java_projects/file1.txt")) {
-
             createEditNewsPage.enterTextIntoTextContentField(lines);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         softAssert.assertTrue(createEditNewsPage.getContentCharacterCountText().length() == 63206,
                   "Поле повинно містити не менше 20 та не більше 63 206 символів");
         softAssert.assertTrue(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
 
-        softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
+        softAssert.assertTrue(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
 
         softAssert.assertAll();

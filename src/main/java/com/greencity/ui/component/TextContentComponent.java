@@ -136,8 +136,8 @@ public class TextContentComponent extends BaseComponent {
         return contentInputTextField.getAttribute("value");
     }
 
-    public String getContentInputFieldBorderColor() {
-        return contentInputTextField.getCssValue("border-color");
+    public String getTextAreaDescriptionWarningsColor() {
+        return textAreaDescriptionWarnings.getCssValue("border-color");
     }
 
     public String getTitleInputTextFieldPlaceholderText() {

@@ -32,13 +32,11 @@ public class UsersHeaderComponent extends HeaderComponent {
 
     @Step("Click on the user name in the header")
     public void clickUserName() {
+        userName.click();
+    }
 
     public String getUserNameText() {
         return userName.getText();
-    }
-
-    public void clickUserName(){
-        userName.click();
     }
 
     @Step("Click on the bookmark icon in the header")
