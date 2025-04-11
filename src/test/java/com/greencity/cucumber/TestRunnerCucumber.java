@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
         glue = {"com.greencity.cucumber"}
 )
 public class TestRunnerCucumber extends AbstractTestNGCucumberTests {
-
     private TestNGCucumberRunner testNGCucumberRunner;
 
     @BeforeClass
