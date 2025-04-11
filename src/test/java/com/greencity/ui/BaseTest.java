@@ -1,5 +1,7 @@
 package com.greencity.ui;
 
+import com.greencity.ui.page.econewspage.CreateEditNewsPage;
+import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

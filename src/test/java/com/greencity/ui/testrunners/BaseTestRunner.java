@@ -30,7 +30,6 @@ import java.util.Date;
 
 
 public class BaseTestRunner {
-    private static final String BASE_URL = "https://www.greencity.cx.ua/#/ubs";
     private static final Long ONE_SECOND_DELAY = 1000L;
     protected static Boolean isTestSuccessful = false;
     protected static LocalStorageJS localStorageJS;
@@ -88,6 +87,11 @@ public class BaseTestRunner {
     public void initDriver() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+
+
 
         for (String option : testValueProvider.getChromeOptions()) {
             options.addArguments(option);
@@ -96,7 +100,7 @@ public class BaseTestRunner {
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
-//        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfile().replace("%HOMEPATH%", System.getenv("HOMEPATH")));
+        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfilePath());
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -118,7 +122,7 @@ public class BaseTestRunner {
         homePage = new HomePage(driver);
     }
 
-    @AfterClass()
+  /*  @AfterClass()
     public void afterClass() {
         if (driver != null) {
             driver.quit();
@@ -134,6 +138,8 @@ public class BaseTestRunner {
         logger.info("After suite driver closed");
     }
 
+   */
+
     @Step("Clear Browser Memory Cookies and LocalStorage.")
     public void clearBrowserMemory() {
         driver.manage().deleteAllCookies();
@@ -143,8 +149,7 @@ public class BaseTestRunner {
 
 
     public HomePage loadApplication() {
-        HomePage homePage = new HomePage(driver).goToHomePage();
-        return homePage;
+        return new HomePage(driver).goToHomePage();
     }
 
 }

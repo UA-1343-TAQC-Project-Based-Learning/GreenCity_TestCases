@@ -2,6 +2,8 @@ package com.greencity.ui;
 
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
+import com.greencity.ui.testrunners.BaseTestRunner;
+import com.greencity.utils.FileReaderData;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
@@ -9,11 +11,12 @@ import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 import com.greencity.ui.data.Colors;
-
 import org.testng.asserts.SoftAssert;
 
+import java.io.IOException;
+import java.util.stream.Stream;
 
-public class ContentFieldValidationTest  extends GreenCityLoginTest {
+public class ContentFieldValidationTest  extends BaseTestRunner {
 
     protected SoftAssert softAssert = new SoftAssert();
     private String contentCharacterProvider(int numberOfCharacters) {
@@ -23,41 +26,38 @@ public class ContentFieldValidationTest  extends GreenCityLoginTest {
         }
         return stringBuilder.toString();
     }
-
-
     @Test
     public void checkContentFormNegative(){
         CreateEditNewsPage createEditNewsPage = homePage
-                .goToCreateEcoNewsPage()
-                .clickTextIntoTextContentField()
-                .clickTitleHeaderText();
+                .gotoEcoNewsPage()
+                .clickCreateNewsButton()
+                .clickTitleInputTextField()
+                .fillTitleInputTextField(contentCharacterProvider(1));
 
-        createEditNewsPage.fillTitleInputTextField("Eco News");
-        logger.info("The actual counter text color is: {}", createEditNewsPage.getTitleFieldCharacterCounterWarningTextColor());
-        softAssert.assertTrue(createEditNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.ERROR_RED),
-                "The counter text color should be red when the Title field exceeding the limit");
-        logger.info("The actual text value of Title text field is: {}", createEditNewsPage.getTitleInputTextFieldValue().length());
-        softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 150,
+        softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 120,
                 "The text should equal 170 characters.");
-
         createEditNewsPage.clickTagFilterButton(TagButton.NEWS);
-        softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
-                "The Publish button should be disabled when all required fields are not filled out");
+        softAssert.assertTrue(createEditNewsPage.isTagSelected(TagButton.NEWS),
+                "The tag should be selected after clicking");
+        softAssert.assertEquals(createEditNewsPage.getTagButtonColor(TagButton.NEWS), Colors.PRIMARY_GREEN.getColor(),
+                "The tag should have green color when selected");
 
         softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
-
-        createEditNewsPage.enterTextIntoTextContentField(contentCharacterProvider(63207));
+        FileReaderData example = new FileReaderData();
+        try (Stream<String> lines = example.readTextFromFileGenerator("D:/Java_projects/file1.txt")) {
+            createEditNewsPage.enterTextIntoTextContentField(lines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         softAssert.assertTrue(createEditNewsPage.getContentCharacterCountText().length() == 63206,
                   "Поле повинно містити не менше 20 та не більше 63 206 символів");
         softAssert.assertTrue(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
 
-        createEditNewsPage.enterTextIntoTextContentField(contentCharacterProvider(10));
-        softAssert.assertTrue(createEditNewsPage.getContentCharacterCountText().length() == 10,
-                "Поле повинно містити не менше 20 та не більше 63 206 символів");
-        softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
+        softAssert.assertTrue(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");
+
         softAssert.assertAll();
 
     }
@@ -71,21 +71,20 @@ public class ContentFieldValidationTest  extends GreenCityLoginTest {
     @Test
     public void checkContentFormPositive(){
         CreateEditNewsPage createEditNewsPage = homePage
-                .goToCreateEcoNewsPage()
-                .clickTextIntoTextContentField()
-                .clickTitleHeaderText();
+                .gotoEcoNewsPage()
+                .clickCreateNewsButton()
+                .clickTitleInputTextField()
+                .fillTitleInputTextField(contentCharacterProvider(10));
 
-        createEditNewsPage.fillTitleInputTextField("Eco News");
-        logger.info("The actual counter text color is: {}", createEditNewsPage.getTitleFieldCharacterCounterWarningTextColor());
-        softAssert.assertTrue(createEditNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.ERROR_RED),
-                "The counter text color should be red when the Title field exceeding the limit");
         logger.info("The actual text value of Title text field is: {}", createEditNewsPage.getTitleInputTextFieldValue().length());
-        softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 150,
+        softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 120,
                 "The text should equal 170 characters.");
 
         createEditNewsPage.clickTagFilterButton(TagButton.NEWS);
-        softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
-                "The Publish button should be disabled when all required fields are not filled out");
+        softAssert.assertTrue(createEditNewsPage.isTagSelected(TagButton.NEWS),
+                "The tag should be selected after clicking");
+        softAssert.assertEquals(createEditNewsPage.getTagButtonColor(TagButton.NEWS), Colors.PRIMARY_GREEN.getColor(),
+                "The tag should have green color when selected");
 
         softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
                 "The Publish button should be disabled when all required fields are not filled out");

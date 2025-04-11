@@ -99,8 +99,11 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
 
         softAssert.assertTrue(createEditNewsPage.isTagSelected(TagButton.EVENTS),
                 "The tag should be selected after clicking");
+
+
         softAssert.assertEquals(createEditNewsPage.getTagButtonColor(TagButton.EVENTS), Colors.PRIMARY_GREEN.getColor(),
                 "The tag should have green color when selected");
+
 
         softAssert.assertTrue(createEditNewsPage.isTagSelected(TagButton.EDUCATION),
                 "The tag should be selected after clicking");

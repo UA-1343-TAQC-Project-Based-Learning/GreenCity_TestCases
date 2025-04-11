@@ -32,6 +32,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
         String titleForSecondTest = "TestTitle-" + UUID.randomUUID();
 
         CreateEditNewsPage createEditNewsPage = homePage.gotoEcoNewsPage().
+
                 clickCreateNewsButton()
                 .fillTitleInputTextField(titleForSecondTest)
                 .fillContentInput("Creating Card with invalid URL in the source field")

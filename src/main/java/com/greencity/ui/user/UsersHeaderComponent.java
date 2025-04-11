@@ -1,5 +1,6 @@
 package com.greencity.ui.user;
 import com.greencity.ui.component.header.HeaderComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,12 +29,27 @@ public class UsersHeaderComponent extends HeaderComponent {
     @FindBy(xpath =".//ul[@id='header_user-wrp']")
     private WebElement userName;
 
+
+    @Step("Click on the user name in the header")
+    public void clickUserName() {
+        userName.click();
+    }
+
     public String getUserNameText() {
         return userName.getText();
     }
 
-    public void clickUserName(){
-        userName.click();
+    @Step("Click on the bookmark icon in the header")
+    public void clickBookmarkIcon() {
+        bookMarkIcon.click();
     }
-
+    @Step("Click on the notification icon in the header")
+    public void clickNotificationIcon() {
+        notificationIcon.click();
+    }
+    
+    @Step("Click on the chat icon in the header")
+    public void clickChatIcon() {
+        chatIcon.click();
+    }
 }

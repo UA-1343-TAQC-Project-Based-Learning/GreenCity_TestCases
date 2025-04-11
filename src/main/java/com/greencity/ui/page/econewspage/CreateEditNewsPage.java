@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
 
 public class CreateEditNewsPage extends BasePage {
 
@@ -116,7 +117,7 @@ public class CreateEditNewsPage extends BasePage {
         imageUploadComponent = new ImageUploadComponent(driver, imageBlockRoot);
         textContentComponent = new TextContentComponent(driver, textAreaRoot);
     }
-
+public String getAuthorName(){return authorLabel.getText();}
     public String getTitleFieldCharacterCounterTextColor() {
         return titleFieldCharacterCounter.getCssValue("color");
     }
@@ -223,6 +224,12 @@ public class CreateEditNewsPage extends BasePage {
     public String getTitleInputTextFieldValue() {
         return titleInputTextField.getAttribute("value");
     }
+    public String getContentInputFieldText() {
+        return textContentComponent.getContentInputTextFieldText();
+    }
+    public String getContentWarningCounterText(){
+        return textContentComponent.getContentWarningCounterText();
+    }
 
     @Step("Fill '{titleText}' into 'Title Input' text field")
     public CreateEditNewsPage fillTitleInputTextField(String titleText) {
@@ -247,9 +254,22 @@ public class CreateEditNewsPage extends BasePage {
         textContentComponent.fillContentTextAreaField(text);
         return this;
     }
+    public CreateEditNewsPage enterTextIntoTextContentField(Stream<String> text) {
+
+        text.forEach(line -> {
+            sleep(100);
+            textContentComponent.fillTextAreaField(line);
+        });
+
+        return this;
+    }
+
 
     public String getTitleInputFieldBorderColor() {
         return titleInputTextField.getCssValue("border-color");
+    }
+    public String getTextAreaDescriptionWarningsColor() {
+        return textContentComponent.getTextAreaDescriptionWarningsColor();
     }
 
     public boolean isPresentContentInputTextField() {
@@ -271,13 +291,23 @@ public class CreateEditNewsPage extends BasePage {
     public boolean isCancelButtonPresent() {
         return exitButton.isDisplayed();
     }
+    public boolean isCancelButtonEnabled() {
+        return exitButton.isEnabled();
+    }
 
     public boolean isPreviewButtonPresent() {
         return previewButton.isDisplayed();
     }
 
+    public boolean isPreviewButtonEnabled() {
+        return previewButton.isEnabled();
+    }
+
     public boolean isPublishButtonPresent() {
         return publishButton.isDisplayed();
+    }
+    public boolean isPublishButtonEnabled() {
+        return publishButton.isEnabled();
     }
 
     @Step("Click '{tagButton}' tag in filter")
@@ -382,9 +412,7 @@ public class CreateEditNewsPage extends BasePage {
         return externalSourceLinkInputField.getCssValue("border");
     }
 
-    public boolean isPublishButtonEnabled() {
-        return publishButton.isEnabled();
-    }
+
 
     public ImageUploadComponent switchToImageUploadComponent() {
         return imageUploadComponent;

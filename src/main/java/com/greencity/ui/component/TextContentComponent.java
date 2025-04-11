@@ -13,6 +13,7 @@ public class TextContentComponent extends BaseComponent {
     protected final String OPTION_NULL_MESSAGE = "Dropdown is null";
     private DropdownTextSize dropdownTextSize;
 
+
     @Getter
     @FindBy(xpath = ".//h3[normalize-space()='Content']")
     private WebElement content;
@@ -31,7 +32,7 @@ public class TextContentComponent extends BaseComponent {
     private WebElement textContentCounter;
 
     @FindBy(xpath = ".//p[@class='quill-counter warning']")
-    private WebElement textContentWarningCounter;
+    private WebElement contentWarningCounter;
 
     @Getter
     @FindBy(xpath = ".//div[@class = 'ql-container ql-snow']")
@@ -108,6 +109,9 @@ public class TextContentComponent extends BaseComponent {
         getDropdownTextSize().clickNormalStyleButton();
         return this;
     }
+    public String getContentWarningCounterText(){
+       return contentWarningCounter.getText();
+    }
 
     public String getAreaDescriptionWarningsText() {
         return textAreaDescriptionWarnings.getText();
@@ -132,8 +136,8 @@ public class TextContentComponent extends BaseComponent {
         return contentInputTextField.getAttribute("value");
     }
 
-    public String getContentInputFieldBorderColor() {
-        return contentInputTextField.getCssValue("border-color");
+    public String getTextAreaDescriptionWarningsColor() {
+        return textAreaDescriptionWarnings.getCssValue("border-color");
     }
 
     public String getTitleInputTextFieldPlaceholderText() {
@@ -142,15 +146,13 @@ public class TextContentComponent extends BaseComponent {
 
     public String getContentInputTextFieldText() {
         return contentInputTextField.getText();
+               // getText();
     }
 
     public String getContentCounterText() {
         return textContentCounter.getText();
     }
 
-    public String getContentWarningCounterText() {
-        return textContentWarningCounter.getText();
-    }
 
 
     @Step("Click on dropdown huge text size")
@@ -171,20 +173,18 @@ public class TextContentComponent extends BaseComponent {
 
     @Step("Click on text area field")
     public void clickTextAreaField() {
-        textAreaField.click();
+        contentInputTextField.click();
     }
 
     @Step("Click text area field")
     public void clearTextAreaField() {
-        textAreaField.clear();
+        contentInputTextField.clear();
     }
 
     @Step("Fill text area field with: {text}")
     public void fillTextAreaField(String text) {
-        textAreaField.sendKeys(text);
+        contentInputTextField.sendKeys(text);
     }
-
-
     @Step("Fill content text area field with: {text}")
     public TextContentComponent fillContentTextAreaField(String text) {
         clickTextAreaField();
