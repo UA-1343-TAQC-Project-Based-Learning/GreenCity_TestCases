@@ -63,5 +63,10 @@ public class BaseStep {
 //        localStorage.setItem("RefreshToken", provider.getRefreshToken());
 //    }
 
-
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
 }
