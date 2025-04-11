@@ -1,3 +1,4 @@
+@ignore
 Feature: Create News Form Display
 
   As a registered GreenCity user

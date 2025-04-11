@@ -1,6 +1,8 @@
 package com.greencity.cucumber.steps;
 
+import com.greencity.cucumber.hooks.Hooks;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
+import com.greencity.ui.data.Colors;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.homepage.HomePage;
@@ -10,36 +12,44 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
 import org.testng.asserts.SoftAssert;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 
-public class CreateEditNewsPageStepsDefinition extends BaseStep {
+public class CreateEditNewsPageStepsDefinition {
+
+    private Hooks hooks;
 
     private HomePage homePage;
-    private EcoNewsPage newsPage;
-    CreateEditNewsPage createEditNewsPage;
+    private EcoNewsPage ecoNewsPage;
+    private CreateEditNewsPage createEditNewsPage;
+
+    public CreateEditNewsPageStepsDefinition(Hooks hooks) {
+        this.hooks = hooks;
+    }
 
     @Given("The user is on the Home page as a logged-in user")
     public void theUserIsOnTheHomePageAsALoggedInUser() {
-        initDriver();
-        driver.get(testValueProvider.getBaseUIUrl());
-        homePage = new HomePage(driver);
+        homePage = new HomePage(hooks.getDriver());
+    }
+
+    @When("The user is on the Create News page as a logged-in user")
+    public void theUserIsOnCreateNewsPageAsALoggedInUser() {
+        createEditNewsPage = new HomePage(hooks.getDriver())
+                .getHeader()
+                .gotoEcoNewsPage()
+                .clickCreateNewsButton();
     }
 
     @When("the user navigates to the GreenCity News page")
     public void theUserNavigatesToTheGreenCityNewsPage() {
-        newsPage = new HomePage(driver).getHeader().gotoEcoNewsPage();
+        ecoNewsPage = new HomePage(hooks.getDriver()).getHeader().gotoEcoNewsPage();
     }
 
     @When("the user navigates to the Create News page")
     public void theUserNavigatesToTheCreateNewsPage() {
-        newsPage.clickCreateNewsButton();
-        createEditNewsPage = new CreateEditNewsPage(driver);
+        ecoNewsPage.clickCreateNewsButton();
+        createEditNewsPage = new CreateEditNewsPage(hooks.getDriver());
     }
 
     @When("the user types {string} in the Title field")
@@ -78,19 +88,19 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
     public void theUserClicksTheButtonOnTheCreateNewsPage(String buttonName) {
         switch (buttonName) {
             case "ImageSubmitButton":
-                driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+                hooks.getDriver().findElement(By.xpath("//button[normalize-space()='Submit']")).click();
                 break;
             case "ImageCancelButton":
-                driver.findElement(By.xpath("//button[@class='secondary-global-button s-btn']")).click();
+                hooks.getDriver().findElement(By.xpath("//button[@class='secondary-global-button s-btn']")).click();
                 break;
             case "Publish/EditButton":
-                driver.findElement(By.xpath("//button[@class='primary-global-button']")).click();
+                hooks.getDriver().findElement(By.xpath("//button[@class='primary-global-button']")).click();
                 break;
             case "CancelButton":
-                driver.findElement(By.xpath("//button[@class='tertiary-global-button']")).click();
+                hooks.getDriver().findElement(By.xpath("//button[@class='tertiary-global-button']")).click();
                 break;
             case "PreviewButton":
-                driver.findElement(By.xpath("//button[@class='secondary-global-button']")).click();
+                hooks.getDriver().findElement(By.xpath("//button[@class='secondary-global-button']")).click();
                 break;
             default:
                 Assert.fail("Unknown button: " + buttonName);
@@ -116,10 +126,10 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
         assertion.assertEquals(createEditNewsPage.getImageBrowseLinkText(),"browse","link for uploading an image should be present in the 'Create News' page");
         assertion.assertEquals(createEditNewsPage.getContentText(),"Content");
         assertion.assertTrue(createEditNewsPage.isPresentContentInputTextField(),"Content input text field should be present in the 'Create News' page");
-       // assertion.assertTrue(createEditNewsPage.getContentCharacterCountText().contains("Must be minimum 20 and maximum 63 206 symbols"));
-        assertion.assertEquals(createEditNewsPage.getAuthorLabelText(),testValueProvider.getUserName().toLowerCase(), "userName should be present in the 'Create News' page" );
+        // assertion.assertTrue(createEditNewsPage.getContentCharacterCountText().contains("Must be minimum 20 and maximum 63 206 symbols"));
+        assertion.assertEquals(createEditNewsPage.getAuthorLabelText(),hooks.getTestValueProvider().getUserName().toLowerCase(), "userName should be present in the 'Create News' page" );
         assertion.assertTrue(createEditNewsPage.isAuthorLabelNotEditable(), "Username label should not be editable");
-       // assertion.assertEquals(createEditNewsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(), "current date should be present");
+        // assertion.assertEquals(createEditNewsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(), "current date should be present");
         assertion.assertTrue(createEditNewsPage.isDataLabelNotEditable(),"Date label should not be editable");
         assertion.assertEquals(createEditNewsPage.getExternalSourceInputFieldTitle(),"Source (optional)", "Source (optional) should be present in the 'Create News' page");
         assertion.assertTrue(createEditNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"),
@@ -152,10 +162,84 @@ public class CreateEditNewsPageStepsDefinition extends BaseStep {
 
     @Then("the Author field should be pre-filled and non-editable")
     public void theFieldShouldBePreFilledAndNonEditable(String arg0) {
+
     }
 
     @Then("the Date field should be pre-filled with the current date and non-editable")
     public void theFieldShouldBePreFilledWithTheCurrentDateAndNonEditable(String arg0) {
+    }
+
+    @When("the user leaves the Title field empty")
+    public void leaveTheFieldEmpty() {
+        createEditNewsPage = new CreateEditNewsPage(hooks.getDriver())
+                .clickTitleInputTextField()
+                .clickTitleHeaderText();
+    }
+
+    @Then("the Title field's border is highlighted in red")
+    public void theTitleFieldSBorderIsHighlightedInRed() {
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.getTitleInputFieldBorderColor().equals(Colors.RED.getColor()),
+                "The border color should be red when the Title field is empty");
+    }
+
+    @Then("the Publish button is disabled")
+    public void thePublishButtonIsDisabled() {
+        hooks.getSoftAssert().assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
+                "The Publish button should be disabled when all required fields are not filled out");
+    }
+
+    @Then("the character counter shows {string}")
+    public void theCharacterCounterShows(String numberOfCharacters) {
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.getTitleFieldCharacterCounterText().equals(numberOfCharacters),
+                "The number of characters should equal 0 when field is empty");
+    }
+
+    @When("the user enters {int} character-long string into the Title field")
+    public void theUserEntersCharacterLongStringIntoTheTitleField(int numberOfCharacters) {
+        createEditNewsPage.fillTitleInputTextField(titleCharacterProvider(171));
+    }
+
+    private String titleCharacterProvider(int numberOfCharacters) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < numberOfCharacters; i++) {
+            stringBuilder.append("A");
+        }
+        return stringBuilder.toString();
+    }
+
+    @Then("the text is truncated to {int} characters")
+    public void theTextIsTruncatedToCharacters(int numberOfCharacters) {
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == numberOfCharacters,
+                "The text should equal " + numberOfCharacters + " characters.");
+    }
+
+    @Then("the counter is highlighted in red when exceeding the limit")
+    public void theCounterIsHighlightedInRedWhenExceedingTheLimit() {
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.getTitleFieldCharacterCounterWarningTextColor().equals(Colors.ERROR_RED.getColor()),
+                "The counter text color should be red when the Title field exceeding the limit");
+    }
+
+    @When("the user enters {string} into TitleInputTextField")
+    public void theUserEntersInto(String inputText) {
+        createEditNewsPage.fillTitleInputTextField(inputText);
+    }
+
+    @Then("the Title field's border is grey")
+    public void theTitleFieldSBorderIsGrey() {
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.getTitleInputFieldBorderColor().equals(Colors.QUINTYNARY_LIGHT_GREY.getColor()),
+                "The border color should be grey and " + Colors.QUINTYNARY_LIGHT_GREY);
+    }
+
+    @When("the user clicks the {string} tag on the Create News page")
+    public void theUserClicksTheTagOnTheCreateNewsPage(String tag) {
+        createEditNewsPage.clickTagFilterButton(TagButton.NEWS);
+        // switch/case will be added soon
+    }
+
+    @Then("the Publish button is enabled")
+    public void thePublishButtonIsEnabled() {
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.getPublishButton().isEnabled(),
+                "The Publish button should be enabled when all required fields are filled out");
     }
 
 }
