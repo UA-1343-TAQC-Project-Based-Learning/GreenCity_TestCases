@@ -260,6 +260,10 @@ public class CreateEditNewsPage extends BasePage {
         return textContentComponent.getContentCounterText();
     }
 
+    public String getContentWarningCounterText() {
+        return textContentComponent.getContentWarningCounterText();
+    }
+
     public long getContentInputTextFieldText() {
         return textContentComponent.getContentInputTextFieldText().length();
     }

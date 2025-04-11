@@ -174,7 +174,7 @@ public class TextContentComponent extends BaseComponent {
         textAreaField.click();
     }
 
-    @Step("Click text area field")
+    @Step("Clear text area field")
     public void clearTextAreaField() {
         textAreaField.clear();
     }
