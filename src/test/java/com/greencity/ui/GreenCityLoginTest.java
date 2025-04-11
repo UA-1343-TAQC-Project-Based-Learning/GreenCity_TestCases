@@ -3,6 +3,7 @@ package com.greencity.ui;
 
 import com.greencity.data.TesterUser;
 import com.greencity.data.TesterUserRepository;
+
 import com.greencity.ui.modal.LoginModal;
 import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.ui.testrunners.BaseTestRunner;

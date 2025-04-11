@@ -112,6 +112,8 @@ public class BaseTestRunner {
         if (driver == null) {
             initDriver();
         }
+        logger.info("Test driver created");
+
         driver.get(testValueProvider.getBaseUIUrl());
         homePage = new HomePage(driver);
     }
@@ -121,6 +123,7 @@ public class BaseTestRunner {
         if (driver != null) {
             driver.quit();
         }
+        logger.info("After class driver closed");
     }
 
     @AfterSuite
@@ -128,6 +131,7 @@ public class BaseTestRunner {
         if (driver != null) {
             driver.quit();
         }
+        logger.info("After suite driver closed");
     }
 
     @Step("Clear Browser Memory Cookies and LocalStorage.")
