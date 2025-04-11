@@ -65,18 +65,6 @@ public class CreateEditNewsPageStepsDefinition extends Steps {
         createEditNewsPage.fillSourceInput(url);
     }
 
-//    @When("the user selects the {tagButton} tag")
-//    public void theUserSelectsTheTag(TagButton tagButton) {
-//        createEditNewsPage.clickOnlyUnselectedTagFilterButton(tagButton);
-//    }
-//
-//    @When("the user unselects the {tagButton} tag")
-//    public void theUserUnselectsTheTag(TagButton tagButton) {
-//        if (createEditNewsPage.isTagSelected(tagButton)) {
-//            createEditNewsPage.clickTagFilterButton(tagButton);
-//        }
-//    }
-
     @When("the user uploads the image from {string}")
     public void theUserUploadsTheImageFrom(String imagePath) {
         createEditNewsPage.switchToImageUploadComponent().uploadImage(imagePath);
