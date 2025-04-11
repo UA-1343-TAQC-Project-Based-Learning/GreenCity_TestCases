@@ -5,7 +5,8 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 
 public class Steps {
-    private Hooks hooks;
+
+    protected Hooks hooks;
 
     public Steps(Hooks hooks) {
         this.hooks = hooks;

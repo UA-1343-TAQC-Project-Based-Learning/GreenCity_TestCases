@@ -16,16 +16,14 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-public class CreateEditNewsPageStepsDefinition {
-
-    private Hooks hooks;
+public class CreateEditNewsPageStepsDefinition extends Steps {
 
     private HomePage homePage;
     private EcoNewsPage ecoNewsPage;
     private CreateEditNewsPage createEditNewsPage;
 
     public CreateEditNewsPageStepsDefinition(Hooks hooks) {
-        this.hooks = hooks;
+        super(hooks);
     }
 
     @Given("The user is on the Home page as a logged-in user")
