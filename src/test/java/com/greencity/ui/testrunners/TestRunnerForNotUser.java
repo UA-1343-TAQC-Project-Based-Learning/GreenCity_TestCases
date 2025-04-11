@@ -14,8 +14,7 @@ import org.testng.annotations.BeforeSuite;
 import java.time.Duration;
 
 public class TestRunnerForNotUser extends BaseTestRunner{
-    protected WebDriverWait wait;
-    private TestValueProvider testValueProvider;
+
     @BeforeSuite
     public void beforeSuite() {
         WebDriverManager.chromedriver().setup();
@@ -36,11 +35,6 @@ public class TestRunnerForNotUser extends BaseTestRunner{
         }
         driver.get(testValueProvider.getBaseUIUrl());
         homePage = new HomePage(driver);
-    }
-
-    @BeforeMethod
-    public void setUp() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 }
 
