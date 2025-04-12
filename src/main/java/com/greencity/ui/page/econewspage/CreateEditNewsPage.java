@@ -442,7 +442,7 @@ public String getAuthorName(){return authorLabel.getText();}
     }
 
     public String getContentDescriptionWarning() {
-        return textContentComponent.getTextAreaDescriptionWarnings();
+        return textContentComponent.getAreaDescriptionWarningsText();
     }
 
 

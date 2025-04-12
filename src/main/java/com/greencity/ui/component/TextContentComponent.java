@@ -196,9 +196,4 @@ public class TextContentComponent extends BaseComponent {
     public String getContentHeaderText(){
         return content.getText();
     }
-
-    public String getTextAreaDescriptionWarnings(){
-        return textAreaDescriptionWarnings.getText();
-    }
-
 }
