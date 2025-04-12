@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 
 public class Steps {
 
-    protected Hooks hooks;
+    private Hooks hooks;
 
     public Steps(Hooks hooks) {
         this.hooks = hooks;
