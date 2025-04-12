@@ -1,5 +1,6 @@
 package com.greencity.cucumber.steps;
 
+import com.greencity.cucumber.hooks.Hooks;
 import com.greencity.ui.component.cards.NewsCardTableViewComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.data.Colors;
@@ -19,14 +20,19 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class NewsTagSelectionSteps extends BaseStep {
+public class NewsTagSelectionSteps {
 
+    private Hooks hooks;
     private HomePage homePage;
     private EcoNewsPage ecoNewsPage;
     private CreateEditNewsPage createEditNewsPage;
     private List<TagButton> selectedTags;
     private String newsTitle;
     private String newsContent;
+
+    public NewsTagSelectionSteps(Hooks hooks) {
+        this.hooks = hooks;
+    }
 
     private TagButton getTagButtonByName(String tagName) {
         try {
@@ -38,9 +44,7 @@ public class NewsTagSelectionSteps extends BaseStep {
 
     @Given("The user is on Create News page")
     public void userIsOnCreateNewsPage() {
-        initDriver();
-        driver.get(testValueProvider.getBaseUIUrl());
-        homePage = new HomePage(driver);
+        homePage = new HomePage(hooks.getDriver());
         ecoNewsPage = homePage.gotoEcoNewsPage();
         createEditNewsPage = ecoNewsPage.clickCreateNewsButton();
 
