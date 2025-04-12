@@ -30,9 +30,9 @@ public class DisplayAllFieldsTest extends BaseTestRunner {
         assertion.assertEquals(newsPage.getListOfAllTagButtonsText(),newsPage.tagFilters,"All tags should be present in the 'Create News' page");
         assertion.assertTrue(newsPage.isAllSelectedTagsChangeAppearance(),"All tags should change an appearance after selecting");
         assertion.assertEquals(newsPage.getImageBrowseLinkText(),"browse","link for uploading an image should be present in the 'Create News' page");
-        assertion.assertEquals(newsPage.getContentText(),"Content");
+        assertion.assertEquals(newsPage.getContentHeaderText(),"Content","Content header should be present");
         assertion.assertTrue(newsPage.isPresentContentInputTextField(),"Content input text field should be present in the 'Create News' page");
-        assertion.assertTrue(newsPage.getContentCharacterCountText().contains("Must be minimum 20 and maximum 63 206 symbols"));
+        assertion.assertTrue(newsPage.getContentDescriptionWarning().contains("Must be minimum 20 and maximum 63 206 symbols"),"Content warning should be present");
         assertion.assertEquals(newsPage.getAuthorLabelText(),testValueProvider.getUserName().toLowerCase(), "userName should be present in the 'Create News' page" );
         assertion.assertTrue(newsPage.isAuthorLabelNotEditable(), "Username label should not be editable");
         assertion.assertEquals(newsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(), "current date should be present");
