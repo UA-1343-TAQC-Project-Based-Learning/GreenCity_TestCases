@@ -9,11 +9,16 @@ import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.econewspage.NewsCardPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Owner;
+import jdk.jfr.Description;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 public class EditNewsCardTest extends BaseTestRunner {
@@ -123,6 +128,40 @@ public class EditNewsCardTest extends BaseTestRunner {
         softAssert.assertAll();
     }
 
+
+    @Test
+    @Description("Verify that content shorter than 20 characters is not accepted.")
+    @Issue("102")
+    @Owner("Maksym Ahafonov")
+    public void verifyShortContentNotAccepted()  {
+        String errorMsgText = "Not enough characters. Left: %s";
+        Map<String,Integer> testData = new TreeMap<>();
+        testData.put("T",19);
+        testData.put("TestString_19_Chars",1);
+        testData.put("1",19);
+        testData.put("10 chars!!",10);
+        testData.put("!",19);
+        testData.put(" ",19);
+
+        SoftAssert softAssert = new SoftAssert();
+        CreateEditNewsPage createEditNewsPage = newsCardPage.clickEditButton();
+
+        for(var dataPair : testData.entrySet()){
+            String testText = dataPair.getKey();
+            int expectedNumber = dataPair.getValue();
+            createEditNewsPage.enterTextIntoTextContentField(testText);
+
+            softAssert.assertEquals(
+                createEditNewsPage.getContentWarningCounterText().trim(), String.format(errorMsgText,expectedNumber),
+                "The text of the warning message does not match with the expected one: "
+            );
+            softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
+                "The Publish button should be disabled when all required fields are not filled out");
+        }
+        createEditNewsPage.clickExitButton()
+                .clickYesCancelButton();
+        softAssert.assertAll();
+    }
 
     @AfterMethod
     public void deleteTestNews() {
