@@ -160,6 +160,7 @@ public class EditNewsCardTest extends BaseTestRunner {
         }
         createEditNewsPage.clickExitButton()
                 .clickYesCancelButton();
+        softAssert.assertAll();
     }
 
     @AfterMethod
