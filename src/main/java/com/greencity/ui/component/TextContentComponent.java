@@ -192,4 +192,8 @@ public class TextContentComponent extends BaseComponent {
         fillTextAreaField(text);
         return this;
     }
+
+    public String getContentHeaderText(){
+        return content.getText();
+    }
 }

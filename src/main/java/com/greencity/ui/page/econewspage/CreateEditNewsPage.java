@@ -80,7 +80,7 @@ public class CreateEditNewsPage extends BasePage {
 
 
     @Getter
-    @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Author:']")
+    @FindBy(xpath = ".//div[@class = 'date']//span[normalize-space() = 'Author:']//following-sibling::span")
     private WebElement authorOfNew;
 
     @Getter
@@ -440,5 +440,14 @@ public String getAuthorName(){return authorLabel.getText();}
         if(!isTagSelected(tagButton)) ecoNewsTagFilterComponent.clickTagButton(tagButton);
         return this;
     }
+
+    public String getContentHeaderText() {
+        return textContentComponent.getContentHeaderText();
+    }
+
+    public String getContentDescriptionWarning() {
+        return textContentComponent.getAreaDescriptionWarningsText();
+    }
+
 
 }
