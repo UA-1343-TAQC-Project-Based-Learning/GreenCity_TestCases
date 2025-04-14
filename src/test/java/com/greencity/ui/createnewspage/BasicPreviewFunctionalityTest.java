@@ -4,6 +4,7 @@ import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.PreviewNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -14,6 +15,7 @@ public class BasicPreviewFunctionalityTest extends BaseTestRunner {
 
     private SoftAssert softAssert = new SoftAssert();
 
+    @Issue("56")
     @Test
     public void checkPreviewMode() {
         String titleTestValue = "Test Preview";
