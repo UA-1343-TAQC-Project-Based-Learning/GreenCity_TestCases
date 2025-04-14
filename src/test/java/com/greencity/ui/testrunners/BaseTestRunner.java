@@ -87,9 +87,9 @@ public class BaseTestRunner {
     public void initDriver() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-gpu");
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("--disable-gpu");
 
 
 
@@ -100,7 +100,7 @@ public class BaseTestRunner {
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
-        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfilePath());
+//        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfilePath());
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -122,7 +122,7 @@ public class BaseTestRunner {
         homePage = new HomePage(driver);
     }
 
-  /*  @AfterClass()
+    @AfterClass()
     public void afterClass() {
         if (driver != null) {
             driver.quit();
@@ -137,8 +137,6 @@ public class BaseTestRunner {
         }
         logger.info("After suite driver closed");
     }
-
-   */
 
     @Step("Clear Browser Memory Cookies and LocalStorage.")
     public void clearBrowserMemory() {

@@ -6,7 +6,7 @@ import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
-public class TitleFieldValidation extends CreateNewsPageSteps {
+public class TitleFieldValidationTest extends CreateNewsPageSteps {
 
     private String titleCharacterProvider(int numberOfCharacters) {
         StringBuilder stringBuilder = new StringBuilder();

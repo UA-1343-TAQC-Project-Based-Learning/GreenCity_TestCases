@@ -217,8 +217,9 @@ public String getAuthorName(){return authorLabel.getText();}
     }
 
     @Step("Click 'Preview' button")
-    public void clickPreviewButton() {
+    public PreviewNewsPage clickPreviewButton() {
         previewButton.click();
+        return new PreviewNewsPage(driver);
     }
 
     public String getTitleInputTextFieldValue() {
