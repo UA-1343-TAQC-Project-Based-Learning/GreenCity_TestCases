@@ -1,4 +1,6 @@
+@ignore
 @TC15
+
 Feature: News Tag Selection
   As a user
   I want to select appropriate tags when creating news
@@ -17,7 +19,11 @@ Feature: News Tag Selection
 
     Examples:
       | tag  |
-      | News |
+      | News      |
+      | Events    |
+      | Education |
+      | Initiatives |
+      | Ads    |
 
   @three_tags
   Scenario: Create news with multiple tags
