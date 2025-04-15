@@ -1,5 +1,6 @@
 Feature: New EcoNews Image Uploading
 
+  @Issue("16")
   Background:
     Given The user is on the Create News page as a logged-in user
 
