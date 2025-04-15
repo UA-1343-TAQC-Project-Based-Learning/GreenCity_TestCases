@@ -228,9 +228,6 @@ public String getAuthorName(){return authorLabel.getText();}
     public String getContentInputFieldText() {
         return textContentComponent.getContentInputTextFieldText();
     }
-    public String getContentWarningCounterText(){
-        return textContentComponent.getContentWarningCounterText();
-    }
 
     @Step("Fill '{titleText}' into 'Title Input' text field")
     public CreateEditNewsPage fillTitleInputTextField(String titleText) {
