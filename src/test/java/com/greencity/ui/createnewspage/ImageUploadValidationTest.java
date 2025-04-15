@@ -32,7 +32,7 @@ public class ImageUploadValidationTest extends BaseTestRunner {
         softAssert.assertTrue(imageUploadComponent.getImageFormatWarningMessage().isEnabled(),
                 "The image upload warning message should be displayed.");
         softAssert.assertTrue(imageUploadComponent.getUploadFieldWarningText().equals("The image isn't uploaded"),
-                "'The image isn't uploaded' message should be displayed");
+                "The image isn't uploaded' message should be displayed");
 
 
         imageUploadComponent.uploadImage(testValueProvider.getFilePath("images/GreenCity15mb.jpg"));
