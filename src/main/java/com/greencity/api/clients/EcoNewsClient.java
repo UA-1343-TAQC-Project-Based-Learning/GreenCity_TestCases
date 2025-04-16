@@ -4,7 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 public class EcoNewsClient extends BaseClient{
-    protected String resourceUrl = "eco-news?title=title&favorite=false&page=0&size=5";
+    protected String resourceUrl = "eco-news?title=title";
 
 
     public EcoNewsClient(String baseUrl) {
