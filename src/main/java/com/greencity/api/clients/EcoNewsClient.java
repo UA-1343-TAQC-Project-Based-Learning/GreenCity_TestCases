@@ -3,15 +3,18 @@ package com.greencity.api.clients;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class EcoNewsClient extends BaseClient{
-    protected String resourceUrl = "eco-news?title=title";
+public class EcoNewsClient extends BaseClientAuthorized{
+    private String title;
 
 
-    public EcoNewsClient(String baseUrl) {
-        super(baseUrl);
+    public EcoNewsClient(String baseUrl, String password, String email, String title) {
+        super(baseUrl, password, email);
+        this.title = title;
     }
 
-    public Response findEcoNewsId() {
+    public Response getEcoNewsId() {
+        String resourceUrl = "eco-news?title=" + title;
+
         return preparedRequest()
                 .header("Accept","*/*")
                 .get(resourceUrl);

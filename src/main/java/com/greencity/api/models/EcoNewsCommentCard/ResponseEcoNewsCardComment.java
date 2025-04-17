@@ -1,15 +1,18 @@
 package com.greencity.api.models.EcoNewsCommentCard;
 
 
+import com.greencity.api.models.EcoNewsCard.ResponseUser;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 
 @Data
 public class ResponseEcoNewsCardComment {
-    private String comment;
-    private Date createDate;
-    public ArrayList<Object> getAdditionalImages;
+    private int id;
+    private ResponseUser author;
+    private String text;
+    private String createdDate;
+    public ArrayList<Object> additionalImages;
 
 }
