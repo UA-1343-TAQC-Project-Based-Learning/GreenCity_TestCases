@@ -13,6 +13,6 @@ public class ResponseEcoNewsCardComment {
     private ResponseUser author;
     private String text;
     private String createdDate;
-    public ArrayList<Object> additionalImages;
+    private ArrayList<Object> additionalImages;
 
 }
