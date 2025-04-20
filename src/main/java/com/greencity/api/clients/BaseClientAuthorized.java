@@ -57,8 +57,9 @@ public class BaseClientAuthorized {
 
         Response response = given().header("Content-Type", "application/json")
                 .when().body(user)
-                .and().post("http://localhost:8065/ownSecurity/signIn");
+                .baseUri(System.getenv("base.authorized.api.url"))
+                .basePath("ownSecurity/signIn")
+                .post();
         token = response.body().jsonPath().getString("accessToken");
     }
-
 }

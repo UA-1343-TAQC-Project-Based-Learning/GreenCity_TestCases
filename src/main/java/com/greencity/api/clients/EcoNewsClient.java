@@ -13,10 +13,11 @@ public class EcoNewsClient extends BaseClientAuthorized{
     }
 
     public Response getEcoNewsId() {
-        String resourceUrl = "eco-news?title=" + title;
+        String resourceUrl = "eco-news?title=";
 
         return preparedRequest()
                 .header("Accept","*/*")
+                .param(title)
                 .get(resourceUrl);
     }
 

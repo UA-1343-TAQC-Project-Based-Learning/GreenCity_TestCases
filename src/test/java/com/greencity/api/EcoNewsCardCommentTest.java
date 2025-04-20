@@ -14,12 +14,15 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class EcoNewsCardCommentTest extends ApiTestRunner{
+import static org.hamcrest.Matchers.equalTo;
+
+public class EcoNewsCardCommentTest extends ApiTestRunner {
     private EcoNewsClient ecoNewsClient;
     private EcoNewsCommentClient ecoNewsCommentClient;
     private ResponseEcoNewsCard ecoNewsCard;
     private ResponseEcoNewsCardPage result;
-    public int ecoNewsCardId;
+    private int ecoNewsCardId;
+    private int commentId;
 
     @BeforeMethod
     public void setUp() {
@@ -27,11 +30,11 @@ public class EcoNewsCardCommentTest extends ApiTestRunner{
     }
 
     @Test
-    public void getEcoNewsCardIdTest(){
+    public void getEcoNewsCardIdTest() {
         String title = "title";
         ecoNewsClient = new EcoNewsClient(testValueProvider.getBaseAPIUrl(), testValueProvider.getUserPassword(), testValueProvider.getUserEmail(), title);
 
-        Response response  =  ecoNewsClient.getEcoNewsId();
+        Response response = ecoNewsClient.getEcoNewsId();
         response.then().statusCode(200);
         result = response.body().as(ResponseEcoNewsCardPage.class);
         ecoNewsCard = result.getPage().get(0);
@@ -39,7 +42,7 @@ public class EcoNewsCardCommentTest extends ApiTestRunner{
     }
 
     @Test
-    public void getEcoNewsCommentTest(){
+    public void createEcoNewsCommentTest() {
         getEcoNewsCardIdTest();
         ecoNewsCommentClient = new EcoNewsCommentClient(testValueProvider.getBaseAPIUrl(), ContentType.MULTIPART, testValueProvider.getUserPassword(), testValueProvider.getUserEmail(), ecoNewsCardId);
 
@@ -49,6 +52,36 @@ public class EcoNewsCardCommentTest extends ApiTestRunner{
         response.then().statusCode(201);
         response.then().log().all();
         String text = response.body().as(ResponseEcoNewsCardComment.class).getText();
-        Assert.assertEquals(text,comment);
+        commentId = response.body().as(ResponseEcoNewsCardComment.class).getId();
+
+        Assert.assertEquals(text, comment);
+    }
+
+    @Test
+    public void getEcoNewsCommentByIdTest() {
+        createEcoNewsCommentTest();
+        ecoNewsCommentClient = new EcoNewsCommentClient(testValueProvider.getBaseAPIUrl(), testValueProvider.getUserPassword(), testValueProvider.getUserEmail());
+
+        Response response = ecoNewsCommentClient.getComment(commentId);
+        response.then().log().all();
+        response.then().statusCode(200)
+                .body("text", equalTo("New comment"))
+                .body("likes", equalTo(0))
+                .body("dislikes", equalTo(0))
+                .body("replies", equalTo(0))
+                .body("author.name", equalTo("testuser"));
+    }
+
+    @Test
+    public void deleteEcoNewsCommentByIdTest() {
+        createEcoNewsCommentTest();
+        ecoNewsCommentClient = new EcoNewsCommentClient(testValueProvider.getBaseAPIUrl(), testValueProvider.getUserPassword(), testValueProvider.getUserEmail());
+        Response response = ecoNewsCommentClient.deleteComment(commentId);
+        response.then().statusCode(200);
+
+        response = ecoNewsCommentClient.getComment(commentId);
+        response.then().statusCode(200)
+                .body("status", equalTo("DELETED"));
+
     }
 }
