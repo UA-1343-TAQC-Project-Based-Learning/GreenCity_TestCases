@@ -4,6 +4,7 @@ import com.greencity.api.models.EcoNews;
 import io.restassured.response.Response;
 
 public class EcoNewsClient extends BaseClient {
+    private static final String ECO_NEWS_END_POINT = "/eco-news";
 
     public EcoNewsClient(String baseUrl) {
         super(baseUrl);
@@ -14,7 +15,7 @@ public class EcoNewsClient extends BaseClient {
                 .pathParam("id", ecoNewsId)
                 .queryParam("lang", lang)
                 .when()
-                .get("/eco-news/{id}")
+                .get(ECO_NEWS_END_POINT+"/{id}")
                 .then()
                 .statusCode(200)
                 .extract()
@@ -26,6 +27,6 @@ public class EcoNewsClient extends BaseClient {
                 .pathParam("id", ecoNewsId)
                 .queryParam("lang", lang)
                 .when()
-                .get("/eco-news/{id}");
+                .get(ECO_NEWS_END_POINT+"/{id}");
     }
 }
