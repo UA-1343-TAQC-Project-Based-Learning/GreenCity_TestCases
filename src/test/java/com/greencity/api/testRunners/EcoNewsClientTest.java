@@ -14,9 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-import static com.greencity.api.testRunners.ApiTestRunner.testValueProvider;
-
-public class EcoNewsClientTest {
+public class EcoNewsClientTest extends ApiTestRunner {
 
     private EcoNewsClient ecoNewsClient;
     private static final String LANG_EN = "en";
@@ -39,8 +37,6 @@ public class EcoNewsClientTest {
         testValueProvider = new TestValueProvider();
         ecoNewsClient = new EcoNewsClient(testValueProvider.getBaseAPIUrl());
 
-        System.out.println("Using base URL: " + testValueProvider.getBaseAPIUrl());
-        System.out.println("Testing with news ID: " + KNOWN_EXISTING_NEWS_ID);
     }
 
     @Test(dataProvider = "languageProvider")
