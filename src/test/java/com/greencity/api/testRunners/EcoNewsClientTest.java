@@ -1,6 +1,7 @@
 package com.greencity.api.testRunners;
 
 import com.greencity.api.clients.EcoNewsClient;
+import com.greencity.api.models.EcoNews;
 import com.greencity.api.clients.OwnSecurityClient;
 import com.greencity.api.models.*;
 import io.restassured.response.Response;
@@ -15,8 +16,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class EcoNewsClientTest extends ApiTestRunner {
 
+public class EcoNewsClientTest extends ApiTestRunner {
 
     private static final String LANG_EN = "en";
     private static final String LANG_UK = "ua";
@@ -79,7 +80,7 @@ public class EcoNewsClientTest extends ApiTestRunner {
 
     @DataProvider
     public Object[][] languageProvider() {
-        return new Object[][]{
+        return new Object[][] {
                 {LANG_EN, Collections.singletonList("News")},
                 {LANG_UK, Collections.singletonList("Новини")}
         };

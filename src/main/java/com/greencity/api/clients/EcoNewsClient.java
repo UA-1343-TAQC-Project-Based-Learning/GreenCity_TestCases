@@ -23,7 +23,7 @@ public class EcoNewsClient extends BaseClient {
                 .pathParam("id", ecoNewsId)
                 .queryParam("lang", lang)
                 .when()
-                .get(ECO_NEWS_END_POINT + "/{id}")
+                .get(ECO_NEWS_END_POINT+"/{id}")
                 .then()
                 .statusCode(200)
                 .extract()
@@ -35,7 +35,7 @@ public class EcoNewsClient extends BaseClient {
                 .pathParam("id", ecoNewsId)
                 .queryParam("lang", lang)
                 .when()
-                .get(ECO_NEWS_END_POINT + "/{id}");
+                .get(ECO_NEWS_END_POINT+"/{id}");
     }
 
     public EcoNews addEcoNews(AddEcoNewsDtoRequest request, String imagePath) {
