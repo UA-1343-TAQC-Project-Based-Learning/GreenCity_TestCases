@@ -254,4 +254,29 @@ public class CreateEditNewsPageStepsDefinition {
     public void verifySizeValidationMessageShouldPresent(){
         hooks.getSoftAssert().assertEquals(imageUploadComponent.getImageFormatWarningMessageText(),"Upload only PNG or JPG. File size must be less than 10MB","'Upload only PNG or JPG. File size must be less than 10MB' warning should appears");
     }
+
+    @Then("the presentation window displayed on the uploaded image")
+    public void thePresentationWindowDisplayedOnTheUploadedImage() {
+        hooks.getSoftAssert().assertTrue(imageUploadComponent.getPresentationImageWindow().isDisplayed(),
+                "The presentation window should be displayed on the uploaded image");
+    }
+
+    @When("the user clicks the Cancel button")
+    public void theUserClicksTheCancelButton() {
+        imageUploadComponent.clickCancelButton();
+    }
+
+    @Then("the image upload warning message: {string} should be displayed")
+    public void theImageUploadWarningMessageShouldBeDisplayed(String warningMessage) {
+        hooks.getSoftAssert().assertTrue(imageUploadComponent.getImageFormatWarningMessage().isEnabled(),
+                "The image upload warning message should be displayed.");
+        hooks.getSoftAssert().assertTrue(imageUploadComponent.getUploadFieldWarningText().equals(warningMessage),
+                "The image isn't uploaded' message should be displayed");
+    }
+
+    @Then("the background color of the image dropzone field should be highlighted in red")
+    public void theBackgroundColorOfTheImageDropzoneFieldShouldBeHighlightedInRed() {
+        hooks.getSoftAssert().assertTrue(imageUploadComponent.getImageDropzoneFieldColor().equals(Colors.IMAGE_DROPZONE_WARNING_BACKGROUND.getColor()),
+                "The background color of the dropzone field should be: " + Colors.IMAGE_DROPZONE_WARNING_BACKGROUND.getColor());
+    }
 }
