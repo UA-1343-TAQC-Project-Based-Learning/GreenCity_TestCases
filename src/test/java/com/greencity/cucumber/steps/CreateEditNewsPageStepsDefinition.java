@@ -6,8 +6,10 @@ import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.data.Colors;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
+import com.greencity.ui.page.econewspage.PreviewNewsPage;
 import com.greencity.ui.page.homepage.HomePage;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,6 +18,7 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,6 +28,7 @@ public class CreateEditNewsPageStepsDefinition {
     private HomePage homePage;
     private EcoNewsPage ecoNewsPage;
     private CreateEditNewsPage createEditNewsPage;
+    private PreviewNewsPage previewNewsPage;
     private ImageUploadComponent imageUploadComponent;
 
     public CreateEditNewsPageStepsDefinition(Hooks hooks) {
@@ -109,21 +113,35 @@ public class CreateEditNewsPageStepsDefinition {
     public void theFormShouldContainTheFollowingFieldsInOrder() {
 
 
-        hooks.getSoftAssert().assertEquals(createEditNewsPage.getTitleText(), "Title","Title should be present in the 'Create News' page");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isPresentTitleInputTextField(),"Title input text field should be present in the 'Create News' page");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.getTitleFieldCharacterCounterText().contains("0/170"), "Character count should be present in the 'Create News' page");
+        hooks.getSoftAssert().assertEquals(createEditNewsPage.getTitleText(),
+                "Title","Title should be present in the 'Create News' page");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isPresentTitleInputTextField(),
+                "Title input text field should be present in the 'Create News' page");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.getTitleFieldCharacterCounterText().contains("0/170"),
+                "Character count should be present in the 'Create News' page");
         hooks.getSoftAssert().assertTrue(createEditNewsPage.getOnlyThreeTagsCanBeAddedText().contains("Only 3 tags can be added"));
-        hooks.getSoftAssert().assertEquals(createEditNewsPage.getListOfAllTagButtonsText(),createEditNewsPage.tagFilters,"All tags should be present in the 'Create News' page");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isAllSelectedTagsChangeAppearance(),"All tags should change an appearance after selecting");
-        hooks.getSoftAssert().assertEquals(createEditNewsPage.getImageBrowseLinkText(),"browse","link for uploading an image should be present in the 'Create News' page");
-        hooks.getSoftAssert().assertEquals(createEditNewsPage.getContentHeaderText(),"Content","Content header should be present");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isPresentContentInputTextField(),"Content input text field should be present in the 'Create News' page");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.getContentDescriptionWarning().contains("Must be minimum 20 and maximum 63 206 symbols"),"Content warning should be present");
-        hooks.getSoftAssert().assertEquals(createEditNewsPage.getAuthorLabelText(),hooks.getTestValueProvider().getUserName().toLowerCase(), "userName should be present in the 'Create News' page" );
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isAuthorLabelNotEditable(), "Username label should not be editable");
-        hooks.getSoftAssert().assertEquals(createEditNewsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(), "current date should be present");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isDataLabelNotEditable(),"Date label should not be editable");
-        hooks.getSoftAssert().assertEquals(createEditNewsPage.getExternalSourceInputFieldTitle(),"Source (optional)", "Source (optional) should be present in the 'Create News' page");
+        hooks.getSoftAssert().assertEquals(createEditNewsPage.getListOfAllTagButtonsText(),createEditNewsPage.tagFilters,
+                "All tags should be present in the 'Create News' page");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isAllSelectedTagsChangeAppearance(),
+                "All tags should change an appearance after selecting");
+        hooks.getSoftAssert().assertEquals(createEditNewsPage.getImageBrowseLinkText(),"browse",
+                "link for uploading an image should be present in the 'Create News' page");
+        hooks.getSoftAssert().assertEquals(createEditNewsPage.getContentHeaderText(),"Content",
+                "Content header should be present");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isPresentContentInputTextField(),
+                "Content input text field should be present in the 'Create News' page");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.getContentDescriptionWarning().contains("Must be minimum 20 and maximum 63 206 symbols"),
+                "Content warning should be present");
+        hooks.getSoftAssert().assertEquals(createEditNewsPage.getAuthorLabelText(),hooks.getTestValueProvider().getUserName().toLowerCase(),
+                "userName should be present in the 'Create News' page" );
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isAuthorLabelNotEditable(),
+                "Username label should not be editable");
+        hooks.getSoftAssert().assertEquals(createEditNewsPage.getDataLabelFormating(Locale.ENGLISH), LocalDate.now(),
+                "current date should be present");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isDataLabelNotEditable(),
+                "Date label should not be editable");
+        hooks.getSoftAssert().assertEquals(createEditNewsPage.getExternalSourceInputFieldTitle(),"Source (optional)",
+                "Source (optional) should be present in the 'Create News' page");
         hooks.getSoftAssert().assertTrue(createEditNewsPage.getExternalSourceInputFieldInfoText().contains("Please add the link of original article/news/post. Link must start with http(s)://"),
                 "Source info text should be present in the 'Create News' page");
         hooks.getSoftAssert().assertEquals(createEditNewsPage.getExternalSourceLinkInputFieldPlaceholderText(),"Link to external source",
@@ -136,13 +154,16 @@ public class CreateEditNewsPageStepsDefinition {
         for(String button: buttons) {
             switch (button) {
                 case "Cancel":
-                    hooks.getSoftAssert().assertTrue(createEditNewsPage.isCancelButtonPresent(),"Cancel button should be present in the 'Create News' page");
+                    hooks.getSoftAssert().assertTrue(createEditNewsPage.isCancelButtonPresent(),
+                            "Cancel button should be present in the 'Create News' page");
                     break;
                 case "Preview":
-                    hooks.getSoftAssert().assertTrue(createEditNewsPage.isPreviewButtonPresent(),"Preview button should be present in the 'Create News' page");
+                    hooks.getSoftAssert().assertTrue(createEditNewsPage.isPreviewButtonPresent(),
+                            "Preview button should be present in the 'Create News' page");
                     break;
                 case "Publish":
-                    hooks.getSoftAssert().assertTrue(createEditNewsPage.isPublishButtonPresent(),"Publish button should be present in the 'Create News' page");
+                    hooks.getSoftAssert().assertTrue(createEditNewsPage.isPublishButtonPresent(),
+                            "Publish button should be present in the 'Create News' page");
                     break;
                 default:
                     hooks.getSoftAssert().fail("Unknown button: " + button);
@@ -234,24 +255,109 @@ public class CreateEditNewsPageStepsDefinition {
 
     @Then("all elements should be in correct order")
     public void allElementsShouldBeInCorrectOrder(){
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getTitleInputTextField(),createEditNewsPage.getFilterTagsRoot()),"Incorrect order between titleInputTextField and filterTagsRoot");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getFilterTagsRoot(),createEditNewsPage.getExternalSourceLinkInputField()), "Incorrect order between filterTagsRoot and externalSourceLinkInputField");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getImageBlockRoot(),createEditNewsPage.getExternalSourceLinkInputField()),"Incorrect order between imageBlockRoot and externalSourceLinkInputField");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getExternalSourceLinkInputField(),createEditNewsPage.getTextAreaRoot()),"Incorrect order between externalSourceLinkInputField and textAreaRoot");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getTextAreaRoot(),createEditNewsPage.getDataLabel()),"Incorrect order between dtaLabel and textAreaRoot");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.areElementsOnSameLine(createEditNewsPage.getDataLabel(), createEditNewsPage.getAuthorLabel()),"Incorrect order between dtaLabel and authorLabel");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(createEditNewsPage.getAuthorLabel(),createEditNewsPage.getExitButton()),"Incorrect order between exitButton and authorLabel");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.areElementsOnSameLine(createEditNewsPage.getExitButton(), createEditNewsPage.getPreviewButton()),"Incorrect order between exitButton and previewButton");
-        hooks.getSoftAssert().assertTrue(createEditNewsPage.areElementsOnSameLine(createEditNewsPage.getPublishButton(), createEditNewsPage.getPreviewButton()),"Incorrect order between publishButton and previewButton");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(
+                createEditNewsPage.getTitleInputTextField(),createEditNewsPage.getFilterTagsRoot()),
+                "Incorrect order between titleInputTextField and filterTagsRoot");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(
+                createEditNewsPage.getFilterTagsRoot(),createEditNewsPage.getExternalSourceLinkInputField()),
+                "Incorrect order between filterTagsRoot and externalSourceLinkInputField");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(
+                createEditNewsPage.getImageBlockRoot(),createEditNewsPage.getExternalSourceLinkInputField()),
+                "Incorrect order between imageBlockRoot and externalSourceLinkInputField");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(
+                createEditNewsPage.getExternalSourceLinkInputField(),createEditNewsPage.getTextAreaRoot()),
+                "Incorrect order between externalSourceLinkInputField and textAreaRoot");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(
+                createEditNewsPage.getTextAreaRoot(),createEditNewsPage.getDataLabel()),
+                "Incorrect order between dtaLabel and textAreaRoot");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.areElementsOnSameLine(
+                createEditNewsPage.getDataLabel(), createEditNewsPage.getAuthorLabel()),
+                "Incorrect order between dtaLabel and authorLabel");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.isElementsOrderCorrect(
+                createEditNewsPage.getAuthorLabel(),createEditNewsPage.getExitButton()),
+                "Incorrect order between exitButton and authorLabel");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.areElementsOnSameLine(
+                createEditNewsPage.getExitButton(), createEditNewsPage.getPreviewButton()),
+                "Incorrect order between exitButton and previewButton");
+        hooks.getSoftAssert().assertTrue(createEditNewsPage.areElementsOnSameLine(
+                createEditNewsPage.getPublishButton(), createEditNewsPage.getPreviewButton()),
+                "Incorrect order between publishButton and previewButton");
     }
 
     @Then("verify the image is not uploaded")
     public void verifyTheImageIsNotUploaded(){
-        hooks.getSoftAssert().assertEquals(imageUploadComponent.getUploadFieldWarningText(),"The image isn't uploaded","'The image isn`t uploaded' warning should appears");
+        hooks.getSoftAssert().assertEquals(imageUploadComponent.getUploadFieldWarningText(),
+                "The image isn't uploaded","'The image isn`t uploaded' warning should appears");
     }
 
     @Then("verify size validation message should present")
     public void verifySizeValidationMessageShouldPresent(){
-        hooks.getSoftAssert().assertEquals(imageUploadComponent.getImageFormatWarningMessageText(),"Upload only PNG or JPG. File size must be less than 10MB","'Upload only PNG or JPG. File size must be less than 10MB' warning should appears");
+        hooks.getSoftAssert().assertEquals(imageUploadComponent.getImageFormatWarningMessageText(),
+                "Upload only PNG or JPG. File size must be less than 10MB");
+    }
+
+    @And("the user clicks Preview button on CreateEditNewsPage")
+    public void theUserClicksPreviewButtonOnCreateEditNewsPage() {
+        previewNewsPage = createEditNewsPage.clickPreviewButton();
+    }
+
+    @Then("the News Title {string} presents on the Preview News Page")
+    public void theNewsTitleEqualsOnThePreviewNewsPage(String title) {
+        hooks.getSoftAssert().assertEquals(previewNewsPage.getNewsTitle().getText(), title,
+                "News title mismatch: Expected " + title + ", but found: " + previewNewsPage.getNewsTitle().getText());
+    }
+
+    @Then("the News ContentText {string} presents on the Preview News Page")
+    public void theNewsContentTextPresentsOnThePreviewNewsPage(String contentText) {
+        hooks.getSoftAssert().assertEquals(previewNewsPage.getNewsTextContent().getText(), contentText,
+                "News content mismatch: Expected " + contentText + ", but found " + previewNewsPage.getNewsTextContent().getText());
+    }
+
+    @Then("the preview page displays the current date")
+    public void thePreviewPageDisplaysTheCurrentDate() {
+        hooks.getSoftAssert().assertEquals(previewNewsPage.getNewsInfoDate().getText(),
+                LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d, yyyy")), "News date mismatch: Expected " +
+                        LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d, yyyy")) + ", but found " +
+                        previewNewsPage.getNewsInfoDate().getText());
+    }
+
+    @Then("the author's name is displayed correctly")
+    public void theAuthorSNameIsDisplayedCorrectly() {
+        hooks.getSoftAssert().assertEquals(previewNewsPage.getNewsAuthor().getText(), "by " +
+                        previewNewsPage.getLoggedHeader().getUserNameText(),
+                "News author mismatch: Expected " + "by " + previewNewsPage.getLoggedHeader().getUserNameText() +
+                        " but found " + previewNewsPage.getNewsAuthor().getText());
+    }
+
+    @Then("the Back to editing link is available for returning to the edit mode")
+    public void theBackToEditingLinkIsAvailableForReturningToTheEditMode() {
+        hooks.getSoftAssert().assertTrue(previewNewsPage.getBackToEditingButton().isEnabled(),
+                "Back to Editing button is not enabled.");
+    }
+
+
+    @Then("the presentation window displayed on the uploaded image")
+    public void thePresentationWindowDisplayedOnTheUploadedImage() {
+        hooks.getSoftAssert().assertTrue(imageUploadComponent.getPresentationImageWindow().isDisplayed(),
+                "The presentation window should be displayed on the uploaded image");
+    }
+
+    @When("the user clicks the Cancel button")
+    public void theUserClicksTheCancelButton() {
+        imageUploadComponent.clickCancelButton();
+    }
+
+    @Then("the image upload warning message: {string} should be displayed")
+    public void theImageUploadWarningMessageShouldBeDisplayed(String warningMessage) {
+        hooks.getSoftAssert().assertTrue(imageUploadComponent.getImageFormatWarningMessage().isEnabled(),
+                "The image upload warning message should be displayed.");
+        hooks.getSoftAssert().assertTrue(imageUploadComponent.getUploadFieldWarningText().equals(warningMessage),
+                "The image isn't uploaded' message should be displayed");
+    }
+
+    @Then("the background color of the image dropzone field should be highlighted in red")
+    public void theBackgroundColorOfTheImageDropzoneFieldShouldBeHighlightedInRed() {
+        hooks.getSoftAssert().assertTrue(imageUploadComponent.getImageDropzoneFieldColor().equals(Colors.IMAGE_DROPZONE_WARNING_BACKGROUND.getColor()),
+                "The background color of the dropzone field should be: " + Colors.IMAGE_DROPZONE_WARNING_BACKGROUND.getColor());
     }
 }
