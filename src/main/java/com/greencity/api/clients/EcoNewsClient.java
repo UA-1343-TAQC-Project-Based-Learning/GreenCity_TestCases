@@ -7,8 +7,9 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
-import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.ContentType.MULTIPART;
 
 public class EcoNewsClient extends BaseClient {
@@ -39,7 +40,9 @@ public class EcoNewsClient extends BaseClient {
     }
 
     public EcoNews addEcoNews(AddEcoNewsDtoRequest request, String imagePath) {
-        return addEcoNewsRawResponse(request, imagePath).then()
+        Response response = addEcoNewsRawResponse(request, imagePath);
+        response.then().log().all();
+        return response.then()
                 .statusCode(201)
                 .extract()
                 .as(EcoNews.class);
@@ -48,14 +51,9 @@ public class EcoNewsClient extends BaseClient {
     public Response addEcoNewsRawResponse(AddEcoNewsDtoRequest request, String imagePath) {
         RequestSpecification requestSpec = preparedRequest()
                 .contentType(MULTIPART)
-                .multiPart("addEcoNewsDtoRequest", request, JSON.toString());
+                .multiPart("addEcoNewsDtoRequest", request, "application/json");
 
-        if (imagePath != null && !imagePath.isEmpty()) {
-            File imageFile = new File(imagePath);
-            requestSpec.multiPart("image", imageFile);
-        } else {
-            requestSpec.multiPart("image", "", "");
-        }
+        attachImageIfExists(requestSpec, imagePath);
 
         return requestSpec.post(ECO_NEWS_END_POINT);
     }
@@ -72,20 +70,43 @@ public class EcoNewsClient extends BaseClient {
         RequestSpecification requestSpec = preparedRequest()
                 .contentType(MULTIPART)
                 .pathParam("ecoNewsId", ecoNewsId)
-                .multiPart("updateEcoNewsDto", request, JSON.toString());
+                .header("Accept", "application/json")
+                .multiPart("updateEcoNewsDto", request, "application/json");
 
-        if (imagePath != null && !imagePath.isEmpty()) {
-            requestSpec.multiPart("image", new File(imagePath));
-        } else {
-            requestSpec.multiPart("image", "", "");
-        }
+        attachImageIfExists(requestSpec, imagePath);
 
-        return requestSpec.put(ECO_NEWS_END_POINT + "/{ecoNewsId}");
+        return requestSpec
+                .log().all()
+                .put(ECO_NEWS_END_POINT + "/{ecoNewsId}");
     }
 
     public Response deleteEcoNews(Long ecoNewsId) {
         return preparedRequest()
                 .pathParam("ecoNewsId", ecoNewsId)
                 .delete(ECO_NEWS_END_POINT + "/{ecoNewsId}");
+    }
+
+    private void attachImageIfExists(RequestSpecification requestSpec, String imagePath) {
+        if (imagePath == null || imagePath.isEmpty()) {
+            requestSpec.multiPart("image", "", "");
+            return;
+        }
+
+        try {
+            File imageFile = new File(imagePath);
+            String fileName = imageFile.getName().toLowerCase();
+
+            if (!fileName.endsWith(".png") && !fileName.endsWith(".jpg")
+                    && !fileName.endsWith(".jpeg") && !fileName.endsWith(".gif")) {
+                throw new IllegalArgumentException("Only PNG, JPEG or GIF images are allowed");
+            }
+
+            String mimeType = fileName.endsWith(".png") ? "image/png" :
+                    fileName.endsWith(".gif") ? "image/gif" : "image/jpeg";
+            requestSpec.multiPart("image", fileName, new FileInputStream(imageFile), mimeType);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to attach image: " + imagePath, e);
+        }
     }
 }

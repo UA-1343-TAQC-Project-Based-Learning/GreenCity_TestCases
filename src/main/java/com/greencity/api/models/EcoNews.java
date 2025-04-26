@@ -7,7 +7,6 @@ import lombok.Getter;
 import java.util.Date;
 import java.util.List;
 
-@Getter
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EcoNews {
@@ -23,6 +22,7 @@ public class EcoNews {
     private Boolean hidden;
     private List<String> tagsUa;
     private List<String> tagsEn;
+    private List<String> tags;
     private String source;
     private Integer countOfEcoNews;
     private Boolean favorite;
