@@ -171,8 +171,8 @@ public class EcoNewsClientTest extends ApiTestRunner {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(updatedNews.getId(), testEcoNews.getId(), "EcoNews id should not be updated");
         softAssert.assertEquals(updatedNews.getTitle(), updatedTitle, "EcoNews Title was not be updated");
-        softAssert.assertEquals(updatedNews.getContent(), updatedContent,"EcoNews Content was not be updated");
-        softAssert.assertEquals(updatedNews.getTagsEn(), updatedTags,"EcoNews Tags were not be updated");
+        softAssert.assertEquals(updatedNews.getContent(), updatedContent, "EcoNews Content was not be updated");
+        softAssert.assertEquals(updatedNews.getTagsEn(), updatedTags, "EcoNews Tags were not be updated");
 
         softAssert.assertAll();
     }
