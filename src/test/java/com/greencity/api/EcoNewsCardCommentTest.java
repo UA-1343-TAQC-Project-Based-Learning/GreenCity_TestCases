@@ -7,6 +7,10 @@ import com.greencity.api.models.EcoNewsCard.ResponseEcoNewsCardPage;
 import com.greencity.api.models.EcoNewsCommentCard.ResponseEcoNewsCardComment;
 import com.greencity.api.testRunners.ApiTestRunner;
 import com.greencity.utils.TestValueProvider;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+
+import io.qameta.allure.Issue;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -28,6 +32,9 @@ public class EcoNewsCardCommentTest extends ApiTestRunner {
         testValueProvider = new TestValueProvider();
     }
 
+    @Description("Get Eco News Card Id")
+    @Epic("Create News")
+    @Issue("153")
     @Test
     public void getEcoNewsCardIdTest() {
         String title = "title";
@@ -40,6 +47,9 @@ public class EcoNewsCardCommentTest extends ApiTestRunner {
         ecoNewsCardId = ecoNewsCard.getId();
     }
 
+    @Description("Create Eco News Comment")
+    @Epic("Eco News Comment")
+    @Issue("153")
     @Test
     public void createEcoNewsCommentTest() {
         getEcoNewsCardIdTest();
@@ -56,6 +66,9 @@ public class EcoNewsCardCommentTest extends ApiTestRunner {
         Assert.assertEquals(text, comment);
     }
 
+    @Description("Get Eco News Comment By Id")
+    @Epic("Eco News Comment")
+    @Issue("153")
     @Test
     public void getEcoNewsCommentByIdTest() {
         createEcoNewsCommentTest();
@@ -71,6 +84,9 @@ public class EcoNewsCardCommentTest extends ApiTestRunner {
                 .body("author.name", equalTo("testuser"));
     }
 
+    @Description("Delete Eco News Comment")
+    @Epic("Eco News Comment")
+    @Issue("153")
     @Test
     public void deleteEcoNewsCommentByIdTest() {
         createEcoNewsCommentTest();

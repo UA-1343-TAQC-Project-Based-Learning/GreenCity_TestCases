@@ -8,6 +8,7 @@ import com.greencity.ui.page.homepage.HomePage;
 import com.greencity.utils.LocalStorageJS;
 import com.greencity.utils.TestValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -17,13 +18,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.testng.ITestContext;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -123,7 +123,8 @@ public class BaseTestRunner {
     }
 
     @AfterClass()
-    public void afterClass() {
+    public void afterClass(ITestContext context) {
+        saveImageAttach("PICTURE Test Name = " + context.getName());
         if (driver != null) {
             driver.quit();
         }
@@ -149,5 +150,18 @@ public class BaseTestRunner {
     public HomePage loadApplication() {
         return new HomePage(driver).goToHomePage();
     }
+
+    @Attachment(value = "Image name = {0}", type = "image/png")
+    public byte[] saveImageAttach(String attachName){
+        byte [] result = null;
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try{
+            result = Files.readAllBytes(scrFile.toPath());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
 }
