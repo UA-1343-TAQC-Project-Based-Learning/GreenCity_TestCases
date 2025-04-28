@@ -109,7 +109,7 @@ public class EditNewsCardTest extends BaseTestRunner {
         softAssert.assertAll();
     }
 
-    @Description("Verify that only the author of the news can see the \"Edit news\" button.")
+    @Description("Verify that clicking \"Cancel\" discards changes and returns to the original view.")
     @Epic("Edit News")
     @Feature("Cancel editing")
     @Issue("104")
