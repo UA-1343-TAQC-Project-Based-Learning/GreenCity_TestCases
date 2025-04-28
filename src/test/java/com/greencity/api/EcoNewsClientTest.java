@@ -1,15 +1,22 @@
-package com.greencity.api.testRunners;
+package com.greencity.api;
 
 import com.greencity.api.clients.EcoNewsClient;
 import com.greencity.api.models.DateUtils;
 import com.greencity.api.models.EcoNews;
+import com.greencity.api.testRunners.ApiTestRunner;
 import com.greencity.utils.TestValueProvider;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Owner;
 import io.restassured.response.Response;
+import jdk.jfr.Description;
 import lombok.SneakyThrows;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -39,6 +46,11 @@ public class EcoNewsClientTest extends ApiTestRunner {
 
     }
 
+    @Description("Verify that API successfully returns Eco News card by ID with status code 200")
+    @Epic("Eco News API")
+    @Feature("Get Eco News Card By Id")
+    @Issue("152")
+    @Owner("Nataliia Hrusha")
     @Test(dataProvider = "languageProvider")
     public void getEcoNewsById(String language, List<String> expectedTags) {
         Response response = ecoNewsClient.getEcoNewsByIdRawResponse(KNOWN_EXISTING_NEWS_ID, language);
@@ -53,7 +65,7 @@ public class EcoNewsClientTest extends ApiTestRunner {
 
     @DataProvider
     public Object[][] languageProvider() {
-        return new Object[][] {
+        return new Object[][]{
                 {LANG_EN, Collections.singletonList("News")},
                 {LANG_UK, Collections.singletonList("Новини")}
         };
