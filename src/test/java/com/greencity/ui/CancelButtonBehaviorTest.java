@@ -4,11 +4,20 @@ import com.greencity.ui.modal.CancelModal;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class CancelButtonBehaviorTest extends BaseTestRunner {
-    @Test(description = "Cancel Button Behavior")
+
+    @Description("Cancel Button Behavior")
+    @Epic("Create News")
+    @Feature("Cancel Button Behavior")
+    @Issue("19")
+    @Test()
     public void cancelButtonBehavior() {
         SoftAssert assertion = new SoftAssert();
 

@@ -29,6 +29,10 @@ public class TestValueProvider {
         return properties != null ? properties.getProperty("base.api.url") : System.getenv("BASE_API_URL");
     }
 
+    public String getBaseAPIUrlUser() {
+        return properties != null ? properties.getProperty("base.api.urlUser") : System.getenv("BASE_API_URL_USER");
+    }
+
     public int getImplicitlyWait() {
         return properties != null ? Integer.parseInt(properties.getProperty("implicitlyWait")) : Integer.parseInt(System.getenv("IMPLICITLY_WAIT"));
     }
@@ -85,7 +89,7 @@ public class TestValueProvider {
         return properties != null ? properties.getProperty("getAPIUrlLogin") : System.getenv("getAPIUrlLogin");
     }
 
-    public String getFilePathByResources(String path){
+    public String getFilePathByResources(String path) {
         return Paths.get("src/test/resources/" + path).toAbsolutePath().toString();
     }
 

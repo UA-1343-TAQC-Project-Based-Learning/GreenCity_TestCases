@@ -1,10 +1,7 @@
 package com.greencity.ui;
 
-import com.greencity.ui.component.cards.NewsCardTableViewComponent;
 import com.greencity.ui.component.ecoNewsTag.TagButton;
-import com.greencity.ui.container.NewsCardsContainer;
 import com.greencity.ui.data.Colors;
-import com.greencity.ui.modal.CancelModal;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.econewspage.NewsCardPage;
