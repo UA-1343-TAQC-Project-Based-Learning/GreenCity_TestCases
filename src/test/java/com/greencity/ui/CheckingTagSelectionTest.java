@@ -6,6 +6,7 @@ import com.greencity.ui.data.Colors;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -26,6 +27,12 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
         ).iterator();
     }
 
+
+    @Description("Verify that the user can select between 1 and 3 tags and news is published with selected tags.")
+    @Epic("Create News")
+    @Feature("Checking Tag Selection")
+    @Issue("15")
+    @Owner("Nataliia Hrusha")
     @Test(dataProvider = "tagSelectionProvider")
     public void verifyTagSelection(TagButton[] tagsToSelect) {
         String newsTitle = "TestNews_" + UUID.randomUUID();
@@ -75,6 +82,11 @@ public class CheckingTagSelectionTest extends BaseTestRunner {
         softAssert.assertAll();
     }
 
+    @Description("Verify that a fourth tag cannot be selected.")
+    @Epic("Create News")
+    @Feature("Checking Tag Selection")
+    @Issue("15")
+    @Owner("Nataliia Hrusha")
     @Test
     public void verifyCantSelectFourTag() {
         String newsTitle = "TestNews_" + UUID.randomUUID();

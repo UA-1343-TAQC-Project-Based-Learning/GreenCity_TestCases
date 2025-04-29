@@ -6,8 +6,7 @@ import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.econewspage.NewsCardPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import jdk.jfr.Description;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -31,6 +30,7 @@ public class EditNewsCardTest extends BaseTestRunner {
     private EcoNewsPage ecoNewsPage;
 
     @BeforeMethod
+    @Step("Create test news")
     public void createTestNews() {
         newsTitle = "TestNews_" + UUID.randomUUID();
         newsContent = "Content_" + UUID.randomUUID();
@@ -47,6 +47,11 @@ public class EditNewsCardTest extends BaseTestRunner {
         newsCardPage = ecoNewsPage.goToNewsCardPage(newsTitle);
     }
 
+    @Description("Verify that the edited news cannot be submitted without a title.")
+    @Epic("Edit News")
+    @Feature("Validation – empty title field")
+    @Issue("101")
+    @Owner("Nataliia Hrusha")
     @Test
     public void verifyNewsCannotBeSubmittedWithoutTitle() {
         CreateEditNewsPage createEditNewsPage = newsCardPage.clickEditButton();
@@ -75,6 +80,11 @@ public class EditNewsCardTest extends BaseTestRunner {
 
     }
 
+    @Description("Verify that only the author of the news can see the \"Edit news\" button.")
+    @Epic("Edit News")
+    @Feature("Edit button visible to author")
+    @Issue("97")
+    @Owner("Nataliia Hrusha")
     @Test
     public void verifyEditButtonVisibleToAuthor() {
         String actualUserName = homePage.getLoggedHeader().getUserNameText();
@@ -96,7 +106,11 @@ public class EditNewsCardTest extends BaseTestRunner {
         softAssert.assertAll();
     }
 
-
+    @Description("Verify that clicking \"Cancel\" discards changes and returns to the original view.")
+    @Epic("Edit News")
+    @Feature("Cancel editing")
+    @Issue("104")
+    @Owner("Nataliia Hrusha")
     @Test
     public void verifyCancelEditing() {
         newsTitleAfterEditing = "TestNews after editing" + UUID.randomUUID();
@@ -130,20 +144,20 @@ public class EditNewsCardTest extends BaseTestRunner {
     @Description("Verify that content shorter than 20 characters is not accepted.")
     @Issue("102")
     @Owner("Maksym Ahafonov")
-    public void verifyShortContentNotAccepted()  {
+    public void verifyShortContentNotAccepted() {
         String errorMsgText = "Not enough characters. Left: %s";
-        Map<String,Integer> testData = new TreeMap<>();
-        testData.put("T",19);
-        testData.put("TestString_19_Chars",1);
-        testData.put("1",19);
-        testData.put("10 chars!!",10);
-        testData.put("!",19);
-        testData.put(" ",19);
+        Map<String, Integer> testData = new TreeMap<>();
+        testData.put("T", 19);
+        testData.put("TestString_19_Chars", 1);
+        testData.put("1", 19);
+        testData.put("10 chars!!", 10);
+        testData.put("!", 19);
+        testData.put(" ", 19);
 
         SoftAssert softAssert = new SoftAssert();
         CreateEditNewsPage createEditNewsPage = newsCardPage.clickEditButton();
 
-        for(var dataPair : testData.entrySet()){
+        for (var dataPair : testData.entrySet()) {
             String testText = dataPair.getKey();
             int expectedNumber = dataPair.getValue();
             createEditNewsPage.enterTextIntoTextContentField(testText);
@@ -153,7 +167,7 @@ public class EditNewsCardTest extends BaseTestRunner {
                 "The text of the warning message does not match with the expected one: "
             );
             softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
-                "The Publish button should be disabled when all required fields are not filled out");
+                    "The Publish button should be disabled when all required fields are not filled out");
         }
         createEditNewsPage.clickExitButton()
                 .clickYesCancelButton();
@@ -161,6 +175,7 @@ public class EditNewsCardTest extends BaseTestRunner {
     }
 
     @AfterMethod
+    @Step("Delete test news")
     public void deleteTestNews() {
         ecoNewsPage = homePage
                 .gotoEcoNewsPage()
