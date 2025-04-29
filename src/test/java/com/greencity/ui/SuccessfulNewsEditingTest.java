@@ -4,6 +4,10 @@ import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 import com.greencity.ui.page.econewspage.NewsCardPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,7 +17,11 @@ import java.util.UUID;
 
 public class SuccessfulNewsEditingTest extends BaseTestRunner {
 
-    @Test(description = "Successful news editing by the author")
+    @Description("Successful news editing by the author")
+    @Epic("Edit News")
+    @Feature("Successful editing an Eco News")
+    @Issue("99")
+    @Test()
     public void successfulNewsEditing() {
         SoftAssert assertion = new SoftAssert();
 

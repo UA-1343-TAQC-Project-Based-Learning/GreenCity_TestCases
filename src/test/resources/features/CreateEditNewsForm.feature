@@ -26,7 +26,7 @@ Feature: Checking some functionalities in the "Create, Edit News" Form
 
   @test_case#99
   Scenario: test_case#99: Verify that the author can edit their own news and the changes are saved
-    When the user navigates to the Eco News page
+    When the user goes to the Eco News page
     And store date of creation card as "creationCardDate"
     And store first card title as "cardTitle"
     And generate unique title and store as "newTitle"

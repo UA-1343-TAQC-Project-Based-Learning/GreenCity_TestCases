@@ -2,6 +2,10 @@ package com.greencity.ui;
 
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -10,14 +14,13 @@ import java.util.Locale;
 
 public class DisplayAllFieldsTest extends BaseTestRunner {
 
-    @Test(description = "Verify that the 'Create News' form displays all the necessary fields in the correct order.")
+    @Description("Verify that the 'Create News' form displays all the necessary fields in the correct order.")
+    @Epic("Create News")
+    @Feature("Displaying of all necessary fields for creating an eco news")
+    @Issue("13")
+    @Test()
 
     public void checkOfDisplayingAllFieldsTest() {
-//        CreateNewsPage newsPage = homePage.clickHeaderButton()
-//                .successfulLogin(testValueProvider.getUserEmail(), testValueProvider.getUserPassword())
-//                .gotoEcoNewsPage()
-//                .clickCreateNewsButton();
-
 
         CreateEditNewsPage newsPage = homePage.gotoEcoNewsPage().clickCreateNewsButton();
 
@@ -50,11 +53,6 @@ public class DisplayAllFieldsTest extends BaseTestRunner {
     }
     @Test(description = "Check for the order of elements")
     public void checkForOrderOfElementsTest(){
-//        CreateNewsPage newsPage = homePage.clickHeaderButton()
-//                .successfulLogin(testValueProvider.getUserEmail(), testValueProvider.getUserPassword())
-//                .gotoEcoNewsPage()
-//                .clickCreateNewsButton();
-
 
         CreateEditNewsPage newsPage = homePage.gotoEcoNewsPage().clickCreateNewsButton();
 

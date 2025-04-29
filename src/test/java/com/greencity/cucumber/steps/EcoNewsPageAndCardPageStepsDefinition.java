@@ -28,8 +28,8 @@ public class EcoNewsPageAndCardPageStepsDefinition {
         this.hooks = hooks;
     }
 
-    @When("the user navigates to the Eco News page")
-    public void theUserNavigatesToTheEcoNewsPage() {
+    @When("the user goes to the Eco News page")
+    public void theUserGoesToTheEcoNewsPage() {
         ecoNewsPage = new HomePage(hooks.getDriver()).getHeader().gotoEcoNewsPage();
     }
 
