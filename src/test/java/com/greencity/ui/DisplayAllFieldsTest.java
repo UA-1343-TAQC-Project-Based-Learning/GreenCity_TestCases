@@ -2,10 +2,7 @@ package com.greencity.ui;
 
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Issue;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -18,6 +15,7 @@ public class DisplayAllFieldsTest extends BaseTestRunner {
     @Epic("Create News")
     @Feature("Displaying of all necessary fields for creating an eco news")
     @Issue("13")
+    @Owner("Maria Markovych")
     @Test()
 
     public void checkOfDisplayingAllFieldsTest() {

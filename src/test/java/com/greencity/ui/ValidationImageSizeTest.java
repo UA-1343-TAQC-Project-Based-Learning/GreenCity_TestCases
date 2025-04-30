@@ -2,10 +2,7 @@ package com.greencity.ui;
 
 import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Issue;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,6 +13,7 @@ public class ValidationImageSizeTest extends BaseTestRunner {
     @Epic("Edit News")
     @Feature("Add a picture for creating a new Eco News")
     @Issue("103")
+    @Owner("Maria Markovych")
     @Test()
     public void ValidationImageSizeTest() {
         SoftAssert assertion = new SoftAssert();
