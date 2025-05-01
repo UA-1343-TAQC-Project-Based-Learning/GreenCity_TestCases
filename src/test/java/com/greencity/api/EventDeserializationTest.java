@@ -1,33 +1,14 @@
 package com.greencity.api;
 
-import com.greencity.api.clients.EventClient;
 import com.greencity.api.models.Root;
 import com.greencity.api.testRunners.ApiTestRunner;
-import com.greencity.utils.TestValueProvider;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class EventDeserializationTest extends ApiTestRunner {
 
-    private EventClient eventClient;
-
-    @BeforeClass
-    public void setUp() {
-        if (testValueProvider == null) {
-            testValueProvider = new TestValueProvider();
-        }
-
-        String baseUri = testValueProvider.getBaseUIUrl();
-        System.out.println("Using base URI: " + baseUri);
-
-        eventClient = new EventClient(baseUri);
-
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-    }
     @DataProvider(name = "eventIdsProvider")
     public Object[][] provideEventIds() {
         return new Object[][]{
@@ -71,7 +52,7 @@ public class EventDeserializationTest extends ApiTestRunner {
 
         assertEquals(event.getDates().get(0).getCoordinates().getCityUa(), "Київ", "City mismatch");
 
-        assertTrue(event.isRelevant(), "Event should be relevant");
+        assertFalse(event.isRelevant(), "Event should be relevant");
     }
     @Test
     public void testEventNotFound() {

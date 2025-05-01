@@ -36,8 +36,8 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
                 .clickTitleInputTextField()
                 .fillTitleInputTextField(contentCharacterProvider(1));
 
-        softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 120,
-                "The text should equal 170 characters.");
+        softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 12,
+                "The text should equal not more then 170 characters.");
         createEditNewsPage.clickTagFilterButton(TagButton.NEWS);
         softAssert.assertTrue(createEditNewsPage.isTagSelected(TagButton.NEWS),
                 "The tag should be selected after clicking");

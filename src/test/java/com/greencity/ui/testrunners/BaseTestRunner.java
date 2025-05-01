@@ -100,7 +100,7 @@ public class BaseTestRunner {
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
-       options.addArguments("--user-data-dir=" + testValueProvider.getUserProfilePath());
+        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfilePath());
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
