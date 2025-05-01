@@ -1,5 +1,5 @@
 Feature: Restrict editing of news posts by not logged-in users
-
+  @Issue("98")
   As a not logged-in users
   I should not be able to see the "Edit news" button
   on posts created by other logged users
