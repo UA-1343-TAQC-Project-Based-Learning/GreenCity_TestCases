@@ -11,6 +11,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 
 import io.qameta.allure.Issue;
+import io.qameta.allure.Owner;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -35,6 +36,7 @@ public class EcoNewsCardCommentTest extends ApiTestRunner {
     @Description("Get Eco News Card Id")
     @Epic("Create News")
     @Issue("153")
+    @Owner("Maria Markovych")
     @Test
     public void getEcoNewsCardIdTest() {
         String title = "title";
@@ -50,6 +52,7 @@ public class EcoNewsCardCommentTest extends ApiTestRunner {
     @Description("Create Eco News Comment")
     @Epic("Eco News Comment")
     @Issue("153")
+    @Owner("Maria Markovych")
     @Test
     public void createEcoNewsCommentTest() {
         getEcoNewsCardIdTest();
@@ -69,6 +72,7 @@ public class EcoNewsCardCommentTest extends ApiTestRunner {
     @Description("Get Eco News Comment By Id")
     @Epic("Eco News Comment")
     @Issue("153")
+    @Owner("Maria Markovych")
     @Test
     public void getEcoNewsCommentByIdTest() {
         createEcoNewsCommentTest();
@@ -87,6 +91,7 @@ public class EcoNewsCardCommentTest extends ApiTestRunner {
     @Description("Delete Eco News Comment")
     @Epic("Eco News Comment")
     @Issue("153")
+    @Owner("Maria Markovych")
     @Test
     public void deleteEcoNewsCommentByIdTest() {
         createEcoNewsCommentTest();
