@@ -5,10 +5,7 @@ import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.page.econewspage.EcoNewsPage;
 
 import com.greencity.ui.testrunners.BaseTestRunner;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Issue;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -20,6 +17,7 @@ public class SourceFieldValidationTest extends BaseTestRunner {
     @Epic("Create News")
     @Feature("Validation of the 'Source' field")
     @Issue("18")
+    @Owner("Maria Markovych")
     @Test()
     public void checkSourceFieldValidation() {
         String titleForFirstTest = "TestTitle-" + UUID.randomUUID();

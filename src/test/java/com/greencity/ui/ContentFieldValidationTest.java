@@ -4,10 +4,7 @@ import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import com.greencity.utils.FileReaderData;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Link;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 import com.greencity.ui.data.Colors;
@@ -26,6 +23,11 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
         }
         return stringBuilder.toString();
     }
+    @Description("Validate the main text field by entering 63,207 characters.")
+    @Owner("Khrystyna Martynova")
+    @Severity(SeverityLevel.CRITICAL)
+    @Epic("Edit News")
+    @Issue("17")
     @Test
     public void checkContentFormNegative(){
         CreateEditNewsPage createEditNewsPage = homePage
@@ -61,13 +63,11 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
         softAssert.assertAll();
 
     }
-    @Description("Verify the validation of the ' Main field title'  (mandatory, maximum 63206 characters) and that the " +
-            "'Publish' button the button should not be available" +
-            " until  Title, Main Text (Content) fields are filled and tag must be selected.")
-    @Severity(SeverityLevel.MINOR)
-    @Issue("14")
-    @Link(name = "Link goto site", url = "http://localhost:4205/#/greenCity")
-
+    @Description("Validate the main text field with a positive scenario.")
+    @Owner("Khrystyna Martynova")
+    @Severity(SeverityLevel.CRITICAL)
+    @Epic("Edit News")
+    @Issue("17")
     @Test
     public void checkContentFormPositive(){
         CreateEditNewsPage createEditNewsPage = homePage
@@ -76,7 +76,6 @@ public class ContentFieldValidationTest  extends BaseTestRunner {
                 .clickTitleInputTextField()
                 .fillTitleInputTextField(contentCharacterProvider(10));
 
-        logger.info("The actual text value of Title text field is: {}", createEditNewsPage.getTitleInputTextFieldValue().length());
         softAssert.assertTrue(createEditNewsPage.getTitleInputTextFieldValue().length() == 120,
                 "The text should equal 170 characters.");
 

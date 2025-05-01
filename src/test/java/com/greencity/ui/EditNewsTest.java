@@ -6,6 +6,7 @@ import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import io.qameta.allure.testng.AllureTestNg;
 import org.testng.annotations.Listeners;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import java.time.LocalDate;
@@ -19,6 +20,11 @@ public class EditNewsTest extends BaseTestRunner {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM d, yyyy",locale );
         return currentDate.format(dateFormat);
     }
+    @Description("Verify that the edit form is pre-populated with existing data.")
+    @Owner("Khrystyna Martynova")
+    @Severity(SeverityLevel.CRITICAL)
+    @Epic("Edit News")
+    @Issue("100")
     @Test
     public void checkEditNewsTest() {
         CreateEditNewsPage createEditNewsPage = homePage
