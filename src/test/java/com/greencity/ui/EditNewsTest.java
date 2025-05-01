@@ -4,6 +4,8 @@ import com.greencity.ui.component.ecoNewsTag.TagButton;
 import com.greencity.ui.data.Colors;
 import com.greencity.ui.page.econewspage.CreateEditNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import io.qameta.allure.testng.AllureTestNg;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import java.time.LocalDate;

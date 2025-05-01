@@ -3,6 +3,10 @@
     <test name="GreenCity Tests">
         <classes>
             <class name="com.greencity.jdbc.HabitsJdbcTest"/>
+            <class name="com.greencity.api.EventDeserializationTest"/>
+            <class name="com.greencity.ui.EditNewsTest"/>
+            <class name="com.greencity.ui.CheckingNotVisibilityEditButtonTest"/>
+            <class name="com.greencity.ui.ContentFieldValidationTest"/>
         </classes>
     </test>
 </suite>

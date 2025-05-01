@@ -1,9 +1,11 @@
 package com.greencity.jdbc;
 
-import com.greencity.api.testRunners.ApiTestRunner;
+
 import com.greencity.api.testRunners.JdbsTestRunner;
 import com.greencity.utils.jdbc.entity.HabitsEntity;
 import io.qameta.allure.*;
+import io.qameta.allure.testng.AllureTestNg;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -12,10 +14,12 @@ import java.util.List;
 
 @Epic("GreenCity JDBC Tests")
 @Owner("Khrystyna Martynova")
+@Listeners({AllureTestNg.class})
 public class HabitsJdbcTest extends JdbsTestRunner {
     SoftAssert softAssert = new SoftAssert();
 
-    @Test(description = "Check that the habits list is not empty and names are not null")
+    @Test
+    @Link(name="Link go to site", url = "https://www.greencity.cx.ua/#/greenCity")
     @Story("Retrieve all habits")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verifies that the list of habits from the DB is not null or empty and all names are filled")
@@ -32,7 +36,8 @@ public class HabitsJdbcTest extends JdbsTestRunner {
         }
         softAssert.assertAll();
     }
-    @Test(description = "Check that habits are sorted by ID in ascending order")
+    @Test
+    @Link(name="Link go to site", url = "https://www.greencity.cx.ua/#/greenCity")
     @Story("Sorting check")
     @Severity(SeverityLevel.NORMAL)
     @Description("Ensures that the habits returned from the DB are sorted correctly by ID")
@@ -47,11 +52,11 @@ public class HabitsJdbcTest extends JdbsTestRunner {
         }
         softAssert.assertAll();
     }
-    @Test(description = "Check specific habits by ID and name")
+    @Test
+    @Link(name="Link go to site", url = "https://www.greencity.cx.ua/#/greenCity")
     @Story("Subset validation")
     @Severity(SeverityLevel.MINOR)
     @Description("Verifies a subset of habits (ID 1-3) have expected names")
-
     public void testGetSubsetOfHabits() {
         List<HabitsEntity> habits = habitsService.getAllHabitsOrderedById();
         List<Integer> selectedIds = Arrays.asList(1, 3, 5, 7, 9);

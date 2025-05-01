@@ -13,7 +13,7 @@ public class HabitsEntity {
     private Integer id;
         private String name;
         private String description;
-        private String habit_item;
+        private String habitItem;
         private Integer languageId;
         private Integer  habitId;
 
@@ -22,7 +22,7 @@ public class HabitsEntity {
         habits.setId(Integer.valueOf(row.get(0)));
         habits.setName(row.get(1));
         habits.setDescription(row.get(2));
-        habits.setHabit_item(row.get(3));
+        habits.setHabitItem(row.get(3));
         habits.setLanguageId(Integer.valueOf(row.get(4)));
         habits.setHabitId(Integer.valueOf(row.get(5)));
         return habits;
