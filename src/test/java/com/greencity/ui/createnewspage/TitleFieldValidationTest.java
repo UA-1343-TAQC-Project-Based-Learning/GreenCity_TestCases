@@ -16,12 +16,15 @@ public class TitleFieldValidationTest extends CreateNewsPageSteps {
         return stringBuilder.toString();
     }
 
+    @Test
+    @Owner("Serhii Hembei")
     @Description("Verify the validation of the 'Title' field (mandatory, maximum 170 characters) and that the " +
             "'Publish' button remains disabled until both Title and Main Text (Content) fields are filled.")
-    @Severity(SeverityLevel.MINOR)
+    @Severity(SeverityLevel.NORMAL)
+    @Epic("Web user interface")
+    @Feature("EcoNews page Title field validation")
     @Issue("14")
-    @Link(name = "Link goto site", url = "http://localhost:4205/#/greenCity")
-    @Test
+    @Link(name = "Website", url = "http://localhost:4205/#/greenCity")
     public void checkPublishButton() {
         CreateEditNewsPage createEditNewsPage = loadApplication()
                 .goToCreateEcoNewsPage()
@@ -62,12 +65,15 @@ public class TitleFieldValidationTest extends CreateNewsPageSteps {
     }
 
 
+    @Test
+    @Owner("Serhii Hembei")
     @Description("Verify the validation of the 'Title' field (mandatory, maximum 170 characters) and that the " +
             "'Publish' button remains disabled until both Title and Main Text (Content) fields are filled.")
-    @Severity(SeverityLevel.MINOR)
+    @Severity(SeverityLevel.NORMAL)
+    @Epic("Web user interface")
+    @Feature("EcoNews page Title field validation")
     @Issue("14")
-    @Link(name = "Link goto site", url = "http://localhost:4205/#/greenCity")
-    @Test
+    @Link(name = "Website", url = "http://localhost:4205/#/greenCity")
     public void checkPublishButton2() {
         goToCreateEcoNewsPage()
                 .checkTitleInputFieldBorderColor(Colors.RED.getColor())

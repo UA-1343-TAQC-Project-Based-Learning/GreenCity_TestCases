@@ -3,17 +3,21 @@ package com.greencity.ui.createnewspage;
 import com.greencity.ui.component.ImageUploadComponent;
 import com.greencity.ui.data.Colors;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class ImageUploadValidationTest extends BaseTestRunner {
     private SoftAssert softAssert = new SoftAssert();
 
-    @Description("Verify the validation of the 'Upload Image' field (accepted formats: PNG/JPG, maximum size: 10MB).")
-    @Issue("16")
     @Test
+    @Owner("Serhii Hembei")
+    @Description("Verify the validation of the 'Upload Image' field (accepted formats: PNG/JPG, maximum size: 10MB).")
+    @Severity(SeverityLevel.MINOR)
+    @Epic("Create news")
+    @Feature("EcoNews page image upload")
+    @Issue("16")
+    @Link(name = "Website", url = "http://localhost:4205/#/greenCity")
     public void checkUploadImage() {
         ImageUploadComponent imageUploadComponent = homePage
                 .gotoEcoNewsPage()

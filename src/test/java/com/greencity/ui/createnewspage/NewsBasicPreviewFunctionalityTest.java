@@ -2,7 +2,7 @@ package com.greencity.ui.createnewspage;
 
 import com.greencity.ui.page.econewspage.PreviewNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import io.qameta.allure.Issue;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,8 +13,15 @@ public class NewsBasicPreviewFunctionalityTest extends BaseTestRunner {
 
     private SoftAssert softAssert = new SoftAssert();
 
-    @Issue("56")
     @Test
+    @Owner("Serhii Hembei")
+    @Description("Verify that the user can preview news content after entering valid data and that the preview matches the input.")
+    @Severity(SeverityLevel.MINOR)
+    @Epic("Preview page")
+    @Feature("News Page")
+    @Issue("56")
+    @Link(name = "Website", url = "http://localhost:4205/#/greenCity")
+
     public void checkPreviewMode() {
         String titleTestValue = "Test Preview";
         String newsTextContent = "This is a test preview content";
