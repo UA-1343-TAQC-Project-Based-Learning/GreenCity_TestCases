@@ -136,4 +136,18 @@ public class NewsEditingSteps {
                 .clickDeleteButton()
                 .clickYesButton();
     }
+
+    @When("The user enters {string} into the content field")
+    public void theUserEntersIntoTheContentField(String content) {
+        String result = content.replaceAll("<SPACE>"," ");
+        createEditNewsPage.enterTextIntoTextContentField(result);
+    }
+
+    @Then("The warning message should say {string}")
+    public void theWarningMessageShouldSay(String expectedMessage) {
+        String actualMessage = createEditNewsPage.getContentWarningCounterText().trim();
+        softAssert.assertEquals(actualMessage, expectedMessage,
+                "The text of the warning message does not match the expected one");
+
+    }
 }

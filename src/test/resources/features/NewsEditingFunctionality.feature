@@ -34,3 +34,22 @@ Feature: News Editing Functionality
     And The user cancels the edit
     Then The user should be redirected to Eco News page
     And The original news title should be displayed
+
+  @TC102
+    @short_content_is_not_accepted
+  Scenario Outline: Verify that content shorter than 20 characters is not accepted
+    When The user clicks the "Edit news" button
+    And The user enters "<text>" into the content field
+    Then The warning message should say "Not enough characters. Left: <expected>"
+    And The "Publish" button should be disabled
+    When The user cancels the edit
+    And Clean up test news
+
+    Examples:
+      | text                | expected |
+      | <SPACE>             | 19       |
+      | T                   | 19       |
+      | TestString_19_Chars | 1        |
+      | 1                   | 19       |
+      | 10 chars!!          | 10       |
+      | !                   | 19       |
