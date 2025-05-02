@@ -72,7 +72,7 @@ public class BaseTestRunner {
     public void beforeSuite() {
         WebDriverManager.chromedriver().setup();
         testValueProvider = new TestValueProvider();
-        initDriver();
+//        initDriver();
     }
 
     public void setLocalStorage(LoginDto loginDto) {
@@ -91,16 +91,13 @@ public class BaseTestRunner {
 //        options.addArguments("--disable-dev-shm-usage");
 //        options.addArguments("--disable-gpu");
 
-
-
         for (String option : testValueProvider.getChromeOptions()) {
             options.addArguments(option);
         }
-
 //        options.addArguments("--disable-notifications");
 //        options.addArguments("--disable-popup-blocking");
 //        options.addArguments("--headless");
-        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfilePath());
+//        options.addArguments("--user-data-dir=" + testValueProvider.getUserProfilePath());
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -113,9 +110,9 @@ public class BaseTestRunner {
 
     @BeforeClass
     public void beforeClass() {
-        if (driver == null) {
+
             initDriver();
-        }
+
         logger.info("Test driver created");
 
         driver.get(testValueProvider.getBaseUIUrl());

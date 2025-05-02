@@ -1,4 +1,3 @@
-@ignore
 @TC15
 
 Feature: News Tag Selection

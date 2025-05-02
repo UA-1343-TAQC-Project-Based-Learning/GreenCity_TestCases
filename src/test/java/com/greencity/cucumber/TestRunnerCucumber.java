@@ -8,9 +8,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @CucumberOptions(
-        tags = "not @ignore",
-        features = "src/test/resources/features",
-        glue = {"com.greencity.cucumber"}
+        tags = "@edit_news or @TC15",
+        features = "src/test/resources/features"
 )
 public class TestRunnerCucumber extends AbstractTestNGCucumberTests {
     private TestNGCucumberRunner testNGCucumberRunner;

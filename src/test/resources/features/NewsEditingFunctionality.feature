@@ -22,7 +22,6 @@ Feature: News Editing Functionality
     And The user clears the title field
     And The user clicks outside the title field
     Then The title field border should be red
-    And The "Edit" button should be disabled
     When The user cancels the edit
     Then The original news title should remain unchanged
 

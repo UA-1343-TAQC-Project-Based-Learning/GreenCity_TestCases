@@ -125,6 +125,7 @@ public class HeaderComponent extends BaseComponent {
     }
 
     public void clickEcoNewsLink() {
+        sleep(3000);
         ecoNewsLink.click();
     }
 

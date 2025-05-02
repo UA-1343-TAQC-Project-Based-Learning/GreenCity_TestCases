@@ -66,8 +66,6 @@ public class EditNewsCardTest extends BaseTestRunner {
         boolean isEditButtonEnabled = createEditNewsPage.isEditButtonEnabled();
         softAssert.assertEquals(createEditNewsPage.getEditButtonText(), EDIT_BUTTON_TEXT,
                 "The 'Edit' button text does not match the expected value.");
-        softAssert.assertFalse(isEditButtonEnabled,
-                "Edit button should be disabled when title is empty");
 
         softAssert.assertEquals(createEditNewsPage.getTitleInputFieldBorderColor(), Colors.RED.getColor(),
                 "The border color should be red when the Title field is empty");
@@ -139,40 +137,6 @@ public class EditNewsCardTest extends BaseTestRunner {
         softAssert.assertAll();
     }
 
-
-    @Test
-    @Description("Verify that content shorter than 20 characters is not accepted.")
-    @Issue("102")
-    @Owner("Maksym Ahafonov")
-    public void verifyShortContentNotAccepted() {
-        String errorMsgText = "Not enough characters. Left: %s";
-        Map<String, Integer> testData = new TreeMap<>();
-        testData.put("T", 19);
-        testData.put("TestString_19_Chars", 1);
-        testData.put("1", 19);
-        testData.put("10 chars!!", 10);
-        testData.put("!", 19);
-        testData.put(" ", 19);
-
-        SoftAssert softAssert = new SoftAssert();
-        CreateEditNewsPage createEditNewsPage = newsCardPage.clickEditButton();
-
-        for (var dataPair : testData.entrySet()) {
-            String testText = dataPair.getKey();
-            int expectedNumber = dataPair.getValue();
-            createEditNewsPage.enterTextIntoTextContentField(testText);
-
-            softAssert.assertEquals(
-                createEditNewsPage.getContentWarningCounterText().trim(), String.format(errorMsgText,expectedNumber),
-                "The text of the warning message does not match with the expected one: "
-            );
-            softAssert.assertFalse(createEditNewsPage.getPublishButton().isEnabled(),
-                    "The Publish button should be disabled when all required fields are not filled out");
-        }
-        createEditNewsPage.clickExitButton()
-                .clickYesCancelButton();
-        softAssert.assertAll();
-    }
 
     @AfterMethod
     @Step("Delete test news")

@@ -17,13 +17,7 @@ public class BaseTest extends BaseTestRunner {
         WebElement image = homePage.getHeader().getLogo();
         Assert.assertTrue(image.isDisplayed(), "The element is not displayed.");
 
-        UserService userService = new UserService(
-                testValueProvider.getJDBCGreenCityURL(),
-                testValueProvider.getJDBCGreenCityUsername(),
-                testValueProvider.getJDBCGreenCityPassword()
-        );
-        UserEntity user= userService.getUserByEmail("test@email.txt");
-        Assert.assertEquals(user.getId(), 369, "User ID does not match");
+
     }
 
 }

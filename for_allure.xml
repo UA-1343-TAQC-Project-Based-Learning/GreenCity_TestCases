@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="EcoNews UI Automation Suite">
+    <test name="Create and Edit News Page Tests">
+        <classes>
+            <class name="com.greencity.ui.EditNewsCardTest"/>
+            <class name="com.greencity.ui.CheckingTagSelectionTest"/>
+            <class name="com.greencity.ui.CheckingFourTag"/>
+            <class name="com.greencity.cucumber.TestRunnerCucumber"/>
+            <class name="com.greencity.api.EcoNewsClientTest"/>
+            <class name="com.greencity.jdbc.EventsJDBCTest"/>
+        </classes>
+    </test>
+</suite>
