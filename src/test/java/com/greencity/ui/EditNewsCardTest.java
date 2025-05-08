@@ -142,6 +142,7 @@ public class EditNewsCardTest extends BaseTestRunner {
 
     @Test
     @Description("Verify that content shorter than 20 characters is not accepted.")
+    @Epic("Edit News UI")
     @Issue("102")
     @Owner("Maksym Ahafonov")
     public void verifyShortContentNotAccepted() {

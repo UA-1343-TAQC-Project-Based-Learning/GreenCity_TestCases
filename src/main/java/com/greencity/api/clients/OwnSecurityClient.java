@@ -2,6 +2,7 @@ package com.greencity.api.clients;
 
 import com.greencity.api.models.SignInRequest;
 import com.greencity.api.models.SignInResponse;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 /**
@@ -21,6 +22,7 @@ public class OwnSecurityClient extends BaseClient {
      * @param password User's password
      * @return Raw HTTP response from the sign-in endpoint
      */
+    @Step("SignIn user raw response")
     public Response signInRawResponse(String email, String password) {
         return preparedRequest()
                 .body(new SignInRequest(email, password))
@@ -34,7 +36,8 @@ public class OwnSecurityClient extends BaseClient {
    * @param password User's password
    * @return Parsed sign-in response with user details and tokens
    */
-    public SignInResponse signIn(String email, String password) {
+   @Step("SignIn user POJO response")
+   public SignInResponse signIn(String email, String password) {
         return signInRawResponse(email, password)
                 .as(SignInResponse.class);
     }

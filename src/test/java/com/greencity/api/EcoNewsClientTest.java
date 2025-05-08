@@ -3,10 +3,10 @@ package com.greencity.api;
 import com.greencity.api.clients.EcoNewsClient;
 import com.greencity.api.clients.OwnSecurityClient;
 import com.greencity.api.models.*;
-import com.greencity.api.models.DateUtils;
-import com.greencity.api.models.EcoNews;
 import com.greencity.api.testRunners.ApiTestRunner;
 import com.greencity.utils.TestValueProvider;
+import com.greencity.utils.jdbc.dao.ManagerDAO;
+import com.greencity.utils.jdbc.services.EcoNewsService;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
@@ -22,8 +22,6 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import java.util.Collections;
 import java.util.List;
 
 public class EcoNewsClientTest extends ApiTestRunner {
@@ -36,6 +34,7 @@ public class EcoNewsClientTest extends ApiTestRunner {
     private static final List<String> EXPECTED_TAGS_EN = Arrays.asList("News", "Events");
     private static final List<String> EXPECTED_TAGS_UA = Arrays.asList("Новини", "Події");
     private static final String TEST_IMAGE_PATH = "images/GreenCity5mb.png";
+    private static EcoNewsService ecoNewsServiceJDBC;
 
     private String filePath;
     private SignInResponse testUser;
@@ -45,8 +44,15 @@ public class EcoNewsClientTest extends ApiTestRunner {
     @BeforeMethod
     public void setUp() {
         super.setUp();
+        ecoNewsServiceJDBC = new EcoNewsService(
+                testValueProvider.getJDBCGreenCityURL(),
+                testValueProvider.getJDBCGreenCityUsername(),
+                testValueProvider.getJDBCGreenCityPassword()
+        );
+
         ecoNewsClient = new EcoNewsClient(testValueProvider.getBaseAPIUrl());
-        this.filePath = testValueProvider.getFilePathByResources(TEST_IMAGE_PATH);
+        filePath = testValueProvider.getFilePathByResources(TEST_IMAGE_PATH);
+
         String email = testValueProvider.getUserEmail();
         String password = testValueProvider.getUserPassword();
         testUser = new OwnSecurityClient(testValueProvider.getBaseAPIUrlUser())
@@ -138,7 +144,10 @@ public class EcoNewsClientTest extends ApiTestRunner {
     }
 
     @Test(dataProvider = "validEcoNewsProvider")
-    public void addEcoNewsSuccessfully(AddEcoNewsDtoRequest request, String imagePath) {
+    @Description("Verify that EcoNews can be added via API.")
+    @Epic("Econ News API")
+    @Owner("Maksym Ahafonov")
+    public void testAddEcoNewsSuccessfully(AddEcoNewsDtoRequest request, String imagePath) {
         ecoNewsClient.setToken(testUser.getAccessToken());
 
         EcoNews response = ecoNewsClient.addEcoNews(request, imagePath);
@@ -159,10 +168,13 @@ public class EcoNewsClientTest extends ApiTestRunner {
 
         softAssert.assertAll();
 
-        ecoNewsClient.deleteEcoNews(response.getId());
+        ecoNewsServiceJDBC.deleteNewsById(response.getId());
     }
 
     @Test(groups = "requiresNews")
+    @Description("Verify that EcoNews can be updated via API.")
+    @Epic("Econ News API")
+    @Owner("Maksym Ahafonov")
     public void testUpdateEcoNews() {
         Long testEcoNewsId = testEcoNews.getId();
         String updatedTitle = EXPECTED_TITLE + " updated";
@@ -193,6 +205,9 @@ public class EcoNewsClientTest extends ApiTestRunner {
     }
 
     @Test(groups = "requiresNews")
+    @Description("Verify that EcoNews can be deleted via API.")
+    @Epic("Econ News API")
+    @Owner("Maksym Ahafonov")
     public void testDeleteEcoNews() {
         Long testNewsId = testEcoNews.getId();
         ecoNewsClient.setToken(testUser.getAccessToken());
@@ -215,13 +230,10 @@ public class EcoNewsClientTest extends ApiTestRunner {
     @AfterMethod
     public void tearDownClass() {
         if (testEcoNews != null) {
-            Long ecoNewsId = testEcoNews.getId();
-            ecoNewsClient.setToken(testUser.getAccessToken());
-            Response getResponse = ecoNewsClient.getEcoNewsByIdRawResponse(ecoNewsId.intValue(), LANG_EN);
-            if (getResponse.getStatusCode() == 200) {
-                ecoNewsClient.deleteEcoNews(ecoNewsId).then().statusCode(200).log();
-            }
+            ecoNewsServiceJDBC.deleteNewsById(testEcoNews.getId());
         }
+        ecoNewsServiceJDBC.deleteAllNewsByTitle(EXPECTED_TITLE);
+        ManagerDAO.closeAllStatements();
         if (ecoNewsClient.getToken() != null) {
             ecoNewsClient.setToken(null);
         }

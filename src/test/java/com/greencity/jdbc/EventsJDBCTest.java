@@ -3,7 +3,10 @@ package com.greencity.jdbc;
 import com.greencity.api.testRunners.ApiTestRunner;
 import com.greencity.utils.jdbc.dao.EventDAO;
 import com.greencity.utils.jdbc.entity.EventEntity;
-import io.qameta.allure.*;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Owner;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
