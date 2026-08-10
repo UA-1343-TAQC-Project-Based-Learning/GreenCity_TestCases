@@ -1,0 +1,16 @@
+base.ui.url=https://www.greencity.cx.ua/#/
+base.api.url=https://api-greencity.azurewebsites.net/
+
+implicitlyWait=10
+
+user.email=your.user@example.com
+user.name=Your User Name
+user.password=your_password
+
+admin.email=admin@example.com
+admin.name=Admin Name
+admin.password=admin_password
+
+JDBCGreenCityUsername=
+JDBCGreenCityPassword=
+JDBCGreenCityURL=

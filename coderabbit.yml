@@ -1,0 +1,28 @@
+version: 1
+
+language: java
+
+java:
+  version: 21
+
+dependencies:
+  - org.seleniumhq.selenium:selenium-java:4.28.1
+  - org.junit.jupiter:junit-jupiter:5.11.4
+  - org.projectlombok:lombok:1.18.36
+  - io.qameta.allure:allure-junit5:2.24.0
+  - io.rest-assured:rest-assured:5.5.0
+  - io.cucumber:cucumber-java:7.21.1
+  - io.cucumber:cucumber-junit-platform-engine:7.21.1
+
+build:
+  tool: maven
+
+test:
+  framework: junit
+  reports:
+    - allure
+    - cucumber
+
+code_style:
+  formatter: intellij
+  linter: none
